@@ -4,7 +4,7 @@ Getting Started
 The Micro RTPS protocol
 -----------------------
 
-XRCE-DDS protocol allows to communicate resource constrained clients with a DDS Global Data Space. This communication is achieve using an Agent as an intermediate.
+*Micro RTPS* implements XRCE-DDS protocol as specified in the "eXtremely Resource Constrained Environments DDS (DDS-XRCE)" proposal submitted to the Object Management Group (OMG) consortium. That XRCE-DDS protocol allows to communicate resource constrained clients with a DDS Global Data Space. This communication is achieve using an Agent as an intermediate.
 
 XRCE-DDS protocol defines the communication between those Agents and Clients. This communication is based on operations and responses,
 the Client requests the Agent to run operations and the Agent responds accordingly to the result of those operations.
