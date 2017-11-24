@@ -1,18 +1,14 @@
-Getting Started
-===============
+Introduction
+============
 
 The Micro RTPS protocol
 -----------------------
 
-*Micro RTPS* implements DDS-XRCE protocol as specified in the "eXtremely Resource Constrained Environments DDS (DDS-XRCE)" proposal submitted to the Object Management Group (OMG) consortium. That DDS-XRCE protocol allows to communicate resource constrained clients with a DDS Global Data Space. This communication is achieve using an Agent as an intermediate.
+*Micro RTPS* implements DDS-XRCE protocol specified in the "Extremely Resource Constrained Environments DDS (DDS-XRCE)" proposal submitted to the Object Management Group (OMG) consortium. DDS-XRCE protocol allows to communicate resource constrained clients with a larger DDS network. This communication is achieve using a client-server architecture, where the server(Agent) acts as an intermediary between clients and DDS Global Data Space.
 
-DDS-XRCE protocol defines the communication between those Agents and Clients. This communication is based on operations and responses,
-the Client requests the Agent to run operations and the Agent responds accordingly to the result of those operations.
+DDS-XRCE protocol defines a messaging protocol between those Agents and Clients. This messages exchange revolves around operations and their responses. Clients requests the Agents to run operations and the Agents reply accordingly to the result of those requested operations. Making use of those operations, Clients are able to create the DDS objects hierarchy necessary to publish and/or receive data from DDS. DDS objects are created and stored on the Agent side so the Clients can reuse them at will.
 
-Combining those operations, Clients are able to create the DDS objects necessary to publish or receive data from DDS. Those DDS objects are
-created on the Agent side so the Clients can reuse them at will.
-
-*Micro RTPS* implements the DDS-XRCE protocol using a *Micro RTPS Agent* as server and providing a C API for developing your own *Micro RTPS Clients*. *Fast RTPS* is used by the *Micro RTPS Agent* to reach DDS Global Data Space.
+*Micro RTPS* implements the DDS-XRCE protocol using a *Micro RTPS Agent* as server and providing a C API for developing your own *Micro RTPS Clients*. *Micro RTPS Agent* uses *Fast RTPS* to reach DDS Global Data Space.
 
 FastRTPS
 ^^^^^^^^
@@ -24,7 +20,9 @@ For deeper information please refer to the official documentation: `eProsima Fas
 Operations
 ----------
 
-Your *Micro RTPS Clients* are able to call a variety of *Micro RTPS Agent* operations:
+*Micro RTPS* communication between Client and Agent is based upon operations and responses. Operations are requested by the Client to the Agent. The Agent will process the operations received and generate responses with the result of the operations. Clients can process the responses to know how an operation request has ended in the Agent.
+
+In your *Micro RTPS Clients* you are able to request a variety of operations to the *Micro RTPS Agent*:
 
 * Create client.
 * Create entities.
@@ -34,7 +32,9 @@ Your *Micro RTPS Clients* are able to call a variety of *Micro RTPS Agent* opera
 
 First of all the *Micro RTPS Client* must be known by the Agent. You do this by sending a create client operation to the Agent, which will register the *Micro RTPS Client*. Once registered, you can request operations from your *Micro RTPS Client*. If you dont register the *Micro RTPS Client*, all the operations coming from that *Micro RTPS Client* will be refused by the *Micro RTPS Agent*.
 
-Create entities operation has multiple target possibilities. It is the operation you use to create *Micro RTPS entities* on the *Micro RTPS Agent*. Each one of these *Micro RTPS Entities* has an equivalent on *Fast RTPS* object. The *Micro RTPS Entities* you can create are:
+*Micro RPS Agent* handle the communication with DDS using *Micro RTPS Entities*. Entities are created and query by the Client using operations.
+
+Create entities operation is the operation you use to create *Micro RTPS entities* on the *Micro RTPS Agent*. Each one of these *Micro RTPS Entities* has an equivalent on *Fast RTPS* object. The *Micro RTPS Entities* you can create are:
 
 * Participants.
 * Publisher.
@@ -43,15 +43,17 @@ Create entities operation has multiple target possibilities. It is the operation
 * Data Writer.
 * Data reader.
 
-For sending and receiving that from/to DDS, *Micro RTPS Client* has access to two operations: Write and Read. Those operations are handled by an already created Data Writer or a Data Reader respectively.
+For sending and receiving that from/to DDS, *Micro RTPS Client* has access to two operations: Write and Read. Those operations are handled by an already created Data Writer or a Data Reader on the Agent.
 
 If you want to remove any *Micro RTPS Entities* from the *Micro RTPS Agent* you use Delete operation.
 
-For further information on this topic please check :ref:`operations_label`.
+For further information:
+    * :ref:`operations_label`.
+    * :ref:`entities_label`.
 
 Topic Type
 ----------
 
 The data sent from the Client to the DDS Global data Space uses the same principles as in *Fast RTPS*.
 On the DDS side you use Interface Definition Language (IDL) to define your own type. That type must be known by the *Micro RTPS Client*.
-You need to implement that type on your *Micro RTPS Client* providing serialization and deserialization code. The type sent or received by *Micro RTPS Client* should match that one used on the DDS Side.
+You need to implement that type on your *Micro RTPS Client* providing serialization and deserialization code. The type sent or received by *Micro RTPS Client* should match that one used on the DDS Side. For sending and receiving any topic from your *Micro RTPS Client* you should use write and read operations.
