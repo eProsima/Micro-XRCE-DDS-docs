@@ -134,6 +134,7 @@ Index
    :caption: User Manual
 
    introduction
+   quickstart
    agent
    client
    entities
