@@ -13,14 +13,12 @@ eProsima Micro RTPS Documentation
    :target: http://www.eprosima.com/
 
 *eprosima Micro RTPS* is a software solution which allows to communicate extremely resource constrained environments(XRCEs) with an existing DDS network. This implementation comply with the specification proposal, "eXtremely Resource Constrained Environments DDS (DDS-XRCE)" submitted to the Object Management Group (OMG) consortium.
-TODO: Cambiar orden de las frases
 
 *Micro RTPS* implements a client-server protocol in order to enable resource-constrained devices(clients) to participate in DDS communications, This communication is done through an *Micro RTPS Agent* (server). The *Micro RTPS Agent* acts on behalf of the *Micro RTPS Clients* and enable them to participate as DDS publishers and/or subscribers in the DDS Global Data Space.
 
 *eProsima Micro RTPS* provides both, a plug and play *Micro RTPS Agent* and an API layer for the implementation of your own *Micro RTPS Clients*.
-TODO: Meter mas chicha a esta frase
 
-TODO: grafico de la arquitectura
+.. image:: architecture.svg
 
 Quick start
 =============
@@ -106,7 +104,7 @@ This example shows how a *Micro RTPS Client* publish message on a DDS Global Dat
 
 In the following figure is represented the hierarchy of objects you need to instantiate on the *Micro RTPS Agent* to publish on a topic:
 
-TODO: Grafico de objetos ejemplo anterior
+.. image:: micrortps_entities_hierarchy.svg
 
 Learn More
 ----------
