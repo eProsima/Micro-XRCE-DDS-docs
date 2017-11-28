@@ -23,14 +23,13 @@ eProsima Micro RTPS Documentation
 Quick start
 =============
 
-*Micro RTPS* provides a C API which allows you to create your own *Micro RTPS Clients* publishing and/or listening to topics from DDS Glocal Data Space. The following example is a simple *Micro RTPS Clients* (Using that C API) and a *Micro RTPS Agent* publishing a "Hello DDS world!" messages to DDS world.
+*Micro RTPS* provides a C API which allows you to create your own *Micro RTPS Clients* publishing and/or listening to topics from DDS Global Data Space. The following example is a simple *Micro RTPS Clients* (Using that C API) and a *Micro RTPS Agent* publishing a "Hello DDS world!" messages to DDS world.
 
 .. code-block:: c++
 
     // User type declaration
     typedef struct HelloWorld
     {
-        uint32_t index;
         uint32_t message_length;
         char* message;
     } HelloTopic;
@@ -39,7 +38,6 @@ Quick start
     bool serialize_hello_topic(MicroBuffer* writer, const AbstractTopic* topic_structure)
     {
         HelloTopic* topic = (HelloTopic*) topic_structure->topic;
-        serialize_uint32_t(writer, topic->index);
         serialize_array_char(writer, topic->message, topic->message_length);
         return true;
     }
@@ -49,10 +47,6 @@ Quick start
     {
         // Process status message.
     };
-
-    // Data writer profile configuration as XML data.
-    String data_writer_profile = {"<profiles><publisher profile_name=\"default_xrce_publisher_profile\"><topic><kind>NO_KEY</kind><name>HelloWorldTopic</name><dataType>HelloWorld</dataType><historyQos><kind>KEEP_LAST</kind><depth>5</depth></historyQos><durability><kind>TRANSIENT_LOCAL</kind></durability></topic></publisher></profiles>",
-                                  300+1};
 
     int main(int args, char** argv)
         {
@@ -73,13 +67,14 @@ Quick start
         XRCEInfo publisher_info = create_publisher(state, participant_info.object_id);
 
         // Creates a data writer using the participant and publisher recently created. This data writer is configured through a XML profile.
-        String data_writer_profile = {"<xml>", 6};
+        String data_writer_profile = {"<profiles><publisher profile_name=\"default_xrce_publisher_profile\"><topic><kind>NO_KEY</kind><name>HelloWorldTopic</name><dataType>HelloWorld</dataType><historyQos><kind>KEEP_LAST</kind><depth>5</depth></historyQos><durability><kind>TRANSIENT_LOCAL</kind></durability></topic></publisher></profiles>",
+        300+1};
         XRCEInfo data_writer_info = create_data_writer(state, participant_info.object_id, publisher_info.object_id, data_writer_profile);
 
         // Prepare and write the user data to be sent.
         char message[] = "Hello DDS world!";
         uint32_t length = strlen(message) + 1;
-        HelloTopic hello_topic = {10, length, message};
+        HelloTopic hello_topic = {length, message};
         // Write user type data.
         write_data(state, data_writer_info.object_id, serialize_hello_topic, &hello_topic);
 
@@ -90,15 +85,11 @@ Quick start
         free_client_state(state);
     }
 
-Along with this *Micro RTPS Clients* you need to already have started a *Micro RTPS Agent* listening on the same UDP ports:
-::
+Along with this *Micro RTPS Clients* you need to already have started a *Micro RTPS Agent* listening on the same UDP ports: ::
     $ ./micrortps_agent udp 2020 2019
 
-and for seeing what is being received on the DDS side, you can use *Fast RTPS* HelloWorld example running a subscriber:
-::
+and for seeing what is being received on the DDS side, you can use *Fast RTPS* HelloWorld example running a subscriber (`Fast RTPS HelloWorld <http://eprosima-fast-rtps.readthedocs.io/en/latest/introduction.html#building-your-first-application>`_: ::
     $ ./HelloWorldExample subscriber
-
-TODO: Link a FastRtps y como compilar el HelloWorld
 
 This example shows how a *Micro RTPS Client* publish message on a DDS Global Data Space. For achieve that, you need to create different kind of entities on a *Micro RTPS Agent* using operations requests sent by *Micro RTPS Client*.
 
