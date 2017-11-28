@@ -10,7 +10,7 @@ Within your *Micro RTPS Client* you can choose between two transport layers: UDP
     ClientState* new_serial_client_state(uint32_t buffer_size, const char* device);
     ClientState* new_udp_client_state(uint32_t buffer_size, uint16_t recv_port, uint16_t send_port);
 
-Those two functions creates a ClientState object that you should keep during a communication session with a *Micro RTPS Agent*. Once your are done with that communication you can free it using:
+Those two functions create a ClientState object that you should keep during a communication session with a *Micro RTPS Agent*. Once your are done with that communication you can free it using:
 
 .. code-block:: c
 
@@ -35,15 +35,15 @@ Your *Micro RTPS Client* can send request operations to the *Micro RTPS Agent* u
     XRCEInfo read_data(ClientState* state, uint16_t data_reader_id, DeserializeTopic deserialization,
                        OnTopicReceived on_topic, void* on_topic_args);
 
-All this functions returns information about the entities and request identifiers inside a XRCEInfo struct.
-This API functions just prepare requests for the *Micro RTPS Agent* but they dont send them. For pushing those request through the transport you need to call:
+All this functions return information about the entities and request identifiers inside a XRCEInfo struct.
+This API functions just prepare requests for the *Micro RTPS Agent* but they don't send them. For pushing those request through the transport you need to call:
 
 .. code-block:: c
 
     bool send_to_agent(ClientState* state);
 
 
-In the other way of the communication (Agent -> client) you need to provide callbacks to get the responses from the Agent as well as receiving your data from DDS Global Data Space:
+In the other way of the communication (Agent -> Client) you need to provide callbacks to get the responses from the Agent as well as receiving your data from DDS Global Data Space:
 
 .. code-block:: c
 

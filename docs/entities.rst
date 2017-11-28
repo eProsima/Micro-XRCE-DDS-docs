@@ -24,10 +24,10 @@ Subscriber
 Topic
     Communication is based on Topic data. A Topic is a definition of a topic name and a topic data type.
 
-Data Writer
+DataWriter
     This is the endpoint able to write topic data.
 
-Data reader
+DataReader
     This is the endpoint able to read topic data.
 
 This is the Entities hierarchy:

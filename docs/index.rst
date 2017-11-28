@@ -12,11 +12,11 @@ eProsima Micro RTPS Documentation
    :alt: eProsima
    :target: http://www.eprosima.com/
 
-*eprosima Micro RTPS* is a software solution which allows to communicate extremely resource constrained environments(XRCEs) with an existing DDS network. This implementation comply with the specification proposal, "eXtremely Resource Constrained Environments DDS (DDS-XRCE)" submitted to the Object Management Group (OMG) consortium.
+*eProsima Micro RTPS* is a software solution which allows to communicate extremely resource constrained environments(XRCEs) with an existing DDS network. This implementation complies with the specification proposal, "eXtremely Resource Constrained Environments DDS (DDS-XRCE)" submitted to the Object Management Group (OMG) consortium.
 
-*Micro RTPS* implements a client-server protocol in order to enable resource-constrained devices(clients) to participate in DDS communications, This communication is done through an *Micro RTPS Agent* (server). The *Micro RTPS Agent* acts on behalf of the *Micro RTPS Clients* and enable them to participate as DDS publishers and/or subscribers in the DDS Global Data Space.
+*Micro RTPS* implements a client-server protocol in order to enable resource-constrained devices(clients) to participate in DDS communications, This communication is done through an *Micro RTPS Agent* (server). The *Micro RTPS Agent* acts on behalf of the *Micro RTPS Clients* and enables them to participate as DDS publishers and/or subscribers in the DDS Global Data Space.
 
-*eProsima Micro RTPS* provides both, a plug and play *Micro RTPS Agent* and an API layer for the implementation of your own *Micro RTPS Clients*.
+*Micro RTPS* provides both, a plug and play *Micro RTPS Agent* and an API layer for the implementation of your own *Micro RTPS Clients*.
 
 .. image:: architecture.svg
 
@@ -85,7 +85,7 @@ Quick start
         free_client_state(state);
     }
 
-Along with this *Micro RTPS Clients* you need to already have started a *Micro RTPS Agent* listening on the same UDP ports: ::
+Along with these *Micro RTPS Clients*, you need to have already started a *Micro RTPS Agent* listening on the same UDP ports: ::
     $ ./micrortps_agent udp 2020 2019
 
 and for seeing what is being received on the DDS side, you can use *Fast RTPS* HelloWorld example running a subscriber (`Fast RTPS HelloWorld <http://eprosima-fast-rtps.readthedocs.io/en/latest/introduction.html#building-your-first-application>`_: ::
