@@ -10,7 +10,7 @@ Within your *Micro RTPS Client* you can choose between two transport layers: UDP
     ClientState* new_serial_client_state(uint32_t buffer_size, const char* device);
     ClientState* new_udp_client_state(uint32_t buffer_size, uint16_t recv_port, uint16_t send_port);
 
-Those two functions create a ClientState object that you should keep during a communication session with a *Micro RTPS Agent*. Once your are done with that communication you can free it using:
+Those two functions create a ClientState object that you should keep during a communication session with a *Micro RTPS Agent*. If you do not need that communication you can free it using:
 
 .. code-block:: c
 
@@ -43,14 +43,14 @@ This API functions just prepare requests for the *Micro RTPS Agent* but they don
     bool send_to_agent(ClientState* state);
 
 
-In the other way of the communication (Agent -> Client) you need to provide callbacks to get the responses from the Agent as well as receiving your data from DDS Global Data Space:
+In the other way of the communication (Agent -> Client) you need to give callbacks to get the responses from the Agent as well as receiving your data from DDS Global Data Space:
 
 .. code-block:: c
 
     typedef void (*OnTopicReceived)(XRCEInfo info, const void* topic, void* args);
     typedef void (*OnStatusReceived)(XRCEInfo info, uint8_t operation, uint8_t status, void* args);
 
-Those callbacks will be called once you make a call to receive. At that moment your transport feeds your client with new data coming from the Agent.
+When yo call to the receive function those callbacks are called if needed. At that moment your transport feeds your client with new data coming from the Agent.
 
 .. code-block:: c
 

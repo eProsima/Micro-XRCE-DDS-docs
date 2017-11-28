@@ -1,6 +1,6 @@
 .. eProsima Micro RTPS documentation master file.
 
-.. _micrortpsdoc:
+.. _micrortps_doc:
 
 eProsima Micro RTPS Documentation
 =================================
@@ -14,9 +14,9 @@ eProsima Micro RTPS Documentation
 
 *eProsima Micro RTPS* is a software solution which allows to communicate extremely resource constrained environments(XRCEs) with an existing DDS network. This implementation complies with the specification proposal, "eXtremely Resource Constrained Environments DDS (DDS-XRCE)" submitted to the Object Management Group (OMG) consortium.
 
-*Micro RTPS* implements a client-server protocol in order to enable resource-constrained devices(clients) to participate in DDS communications, This communication is done through a *Micro RTPS Agent* (server). The *Micro RTPS Agent* acts on behalf of the *Micro RTPS Clients* and enables them to participate as DDS publishers and/or subscribers in the DDS Global Data Space.
+*Micro RTPS* implements a client-server protocol to enable resource-constrained devices(clients) to take part in DDS communications, *Micro RTPS Agent* (server) makes possible this communication. The *Micro RTPS Agent* acts on behalf of the *Micro RTPS Clients* and enables them to take part as DDS publishers and/or subscribers in the DDS Global Data Space.
 
-*Micro RTPS* provides both, a plug and play *Micro RTPS Agent* and an API layer for the implementation of your own *Micro RTPS Clients*.
+*Micro RTPS* provides both, a plug and play *Micro RTPS Agent* and an API layer which allows you to implement your *Micro RTPS Clients*.
 
 .. image:: architecture.svg
 
@@ -88,12 +88,12 @@ Quick start
 Along with these *Micro RTPS Clients*, you need to have already started a *Micro RTPS Agent* listening on the same UDP ports: ::
     $ ./micrortps_agent udp 2020 2019
 
-and for seeing what is being received on the DDS side, you can use *Fast RTPS* HelloWorld example running a subscriber (`Fast RTPS HelloWorld <http://eprosima-fast-rtps.readthedocs.io/en/latest/introduction.html#building-your-first-application>`_: ::
+and for seeing the messages from the DDS Global Data Space point fo view, you can use *Fast RTPS* HelloWorld example running a subscriber (`Fast RTPS HelloWorld <http://eprosima-fast-rtps.readthedocs.io/en/latest/introduction.html#building-your-first-application>`_: ::
     $ ./HelloWorldExample subscriber
 
-This example shows how a *Micro RTPS Client* publish message on a DDS Global Data Space. For achieve that, you need to create different kind of entities on a *Micro RTPS Agent* using operations requests sent by *Micro RTPS Client*.
+This example shows how a *Micro RTPS Client* publish message on a DDS Global Data Space. You need to create different kind of entities on a *Micro RTPS Agent* using operations requests sent by *Micro RTPS Client*.
 
-In the following figure is represented the hierarchy of objects you need to instantiate on the *Micro RTPS Agent* to publish on a topic:
+The following figure represents the hierarchy of objects you need to instantiate on the *Micro RTPS Agent* to publish on a topic:
 
 .. image:: micrortps_entities_hierarchy.svg
 

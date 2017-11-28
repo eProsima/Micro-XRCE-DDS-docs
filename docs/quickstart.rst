@@ -5,7 +5,8 @@ This page gives you a good introduction in how to get started with the *Micro RT
 
 First, you need to have installed:
  * FastRTPS
- * Micro RTPS
+ * Micro RTPS Client
+ * Micro RTPS Agent
 
 Creating a Client
 ^^^^^^^^^^^^^^^^^
