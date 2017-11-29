@@ -7,6 +7,7 @@ Installing the Agent
 --------------------
 
 Clone the project from Github: ::
+
     $ git clone --recursive https://github.com/eProsima/Micro-RTPS
     $ mkdir Micro-RTPS/build && cd Micro-RTPS/build
 
