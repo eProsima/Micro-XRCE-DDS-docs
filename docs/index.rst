@@ -12,9 +12,9 @@ eProsima Micro RTPS Documentation
    :alt: eProsima
    :target: http://www.eprosima.com/
 
-*eProsima Micro RTPS* is a software solution which allows to communicate extremely resource constrained environments(XRCEs) with an existing DDS network. This implementation complies with the specification proposal, "eXtremely Resource Constrained Environments DDS (DDS-XRCE)" submitted to the Object Management Group (OMG) consortium.
+*eProsima Micro RTPS* is a software solution which allows to communicate eXtremely Resource Constrained Environments (XRCEs) with an existing DDS network. This implementation complies with the specification proposal, "eXtremely Resource Constrained Environments DDS (DDS-XRCE)" submitted to the Object Management Group (OMG) consortium.
 
-*Micro RTPS* implements a client-server protocol to enable resource-constrained devices(clients) to take part in DDS communications, *Micro RTPS Agent* (server) makes possible this communication. The *Micro RTPS Agent* acts on behalf of the *Micro RTPS Clients* and enables them to take part as DDS publishers and/or subscribers in the DDS Global Data Space.
+*Micro RTPS* implements a client-server protocol to enable resource-constrained devices (clients) to take part in DDS communications. *Micro RTPS Agent* (server) makes possible this communication. The *Micro RTPS Agent* acts on behalf of the *Micro RTPS Clients* and enables them to take part as DDS publishers and/or subscribers in the DDS Global Data Space.
 
 *Micro RTPS* provides both, a plug and play *Micro RTPS Agent* and an API layer which allows you to implement your *Micro RTPS Clients*.
 
@@ -23,7 +23,7 @@ eProsima Micro RTPS Documentation
 Quick start
 =============
 
-*Micro RTPS* provides a C API which allows you to create your own *Micro RTPS Clients* publishing and/or listening to topics from DDS Global Data Space. The following example is a simple *Micro RTPS Clients* (Using that C API) and a *Micro RTPS Agent* publishing a "Hello DDS world!" messages to DDS world.
+*Micro RTPS* provides a C API which allows you to create your own *Micro RTPS Clients* publishing and/or listening to topics from DDS Global Data Space. The following example is a simple *Micro RTPS Client* (Using that C API) and a *Micro RTPS Agent* publishing a "Hello DDS world!" message to DDS world.
 
 .. code-block:: c++
 
@@ -86,12 +86,14 @@ Quick start
     }
 
 Along with these *Micro RTPS Clients*, you need to have already started a *Micro RTPS Agent* listening on the same UDP ports: ::
+
     $ ./micrortps_agent udp 2020 2019
 
 and for seeing the messages from the DDS Global Data Space point fo view, you can use *Fast RTPS* HelloWorld example running a subscriber (`Fast RTPS HelloWorld <http://eprosima-fast-rtps.readthedocs.io/en/latest/introduction.html#building-your-first-application>`_: ::
+
     $ ./HelloWorldExample subscriber
 
-This example shows how a *Micro RTPS Client* publish message on a DDS Global Data Space. You need to create different kind of entities on a *Micro RTPS Agent* using operations requests sent by *Micro RTPS Client*.
+This example shows how a *Micro RTPS Client* publishes messages on a DDS Global Data Space. You need to create different kind of entities on a *Micro RTPS Agent* using operations requests sent by *Micro RTPS Client*.
 
 The following figure represents the hierarchy of objects you need to instantiate on the *Micro RTPS Agent* to publish on a topic:
 

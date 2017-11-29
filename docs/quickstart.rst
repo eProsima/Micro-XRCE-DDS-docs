@@ -1,9 +1,9 @@
-Quicstart
-=========
+Quickstart
+==========
 
-This page gives you a good introduction in how to get started with the *Micro RTPS Client* development
+This page introduces you how to get started with the *Micro RTPS Client* development
 
-First, you need to have installed:
+First, you need to have available on your system:
  * FastRTPS
  * Micro RTPS Client
  * Micro RTPS Agent
