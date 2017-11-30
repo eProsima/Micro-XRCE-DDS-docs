@@ -26,7 +26,7 @@ Installing the Client
 
 Clone the project from Github: ::
 
-    $ git git clone --recursive  https://github.com/eProsima/Micro-RTPS
+    $ git clone --recursive  https://github.com/eProsima/Micro-RTPS
     $ mkdir Micro-RTPS/build && cd Micro-RTPS/build
 
 On Linux, execute: ::
