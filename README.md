@@ -2,86 +2,143 @@
 
 <a href="http://www.eprosima.com"><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSd0PDlVz1U_7MgdTe0FRIWD0Jc9_YH-gGi0ZpLkr-qgCI6ZEoJZ5GBqQ" align="left" hspace="8" vspace="2" width="100" height="100" ></a>
 
-*eprosima Micro RTPS* is a software solution which allows to communicate extremely resource constrained environments(XRCEs) with an existing DDS network. This implementation comply with the specification proposal, "eXtremely Resource Constrained Environments DDS (DDS-XRCE)" submitted to the Object Management Group (OMG) consortium.
+*eProsima Micro RTPS* is a software solution which allows to communicate eXtremely Resource Constrained Environments (XRCEs) with an existing DDS network. This implementation complies with the specification proposal, "eXtremely Resource Constrained Environments DDS (DDS-XRCE)" submitted to the Object Management Group (OMG) consortium.
 
-*Micro RTPS* implements a client-server protocol in order to enable resource-constrained devices(clients) to participate in DDS communications, This communication is done through an Agent(server). The Agent acts on behalf of the clients and enable them to participate as DDS publishers and/or subscribers in the DDS Global Data Space.
+*Micro RTPS* implements a client-server protocol to enable resource-constrained devices (clients) to take part in DDS communications. *Micro RTPS Agent* (server) makes possible this communication. The *Micro RTPS Agent* acts on behalf of the *Micro RTPS Clients* and enables them to take part as DDS publishers and/or subscribers in the DDS Global Data Space.
 
-*eProsima Micro RTPS* provides both, a plug and play Agent and an API layer for the implementation of your own clients.
+*Micro RTPS* provides both, a plug and play *Micro RTPS Agent* and an API layer which allows you to implement your *Micro RTPS Clients*.
 
+![Architecture](docs/architecture.svg)
 
-## Quick example
+Quick start
+=============
 
-*Micro RTPS* provides a C API which allows you to create your own clients publishing and/or listening to topics from DDS Glocal Data Space. The following example are a simple Client (Using that C API) and an Agent publishing and receiving "Hello World" messages to DDS world.
+*Micro RTPS* provides a C API which allows you to create your own *Micro RTPS Clients* publishing and/or listening to topics from DDS Global Data Space. The following example is a simple *Micro RTPS Client* (Using that C API) and a *Micro RTPS Agent* publishing a "Hello DDS world!" message to DDS world.
 
+```cpp
+    #include <micrortps/client/client.h>
+    #include <microcdr/microcdr.h>
+    #include <string.h>
+    #include <stdlib.h>
 
-`
-ClientState* state = new_udp_client_state(BUFFER_SIZE, received_port, send_port);
-free_client_state(state);
-
- `
-
-
-
-----------------------------------------
-
-
-
-
-
-
-
+    // User type declaration
+    typedef struct HelloWorld
+    {
+        uint32_t index;
+        uint32_t message_length;
+        char* message;
+    } HelloTopic;
 
 
+    // Serialization implementation provided by the user. Uses Eprosima MicroCDR.
+    bool serialize_hello_topic(MicroBuffer* writer, const AbstractTopic* topic_structure)
+    {
+        HelloTopic* topic = (HelloTopic*) topic_structure->topic;
+        serialize_uint32_t(writer, topic->index);
+        serialize_array_char(writer, topic->message, topic->message_length);
+        return true;
+    }
 
+    // User callback for receiving status messages from the Micro RTPS Agent.
+    void on_status(XRCEInfo info, uint8_t operation, uint8_t status, void* args)
+    {
+        // Process status message.
+    };
 
+    int main(int args, char** argv)
+        {
+        // Creates a Client state.
+        ClientState* state = new_udp_client_state(4096, "127.0.0.1", 2019, 2020);
 
+        // Creates a Client on the Micro RTPS Micro RTPS Agent.
+        create_client(state, on_status, NULL);
 
+        // Creates a Participant on the Micro RTPS Agent.
+        XRCEInfo participant_info = create_participant(state);
 
-Start client
+        // Register a Topic on the given Participant. Uses a Topic configuration written in xml format
+        String topic_profile = {"<dds><topic><name>HelloWorldTopic</name><dataType>HelloWorld</dataType></topic></dds>", 86};
+        create_topic(state, participant_info.object_id, topic_profile);
 
+        // Creates a publisher on the given Participant
+        XRCEInfo publisher_info = create_publisher(state, participant_info.object_id);
 
+        // Creates a data writer using the Participant and publisher recently created. This data writer is configured through a XML profile.
+        String data_writer_profile = {"<profiles><publisher profile_name=\"default_xrce_publisher_profile\"><topic><kind>NO_KEY</kind><name>HelloWorldTopic</name><dataType>HelloWorld</dataType><historyQos><kind>KEEP_LAST</kind><depth>5</depth></historyQos><durability><kind>TRANSIENT_LOCAL</kind></durability></topic></publisher></profiles>",
+        300+1};
+        XRCEInfo data_writer_info = create_data_writer(state, participant_info.object_id, publisher_info.object_id, data_writer_profile);
 
+        // Prepare and write the user data to be sent.
+        char message[] = "Hello DDS world!";
+        uint32_t length = strlen(message) + 1;
+        HelloTopic hello_topic = (HelloTopic){1, length, message};
+        // Write user type data.
+        write_data(state, data_writer_info.object_id, serialize_hello_topic, &hello_topic);
 
+        // Send the data through the UDP transport.
+        send_to_agent(state);
 
+        // Free all the ClientState resources.
+        free_client_state(state);
+    }
+```
 
+For building your Client you need to build against the following libs
 
+    gcc <your_main.c> -lmicrocdr -lmicrortps-client -ltransport
 
+Along with these *Micro RTPS Clients*, you need to have already started a *Micro RTPS Agent* listening on the same UDP ports:
 
+    $ cd /usr/local/bin && micrortps_agent udp 127.0.0.1 2020 2019
 
+and for seeing the messages from the DDS Global Data Space point fo view, you can use *Fast RTPS* HelloWorld example running a subscriber [Fast RTPS HelloWorld](http://eprosima-fast-rtps.readthedocs.io/en/latest/introduction.html#building-your-first-application):
 
+    $ cd /usr/local/examples/C++/HelloWorldExample
+    $ sudo make && cd bin
+    $ ./HelloWorldExample subscriber
 
+This example shows how a *Micro RTPS Client* publishes messages on a DDS Global Data Space. You need to create different kind of entities on a *Micro RTPS Agent* using Operations requests sent by *Micro RTPS Client*.
 
+The following figure represents the hierarchy of objects you need to instantiate on the *Micro RTPS Agent* to publish on a topic:
 
+![Entities Hierarchy](docs/micrortps_entities_hierarchy.svg)
 
+Installation from Sources
+=========================
 
+Installing the Agent
+--------------------
 
-`<blink>`
+Clone the project from Github:
 
+    $ git clone --recursive https://github.com/eProsima/Micro-RTPS
+    $ mkdir Micro-RTPS/build && cd Micro-RTPS/build
 
+On Linux, execute:
 
-You can get either a binary distribution of *eprosima Fast RTPS* or compile the library yourself from source.
-
-### Installation from binaries
-The latest, up to date binary release of *eprosima Fast RTPS* can be obtained from the <a href='http://www.eprosima.com'>company website</a>.
-
-### Installation from Source
-To compile *eprosima Fast RTPS* from source, at least Cmake version 2.8.12 and Boost 1.61 are needed.
-Clone the project from GitHub:
-
-    $ git clone https://github.com/eProsima/Fast-RTPS
-
-If you are on Linux, execute:
-
-    $ cmake ../ -DEPROSIMA_BUILD=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=install
+    $ cmake -DTHIRDPARTY=ON ..
     $ make
-    $ make install
+    $ sudo make install
 
-If you are on Windows, choose your version of Visual Studio:
+Now you have micrortps_agent installed in your system. Before running it, you need to add /usr/local/lib to the dynamic loader-linker directories.
 
-    > cmake ../  -G"Visual Studio 14 2015 Win64" -DEPROSIMA_BUILD=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=installationpath
-    > cmake --build . --target install
+    sudo ldconfig /usr/local/lib/
 
-If you want to compile the performance tests, you will need to add the argument `-DPERFORMANCE_TESTS=ON` when calling Cmake.
+Installing the Client
+---------------------
+
+Clone the project from Github:
+
+    $ git clone --recursive  https://github.com/eProsima/Micro-RTPS
+    $ mkdir Micro-RTPS/build && cd Micro-RTPS/build
+
+On Linux, execute: ::
+
+    $ cmake -DTHIRDPARTY=ON ..
+    $ make
+    $ sudo make install
+
+If you want to install our *Micro RTPS Client* examples you can add "-DEPROSIMA_BUILD_EXAMPLES=ON" to the cmake command line options.
 
 ## Documentation
 

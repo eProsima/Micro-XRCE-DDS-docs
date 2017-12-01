@@ -8,7 +8,7 @@ Within your *Micro RTPS Client* you can choose between two transport layers: UDP
 .. code-block:: c
 
     ClientState* new_serial_client_state(uint32_t buffer_size, const char* device);
-    ClientState* new_udp_client_state(uint32_t buffer_size, uint16_t recv_port, uint16_t send_port);
+    ClientState* new_udp_client_state(uint32_t buffer_size, const char* server_ip, uint16_t recv_port, uint16_t send_port);
 
 Those two functions create a ClientState object that you should keep during a communication session with a *Micro RTPS Agent*. If you do not need that communication you can free it using:
 
@@ -17,7 +17,7 @@ Those two functions create a ClientState object that you should keep during a co
     void free_client_state(ClientState* state);
 
 
-Your *Micro RTPS Client* can send request operations to the *Micro RTPS Agent* using the API provided:
+Your *Micro RTPS Client* can send request Operations to the *Micro RTPS Agent* using the API provided:
 
 .. code-block:: c
 
@@ -35,7 +35,7 @@ Your *Micro RTPS Client* can send request operations to the *Micro RTPS Agent* u
     XRCEInfo read_data(ClientState* state, uint16_t data_reader_id, DeserializeTopic deserialization,
                        OnTopicReceived on_topic, void* on_topic_args);
 
-All this functions return information about the entities and request identifiers inside a XRCEInfo struct.
+All these functions return information about the entities and request identifiers inside a XRCEInfo struct.
 This API functions just prepare requests for the *Micro RTPS Agent* but they don't send them. For pushing those request through the transport you need to call:
 
 .. code-block:: c
@@ -50,7 +50,7 @@ In the other way of the communication (Agent -> Client) you need to give callbac
     typedef void (*OnTopicReceived)(XRCEInfo info, const void* topic, void* args);
     typedef void (*OnStatusReceived)(XRCEInfo info, uint8_t operation, uint8_t status, void* args);
 
-When yo call to the receive function those callbacks are called if needed. At that moment your transport feeds your client with new data coming from the Agent.
+When You call to the receive function those callbacks are called if needed. At that moment your transport feeds your Client with new data coming from the Agent.
 
 .. code-block:: c
 

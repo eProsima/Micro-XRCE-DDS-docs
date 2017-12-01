@@ -31,14 +31,14 @@ In your code you can create a Client State like:
 
 .. code-block:: C
 
-    ClientState* state = new_udp_client_state(4096, 2019, 2020);
+    ClientState* state = new_udp_client_state(4096, "127.0.0.1", 2019, 2020);
 
-If the client state creation finished successfully you will get a valid pointer otherwise the pointer will be NULL.
+If the Client state creation finished successfully you will get a valid pointer otherwise the pointer will be NULL.
 
 First Agent Operation
 ^^^^^^^^^^^^^^^^^^^^^
 
-For starting a communication with the Agent you need to let It know about your new Client. You can do this using Create Client operation.
+For starting a communication with the Agent you need to let it know about your new Client. You can do this using Create Client Operation.
 
 All the Operations you send to the Agent will be replied over a callback you must implement:
 
@@ -49,18 +49,18 @@ All the Operations you send to the Agent will be replied over a callback you mus
         printf("Status response received\n");
     }
 
-You pass that callback to the create operation so all the status responses for that Client are received on that callback. For creating a Client you need the callback and the Client State you create before.
+You pass that callback to the create Operation so all the status responses for that Client are received on that callback. For creating a Client you need the callback and the Client State you create before.
 
 .. code-block:: C
 
     XRCEInfo create_client_info = create_client(state, on_status_received, NULL);
 
-The XRCEInfo you get from this function provides you with the request id generated as well as the Entity ID the object created will have in the Agent.
+The XRCEInfo you get from this function provides you with the request ID generated as well as the Entity ID the object created will have in the Agent.
 
 Setup a Participant
 ^^^^^^^^^^^^^^^^^^^
 
-For establishing DDS communication you need to create a :class:`Participant` for your Client in the Agent. You do this calling create participant:
+For establishing DDS communication you need to create a :class:`Participant` for your Client in the Agent. You do this calling create Participant:
 
 .. code-block:: C
 
@@ -77,7 +77,7 @@ If you provide the Client with a status callback all the subsequent Operations w
 
     receive_from_agent(state);
 
-This call will check the transport for new incoming messages. On the callback you will receive the XRCEInfo corresponding to the last operation as well as the last operation ID and the status of this operation. This are the possible Status and last operation IDs:
+This call will check the transport for new incoming messages. On the callback you will receive the XRCEInfo corresponding to the last Operation as well as the last Operation ID and the status of this Operation. This are the possible Status and last Operation IDs:
 
 .. code-block:: C
 
@@ -105,7 +105,7 @@ This call will check the transport for new incoming messages. On the callback yo
 Creating  topics
 ^^^^^^^^^^^^^^^^
 
-Once you have created a Participant you can use create topic operation for register your Topic within the Participant.
+Once you have created a Participant you can use create Topic Operation for register your Topic within the Participant.
 
 For example if we use ShapesDemo as our Topic. The ShapeType IDL on FastRTPS looks like:
 
@@ -174,7 +174,7 @@ Once you have your Topic type ready you can register it. You need to provide the
     String topic_profile = {"<dds><topic><kind>WITH_KEY</kind><name>Square</name><dataType>ShapeType</dataType></topic></dds>", 96+1};
     create_topic(state, participant_info.object_id, topic_profile);
 
-For this operation You must provide a XML defining your topic. That definition consists on a name and a type.
+For this Operation You must provide a XML defining your topic. That definition consists on a name and a type.
 
 Publishers & Subscribers
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -252,7 +252,7 @@ All the previous Operations calls are not sent to the Agent till you ask so. You
 
 This call will send all the accumulated Operations to the Agent.
 
-For receiving data there is an analogous operation you must call:
+For receiving data there is an analogous Operation you must call:
 
 .. code-block:: C
 
@@ -264,7 +264,7 @@ to receive read data from the Agent.
 Closing my Client
 ^^^^^^^^^^^^^^^^^
 
-You need to free all the Client State resources with a call to free client state.
+You need to free all the Client State resources with a call to free Client state.
 
 .. code-block:: C
 
@@ -355,24 +355,24 @@ This is an example code of an interactive shapesDemo Client.
         printf("<< SHAPES DEMO XRCE CLIENT >>\n");
 
         ClientState* state = NULL;
-        if(args > 2)
+        if(args > 3)
         {
             if(strcmp(argv[1], "serial") == 0)
             {
                 state = new_serial_client_state(BUFFER_SIZE, argv[2]);
                 printf("<< Serial mode => dev: %s >>\n", argv[2]);
             }
-            else if(strcmp(argv[1], "udp") == 0 && args == 4)
+            else if(strcmp(argv[1], "udp") == 0 && args == 5)
             {
-                uint16_t received_port = atoi(argv[2]);
-                uint16_t send_port = atoi(argv[3]);
-                state = new_udp_client_state(BUFFER_SIZE, received_port, send_port);
+                uint16_t received_port = atoi(argv[3]);
+                uint16_t send_port = atoi(argv[4]);
+                state = new_udp_client_state(BUFFER_SIZE, argv[2], received_port, send_port);
                 printf("<< UDP mode => recv port: %u, send port: %u >>\n", received_port, send_port);
             }
         }
         if(!state)
         {
-            printf("Help: program [serial | udp recv_port send_port]\n");
+            printf("Help: program [serial | udp dest_ip recv_port send_port]\n");
             return 1;
         }
 
