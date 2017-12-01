@@ -27,7 +27,7 @@ Quick start
 
 .. code-block:: c++
 
-        #include <micrortps/client/client.h>
+    #include <micrortps/client/client.h>
     #include <microcdr/microcdr.h>
     #include <string.h>
     #include <stdlib.h>
@@ -46,6 +46,7 @@ Quick start
     {
         HelloTopic* topic = (HelloTopic*) topic_structure->topic;
         serialize_uint32_t(writer, topic->index);
+        serialize_uint32_t(writer, topic->message_length);
         serialize_array_char(writer, topic->message, topic->message_length);
         return true;
     }
