@@ -8,7 +8,7 @@
 
 *Micro RTPS* provides both, a plug and play *Micro RTPS Agent* and an API layer which allows you to implement your *Micro RTPS Clients*.
 
-![Architecture](docs/architecture.svg)
+![Architecture](docs/architecture.png)
 
 Quick start
 =============
@@ -101,7 +101,7 @@ This example shows how a *Micro RTPS Client* publishes messages on a DDS Global 
 
 The following figure represents the hierarchy of objects you need to instantiate on the *Micro RTPS Agent* to publish on a topic:
 
-![Entities Hierarchy](docs/micrortps_entities_hierarchy.svg)
+![Entities Hierarchy](docs/micrortps_entities_hierarchy.png)
 
 Installation from Sources
 =========================
@@ -142,13 +142,7 @@ If you want to install our *Micro RTPS Client* examples you can add "-DEPROSIMA_
 
 ## Documentation
 
-You can access the documentation online, which is hosted on [Read the Docs](http://eprosima-fast-rtps.readthedocs.io).
-
-* [Start Page](http://eprosima-fast-rtps.readthedocs.io)
-* [Installation manual](http://eprosima-fast-rtps.readthedocs.io/en/latest/requirements.html)
-* [User manual](http://eprosima-fast-rtps.readthedocs.io/en/latest/introduction.html)
-* [FastRTPSGen manual](http://eprosima-fast-rtps.readthedocs.io/en/latest/geninfo.html)
-* [Release notes](http://eprosima-fast-rtps.readthedocs.io/notes.html)
+Coming soon...
 
 ## Getting Help
 
