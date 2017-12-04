@@ -14,7 +14,7 @@ Once it is built successfully you just need to launch it executing one of the fo
 
 For running it on UDP.  ::
 
-    $ ./micrortps_agent udp <out_UPD_port> <in_UPD_port>
+    $ ./micrortps_agent udp <local_ip> <out_UDP_port> <in_UDP_port>
 
 For running it on SerialPort.  ::
 

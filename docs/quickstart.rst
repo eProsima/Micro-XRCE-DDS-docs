@@ -3,13 +3,14 @@ Quickstart
 
 This page shows you how to get started with the *Micro RTPS Client* development.
 
-We will go step by step on one of our Client examples using ShapesDemo.
+We will go step by step on one of our Client examples using `ShapesDemo. <https://github.com/eProsima/ShapesDemo>`_
 
 If you want to jump straight to the code go to :ref:`quick_start_code`.
 
 First, you need to have on your system:
 
  - FastRTPS
+ - ShapesDemo.
  - Micro RTPS Client
  - Micro RTPS Agent
 
@@ -118,54 +119,7 @@ For example if we use ShapesDemo as our Topic. The ShapeType IDL on FastRTPS loo
         long shapesize;
     };
 
-In your Client you need to create and equivalent type:
-
-
-.. code-block:: C
-
-    typedef struct ShapeTopic
-    {
-        uint32_t color_length;
-        char*    color;
-        uint32_t x;
-        uint32_t y;
-        uint32_t size;
-
-    } ShapeTopic;
-
-Also you need to provide Micro-CDR serialization/deserialization functions:
-
-.. code-block:: C
-
-    bool serialize_shape_topic(MicroBuffer* writer, const AbstractTopic* topic_structure)
-    {
-        ShapeTopic* topic = (ShapeTopic*) topic_structure->topic;
-
-        serialize_uint32_t(writer, topic->color_length);
-        serialize_array_char(writer, topic->color, topic->color_length);
-        serialize_uint32_t(writer, topic->x);
-        serialize_uint32_t(writer, topic->y);
-        serialize_uint32_t(writer, topic->size);
-
-        return true;
-    }
-
-    bool deserialize_shape_topic(MicroBuffer* reader, AbstractTopic* topic_structure)
-    {
-        ShapeTopic* topic = malloc(sizeof(ShapeTopic));
-
-        deserialize_uint32_t(reader, &topic->color_length);
-        topic->color = malloc(sizeof(topic->color_length));
-        deserialize_array_char(reader, topic->color, topic->color_length);
-        deserialize_uint32_t(reader, &topic->x);
-        deserialize_uint32_t(reader, &topic->y);
-        deserialize_uint32_t(reader, &topic->size);
-
-        topic_structure->topic = topic;
-
-        return true;
-    }
-
+In your Client you need to create and equivalent type and serialization/deserialization code. This is done automatically for you by an auto generator tool. This tool will be available in a future update.
 
 Once you have your Topic type ready you can register it. You need to provide the Participant ID to create the Topic with it:
 
@@ -277,6 +231,33 @@ Full Code
 ^^^^^^^^^
 
 This is an example code of an interactive shapesDemo Client.
+
+This interactive client waits for user input indicating commands to execute.
+
+For publishing a topic data you need to run the following commands in order:
+
+* create_client
+* create_participant
+* create_topic 1
+* create_publisher 1
+* create_data_writer 1 3
+* write_data 4
+
+Participant will be assigned ID 1.
+Topic will be assigned ID 2.
+Publisher will be assigned ID 3.
+And DaWriter will be assigned ID 4.
+
+And for reading data:
+
+* create_client
+* create_participant
+* create_topic 1
+* create_subscriber 1
+* create_data_reader 1 3
+* read_data 4
+
+The previous IDs are valid for a fresh run of Agent and Client pair. Other wise you need to get IDs from status messages responses sent from Agent.
 
 .. code-block:: C
 
