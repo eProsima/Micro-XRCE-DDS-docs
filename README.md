@@ -106,31 +106,47 @@ The following figure represents the hierarchy of objects you need to instantiate
 Installation from Sources
 =========================
 
-Installing the Agent
---------------------
+Installing Agent and Client
+---------------------------
 
 Clone the project from Github:
 
-    $ git clone --recursive https://github.com/eProsima/Micro-RTPS
-    $ mkdir Micro-RTPS/build && cd Micro-RTPS/build
+    $ git clone --recursive https://github.com/eProsima/micro-RTPS.git
+    $ mkdir micro-RTPS/build && cd micro-RTPS/build
 
 On Linux, execute:
+
+    $ cmake ..
+    $ make
+    $ sudo make install
+
+Now you have Micro-RTPS-Agent and Micro-RTPS-Client installed in your system.
+
+Installing the Agent stand-alone
+--------------------------------
+
+Clone the project from Github: ::
+
+    $ git clone --recursive https://github.com/eProsima/micro-RTPS-agent.git
+    $ mkdir micro-RTPS-agent/build && cd micro-RTPS-agent/build
+
+On Linux, execute: ::
 
     $ cmake -DTHIRDPARTY=ON ..
     $ make
     $ sudo make install
 
-Now you have micrortps_agent installed in your system. Before running it, you need to add /usr/local/lib to the dynamic loader-linker directories.
+Now you have micrortps_agent installed in your system. Before running it, you need to add /usr/local/lib to the dynamic loader-linker directories. ::
 
     sudo ldconfig /usr/local/lib/
 
-Installing the Client
----------------------
+Installing the Client stand-alone
+---------------------------------
 
-Clone the project from Github:
+Clone the project from Github: ::
 
-    $ git clone --recursive  https://github.com/eProsima/Micro-RTPS
-    $ mkdir Micro-RTPS/build && cd Micro-RTPS/build
+    $ git clone --recursive  https://github.com/eProsima/micro-RTPS-client.git
+    $ mkdir micro-RTPS-client/build && cd micro-RTPS-client/build
 
 On Linux, execute: ::
 
@@ -142,7 +158,11 @@ If you want to install our *Micro RTPS Client* examples you can add "-DEPROSIMA_
 
 ## Documentation
 
-Coming soon...
+You can access the documentation online, which is hosted on [Read the Docs](http://micro-rtps.readthedocs.io).
+
+* [Start Page](http://micro-rtps.readthedocs.io)
+* [Installation manual](http://micro-rtps.readthedocs.io/en/latest/dependencies.html)
+* [User manual](http://micro-rtps.readthedocs.io/en/latest/introduction.html)
 
 ## Getting Help
 
