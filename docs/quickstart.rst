@@ -303,7 +303,7 @@ The previous IDs are valid for a fresh run of Agent and Client pair. Other wise 
         ShapeTopic* topic = malloc(sizeof(ShapeTopic));
 
         deserialize_uint32_t(reader, &topic->color_length);
-        topic->color = malloc(sizeof(topic->color_length));
+        topic->color = malloc(topic->color_length);
         deserialize_array_char(reader, topic->color, topic->color_length);
         deserialize_uint32_t(reader, &topic->x);
         deserialize_uint32_t(reader, &topic->y);
