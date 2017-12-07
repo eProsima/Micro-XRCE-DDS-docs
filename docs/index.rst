@@ -131,8 +131,6 @@ Index
    dependencies
    sources
 
-.. _user:
-
 .. toctree::
    :caption: User Manual
 
@@ -142,7 +140,6 @@ Index
    client
    entities
    operations
-   more
 
 .. toctree::
    :caption: Micro RTPS Gen
