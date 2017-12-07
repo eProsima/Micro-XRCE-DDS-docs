@@ -1,3 +1,5 @@
+.. _micro_rtps_agent_label:
+
 Micro RTPS Agent
 ================
 

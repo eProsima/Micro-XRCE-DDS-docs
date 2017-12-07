@@ -1,3 +1,5 @@
+.. _micro_rtps_client_label:
+
 Micro RTPS Client
 =================
 

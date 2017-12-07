@@ -55,5 +55,4 @@ Topic Type
 ----------
 
 The data sent by the Client to the DDS Global data Space uses the same principles as in *Fast RTPS*.
-On the DDS side you use Interface Definition Language (IDL) to define your own type. *Micro RTPS Client* must know that type.
-You need to add that type implementation on your *Micro RTPS Client* providing serialization and deserialization code. The type sent or received by *Micro RTPS Client* should match that one used on the DDS Side. For sending and receiving any Topic from your *Micro RTPS Client* you should use Write Data and Read Data Operations.
+On the DDS side you use Interface Definition Language (IDL) to define your own type. *Micro RTPS Client* must know that type. Having your type defined as IDL we provide you with (:ref:`micrortpsgen_label`). It is a tool able to generate a compatible Type that your *Micro RTPS Client* can use to send and receive that type of data. The type sent or received by *Micro RTPS Client* should match that one used on the DDS Side. For sending and receiving any Topic from your *Micro RTPS Client* you should use Write Data and Read Data Operations.

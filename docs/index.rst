@@ -25,6 +25,20 @@ Quick start
 
 *Micro RTPS* provides a C API which allows you to create your own *Micro RTPS Clients* publishing and/or listening to topics from DDS Global Data Space. The following example is a simple *Micro RTPS Client* (Using that C API) and a *Micro RTPS Agent* publishing a "Hello DDS world!" message to DDS world.
 
+Using this HelloWorld.idl. ::
+
+    struct HelloWorld
+    {
+            unsigned long index;
+            string message;
+    };
+
+We run our (:ref:`micrortpsgen_label`) tool: ::
+
+    $ micrortpsgen HelloWorld.idl
+
+And use the header file generated as our type:
+
 .. code-block:: c++
 
     #include <micrortps/client/client.h>
@@ -32,24 +46,7 @@ Quick start
     #include <string.h>
     #include <stdlib.h>
 
-    // User type declaration
-    typedef struct HelloWorld
-    {
-        uint32_t index;
-        uint32_t message_length;
-        char* message;
-    } HelloTopic;
-
-
-    // Serialization implementation provided by the user. Uses Eprosima MicroCDR.
-    bool serialize_hello_topic(MicroBuffer* writer, const AbstractTopic* topic_structure)
-    {
-        HelloTopic* topic = (HelloTopic*) topic_structure->topic;
-        serialize_uint32_t(writer, topic->index);
-        serialize_uint32_t(writer, topic->message_length);
-        serialize_array_char(writer, topic->message, topic->message_length);
-        return true;
-    }
+    #include "HelloWorld.h"
 
     // User callback for receiving status messages from the Micro RTPS Agent.
     void on_status(XRCEInfo info, uint8_t operation, uint8_t status, void* args)
@@ -82,8 +79,7 @@ Quick start
 
         // Prepare and write the user data to be sent.
         char message[] = "Hello DDS world!";
-        uint32_t length = strlen(message) + 1;
-        HelloTopic hello_topic = (HelloTopic){1, length, message};
+        HelloTopic hello_topic = (HelloTopic){1, message};
         // Write user type data.
         write_data(state, data_writer_info.object_id, serialize_hello_topic, &hello_topic);
 
@@ -119,14 +115,15 @@ Learn More
 
 To learn more about DDS and FastRTPS: `eProsima Fast RTPS <http://eprosima-fast-rtps.readthedocs.io>`_
 
-To learn how to install *Micro RTPS* read :ref:`installation`
+To learn how to install *Micro RTPS* read: :ref:`sources_label`
 
 To learn more about *Micro RTPS* read :ref:`user`
+
+To learn more about *Micro RTPS Gen* read: :ref:`micrortpsgen_label`
 
 
 Index
 -----
-.. _installation:
 
 .. toctree::
    :caption: Installation manual
@@ -147,7 +144,10 @@ Index
    operations
    more
 
-.. _notes:
+.. toctree::
+   :caption: Micro RTPS Gen
+
+   micrortpsgen
 
 .. toctree::
    :caption: Release Notes

@@ -1,4 +1,4 @@
-.. _source_label:
+.. _sources_label:
 
 Installation from Sources
 =========================
