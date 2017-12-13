@@ -317,6 +317,8 @@ Generated Type code:
         deserialize_int32_t(reader, &topic->m_y);
         deserialize_int32_t(reader, &topic->m_shapesize);
 
+        topic_structure->topic = topic;
+
         return true;
     }
 
