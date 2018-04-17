@@ -6,12 +6,12 @@ Installation from Sources
 Installing Agent and Client
 ---------------------------
 
-Clone the project from Github:
+Clone the project from Github: ::
 
     $ git clone --recursive https://github.com/eProsima/micro-RTPS.git
     $ mkdir micro-RTPS/build && cd micro-RTPS/build
 
-On Linux, execute:
+On Linux, execute: ::
 
     $ cmake ..
     $ make
@@ -33,7 +33,7 @@ On Linux, execute: ::
     $ make
     $ sudo make install
 
-Now you have micrortps_agent installed in your system. Before running it, you need to add /usr/local/lib to the dynamic loader-linker directories. ::
+Now you have micrortps_agent installed in your system. Before running it, you need to add ``/usr/local/lib`` to the dynamic loader-linker directories. ::
 
     sudo ldconfig /usr/local/lib/
 
@@ -51,4 +51,4 @@ On Linux, execute: ::
     $ make
     $ sudo make install
 
-If you want to install our *Micro RTPS Client* examples you can add "-DEPROSIMA_BUILD_EXAMPLES=ON" to the cmake command line options.
+If you want to install our *Micro RTPS Client* examples you can add ``-DEPROSIMA_BUILD_EXAMPLES=ON`` to the cmake command line options.

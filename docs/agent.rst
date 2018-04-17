@@ -10,7 +10,7 @@ The communication between a *Micro RTPS Client* and a *Micro RTPS Agent* support
 Run an Agent
 ------------
 
-To run the *Micro RTPS Agent* you should build it as indicated in :ref:`source_label`
+To run the *Micro RTPS Agent* you should build it as indicated in :ref:`sources_label`.
 
 Once it is built successfully you just need to launch it executing one of the following options:
 
