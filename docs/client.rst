@@ -6,6 +6,8 @@ Micro RTPS Client
 In *Micro RTPS* a *Client* can communicate with DDS Network as any other DDS actor could do.
 Clients can publish and subscribe to data topics in DDS Global Data Space.
 *Micro RTPS* provides you with a C API to create *Micro RTPS Clients*.
+All functions needed to set up the client can be found into ``xrce_client.h`` header.
+This is the only header that you must to include.
 
 Within your *Micro RTPS Client* you can choose between several transport layers.
 Communication with the Agent is done through the transport you choose.

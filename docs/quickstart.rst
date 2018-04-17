@@ -115,10 +115,6 @@ For seeing the messages from the DDS Global Data Space point of view, you can us
 
 This example shows how a *Micro RTPS Client* publishes messages on a DDS Global Data Space. You need to create different kind of entities on a *Micro RTPS Agent* using Operations requests sent by *Micro RTPS Client*.
 
-The following figure represents the hierarchy of objects you need to instantiate on the *Micro RTPS Agent* to publish on a topic:
-
-.. image:: micrortps_entities_hierarchy.svg
-
 Learn More
 ----------
 

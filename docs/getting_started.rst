@@ -1,223 +1,253 @@
 Getting started
 ===============
+This page shows how to get started with the *Micro RTPS Client* development.
+We will create a client that can publish and subscribe a topic.
+This example can be found into ``examples/PublishSubscribeHelloWorld``.
 
-This page shows you how to get started with the *Micro RTPS Client* development.
-
-First, you need to have on your system:
+First, we need to have on the system:
 
  - :ref:`micro_rtps_client_label`.
  - :ref:`micro_rtps_agent_label`.
  - :ref:`micrortpsgen_label`.
  - `FastRTPS. <https://github.com/eProsima/Fast-RTPS>`_
 
-Generate from your IDL
+Generate from the IDL
 ^^^^^^^^^^^^^^^^^^^^^^
+We will use HelloWorld as our Topic, that looks like: ::
 
-Using ShapesDemo as our Topic. The ShapeType IDL on FastRTPS looks like: ::
-
-    struct ShapeType {
-        @Key string color;
-        long x;
-        long y;
-        long shapesize;
+    struct HelloWorld
+    {
+        unsigned long index;
+        string message;
     };
 
-In your Client you need to create and equivalent type and serialization/deserialization code. This is done automatically for you by :ref:`micrortpsgen_label`: ::
+In the Client we need to create an equivalent c type with its serialization/deserialization code. This is done automatically by :ref:`micrortpsgen_label`: ::
 
-    $ micrortpsgen Shape.idl
+    $ micrortpsgen HelloWorld.idl
 
-Creating a Client
-^^^^^^^^^^^^^^^^^
+Initialize a Session
+^^^^^^^^^^^^^^^^^^^^
+We need to create a Session using a transport to use. This time we are using UDP in localhost over the port 2018.
 
-You need to create a ClientState using the transport you want to use (UDP or Serial). This time we are using UDP over the ports 2019 (in) and 2020 (out). We also specify the buffer size of 4096 for the messages.
-
-Include your generated type code.
-
-.. code-block:: C
-
-    #include "Shape.h"
-
-In your code you can create a Client State like:
+In the source example file, we include the generated type code, in order to have access to its serialization/deserialization functions.
+Also, we will specify a define for identifing the topic more readability.
 
 .. code-block:: C
 
-    ClientState* state = new_udp_client_state(4096, "127.0.0.1", 2019, 2020);
+    #include "HelloWorld.h"
+    #define HELLO_WORLD_TOPIC  1
 
-If the Client state creation finished successfully you will get a valid pointer otherwise the pointer will be NULL.
-
-First Agent Operation
-^^^^^^^^^^^^^^^^^^^^^
-
-For starting a communication with the Agent you need to let it know about your new Client. You can do this using Create Client Operation.
-
-All the Operations you send to the Agent will be replied over a callback you must implement:
+The first API call is for creating a Session which will use to manage the client.
+A valid Session is created in two steps:
 
 .. code-block:: C
 
-    void on_status_received(XRCEInfo info, uint8_t operation, uint8_t status, void* args)
+    ClientKey key = {{0xBB, 0xBB, 0xCC, 0xDD}};
+    if(new_udp_session(&my_session, 0x01, key, "127.0.0.1", 2018, on_topic, NULL))
     {
-        printf("Status response received\n");
+        printf("Error: socket is not available.");
+        return 1;
     }
 
-You pass that callback to the create Operation so all the status responses for that Client are received on that callback. For creating a Client you need the callback and the Client State you create before.
+    bool success = init_session_sync(&my_session);
+
+The first function ``new_udp_session`` does several things,
+first of all, set an id and a key for the Session,
+creates a socket for connecting to the agent,
+and setted a callback for receiving data from that agent.
+
+Once the udp Session has been created, we can send the first message for initiallizing the Session in the agent ``init_session_sync``.
+This call creates an client representation in the agent side.
+All functions with the suffix ``sync`` will be wait until the response or until a max number of attempts.
+
+In order to publish and subscribe a topic, we need to create a hierarchy of xrce entities in the Agent side.
+This entities will be created from the client.
+
+.. image:: micrortps_entities_hierarchy.svg
+
+Agent response
+^^^^^^^^^^^^^^
+In XRCE operations like initializing a client, create an entity or request data from the agent,
+an status state is send from the agent to the client to specify what happened.
+
+In this operations, if the call returns true, the things go well, as expected.
+If not, an status state can be read on ``session->last_status`` attribute to determine what was wrong.
+There are several values into a status response:
 
 .. code-block:: C
 
-    XRCEInfo create_client_info = create_client(state, on_status_received, NULL);
+    typedef enum StatusValue
+    {
+        STATUS_OK = 0x00,
+        STATUS_OK_MATCHED = 0x01,
+        STATUS_ERR_DDS_ERROR = 0x80,
+        STATUS_ERR_MISMATCH = 0x81,
+        STATUS_ERR_ALREADY_EXISTS = 0x82,
+        STATUS_ERR_DENIED = 0x83,
+        STATUS_ERR_UNKNOWN_REFERENCE = 0x84,
+        STATUS_ERR_INVALID_DATA = 0x85,
+        STATUS_ERR_INCOMPATIBLE = 0x86,
+        STATUS_ERR_RESOURCES = 0x87
 
-The XRCEInfo you get from this function provides you with the request ID generated as well as the Entity ID the object created will have in the Agent.
+    } StatusValue;
 
 Setup a Participant
 ^^^^^^^^^^^^^^^^^^^
-
-For establishing DDS communication you need to create a :class:`Participant` for your Client in the Agent. You do this calling create Participant:
-
-.. code-block:: C
-
-    XRCEInfo participant_info = create_participant(state);
-
-This Participant configuration is taken from the XML file DEFAULT_FASTRTPS_PROFILES.xml that you can find within the Agent installation. You can modify this predefined configuration.
-
-What is the response
-^^^^^^^^^^^^^^^^^^^^
-
-If you provide the Client with a status callback all the subsequent Operations will generate a response message. This messages are received upon a call to receive_from_agent:
+For establishing DDS communication we need to create a Participant for our Client in the Agent.
+We can do this calling create Participant operation:
 
 .. code-block:: C
 
-    receive_from_agent(state);
+    const char* reference = "default_participant";
+    ObjectId participant_id = {{0x00, OBJK_PARTICIPANT}};
+    success = create_participant_sync_by_ref(&my_session, participant_id, reference, false, false);
 
-This call will check the transport for new incoming messages. On the callback you will receive the XRCEInfo corresponding to the last Operation as well as the last Operation ID and the status of this Operation. This are the possible Status and last Operation IDs:
-
-.. code-block:: C
-
-    // Operation Status
-    #define STATUS_OK 0x00
-    #define STATUS_OK_MATCHED 0x01
-    #define STATUS_ERR_DDS_ERROR 0x80
-    #define STATUS_ERR_MISMATCH 0x81
-    #define STATUS_ERR_ALREADY_EXISTS 0x82
-    #define STATUS_ERR_DENIED 0x83
-    #define STATUS_ERR_UNKNOWN_REFERENCE 0x84
-    #define STATUS_ERR_INVALID_DATA 0x85
-    #define STATUS_ERR_INCOMPATIBLE 0x86
-    #define STATUS_ERR_RESOURCES 0x87
-
-    // Last Operation ID
-    #define STATUS_LAST_OP_NONE 0x00
-    #define STATUS_LAST_OP_CREATE 0x01
-    #define STATUS_LAST_OP_UPDATE 0x02
-    #define STATUS_LAST_OP_DELETE 0x03
-    #define STATUS_LAST_OP_LOOKUP 0x04
-    #define STATUS_LAST_OP_READ 0x05
-    #define STATUS_LAST_OP_WRITE 0x06
+In any XRCE operation that creates an entity, an ObjectId is necessary. It is used to represent and manage the object in the client side.
+The reference is the identifier of a DDS entity in the agent side.
+if the function returns true, the participant will be able to use from this client.
 
 Creating  topics
 ^^^^^^^^^^^^^^^^
-
-Once you have created a Participant you can use create Topic Operation for register your Topic within the Participant.
-
-You need to provide the Participant ID to create the Topic with it:
+Once the Participant has been created, we can use create Topic Operation for register a Topic within the Participant.
 
 .. code-block:: C
 
-    String topic_profile = {"<dds><topic><kind>WITH_KEY</kind><name>Square</name><dataType>ShapeType</dataType></topic></dds>", 96+1};
-    create_topic(state, participant_info.object_id, topic_profile);
+    const char* topic_xml = {"<dds><topic><name>HelloWorldTopic</name><dataType>HelloWorld</dataType></topic></dds>"};
+    ObjectId topic_id = {{0x00, OBJK_TOPIC}};
+    success = create_topic_sync_by_xml(&my_session, topic_id, topic_xml, participant_id, false, false);
 
-For this Operation You must provide a XML defining your topic. That definition consists on a name and a type.
+As any other XRCE operation used to create an entity, an ObjectId must be specify to represent the object.
+The ``participant_id`` is the participant where the topic will be register.
+In order to determine which topic will be used, an xml is sent to the agent for creating and defining the topic in the DDS Global Data Space.
+That definition consists on a name and a type.
 
 Publishers & Subscribers
 ^^^^^^^^^^^^^^^^^^^^^^^^
-
-Similar to Topic registration you can create publishers and subscribers. You create a publisher or subscriber on a Participant, so you need to provide the ID of the Participant that will hold those publishers or subscribers.
+Similar to Topic registration we can create publishers and subscribers. We create a publisher or subscriber on a Participant, so its necessary to provide the Id of the Participant that will hold those publishers or subscribers.
 
 .. code-block:: C
 
-    XRCEInfo publisher_info = create_publisher(state, participant_info.object_id);
+    const char* publisher_xml = {"<publisher name=\"MyPublisher\""};
+    ObjectId publisher_id = {{HELLO_WORLD_TOPIC, OBJK_PUBLISHER}};
+    success = create_publisher_sync_by_xml(&my_session, publisher_id, publisher_xml, participant_id, false, false);
 
-    XRCEInfo subscriber_info = create_subscriber(state, participant_info.object_id);
+    const char* subscriber_xml = {"<publisher name=\"MySubscriber\""};
+    ObjectId subscriber_id = {{HELLO_WORLD_TOPIC, OBJK_SUBSCRIBER}};
+    success = create_subscriber_sync_by_xml(&my_session, subscriber_id, subscriber_xml, participant_id, false, false);
 
-Write data
+DataWriters & DataReaders
+^^^^^^^^^^^^^^^^^^^^^^^^^
+Analogous to Publishers and Subscribers, we create the DataWriters and DataReaders.
+This XRCE entities are responsible to send and receive the data.
+DataWriters are referred to a Publisher, and DataReaders are referred to a Subscriber.
+
+.. code-block:: C
+
+    const char* datawriter_xml = {"<profiles><publisher profile_name=\"default_xrce_publisher_profile\"><topic><kind>NO_KEY</kind><name>HelloWorldTopic</name><dataType>HelloWorld</dataType><historyQos><kind>KEEP_LAST</kind><depth>5</depth></historyQos><durability><kind>TRANSIENT_LOCAL</kind></durability></topic></publisher></profiles>"};
+    ObjectId datawriter_id = {{HELLO_WORLD_TOPIC, OBJK_DATAWRITER}};
+    success = create_datawriter_sync_by_xml(&my_session, datawriter_id, datawriter_xml, publisher_id, false, false);
+
+    const char* datareader_xml = {"<profiles><subscriber profile_name=\"default_xrce_subscriber_profile\"><topic><kind>NO_KEY</kind><name>HelloWorldTopic</name><dataType>HelloWorld</dataType><historyQos><kind>KEEP_LAST</kind><depth>5</depth></historyQos><durability><kind>TRANSIENT_LOCAL</kind></durability></topic></subscriber></profiles>"};
+    ObjectId datareader_id = {{HELLO_WORLD_TOPIC, OBJK_DATAREADER}};
+    success = create_datareader_sync_by_xml(&my_session, datareader_id, datareader_xml, subscriber_id, false, false);
+
+Write Data
 ^^^^^^^^^^
-
-For writing data you need two essential elements, the data you want to write on a DDS topic and the DataWriter you want to use to write.
-
-You need to specify in which Participant and in which Publisher you want the new DataWriter to be created by the Agent. Also you need to pass a XML representation of it. We support the same XML profiles as in FastRTPS implementation.
-
-.. code-block:: C
-
-    String data_writer_profile = {"<profiles><publisher profile_name=\"default_xrce_publisher_profile\"><topic><kind>NO_KEY</kind><name>Square</name><dataType>ShapeType</dataType><historyQos><kind>KEEP_LAST</kind><depth>5</depth></historyQos><durability><kind>TRANSIENT_LOCAL</kind></durability></topic></publisher></profiles>",
-    289+1};
-
-    XRCEInfo data_writer_info = create_data_writer(state, participant_info.object_id, publisher_info.object_id, data_writer_profile);
-
-Once you have created a valid DataWriter and with its ID you can write data into DDS Global Data Space using the write Operation:
+Once we have created a valid DataWriter, we can write data into DDS Global Data Space using the write Operation.
+For creating a message with data, first we must to decide which stream we want to use, and write that topic in this stream.
+In this case, we will use a reliable stream.
 
 .. code-block:: C
 
-    ShapeTopic shape_topic = {strlen("GREEN") + 1, "GREEN", 100 , 100, 50};
-    XRCEInfo write_info = write_data(state, data_writer_info.object_id, serialize_shape_topic, &ShapeTopic);
+    HelloWorld topic = {counter, "Hello DDS World!"};
+    bool serialized = write_HelloWorld(&my_session, datawriter_id, STREAMID_BUILTIN_RELIABLE, &topic);
+    if(true == serialized)
+    {
+        printf("Write topic: %s, count: %i\n", topic.message, topic.index);
+    }
 
-You need to provide the serialization function to be used with your type. This serialization function is automatically generated by :ref:`micrortpsgen_label` from your IDL.
+``write_HelloWorld`` function is automatically generated by :ref:`micrortpsgen_label` from the IDL.
+This functions serialize the topic into stream.
+If the stream is available and the topic fix into it, a true is returned.
+``datawriter_id`` correspond to the DataWriter entity used for sending the data.
+
+At this point, the topic has been serialized in the buffer but not has been sent yet.
+The topic will be send in the next call to ``run_communication`` function.
 
 Read Data
 ^^^^^^^^^
-
-For receiving data you need to create a DataReader in an already existing Subscriber.
-
-.. code-block:: C
-
-    String data_reader_profile = {"<profiles><subscriber profile_name=\"default_xrce_subscriber_profile\"><topic><kind>NO_KEY</kind>  <name>Square</name><dataType>ShapeType</dataType><historyQos><kind>KEEP_LAST</kind><depth>5</depth></historyQos><durability>   <kind>TRANSIENT_LOCAL</kind></durability></topic></subscriber></profiles>", 297+1}
-
-    XRCEInfo data_reader_info = create_data_reader(state, participant_info.object_id, publisher_info.object_id, data_reader_profile);
-
-
-You receive data in a callback you must provide. This callback is called after the topic data deserialization function. Here you can free up all the resources the library have reserved deserializing the data.
+Once we have created a valid DataWriter, we can read data from DDS Global Data Space using the read Operation.
+This operation configure how the agent will send the data to the client.
+Current implementation send one topic to the client for each read data operation of the client.
 
 .. code-block:: C
 
-    void on_shape_topic(XRCEInfo info, const void* vtopic, void* args)
+        success = read_data_sync(&my_session, datareader_id, STREAMID_BUILTIN_RELIABLE);
+
+In order to configure how the agent will send the topic, we must set the input stream. In this case, we used a reliable stream.
+``datareader_id`` correspond to the DataReader entity used for receiving the data.
+
+The function ``run_communication`` will call the callback provided at Session creation stage when a topic will be received from the agent.
+Once the topic has been received we can read it in the callback:
+
+.. code-block:: C
+
+    void on_topic(ObjectId id, MicroBuffer* serialized_topic, void* args)
     {
-        ShapeTopic* topic = (ShapeTopic*) vtopic;
-        free(topic->color);
-        free(topic);
+        switch(id.data[0])
+        {
+            case HELLO_WORLD_TOPIC:
+            {
+                HelloWorld topic;
+                deserialize_HelloWorld_topic(serialized_topic, &topic);
+                printf("Read topic: %s, count: %i\n", topic.message, topic.index);
+                break;
+            }
+
+            default:
+                break;
+        }
     }
 
-Once you have the callback for receiving data you can ask your DataReader to read data.
+To know which kind of topic has received, we can use the ObjectId parameter. This id correspond to the DataReader that has read the topic.
+The args of the third argument correspond to user free data.
+
+Let the Client works
+^^^^^^^^^^^^^^^^^^^^
+Write Data operation only write a topic into the buffer, and Read Data operation only set how read the topics.
+To make it works, we must to call the main function of the library ``run_communication``.
+This function is responsible to send topics, receive topics, call the user callback, send and receive heartbeats and acknacks for reliable streams, and send lost messages again.
+For a correct work of the *Micro RTPS Client*, this function must be called periodically.
 
 .. code-block:: C
 
-    XRCEInfo read_info = read_data(state, id, deserialize_shape_topic, on_shape_topic, NULL);
+    // main loop
+    while(true)
+    {
+        //write something
+        //...
 
-From this point you will receive the data read from DDS Global Data Space within the callback you provide.
+        //configure reads
+        //...
 
-Communication with Agent
-^^^^^^^^^^^^^^^^^^^^^^^^
+        run_communication(&my_session);
 
-All the previous Operations calls are not sent to the Agent till you ask so. You must call send to Agent explicitly.
-
-.. code-block:: C
-
-    send_to_agent(state);
-
-This call will send all the accumulated Operations to the Agent.
-
-For receiving data there is an analogous Operation you must call:
-
-.. code-block:: C
-
-    receive_from_agent(state);
-
-to receive read data from the Agent.
-
+        //go to sleep 1 second
+        sleep(1);
+    }
 
 Closing my Client
 ^^^^^^^^^^^^^^^^^
-
-You need to free all the Client State resources with a call to free Client state.
+To close a client, we must perform two steps.
+First, we need to tell the agent that the client is no longer available. This is done sending the next message:
 
 .. code-block:: C
 
-    free_client_state(state);
+    close_session_sync(&my_session);
 
+After this, we can free the resources held by the client with:
+
+.. code-block:: C
+
+    free_session_udp(&my_session);
 
