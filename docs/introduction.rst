@@ -19,6 +19,8 @@ DDS objects are created and stored on the Agent side so the Clients can reuse th
 *Micro RTPS* implements the DDS-XRCE protocol using a *Micro RTPS Agent* as server and providing a C API for developing your own *Micro RTPS Clients*.
 *Micro RTPS Agent* uses *Fast RTPS* to reach the DDS Global Data Space.
 
+.. image:: architecture.svg
+
 FastRTPS
 ^^^^^^^^
 
