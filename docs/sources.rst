@@ -1,6 +1,6 @@
 .. _sources_label:
 
-Installation from Sources
+Installation
 =========================
 
 Installing Agent and Client
@@ -9,7 +9,8 @@ Installing Agent and Client
 Clone the project from Github: ::
 
     $ git clone --recursive https://github.com/eProsima/micro-RTPS.git
-    $ mkdir micro-RTPS/build && cd micro-RTPS/build
+    $ cd micro-RTPS
+    $ mkdir build && cd build
 
 On Linux, execute: ::
 
@@ -25,7 +26,8 @@ Installing the Agent stand-alone
 Clone the project from Github: ::
 
     $ git clone --recursive https://github.com/eProsima/micro-RTPS-agent.git
-    $ mkdir micro-RTPS-agent/build && cd micro-RTPS-agent/build
+    $ cd micro-RTPS-agent
+    $ mkdir build && cd build
 
 On Linux, execute: ::
 
@@ -42,8 +44,9 @@ Installing the Client stand-alone
 
 Clone the project from Github: ::
 
-    $ git clone --recursive  https://github.com/eProsima/micro-RTPS-client.git
-    $ mkdir micro-RTPS-client/build && cd micro-RTPS-client/build
+    $ git clone --recursive https://github.com/eProsima/micro-RTPS-client.git
+    $ cd micro-RTPS-client
+    $ mkdir build && cd build
 
 On Linux, execute: ::
 
