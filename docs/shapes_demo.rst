@@ -21,7 +21,7 @@ create_datawriter  <datawriter id> <publisher id>
     Creates a DataWriter on the publisher <publisher id>
 create_datareader  <datareader id> <subscriber id>
     Creates a DataReader on the subscriber <subscriber id>
-write_data <datawriter id> <stream id>
+write_data <datawriter id> <stream id> [<color> <x> <y> <size>]
     Write data into a <stream id> using <data writer id> DataWriter
 read_data <datareader id> <stream id>
     Read data from a <stream id> using <data reader id> DataReader
