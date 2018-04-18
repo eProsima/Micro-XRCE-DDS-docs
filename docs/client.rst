@@ -82,6 +82,7 @@ To send the serialized data to the agent you must call to the main library funct
 
 This function performs all the activities required related to the session.
 This activities include:
+
 - Send written topics to the agent.
 - Receive topics from the agent.
 - In reliable connection, send and received heartbeats and acknacks.

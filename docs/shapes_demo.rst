@@ -28,7 +28,7 @@ read_data <datareader id> <stream id>
 delete <id>
     Removes object with <id> identifier
 exit
-    Close program previously notifying the agent.
+    Close program notifying previously the agent.
 
 
 For example, to create a publisher client that send a square topic in reliable mode, you need to run the following commands in order: ::

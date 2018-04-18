@@ -1,4 +1,4 @@
-.. _sources_label:
+.. _installation_label:
 
 Installation
 =========================

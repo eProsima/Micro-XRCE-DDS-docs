@@ -120,7 +120,7 @@ Learn More
 
 To learn more about DDS and FastRTPS: `eProsima Fast RTPS <http://eprosima-fast-rtps.readthedocs.io>`_
 
-To learn how to install *Micro RTPS* read: :ref:`sources_label`
+To learn how to install *Micro RTPS* read: :ref:`installation_label`
 
 To learn more about *Micro RTPS* read :ref:`user`
 
