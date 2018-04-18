@@ -9,7 +9,7 @@ Index
    :caption: Installation manual
 
    dependencies
-   sources
+   installation
 
 .. toctree::
    :caption: User Manual
