@@ -2,7 +2,7 @@ Quick start
 ===========
 
 *Micro RTPS* provides a C API which allows you to create your own *Micro RTPS Clients* publishing and/or listening to topics from DDS Global Data Space.
-The following example how create a simple *Micro RTPS Client* and a *Micro RTPS Agent* for publishing and subscribing to DDS world, using this HelloWorld.idl. ::
+The following example shows how create a simple *Micro RTPS Client* and a *Micro RTPS Agent* for publishing and subscribing to the DDS world, using this HelloWorld.idl: ::
 
     struct HelloWorld
     {
@@ -14,12 +14,12 @@ First of all, we will start a *Micro RTPS Agent* listening on the same UDP port:
 
     $ cd /usr/local/bin && micrortps_agent udp 127.0.0.1 2018
 
-Along with these *Micro RTPS Agent*, we will create a client that will be publish in DDS World.
-(To execute this, you will need the *Micro RTPS* built with the examples) ::
+Along with the *Agent*, the *PublishHelloWorldClient* example provided in the source code is launched.
+This *Client* example will publish in the DDS World the HelloWorld topic. :: 
 
     $ examples/PublishHelloWorld/PublishHelloWorldClient 127.0.0.1 2018
 
-This example is the next one: ::
+The following shows the source code of the *PublishHelloWorldClient* example. ::
 
     #include "HelloWorld.h"
 
@@ -107,7 +107,7 @@ This example is the next one: ::
         return 0;
     }
 
-For seeing the messages from the DDS Global Data Space point of view, you can use *Fast RTPS* HelloWorld example running a subscriber (`Fast RTPS HelloWorld <http://eprosima-fast-rtps.readthedocs.io/en/latest/introduction.html#building-your-first-application>`_): ::
+In order to see the messages from the DDS Global Data Space point of view, you can use *Fast RTPS* HelloWorld example running a subscriber (`Fast RTPS HelloWorld <http://eprosima-fast-rtps.readthedocs.io/en/latest/introduction.html#building-your-first-application>`_): ::
 
     $ cd /usr/local/examples/C++/HelloWorldExample
     $ sudo make && cd bin

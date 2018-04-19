@@ -4,9 +4,9 @@ Micro RTPS Client
 =================
 
 In *Micro RTPS* a *Client* can communicate with DDS Network as any other DDS actor could do.
-Clients can publish and subscribe to data topics in DDS Global Data Space.
+*Clients* can publish and subscribe to data Topics in the DDS Global Data Space.
 *Micro RTPS* provides you with a C API to create *Micro RTPS Clients*.
-All functions needed to set up the client can be found into ``xrce_client.h`` header.
+All functions needed to set up the *Client* can be found into ``xrce_client.h`` header.
 This is the only header that you must to include.
 
 Within your *Micro RTPS Client* you can choose between several transport layers.
@@ -18,11 +18,11 @@ The API functions to select transport follows the next syntax, where X correspon
     bool new_X_session(Session* session, SessionId id, ClientKey key,
                        const uint8_t* const agent_ip, uint16_t agent_port,
                        OnTopic on_topic_callback, void* on_topic_args);
-    //Currently, only 'udp' is entirelly supported.
+    //Currently, only 'UDP' is entirelly supported.
 
 This function initialize a Session object that you should keep during a communication session with a *Micro RTPS Agent*.
 
-To log in with the agent you must call:
+To log in with the *Agent* you must call:
 
 .. code-block:: c
 
@@ -63,18 +63,18 @@ All operations except to send and to receive data are synchronous:
 
     bool read_data_sync(Session* session, ObjectId object_id, StreamId id);
 
-This API functions prepare requests for the *Micro RTPS Agent*. The client wait the status about of the state of these entities in the agent side.
+This API functions prepare requests for the *Micro RTPS Agent*. The *Client* waits the status about of the state of these XRCE entities in the *Agent* side.
 
-Write and read topics are asynchronous messages.
-For writing data, *micrortpsgen* creates a function for writing specific topics easily with the next form:
+Write and read Topics are asynchronous messages.
+For writing data, *Micro RTPS Gent* creates a function for writing specific Topics easily with the next form:
 
 .. code-block:: c
 
     bool write_TopicName(Session* session, ObjectId datawriter_id, StreamId stream_id, TopicName* topic);
 
-This functions only serialize the ``TopicName`` topic into the ``stream_id`` selected, do not send it to the agent.
+This functions only serialize the ``TopicName`` Topic into the ``stream_id`` selected, it do not send the Topic to the *Agent*.
 
-To send the serialized data to the agent you must call to the main library function:
+To send the serialized data to the *Agent* you must call to the main library function:
 
 .. code-block:: c
 
@@ -83,21 +83,21 @@ To send the serialized data to the agent you must call to the main library funct
 This function performs all the activities required related to the session.
 This activities include:
 
-- Send written topics to the agent.
-- Receive topics from the agent.
+- Send written Topics to the *Agent*.
+- Receive Topics from the *Agent*.
 - In reliable connection, send and received heartbeats and acknacks.
 - Resend lost messages.
 
-All data from DDS Global Data Space that the client has been subscribed, will call the callback setted at the Session creation.
+All data from the DDS Global Data Space that the *Client* has been subscribed, will call the callback setted at the Session creation.
 This callback must have the next form:
 
 .. code-block:: c
 
     void on_topic(ObjectId id, MicroBuffer *message, void* args);
 
-The id correspond to the subscriber id, for distinguishing the topic received.
-The topic is serialized into message.
-For deserializen the topic, *micrortpsgen* generates a deserialize function of your topic.
+The id correspond to the Subscriber id, for distinguishing the Topic received.
+The Topic is serialized into message.
+For deserializen the Topic, *Micro RTPS Gen* generates a deserialize function of your Topic.
 
 .. code-block:: c
 

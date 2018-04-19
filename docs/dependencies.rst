@@ -1,11 +1,33 @@
 Dependencies
 ============
-*eProsima Micro RTPS - Client* does not required external dependencies.
 
-*eProsima Micro RTPS - Agent* requires you to install the following packages on your machine.
+*eProsima Micro RTPS - Client* does not require external dependencies.
 
-:FastRTPS: *Micro RTPS* Agent requires *eProsima Fast RTPS* to be on your machine. (see: `eProsima Fast RTPS installation guide <http://eprosima-fast-rtps.readthedocs.io/en/latest/index.html#installation>`_)
+*eProsima Micro RTPS - Agent* requires following packages to work.
 
-:ASIO: Agents uses Asio library. You can use the one provided as a third party with the *Micro RTPS Agent* as part of the sources or use a different one installed on the system.
+Common Dependencies
+-------------------
 
-:Gtest: Our tests uses Gtest, so it is needed to build our tests from the sources.
+FastRTPS
+^^^^^^^^
+*eProsima Fast RTPS* could be installed following the instructions: `eProsima Fast RTPS installation guide <http://eprosima-fast-rtps.readthedocs.io/en/latest/index.html#installation>`_.
+
+ASIO
+^^^^
+Asio library is provided as a third party with the *Micro RTPS Agent* as part of the sources. It is also possible to use a different one installed on the system.
+
+GTEST
+^^^^^
+Gtest is the framework used to test the code through a complete set of tests.
+
+Java & Gradle
+^^^^^^^^^^^^^
+Java & Gradle is required to compile the code generation tool *Micro RTPS Gen*.
+
+Windows 
+-------
+
+Microsoft Visual C++ 2013 or 2015
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+*eProsima Micro RTPS* is supported on Windows over Microsoft Visual C++ 2013 or 2015 framework.
+

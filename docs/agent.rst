@@ -3,10 +3,10 @@
 Micro RTPS Agent
 ================
 
-*Micro RTPS Agent* acts as a server between DDS Network and *Micro RTPS Clients*.
+*Micro RTPS Agent* acts as a server between the DDS Network and *Micro RTPS Clients*.
 *Micro RTPS Agents* receive messages containing Operations from Clients.
-Agents keep track of the Clients and the *Micro RTPS Entities* they create.
-The Agent uses the Entities to interact with DDS Global Data Space on behalf of the Client.
+Agents keep track of the *Clients* and the *Micro RTPS Entities* they create.
+The Agent uses the Entities to interact with the DDS Global Data Space on behalf of the *Client*.
 
 The communication between a *Micro RTPS Client* and a *Micro RTPS Agent* will support several transport, but currently only UDP.
 While running *Micro RTPS Agent* will attend any received request from your *Micro RTPS Clients*.
@@ -16,10 +16,7 @@ Run an Agent
 ------------
 
 To run the *Micro RTPS Agent* you should build it as indicated in :ref:`installation_label`.
-
-Once it is built successfully you just need to launch it executing one of the following options:
-
-For running it on UDP.  ::
+Once it is built successfully you just need to launch it executing the following command: ::
 
     $ ./micrortps_agent udp <local_port>
 

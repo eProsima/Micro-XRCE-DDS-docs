@@ -1,9 +1,9 @@
 .. _micrortpsgen_label:
 
-MicroRTPSGen
-============
+Micro RTPS Gen
+==============
 
-*MicroRTPSGen* is a Java application used to generate source code for the *eProsima Micro RTPS* software.
+*Micro RTPS Gen* is a Java application used to generate source code for the *eProsima Micro RTPS* software.
 
 This tool is able to generate from a given IDL specification file, the C struct associated with the
 Topic, as well as, the serialization and deserialization methods.
@@ -23,9 +23,9 @@ As an example of the powerful of this tool, the following shows the source code 
 
 If we will perform the following command: ::
 
-   MicroRTPSGen ShapeType.idl
+   $ micrortpsgen ShapeType.idl
 
-Will generate:
+it will generate the following:
 
 .. code-block:: C
 
@@ -121,10 +121,14 @@ Will generate:
 
     #endif // _ShapeType_H_
 
+*Micro RTPS Gen* is also able to generate both *Publisher* and *Subscriber* source code examples related with the Topic speficified in the IDL file through the following command: ::
+
+    $ micrortpsgen -example <platform> <file.idl>
+
 Installation
 ------------
 
-For use *MicroRTPSGen* you have to follow the next steps:
+For use *Micro RTPS Gen* you have to follow the next steps:
 
 1. Install its dependencies:
 
@@ -139,7 +143,7 @@ For use *MicroRTPSGen* you have to follow the next steps:
 
 3. Build the code with Gradle. ::
 
-    $ cd micro-RTPS-gen
+    $ gradle build 
 
 Usage
 -----
@@ -148,5 +152,5 @@ Usage
 
     $ ./scripts/micrortpsgen -d <output dir> <file.idl>
 
-At the present time, *MicroRTPSGen* only supports Structs composed of integer types and string type,
-even though it is planned to enhance the capabilities of the *MicroRTPSGen* tool in a near future.
+At the present time, *Micro RTPS Gen* only supports Structs composed of integer, string, array and sequence types
+even though it is planned to enhance the capabilities of the *Micro RTPS Gen* tool in a near future.

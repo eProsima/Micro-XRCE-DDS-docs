@@ -11,7 +11,7 @@ DDS-XRCE protocol allows to communicate resource constrained clients with a larg
 This communication is done using a client-server architecture, where the server (Agent) acts as an intermediary between clients and DDS Global Data Space.
 
 DDS-XRCE protocol defines a messaging protocol between those Agents and Clients.
-This message exchange revolves around Operations and their responses.
+This message exchanged revolves around Operations and their responses.
 Clients ask the Agents to run Operations and the Agents reply with the result of those requested Operations.
 Making use of those Operations, Clients are able to create the DDS objects hierarchy necessary to publish and/or receive data from DDS.
 DDS objects are created and stored on the Agent side so the Clients can reuse them at will.
@@ -21,10 +21,10 @@ DDS objects are created and stored on the Agent side so the Clients can reuse th
 
 .. image:: architecture.svg
 
-FastRTPS
-^^^^^^^^
+Fast RTPS
+^^^^^^^^^
 
-FastRTPS is a C++ implementation of the RTPS (Real-Time Publish-Subscribe) protocol,
+* eProsima Fast RTPS* is a C++ implementation of the RTPS (Real-Time Publish-Subscribe) protocol,
 which provides publisher-subscriber communications over unreliable transports such as UDP,
 as defined and maintained by the Object Management Group (OMG) consortium.
 RTPS is also the wire interoperability protocol defined for the Data Distribution Service (DDS) standard, again by the OMG.
@@ -79,7 +79,7 @@ Topic Type
 
 The data sent by the Client to the DDS Global data Space uses the same principles as in *Fast RTPS*.
 On the DDS side you use Interface Definition Language (IDL) to define your own type.
-*Micro RTPS Client* must know that type. Having your type defined as IDL we provide you with (:ref:`micrortpsgen_label`).
+*Micro RTPS Client* must know that type. Having your type defined as IDL we provide you with :ref:`micrortpsgen_label`.
 It is a tool able to generate a compatible Type that your *Micro RTPS Client* can use to send and receive that type of data.
 The type sent or received by *Micro RTPS Client* should match that one used on the DDS Side.
 For sending and receiving any Topic from your *Micro RTPS Client* you should use Write Data and Read Data Operations.
