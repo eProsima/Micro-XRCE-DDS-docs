@@ -15,7 +15,7 @@ First of all, we will start a *Micro RTPS Agent* listening on the same UDP port:
     $ cd /usr/local/bin && micrortps_agent udp 127.0.0.1 2018
 
 Along with the *Agent*, the *PublishHelloWorldClient* example provided in the source code is launched.
-This *Client* example will publish in the DDS World the HelloWorld topic. :: 
+This *Client* example will publish in the DDS World the HelloWorld topic. ::
 
     $ examples/PublishHelloWorld/PublishHelloWorldClient 127.0.0.1 2018
 
@@ -107,13 +107,18 @@ The following shows the source code of the *PublishHelloWorldClient* example. ::
         return 0;
     }
 
-In order to see the messages from the DDS Global Data Space point of view, you can use *Fast RTPS* HelloWorld example running a subscriber (`Fast RTPS HelloWorld <http://eprosima-fast-rtps.readthedocs.io/en/latest/introduction.html#building-your-first-application>`_): ::
+In order to see the messages from the DDS Global Data Space point of view, you can use *Fast RTPS* HelloWorld example running a subscriber
+(`Fast RTPS HelloWorld <http://eprosima-fast-rtps.readthedocs.io/en/latest/introduction.html#building-your-first-application>`_): ::
 
     $ cd /usr/local/examples/C++/HelloWorldExample
     $ sudo make && cd bin
     $ ./HelloWorldExample subscriber
 
-This example shows how a *Micro RTPS Client* publishes messages on a DDS Global Data Space. You need to create different kind of entities on a *Micro RTPS Agent* using Operations requests sent by *Micro RTPS Client*.
+This example shows how a *Micro RTPS Client* publishes messages on a DDS Global Data Space.
+*Micro RTPS Client* can also subscribe to messages from a DDS Global Data Space.
+To run a subscriber HelloWorld topic from the client, execute the example: ::
+
+    $ examples/PublishHelloWorld/PublishHelloWorldClient 127.0.0.1 2018
 
 Learn More
 ----------
