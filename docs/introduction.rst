@@ -24,7 +24,7 @@ DDS objects are created and stored on the Agent side so the Clients can reuse th
 Fast RTPS
 ^^^^^^^^^
 
-* eProsima Fast RTPS* is a C++ implementation of the RTPS (Real-Time Publish-Subscribe) protocol,
+*eProsima Fast RTPS* is a C++ implementation of the RTPS (Real-Time Publish-Subscribe) protocol,
 which provides publisher-subscriber communications over unreliable transports such as UDP,
 as defined and maintained by the Object Management Group (OMG) consortium.
 RTPS is also the wire interoperability protocol defined for the Data Distribution Service (DDS) standard, again by the OMG.

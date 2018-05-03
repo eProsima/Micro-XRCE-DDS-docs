@@ -33,7 +33,7 @@ If you do not need that communication you can close and free it using:
 .. code-block:: c
 
     bool close_session_sync(Session* session); //to destroy the client instance in the agent. Equivalent to logging out.
-    void free_X_session(Session* session); //to remove the local data used in this session.
+    void free_session(Session* session); //to remove the local data used in this session.
     //Currently, only 'udp' is entirelly supported.
 
 Your *Micro RTPS Client* can send request Operations to the *Micro RTPS Agent* using the API provided.

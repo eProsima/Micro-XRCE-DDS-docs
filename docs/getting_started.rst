@@ -249,5 +249,5 @@ After this, we can free the resources held by the *Client* with:
 
 .. code-block:: C
 
-    free_session_udp(&my_session);
+    free_session(&my_session);
 

@@ -8,7 +8,7 @@ Micro RTPS Agent
 Agents keep track of the *Clients* and the *Micro RTPS Entities* they create.
 The Agent uses the Entities to interact with the DDS Global Data Space on behalf of the *Client*.
 
-The communication between a *Micro RTPS Client* and a *Micro RTPS Agent* will support several transport, but currently only UDP.
+The communication between a *Micro RTPS Client* and a *Micro RTPS Agent* currently supports UDP and serial.
 While running *Micro RTPS Agent* will attend any received request from your *Micro RTPS Clients*.
 *Micro RTPS Agent* answers back with the result of a request each time a request is attended.
 
@@ -16,7 +16,13 @@ Run an Agent
 ------------
 
 To run the *Micro RTPS Agent* you should build it as indicated in :ref:`installation_label`.
-Once it is built successfully you just need to launch it executing the following command: ::
+Once it is built successfully you just need to launch it executing the following command.
 
-    $ ./micrortps_agent udp <local_port>
+For serial communication: ::
+
+    $ ./micrortps_agent serial <device>
+
+For udp communication: ::
+
+    $ ./micrortps_agent udp <port>
 

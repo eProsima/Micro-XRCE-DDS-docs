@@ -10,14 +10,15 @@ The following example shows how create a simple *Micro RTPS Client* and a *Micro
         string message;
     };
 
-First of all, we will start a *Micro RTPS Agent* listening on the same UDP port: ::
+First of all, we will start a *Micro RTPS Agent*. For this example, the client - agent communication will be done through UDP
+(currently, there is two modes: UDP and serial): ::
 
     $ cd /usr/local/bin && micrortps_agent udp 127.0.0.1 2018
 
 Along with the *Agent*, the *PublishHelloWorldClient* example provided in the source code is launched.
 This *Client* example will publish in the DDS World the HelloWorld topic. ::
 
-    $ examples/PublishHelloWorld/PublishHelloWorldClient 127.0.0.1 2018
+    $ examples/PublishHelloWorld/PublishHelloWorldClient udp 127.0.0.1 2018
 
 The following shows the source code of the *PublishHelloWorldClient* example. ::
 
@@ -103,6 +104,7 @@ The following shows the source code of the *PublishHelloWorldClient* example. ::
         }
 
         close_session_sync(&my_session);
+        free_session(&my_session);
 
         return 0;
     }
