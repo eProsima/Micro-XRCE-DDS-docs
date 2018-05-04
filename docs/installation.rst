@@ -36,13 +36,13 @@ Clone the project from Github: ::
 
 On Linux, execute the following commands: ::
 
-    $ cmake -DTHIRDPARTY=ON ..
+    $ cmake ..
     $ make
     $ sudo make install
 
 On Windows first select the Visual Studio version: ::
 
-    > cmake -G "Visual Studio 14 2015 Win64" -DTHIRDPARTY=ON ..
+    > cmake -G "Visual Studio 14 2015 Win64" ..
     > cmake --build . --target install
 
 Now you have micrortps_agent installed in your system. Before running it, you need to add ``/usr/local/lib`` to the dynamic loader-linker directories. ::
@@ -60,13 +60,13 @@ Clone the project from Github: ::
 
 On Linux, execute the following commands: ::
 
-    $ cmake -DTHIRDPARTY=ON ..
+    $ cmake ..
     $ make
     $ sudo make install
 
 On Windows first select the Visual Studio version: ::
 
-    > cmake -G "Visual Studio 14 2015 Win64" -DTHIRDPARTY=ON ..
+    > cmake -G "Visual Studio 14 2015 Win64" ..
     > cmake --build . --target install
 
 If you want to install our *Micro RTPS Client* examples you can add ``-DEPROSIMA_BUILD_EXAMPLES=ON`` to the cmake command line options.
