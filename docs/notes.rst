@@ -1,4 +1,4 @@
-Version 0.4.0Alpha
+Version 1.0.0Beta
 ==================
 
 This release includes the following features:
