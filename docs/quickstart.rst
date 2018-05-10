@@ -13,7 +13,7 @@ The following example shows how create a simple *Micro RTPS Client* and a *Micro
 First of all, we will start a *Micro RTPS Agent*. For this example, the client - agent communication will be done through UDP
 (currently, there is two modes: UDP and serial): ::
 
-    $ cd /usr/local/bin && micrortps_agent udp 127.0.0.1 2018
+    $ cd /usr/local/bin && MicroRTPSAgent udp 127.0.0.1 2018
 
 Along with the *Agent*, the *PublishHelloWorldClient* example provided in the source code is launched.
 This *Client* example will publish in the DDS World the HelloWorld topic. ::
