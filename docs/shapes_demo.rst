@@ -8,27 +8,29 @@ This interactive *Client* waits for user input indicating commands to execute.
 The available commands are the following:
 
 create_session
-    Creates a Session
+    Creates a session
 create_participant <participant id>
-    Creates a new Participant on the current session
+    Creates a new participant on the current session
 create_topic       <topic id> <participant id>
-    Registers new Topic using <participant id> Participant
+    Registers new topic using <participant id> Participant
 create_publisher   <publisher id> <participant id>
-    Creates a Publisher on <participant id> Participant
+    Creates a publisher on <participant id> Participant
 create_subscriber  <subscriber id> <participant id>
-    Creates a Subscriber on <participant id> Participant
+    Creates a subscriber on <participant id> Participant
 create_datawriter  <datawriter id> <publisher id>
-    Creates a DataWriter on the Publisher <publisher id>
+    Creates a dataWriter on the publisher <publisher id>
 create_datareader  <datareader id> <subscriber id>
-    Creates a DataReader on the Subscriber <subscriber id>
+    Creates a dataReader on the subscriber <subscriber id>
 write_data <datawriter id> <stream id> [<color> <x> <y> <size>]
     Write data into a <stream id> using <data writer id> DataWriter
 read_data <datareader id> <stream id>
     Read data from a <stream id> using <data reader id> DataReader
 delete <id>
-    Removes object with <id> identifier
+    Removes a object (the entity created with the `create_*` function)  with <id> identifier
+delete_session
+    Deletes a session
 exit
-    Close program notifying previously the *Agent*.
+    Close program.
 
 
 For example, to create a Publisher *Client* that sends an square Topic in reliable mode, you need to run the following commands in order: ::

@@ -20,9 +20,9 @@ Once it is built successfully you just need to launch it executing the following
 
 For serial communication: ::
 
-    $ ./micrortps_agent serial <device>
+    $ ./agent serial <device>
 
 For udp communication: ::
 
-    $ ./micrortps_agent udp <port>
+    $ ./agent udp <port>
 
