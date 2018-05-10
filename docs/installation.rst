@@ -45,7 +45,7 @@ On Windows first select the Visual Studio version: ::
     > cmake -G "Visual Studio 14 2015 Win64" -DTHIRDPARTY=ON ..
     > cmake --build . --target install
 
-Now you have the program `agent` installed in your system. Before running it, you need to add ``/usr/local/lib`` to the dynamic loader-linker directories. ::
+Now you have the program `micrortps_agent` installed in your system. Before running it, you need to add ``/usr/local/lib`` to the dynamic loader-linker directories. ::
 
     sudo ldconfig /usr/local/lib/
 
