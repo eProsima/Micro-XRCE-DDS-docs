@@ -20,9 +20,11 @@ Once it is built successfully you just need to launch it executing the following
 
 For serial communication: ::
 
-    $ ./micrortps_agent serial <device>
+    $ ./agent serial <device>
 
 For udp communication: ::
 
-    $ ./micrortps_agent udp <port>
+    $ ./agent udp <port>
 
+For running the agent is necessary that the file ``DEFAULT_FASTRTPS_PROFILES.xml`` be located in the folder where the
+agent is located. Default installation place this file along with the agent executable into ``/usr/local/bin``.
