@@ -1,3 +1,5 @@
+.. _quickstart_label:
+
 Quick start
 ===========
 

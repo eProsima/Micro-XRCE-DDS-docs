@@ -1,3 +1,5 @@
+.. _getting_started_label:
+
 Getting started
 ===============
 This page shows how to get started with the *Micro RTPS Client* development.

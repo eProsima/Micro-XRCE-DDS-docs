@@ -1,3 +1,5 @@
+.. _shapes_demo_label:
+
 Shapes Demo
 ===========
 
