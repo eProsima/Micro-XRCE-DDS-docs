@@ -19,7 +19,7 @@ The *Micro RTPS Agent* acts on behalf of the *Micro RTPS Clients* and enables th
 
 Installation
 ~~~~~~~~~~~~
-To install *micro RTPS*, follow the instructions of :ref:`installation_label` page.
+To install *Micro RTPS*, follow the instructions of :ref:`installation_label` page.
 
 User manual
 ~~~~~~~~~~~
@@ -31,7 +31,7 @@ to send/receive topics by the instructions given by command line.
 This example is useful to understand how XRCE protocol works along to the DDS World.
 
 To create your own client, you can follow the the instructions of :ref:`getting_started_label` page.
-It's a manual about how *Micro RTPS* API is and how it works.
+This is a tutorial that describe briefly how *Micro RTPS* API is and how it works.
 
 To know more about *Micro RTPS*, you can read the corresponding parts to the :ref:`micro_rtps_client_label` or the :ref:`micro_rtps_agent_label`.
 If you are interesting in how XRCE works, read :ref:`entities_label` and :ref:`operations_label` pages.
