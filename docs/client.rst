@@ -102,3 +102,55 @@ For deserializen the Topic, *Micro RTPS Gen* generates a deserialize function of
 .. code-block:: c
 
     bool deserialize_TopicName_topic(MicroBuffer* reader, TopicName* topic);
+
+Build configuration
+-------------------
+There are several cmake definitions for configuring the build of the client library at compile time.
+These allow you to create a version of the library according to your requirements.
+
+:``_MICRORTPS_MTU_SIZE_=<number>``:
+    This value set the size of the internal buffers.
+    Both, input and output streams, will use this value for creating their buffers.
+    Knowing that any message will overcome a certain size, you can reduce this value for save considerably the memory that the library will use.
+    By default, this value is 512 (bytes)
+
+:``_MICRORTPS_RELIABLE_HISTORY_=<number>``:
+    This value set the number of buffers reserved for a reliable stream.
+    By default is 16.
+    Each buffer will hold a `_MICRORTPS_MTU_SIZE_` bytes.
+
+:``_MICRORTPS_TIMEOUT_MS_=<number>``:
+    This value is the max milliseconds that the client will wait for receiving a message.
+    By default is 1 ms.
+
+:``_MICRORTPS_MAX_ATTEMPTS_=<number>``:
+    This value indicates the number of reading tries that an sync petition (as create or delete operations) will perform until receiving an status message.
+    It is only used in reliable streams. By default is attempts
+
+:``_MICRORTPS_CONNECTION_MAX_ATTEMPTS_=<number>``:
+    Similar to `_MICRORTPS_MAX_ATTEMPTS_` but used when there is not a reliable stream and a status message is required, as in *Create Session* operation.
+    By default is 20 attemps.
+
+:``_MICRORTPS_HEARTBEAT_MIN_PERIOD_MS_=<number>``:
+    This time indicates the period of the hearbeat.
+    A large period will saturate less the network, saving the client bandwidth, but if a message is lost, their recovery will take more time.
+
+:``-D_CONFIG_MAX_TRANSMISSIONS_UNIT_SIZE_=<number>``:
+    This value is used to create an internal buffer. By default is 512 (bytes).
+    If a message is higher than this value, the message will be sengmented at transport level.
+
+:``-D_CONFIG_MAX_NUM_LOCATORS_=<number>``:
+    This value refers to an array of locators managed internally.
+    The user must be defined as maximun this number of locators.
+    By default is 16.
+
+:``-D_CONFIG_MAX_STRING_SIZE_=<number>``:
+    Internally, it is used to save the name of the device in serial communication.
+    By default is 255.
+
+:``-D__BIG_ENDIAN__=<number>``:
+    This value must be correspond to the memory endianness of the device in which the client is running.
+    `0` implies that the machine is little endian and `1` big endian.
+    By default, when the client is compiled, the build system will get this value from the machine that is compiling the library.
+    For cross compiling, you must set this value manually with the endianness of the device that run the client.
+
