@@ -3,8 +3,8 @@
 Quick start
 ===========
 
-*Micro RTPS* provides a C API which allows you to create your own *Micro RTPS Clients* publishing and/or listening to topics from DDS Global Data Space.
-The following example shows how create a simple *Micro RTPS Client* and a *Micro RTPS Agent* for publishing and subscribing to the DDS world, using this HelloWorld.idl: ::
+*Micro RTPS Client* provides a C API which allows you to create your own clients publishing and/or listening to topics from DDS Global Data Space.
+The following example shows how create a simple *Micro RTPS Client* and *Micro RTPS Agent* for publishing and subscribing to the DDS world, using this HelloWorld.idl: ::
 
     struct HelloWorld
     {
@@ -12,135 +12,212 @@ The following example shows how create a simple *Micro RTPS Client* and a *Micro
         string message;
     };
 
-First of all, we will start a *Micro RTPS Agent*. For this example, the client - agent communication will be done through UDP
-(currently, there is two modes: UDP and serial): ::
+First of all, we will start agent. For this example, the client - agent communication will be done through UDP: ::
 
-    $ cd /usr/local/bin && MicroRTPSAgent udp 127.0.0.1 2018
+    $ cd /usr/local/bin && MicroRTPSAgent udp 2018
 
-Along with the *Agent*, the *PublishHelloWorldClient* example provided in the source code is launched.
+Along with the agent, the *PublishHelloWorldClient* example provided in the source code is launched.
 This *Client* example will publish in the DDS World the HelloWorld topic. ::
 
-    $ examples/PublishHelloWorld/PublishHelloWorldClient udp 127.0.0.1 2018
+    $ examples/PublishHelloWorld/PublishHelloWorldClient
 
-The following shows the source code of the *PublishHelloWorldClient* example.
+The code of the *PublishHelloWorldClient* is the following:
 
 .. code-block:: C
 
-    #include "HelloWorld.h"
+    #include "HelloWorldWriter.h"
 
+    #include <micrortps/client/client.h>
     #include <stdio.h>
+    #include <string.h> //strcmp
+    #include <stdlib.h> //atoi
 
-    void check_and_print_error(Session* session, const char* where)
-    {
-        if(session->last_status_received)
-        {
-            if(session->last_status.status == STATUS_OK)
-            {
-                return; //All things go well
-            }
-            else
-            {
-                printf("%sStatus error (%i)%s", "\x1B[1;31m", session->last_status.status, "\x1B[0m");
-            }
-        }
-        else
-        {
-            printf("%sConnection error", "\x1B[1;31m");
-        }
-
-        printf(" at %s%s\n", where, "\x1B[0m");
-        exit(1);
-    }
+    #define STREAM_HISTORY  8
+    #define BUFFER_SIZE     MR_CONFIG_UDP_TRANSPORT_MTU * STREAM_HISTORY
 
     int main(int args, char** argv)
     {
-        Session my_session;
-        ClientKey key = {{0xAA, 0xAA, 0xAA, 0xAA}};
-        if(args == 3 && strcmp(argv[1], "serial") == 0)
+        if(args >= 2 && (0 == strcmp("-h", argv[1]) || 0 == strcmp("--help", argv[1]) || 0 == atoi(argv[1])))
         {
-            const char* device = argv[2];
-            if(!new_serial_session(&my_session, 0x01, key, device, NULL, NULL))
-            {
-                printf("%sCan not create serial connection%s\n", "\x1B[1;31m", "\x1B[0m");
-                return 1;
-            }
-            printf("<< Serial mode => dev: %s >>\n", device);
+            printf("usage: program [-h | --help | <topics>]\n");
+            return 0;
         }
-        else if(args == 4 && strcmp(argv[1], "udp") == 0)
-        {
-            uint8_t ip[4];
-            int length = sscanf(argv[2], "%d.%d.%d.%d", (int*)&ip[0], (int*)&ip[1], (int*)&ip[2], (int*)&ip[3]);
-            if(length != 4)
-            {
-                printf("%sIP must have th format a.b.c.d%s\n", "\x1B[1;31m", "\x1B[0m");
-                return 1;
-            }
 
-            uint16_t port = (uint16_t)atoi(argv[3]);
-            if(!new_udp_session(&my_session, 0x01, key, ip, port, NULL, NULL))
-            {
-                printf("%sCan not create a socket%s\n", "\x1B[1;31m", "\x1B[0m");
-                return 1;
-            }
-            printf("<< UDP mode => ip: %s - port: %hu >>\n", argv[2], port);
-        }
-        else
+        uint32_t max_topics = (args == 2) ? (uint32_t)atoi(argv[1]) : UINT32_MAX;
+
+        // Transport
+        mrUDPTransport transport;
+        if(!mr_init_udp_transport(&transport, "127.0.0.1", 2018))
         {
-            printf("Usage: program <command>\n");
-            printf("List of commands:\n");
-            printf("    serial device\n");
-            printf("    udp agent_ip agent_port\n");
-            printf("    help\n");
+            printf("Error at create transport.\n");
             return 1;
         }
 
-        /* Init session. */
-        init_session_sync(&my_session);
-        check_and_print_error(&my_session, "init session");
-
-        /* Init XRCE objects. */
-        ObjectId participant_id = {{0x00, OBJK_PARTICIPANT}};
-        create_participant_sync_by_ref(&my_session, participant_id, "default_participant", false, false);
-        check_and_print_error(&my_session, "create participant");
-
-        const char* topic_xml = {"<dds><topic><name>HelloWorldTopic</name><dataType>HelloWorld</dataType></topic></dds>"};
-        ObjectId topic_id = {{0x00, OBJK_TOPIC}};
-        create_topic_sync_by_xml(&my_session, topic_id, topic_xml, participant_id, false, false);
-        check_and_print_error(&my_session, "create topic");
-
-        const char* publisher_xml = {"<publisher name=\"MyPublisher\""};
-        ObjectId publisher_id = {{0x00, OBJK_PUBLISHER}};
-        create_publisher_sync_by_xml(&my_session, publisher_id, publisher_xml, participant_id, false, false);
-        check_and_print_error(&my_session, "create publisher");
-
-        const char* datawriter_xml = {"<profiles><publisher profile_name=\"default_xrce_publisher_profile\"><topic><kind>NO_KEY</kind><name>HelloWorldTopic</name><dataType>HelloWorld</dataType><historyQos><kind>KEEP_LAST</kind><depth>5</depth></historyQos><durability><kind>TRANSIENT_LOCAL</kind></durability></topic></publisher></profiles>"};
-        ObjectId datawriter_id = {{0x00, OBJK_DATAWRITER}};
-        create_datawriter_sync_by_xml(&my_session, datawriter_id, datawriter_xml, publisher_id, false, false);
-        check_and_print_error(&my_session, "create datawriter");
-
-        /* Main loop */
-        int32_t count = 0;
-        while(true)
+        // Session
+        mrSession session;
+        mr_init_session(&session, &transport.comm, 0xAAAABBBB);
+        if(!mr_create_session(&session))
         {
-            /* Write HelloWorld topic */
-            HelloWorld topic;
-        topic.index = ++count;
-        topic.message = "Hello DDS world!";
-            write_HelloWorld(&my_session, datawriter_id, STREAMID_BUILTIN_RELIABLE, &topic);
-            printf("Send topic: %s, count: %i\n", topic.message, topic.index);
-
-            run_communication(&my_session);
-
-            ms_sleep(1000);
+            printf("Error at create session.\n");
+            return 1;
         }
 
-        close_session_sync(&my_session);
-        check_and_print_error(&my_session, "close session");
+        // Streams
+        uint8_t output_reliable_stream_buffer[BUFFER_SIZE];
+        mrStreamId reliable_out = mr_create_output_reliable_stream(&session, output_reliable_stream_buffer, BUFFER_SIZE, STREAM_HISTORY);
 
-        free_session(&my_session);
+        uint8_t input_reliable_stream_buffer[BUFFER_SIZE];
+        mr_create_input_reliable_stream(&session, input_reliable_stream_buffer, BUFFER_SIZE, STREAM_HISTORY);
+
+        // Create entities
+        mrObjectId participant_id = mr_object_id(0x01, MR_PARTICIPANT_ID);
+        const char* participant_ref = "default participant";
+        uint16_t participant_req = mr_write_create_participant_ref(&session, reliable_out, participant_id, participant_ref, MR_REPLACE);
+
+        mrObjectId topic_id = mr_object_id(0x01, MR_TOPIC_ID);
+        const char* topic_xml = "<dds><topic><name>HelloWorldTopic</name><dataType>HelloWorld</dataType></topic></dds>";
+        uint16_t topic_req = mr_write_configure_topic_xml(&session, reliable_out, topic_id, participant_id, topic_xml, MR_REPLACE);
+
+        mrObjectId publisher_id = mr_object_id(0x01, MR_PUBLISHER_ID);
+        const char* publisher_xml = "<publisher name=\"MyPublisher\">";
+        uint16_t publisher_req = mr_write_configure_publisher_xml(&session, reliable_out, publisher_id, participant_id, publisher_xml, MR_REPLACE);
+
+        mrObjectId datawriter_id = mr_object_id(0x01, MR_DATAWRITER_ID);
+        const char* datawriter_xml = "<profiles><publisher profile_name=\"default_xrce_publisher_profile\"><topic><kind>NO_KEY</kind><name>HelloWorldTopic</name><dataType>HelloWorld</dataType><historyQos><kind>KEEP_LAST</kind><depth>5</depth></historyQos><durability><kind>TRANSIENT_LOCAL</kind></durability></topic></publisher></profiles>";
+        uint16_t datawriter_req = mr_write_configure_datawriter_xml(&session, reliable_out, datawriter_id, publisher_id, datawriter_xml, MR_REPLACE);
+
+        // Send create entities message and wait its status
+        uint8_t status[4];
+        uint16_t requests[4] = {participant_req, topic_req, publisher_req, datawriter_req};
+        if(!mr_run_session_until_status(&session, 1000, requests, status, 4))
+        {
+            printf("Error at create entities: participant: %i topic: %i publisher: %i darawriter: %i\n", status[0], status[1], status[2], status[3]);
+            return 1;
+        }
+
+        // Write topics
+        bool connected = true;
+        uint32_t count = 0;
+        while(connected && count < max_topics)
+        {
+            HelloWorld topic = {count++, "Hello DDS world!"};
+            (void) mr_write_HelloWorld_topic(&session, reliable_out, datawriter_id, &topic);
+
+            connected = mr_run_session_until_timeout(&session, 1000);
+            if(connected)
+            {
+                printf("Sent topic: %s, id: %i\n", topic.message, topic.index);
+            }
+        }
+
+        // Delete resources
+        mr_delete_session(&session);
+        mr_close_udp_transport(&transport);
 
         return 0;
     }
+
+After it, we will launch the *SubscriberHelloWorldClient*. This client example will subscribe to HelloWorld topic from the DDS World. ::
+
+    $ examples/SubscriberHelloWorld/SubscribeHelloWorldClient
+
+The code of the *SubscriberHelloWorldClient* is the following:
+
+.. code-block:: C
+
+    #include "HelloWorldWriter.h"
+
+    #include <micrortps/client/client.h>
+    #include <stdio.h>
+    #include <string.h> //strcmp
+    #include <stdlib.h> //atoi
+
+    #define STREAM_HISTORY  8
+    #define BUFFER_SIZE     MR_CONFIG_UDP_TRANSPORT_MTU * STREAM_HISTORY
+
+    int main(int args, char** argv)
+    {
+        if(args >= 2 && (0 == strcmp("-h", argv[1]) || 0 == strcmp("--help", argv[1]) || 0 == atoi(argv[1])))
+        {
+            printf("usage: program [-h | --help | <topics>]\n");
+            return 0;
+        }
+
+        uint32_t max_topics = (args == 2) ? (uint32_t)atoi(argv[1]) : UINT32_MAX;
+
+        // Transport
+        mrUDPTransport transport;
+        if(!mr_init_udp_transport(&transport, "127.0.0.1", 2018))
+        {
+            printf("Error at create transport.\n");
+            return 1;
+        }
+
+        // Session
+        mrSession session;
+        mr_init_session(&session, &transport.comm, 0xAAAABBBB);
+        if(!mr_create_session(&session))
+        {
+            printf("Error at create session.\n");
+            return 1;
+        }
+
+        // Streams
+        uint8_t output_reliable_stream_buffer[BUFFER_SIZE];
+        mrStreamId reliable_out = mr_create_output_reliable_stream(&session, output_reliable_stream_buffer, BUFFER_SIZE, STREAM_HISTORY);
+
+        uint8_t input_reliable_stream_buffer[BUFFER_SIZE];
+        mr_create_input_reliable_stream(&session, input_reliable_stream_buffer, BUFFER_SIZE, STREAM_HISTORY);
+
+        // Create entities
+        mrObjectId participant_id = mr_object_id(0x01, MR_PARTICIPANT_ID);
+        const char* participant_ref = "default participant";
+        uint16_t participant_req = mr_write_create_participant_ref(&session, reliable_out, participant_id, participant_ref, MR_REPLACE);
+
+        mrObjectId topic_id = mr_object_id(0x01, MR_TOPIC_ID);
+        const char* topic_xml = "<dds><topic><name>HelloWorldTopic</name><dataType>HelloWorld</dataType></topic></dds>";
+        uint16_t topic_req = mr_write_configure_topic_xml(&session, reliable_out, topic_id, participant_id, topic_xml, MR_REPLACE);
+
+        mrObjectId publisher_id = mr_object_id(0x01, MR_PUBLISHER_ID);
+        const char* publisher_xml = "<publisher name=\"MyPublisher\">";
+        uint16_t publisher_req = mr_write_configure_publisher_xml(&session, reliable_out, publisher_id, participant_id, publisher_xml, MR_REPLACE);
+
+        mrObjectId datawriter_id = mr_object_id(0x01, MR_DATAWRITER_ID);
+        const char* datawriter_xml = "<profiles><publisher profile_name=\"default_xrce_publisher_profile\"><topic><kind>NO_KEY</kind><name>HelloWorldTopic</name><dataType>HelloWorld</dataType><historyQos><kind>KEEP_LAST</kind><depth>5</depth></historyQos><durability><kind>TRANSIENT_LOCAL</kind></durability></topic></publisher></profiles>";
+        uint16_t datawriter_req = mr_write_configure_datawriter_xml(&session, reliable_out, datawriter_id, publisher_id, datawriter_xml, MR_REPLACE);
+
+        // Send create entities message and wait its status
+        uint8_t status[4];
+        uint16_t requests[4] = {participant_req, topic_req, publisher_req, datawriter_req};
+        if(!mr_run_session_until_status(&session, 1000, requests, status, 4))
+        {
+            printf("Error at create entities: participant: %i topic: %i publisher: %i darawriter: %i\n", status[0], status[1], status[2], status[3]);
+            return 1;
+        }
+
+        // Write topics
+        bool connected = true;
+        uint32_t count = 0;
+        while(connected && count < max_topics)
+        {
+            HelloWorld topic = {count++, "Hello DDS world!"};
+            (void) mr_write_HelloWorld_topic(&session, reliable_out, datawriter_id, &topic);
+
+            connected = mr_run_session_until_timeout(&session, 1000);
+            if(connected)
+            {
+                printf("Sent topic: %s, id: %i\n", topic.message, topic.index);
+            }
+        }
+
+        // Delete resources
+        mr_delete_session(&session);
+        mr_close_udp_transport(&transport);
+
+        return 0;
+    }
+
+At this moment, the subscriber will receive the topics that are sending by the publisher.
 
 In order to see the messages from the DDS Global Data Space point of view, you can use *Fast RTPS* HelloWorld example running a subscriber
 (`Fast RTPS HelloWorld <http://eprosima-fast-rtps.readthedocs.io/en/latest/introduction.html#building-your-first-application>`_): ::
@@ -148,12 +225,6 @@ In order to see the messages from the DDS Global Data Space point of view, you c
     $ cd /usr/local/examples/C++/HelloWorldExample
     $ sudo make && cd bin
     $ ./HelloWorldExample subscriber
-
-This example shows how a *Micro RTPS Client* publishes messages on a DDS Global Data Space.
-*Micro RTPS Client* can also subscribe to messages from a DDS Global Data Space.
-To run a subscriber HelloWorld topic from the client, execute the example: ::
-
-    $ examples/PublishHelloWorld/PublishHelloWorldClient 127.0.0.1 2018
 
 Learn More
 ----------

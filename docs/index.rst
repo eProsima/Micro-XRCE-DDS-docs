@@ -15,7 +15,7 @@ The *Micro RTPS Agent* acts on behalf of the *Micro RTPS Clients* and enables th
 
 *Micro RTPS* provides both, a plug and play *Micro RTPS Agent* and an API layer which allows you to implement your *Micro RTPS Clients*.
 
-.. image:: architecture.svg
+.. image:: images/architecture.svg
 
 Installation
 ~~~~~~~~~~~~
@@ -26,7 +26,7 @@ User manual
 To test *Micro RTPS* in your computer, you can follow the :ref:`quickstart_label` instructions.
 This page shows how to create a simple publisher as a XRCE client that send topics into the DDS World.
 
-Additionally, there is an interactive example called :ref:`shapes_demo_label` that allow you to create XRCE objects and
+Additionally, there is an interactive example called :ref:`shapes_demo_label` that allow you to create entities and
 to send/receive topics by the instructions given by command line.
 This example is useful to understand how XRCE protocol works along to the DDS World.
 
@@ -57,8 +57,8 @@ Index
    quickstart
    getting_started
    shapes_demo
-   agent
    client
+   agent
    entities
    operations
 
