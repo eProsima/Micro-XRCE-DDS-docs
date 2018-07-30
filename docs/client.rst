@@ -77,6 +77,11 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
     This value indicates the number of attempts that ``create_session`` and ``delete_session`` will perform until receiving an status message.
     After a failed attempt, the wait time for the next attempt will be double.
 
+``CONFIG_MIN_SESSION_CONNECTION_INTERVAL=<number>``
+    This value represents how long it will take to send a new ``create_session`` or ``delete_session`` if the first sent has not answer.
+    The wait time for the each attempt will be double until reach ``CONFIG_MAX_SESSION_CONNECTION_ATTEMPTS``.
+    It is measured in milliseconds.
+
 ``CONFIG_MIN_HEARTBEAT_TIME_INTERVAL=<number>``
     Into a reliable communication, this value represents how long it will take the first heartbeat to be sent.
     The wait time for the next heartbeat will be double.
