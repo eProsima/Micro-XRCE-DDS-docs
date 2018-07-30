@@ -260,17 +260,6 @@ To close a *Client*, we must perform two steps.
 First, we need to tell the agent that the session is no longer available.
 This is done sending the next message:
 
-Real application
-^^^^^^^^^^^^^^^^
-This tutorial are based in `all in one` examples, that is, examples that create entities, publish or subscribe and then delete the resources.
-A possible real purpose of this, consists in differentiate the logic of `creating entities` and the actions of `publishing and subscribing`.
-This can be done creating two differents clients.
-One for configurating the entities in the agent, and run possibly only once.
-And other, a client, that logs in with the same session as the configure client (sharing the entities) and only publishes or subscribes data.
-
-This way allow to create easy clients in production only with te purpose of send and receive data.
-Related to it, exists the concept of `profile` that allow to build the client library only with the behavior choosen.
-
 .. code-block:: C
 
     mr_delete_session(&session);
@@ -281,3 +270,14 @@ After this, we can close the transport used by the session.
 
     mr_close_udp_transport(&transport);
 
+Real application
+^^^^^^^^^^^^^^^^
+This tutorial are based in `all in one` examples, that is, examples that create entities, publish or subscribe and then delete the resources.
+A possible real purpose of this, consists in differentiate the logic of `creating entities` and the actions of `publishing and subscribing`.
+This can be done creating two differents clients.
+One for configurating the entities in the agent, and run possibly only once.
+And other, that logs in with the same session as the configure client (sharing the entities) and only publishes or subscribes data.
+
+This way allow to create easy clients in production only with te purpose of send and receive data.
+Related to it, exists the concept of `profile` that allow to build the client library only with the behavior choosen.
+See :ref:`micro_rtps_client_label` for more information about this.

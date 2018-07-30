@@ -63,15 +63,15 @@ it will generate the following header file and its corresponding source:
 
     #endif // _ShapeType_H_
 
-*Micro RTPS Gen* is also able to generate a writing function for the topic. It is enabled with the ``-write-access-profile`` option ::
+*Micro RTPS Gen* is also able to generate a writing function for the topic. It is enabled with the ``-write-access-profile`` option: ::
 
     $ micrortpsgen -write-access-profile <file.idl>
 
-*Micro RTPS Gen* is also able to generate both *publisher* and *subscriber* source code examples related with the topic speficified in the IDL file through the following command: ::
+*Micro RTPS Gen* is also able to generate both *publisher* and *subscriber* source code examples related with the topic speficified in the IDL file adding the flag ``-example``: ::
 
     $ micrortpsgen -example <file.idl>
 
-(In this case, the ``-write_access-profile`` is automatically enabled.)
+With the ``-example`` flag, the ``-write_access-profile`` option is automatically enabled.
 
 Installation
 ------------

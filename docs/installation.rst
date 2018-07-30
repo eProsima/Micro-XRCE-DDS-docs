@@ -70,10 +70,10 @@ On Windows first select the Visual Studio version: ::
     > cmake -G "Visual Studio 14 2015 Win64" -DTHIRDPARTY=ON ..
     > cmake --build . --target install
 
-If you want to install our *Micro RTPS Client* examples you can add ``-DEPROSIMA_BUILD_EXAMPLES=ON`` to the cmake command line options.
+If you want to install the *Micro RTPS Client* examples you can add ``-DEPROSIMA_BUILD_EXAMPLES=ON`` to the cmake command line options.
 This flag will enable the compilation of the examples when the project it is compiled.
 There are several cmake definitions for configuring the build of the client library at compile time.
-You can found them in :ref:`micro_rtps_client_label` page under `Build configuration` section.
+You can found them in :ref:`micro_rtps_client_label` page under `Configuration` section.
 
 Compiling an app with the Client library
 ----------------------------------------
