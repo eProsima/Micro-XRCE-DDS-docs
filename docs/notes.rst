@@ -14,3 +14,4 @@ Missing features to be compliant with DDS-XRCE Protocol:
 * Info message communication.
 * Fragment messages.
 * Sequence data into the same submessage.
+* More create entity options (currently only available by xml)

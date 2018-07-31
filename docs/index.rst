@@ -58,14 +58,11 @@ Index
    getting_started
    shapes_demo
    client
+   gen
    agent
    entities
    operations
-
-.. toctree::
-   :caption: Micro RTPS Gen
-
-   micrortpsgen
+   deployment
 
 .. toctree::
    :caption: Release Notes
