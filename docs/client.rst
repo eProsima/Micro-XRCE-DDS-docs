@@ -26,7 +26,7 @@ Transport     Linux      Windows   Nuttx
 ============ ========== ========= =========
 UDP           X           X
 TCP           X           X
-UART          X                    X
+Serial        X                    X
 ============ ========== ========= =========
 
 The addition of a new transport or an existant transport for a new platform can be easily implemented setting the callbacks of a ``mrCommunication`` structure.
@@ -54,8 +54,8 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
 ``PROFILE_TCP_TRANSPORT=<bool>``
     Enables or disables the posibility to connect with the agent by TCP.
 
-``PROFILE_UART_TRANSPORT=<bool>``
-    Enables or disables the posibility to connect with the agent by UART.
+``PROFILE_SERIAL_TRANSPORT=<bool>``
+    Enables or disables the posibility to connect with the agent by Serial.
 
 ``CONFIG_MAX_OUTPUT_BEST_EFFORT_STREAMS=<number>``
     Configures the maximun output best effort streams that a session could have.
@@ -101,8 +101,8 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
     This value corresponds to the max message size able to send and receive by TCP.
     Internally a buffer is created with this size.
 
-``CONFIG_UART_TRANSPORT_MTU=<number>``
-    This value corresponds to the max message size able to send and receive by UART.
+``CONFIG_SERIAL_TRANSPORT_MTU=<number>``
+    This value corresponds to the max message size able to send and receive by Serial.
     Internally a buffer is created proportional to this size.
 
 API
@@ -665,30 +665,30 @@ If the TCP is used, the behaviour of best effort streams will be similiar to rel
 
 .. code-block:: c
 
-    bool mr_init_uart_transport(UARTTransport* transport, const char* device, uint8_t remote_addr, uint8_t local_addr);
+    bool mr_init_serial_transport(SerialTransport* transport, const char* device, uint8_t remote_addr, uint8_t local_addr);
 
-Initializes an UART connection using a device.
+Initializes a Serial connection using a device.
 
 :transport: The uninitialized structure used for managing the transport.
             This structure must to be accesible during the connection.
 :device: Device used for the serial connection.
 :remote_addr: Identifier of the agent in the serial connection.
-              By default, the agent identifier in a uart is 0.
+              By default, the agent identifier in a serial is 0.
 :local_addr: Identifier of the client in the serial connection.
 
 ------
 
 .. code-block:: c
 
-    bool mr_init_uart_transport_fd(UARTTransport* transport, const int fd, uint8_t remote_addr, uint8_t local_addr);
+    bool mr_init_serial_transport_fd(SerialTransport* transport, const int fd, uint8_t remote_addr, uint8_t local_addr);
 
-Initializes an UART connection using a file descriptor
+Initializes a Serial connection using a file descriptor
 
 :transport: The uninitialized structure used for managing the transport.
             This structure must to be accesible during the connection.
 :fd: File descriptor of the serial connection. Usually, the fd comes from the ``open`` OS function.
 :remote_addr: Identifier of the agent in the serial connection.
-              By default, the agent identifier in a uart is 0.
+              By default, the agent identifier in a serial is 0.
 :local_addr: Identifier of the client in the serial connection.
 
 ------
@@ -697,7 +697,7 @@ Initializes an UART connection using a file descriptor
 
     bool mr_close_PROTOCOL_transport(PROTOCOLTransport* transport);
 
-Closes a transport previously opened. `PROTOCOL` can be ``udp``, ``tcp`` or ``uart``.
+Closes a transport previously opened. `PROTOCOL` can be ``udp``, ``tcp`` or ``serial``.
 
 :transport: The transport to close.
 
