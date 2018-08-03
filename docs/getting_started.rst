@@ -22,7 +22,7 @@ We will use HelloWorld as our Topic whose IDL is the following: ::
         string message;
     };
 
-In the *Client* we need to create an equivalent c type with its serialization/deserialization code.
+In the *Client* we need to create an equivalent C type with its serialization/deserialization code.
 This is done automatically by :ref:`micrortpsgen_label`: ::
 
     $ micrortpsgen -write-access-profile HelloWorld.idl
@@ -42,7 +42,6 @@ Also, we will specify the max buffer for the streams and its historical associat
     #define BUFFER_SIZE     MR_CONFIG_UDP_TRANSPORT_MTU * STREAM_HISTORY
 
 First, we need to create a Session indicating the transport to use.
-This time we are using UDP in localhost over the port 2018.
 The agent must be configured for listening from udp at port 2018.
 
 .. code-block:: C
@@ -67,8 +66,8 @@ Next, we will a session that allow us interact with the agent:
         return 1;
     }
 
-The first function ``mr_init_session`` initializes the ``Session`` structure with the transport and the key (the session identifier for an agent).
-The ``mr_set_topic_callback`` function is for registering the function ``on_topic`` which has been called when the client receive a topic.
+The first function ``mr_init_session`` initializes the ``Session`` structure with the transport and the `Client Key` (the session identifier for an agent).
+The ``mr_set_topic_callback`` function is for registering the function ``on_topic`` which has been called when the `Client` receive a topic.
 Once the session has been initialized, we can send the first message for login the client in agent side: ``mr_create_session``.
 This function will try to connect with the agent by ``CONFIG_MAX_SESSION_CONNECTION_ATTEMPTS`` attempts (the value can be configurable at ``client.config``).
 
@@ -92,7 +91,7 @@ These entities will be created from the client.
 
 Setup a Participant
 ^^^^^^^^^^^^^^^^^^^
-For establishing DDS communication we need to create a participant entity for our *Client* in the *Agent*.
+For establishing DDS communication we need to create a `Participant` entity for the `Client` in the `Agent`.
 We can do this calling *Create participant* operation:
 
 .. code-block:: C
@@ -101,17 +100,17 @@ We can do this calling *Create participant* operation:
     const char* participant_ref = "default participant";
     uint16_t participant_req = mr_write_create_participant_ref(&session, reliable_out, participant_id, participant_ref, MR_REPLACE);
 
-In any XRCE Operation that creates an entity, an ObjectId is necessary.
-It is used to represent and manage the object in the *Client* side.
+In any XRCE Operation that creates an entity, an `Object ID` is necessary.
+It is used to represent and manage the entity in the *Client* side.
 The reference is the identifier of a DDS entity in the *Agent* side.
-Each operation, return a `request id`.
-This identifier of the operation can be used later for assoaciated the status with the request.
-In this case, we have only write the operation into the stream ``reliable_out``.
-Later, in ``run_session`` function the stream will send the written data to the agent.
+Each operation, return a `Request ID`.
+This identifier of the operation can be used later for associating the status with the operation.
+In this case, the operation has been written into the stream ``reliable_out``.
+Later, in the ``run_session`` function, the data written in the stream will be sent to the agent.
 
 Creating  topics
 ^^^^^^^^^^^^^^^^
-Once the Participant has been created, we can use *Create Topic* operation for register a topic entity within the participant.
+Once the `Participant` has been created, we can use `Create topic` operation for register a `Topic` entity within the `Participant`.
 
 .. code-block:: C
 
@@ -119,15 +118,15 @@ Once the Participant has been created, we can use *Create Topic* operation for r
     const char* topic_xml = "<dds><topic><name>HelloWorldTopic</name><dataType>HelloWorld</dataType></topic></dds>";
     uint16_t topic_req = mr_write_configure_topic_xml(&session, reliable_out, topic_id, participant_id, topic_xml, MR_REPLACE);
 
-As any other XRCE Operation used to create an entity, an ObjectId must be specify to represent the object.
+As any other XRCE Operation used to create an entity, an Object ID must be specify to represent the entity.
 The ``participant_id`` is the participant where the Topic will be registered.
 In order to determine which topic will be used, an XML is sent to the agent for creating and defining the Topic in the DDS Global Data Space.
 That definition consists of a name and a type.
 
 Publishers & Subscribers
 ^^^^^^^^^^^^^^^^^^^^^^^^
-Similar to Topic registration we can create publishers and subscribers entities.
-We create a publisher or subscriber on a participant entity, so it is necessary to provide the ID of the Participant which will hold those publishers or subscribers.
+Similar to Topic registration we can create `Publishers` and `Subscribers` entities.
+We create a publisher or subscriber on a participant entity, so it is necessary to provide the ID of the `Participant` which will hold those `Publishers` or `Subscribers`.
 
 .. code-block:: C
 
@@ -141,10 +140,10 @@ We create a publisher or subscriber on a participant entity, so it is necessary 
 
 DataWriters & DataReaders
 ^^^^^^^^^^^^^^^^^^^^^^^^^
-Analogous to publishers and subscribers entities, we create the data writers and data readers entities.
+Analogous to publishers and subscribers entities, we create the `DataWriters` and `DataReaders` entities.
 These entities are responsible to send and receive the data.
-Data writers are referred to a publisher, and data readers are referred to a subscriber.
-The configuration about how these data readers and data writers works is contained in the xml.
+`DataWriters` are referred to a publisher, and `DataReaders` are referred to a subscriber.
+The configuration about how these `DataReaders` and data writers works is contained in the xml.
 
 .. code-block:: C
 
@@ -158,11 +157,11 @@ The configuration about how these data readers and data writers works is contain
 
 Agent response
 ^^^^^^^^^^^^^^
-In operations such as create a session, create an entity or request data from the *Agent*,
-an status state is sent from the *Agent* to the *Client* indicating what happened.
+In operations such as create session, create entity or request data from the *Agent*,
+an status is sent from the *Agent* to the *Client* indicating what happened.
 
 For `Create session` or `Detele session` operations the status value is storage into the ``session.info.last_request_status``.
-For the rest of the operations, the status are send to the input reliable stream ``0x80``, that is, the first input reliable stream created, with index 0.
+For the rest of the operations, the status are sent to the input reliable stream ``0x80``, that is, the first input reliable stream created, with index 0.
 
 The different status values that the agent can send to the client are the following:
 
@@ -179,7 +178,7 @@ The different status values that the agent can send to the client are the follow
     MR_STATUS_ERR_INCOMPATIBLE
     MR_STATUS_ERR_RESOURCES
 
-These status, can be trated with the callback destined for it or by the ``run_session_until_status`` as we will see.
+The status can be handle by the ``on_status_callback`` callback (configured in ``mr_set_status_callback`` function) or by the ``run_session_until_status`` as we will see.
 
 .. code-block:: C
 
@@ -193,9 +192,13 @@ These status, can be trated with the callback destined for it or by the ``run_se
 
 The ``run_session`` functions are the main functions of the `Micro RTP Client` library.
 They performs serveral things: send the stream data to the agent, listen data from the agent, call callbacks, and manage the reliable connection.
-There are three variations of ``run_session`` function.
-Here we use the ``until_status`` variation that will performs these actions until all status have been confirmed or the timeout has been reached.
-The function ``mr_run_session_until_status`` will return ``true`` in case all status were `OK`.
+There are three variations of ``run_session`` function:
+- ``mr_run_session_until_timeout``
+- ``mr_run_session_until_confirmed_delivery``
+- ``mr_run_session_until_status``
+
+Here we use the ``mr_run_session_until_status`` variation that will performs these actions until all status have been confirmed or the timeout has been reached.
+This function will return ``true`` in case all status were `OK`.
 After call this function, the status can be read from the ``status`` array previously declared.
 
 Write Data
@@ -221,9 +224,9 @@ In this case, we call to ``mr_run_session_until_confirmed_delivery`` that will w
 
 Read Data
 ^^^^^^^^^
-Once we have created a valid data reader entity, we can read data from the DDS Global Data Space using the read operation.
+Once we have created a valid `DataReader` entity, we can read data from the DDS Global Data Space using the read operation.
 This operation configures how the agent will send the data to the client.
-current implementation sends one topic to the client for each read data operation of the client.
+Current implementation sends one topic to the client for each read data operation of the client.
 
 .. code-block:: C
 
@@ -233,12 +236,11 @@ current implementation sends one topic to the client for each read data operatio
     uint16_t read_data_req = mr_write_request_data(&session, reliable_out, datareader_id, reliable_in, &delivery_control);
 
 In order to configure how the agent will send the topic, we must set the input stream. In this case, we use the input reliable stream previously defined.
-``datareader_id`` corresponds to the data deader entity used for receiving the data.
+``datareader_id`` corresponds with the `DataDeader` entity used for receiving the data.
 The ``delivery_control`` parameter is option, and allow to specify how the data will be deliverd to the client.
 For the example purpose, we set it as `unlimited`, so any number HelloWorld topic will be delivered to the client.
 
-The function ``run_session`` will call the callback when a topic will be received from the agent.
-Once the topic has been received we can read it in the callback:
+The ``run_session`` function will call the topic callback each time a topic will be received from the agent.
 
 .. code-block:: C
 

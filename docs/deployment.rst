@@ -12,7 +12,7 @@ This can be done creating two differents clients.
 One for configurating the entities in the agent, and run possibly once, only for creating the entities at configuration time.
 And other/s, that logs in the same session as the configure client (sharing the entities) and only publishes or subscribes data.
 
-This way allow to create easy clients in production only with the purpose of send and receive data.
+This way allows to create easy clients in production only with the purpose of send and receive data.
 Related to it, exists the concept of `profile` that allow to build the client library only with the behavior choosen (only publish or only suscribe, for example).
 See :ref:`micro_rtps_client_label` for more information about this.
 
@@ -35,7 +35,7 @@ Configurate the publisher
         :width: 600 px
         :align: center
 
-In this state a `configurator client` is connected to the agent `A` with the `client key` that will be used by the future `publisher client` (0xAABBCCDD)
+In this state a `configurator client` is connected to the agent `A` with the `client key` that will be used by the future `publisher client` (0xAABBCCDD).
 Once a session is logged in, the `configurator client` creates all necesary entities for the `publisher client`.
 This implies the creation of `participant`, `topic`, `publisher`, and `datawriter` entities.
 These entities have a representation as DDS entities, and can be reached now from the DDS world.
@@ -49,8 +49,8 @@ Publish
 
 Then, the `publisher client` is connected to the agent `A`.
 This client logs in session with its client key (0xAABBCCDD).
-In that moment, it can use all entities created related to this `client key`.
-Because all entities that it use was created successful by the `configurator client`, the `publisher client` can inmediately publish to `DDS`.
+At that moment, it can use all entities created related to this `client key`.
+Because all entities that it uses were created successful by the `configurator client`, the `publisher client` can inmediately publish to `DDS`.
 
 
 Configurate the subscriber
@@ -71,7 +71,7 @@ Subscriber
         :width: 600 px
         :align: center
 
-Once the subscriber is configured, the `subscriber client` logs in to the agent `B`.
+Once the subscriber is configured, the `subscriber client` logs in the agent `B`.
 As all their entities have been created previously, so it only need to configure the read after log in.
 Once the data request message has been sent, the subscriber will receive the topics from the publisher through `DDS` world.
 

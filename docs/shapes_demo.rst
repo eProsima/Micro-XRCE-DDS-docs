@@ -3,8 +3,8 @@
 Shapes Demo
 ===========
 
-`ShapesDemo <https://github.com/eProsima/ShapesDemo>`_ is an interactive example for testing how *Fast RTPS* working in the DDS Global Data Space.
-Because the aim of *Micro RTPS* is connect a client to the DDS World, in this example we will create a client which will interact with the *Shapes Demo*.
+`ShapesDemo <https://github.com/eProsima/ShapesDemo>`_ is an interactive example for testing how `Fast RTPS` working in the `DDS Global Data Space`.
+Because the aim of `Micro RTPS` is connect a `XRCE Client` to the `DDS World`, in this example we will create a client which will interact with the `Shapes Demo`.
 This interactive client waits for user input indicating commands to execute.
 
 The available commands are the following:
@@ -12,13 +12,13 @@ The available commands are the following:
 create_session
     Creates a Session, if exists, reuse it.
 create_participant <participant id>:
-    Creates a new Participant on the current session.
+    Creates a Participant on the current session.
 create_topic       <topic id> <participant id>:
-    Registers a new Topic using <participant id> participant.
+    Registers a Topic using <participant id> participant.
 create_publisher   <publisher id> <participant id>:
     Creates a Publisher on <participant id> participant.
 create_subscriber  <subscriber id> <participant id>:
-    Creates a Subscriber on <participant id> participantr.
+    Creates a Subscriber on <participant id> participant.
 create_datawriter  <datawriter id> <publisher id>:
     Creates a DataWriter on the publisher <publisher id>.
 create_datareader  <datareader id> <subscriber id>:
@@ -26,9 +26,9 @@ create_datareader  <datareader id> <subscriber id>:
 write_data <datawriter id> <stream id> [<x> <y> <size> <color>]:
     Writes data into a <stream id> using <data writer id> DataWriter.
 request_data       <datareader id> <stream id> <samples>:
-    Reads <sample> topics from a <stream id> using <data reader id> DataReader,
+    Reads <sample> topics from a <stream id> using <datareader id> DataReader,
 cancel_data        <datareader id>:
-    Cancels any previous request data of <data reader id> DataReader.
+    Cancels any previous request data of <datareader id> DataReader.
 delete             <id_prefix> <type>:
     Removes object with <id prefix> and <type>.
 stream, default_output_stream <stream_id>:
@@ -66,7 +66,7 @@ In case of a subscriber client that receives square topics in a reliable mode, r
 This client will received 10 topics in reliable mode.
 
 To create the entities tree easily, you can run the command ``entity_tree <id>``.
-For example, the following command creates: ::
+For example, the following command creates the necessary entities for publishing and subscribing data with id `3`: ::
 
     > entity_tree 3
     create_participant 3
@@ -79,5 +79,8 @@ For example, the following command creates: ::
 To modify the output default stream, you can change it with `stream <id>`.
 
     > stream 1
+
+The maximun available streams corresponds with the ``CONFIG_MAX_OUTPUT_BEST_EFFORT_STREAMS`` and
+``CONFIG_MAX_OUTPUT_RELIABLE_STREAMS`` properties configurable in ``client.config`` file.
 
 Now the messages will be send in best effort mode.

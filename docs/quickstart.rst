@@ -2,9 +2,8 @@
 
 Quick start
 ===========
-
-*Micro RTPS Client* provides a C API which allows you to create your own clients publishing and/or listening to topics from DDS Global Data Space.
-The following example shows how create a simple *Micro RTPS Client* and *Micro RTPS Agent* for publishing and subscribing to the DDS world, using this HelloWorld.idl: ::
+`Micro RTPS` provides a C API which allows the creation of `Micro RTPS Clients` that publish and/or subscribe to topics from DDS Global Data Space.
+The following example shows how to create a simple `Micro RTPS Client` and `Micro RTPS Agent` for publishing and subscribing to the DDS world, using this HelloWorld.idl: ::
 
     struct HelloWorld
     {
@@ -12,12 +11,12 @@ The following example shows how create a simple *Micro RTPS Client* and *Micro R
         string message;
     };
 
-First of all, we will start agent. For this example, the client - agent communication will be done through UDP: ::
+First of all, we launch the `Agent`. For this example, the `Client` - `Agent` communication will be done through UDP: ::
 
     $ cd /usr/local/bin && MicroRTPSAgent udp 2018
 
-Along with the agent, the *PublishHelloWorldClient* example provided in the source code is launched.
-This *Client* example will publish in the DDS World the HelloWorld topic. ::
+Along with the `Agent`, the `PublishHelloWorldClient` example provided in the source code is launched.
+This `Client` example will publish in the DDS World the HelloWorld topic. ::
 
     $ examples/PublishHelloWorld/PublishHelloWorldClient
 
@@ -117,7 +116,7 @@ The code of the *PublishHelloWorldClient* is the following:
         return 0;
     }
 
-After it, we will launch the *SubscriberHelloWorldClient*. This client example will subscribe to HelloWorld topic from the DDS World. ::
+After it, we will launch the *SubscriberHelloWorldClient*. This `Client` example will subscribe to HelloWorld topic from the DDS World. ::
 
     $ examples/SubscriberHelloWorld/SubscribeHelloWorldClient
 

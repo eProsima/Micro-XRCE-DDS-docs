@@ -13,7 +13,7 @@ Profiles
 --------
 
 The client library follows a profile concept that enables to choose add or remove some features in configuration time.
-This allow to reduce the client library size, if there are features that are not used.
+This allows to reduce the client library size, if there are features that are not used.
 The profiles can be choosen in ``client.config`` and start with the prefix ``PROFILE``.
 As part of these profiles, you can choose between several transport layers.
 Communication with the agent is done through the transport you choose.
@@ -22,10 +22,10 @@ The implementation of the transport depends of the platform.
 The next tables show the current implementation.
 
 ============ ========== ========= =========
-Transport     Linux      Windows   Nuttx
+Transport     Linux      Windows   NuttX
 ============ ========== ========= =========
-UDP           X           X
-TCP           X           X
+UDP           X           X        X
+TCP           X           X        X
 Serial        X                    X
 ============ ========== ========= =========
 
@@ -34,9 +34,9 @@ See the current transport implementations as an example for a new custom transpo
 
 Configuration
 -------------
-There are several definitions for configuring the build of the client library at **compile time**.
+There are several definitions for configuring and building of the client library at **compile time**.
 These allow you to create a version of the library according to your requirements.
-This definitions can be modify at ``client.config`` file.
+These definitions can be modify at ``client.config`` file.
 For incorporating the changes to your project, is necessary to run the ``cmake`` command every time the definitions change.
 
 ``PROFILE_CREATE_ENTITIES_REF=<bool>``
@@ -94,21 +94,21 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
     For cross compiling, you must set this value manually with the endianness of the device that run the client.
 
 ``CONFIG_UDP_TRANSPORT_MTU=<number>``
-    This value corresponds to the max message size able to send and receive by UDP.
+    This value corresponds to the `Maximun Transmission Unit` able to send and receive by UDP.
     Internally a buffer is created with this size.
 
 ``CONFIG_TCP_TRANSPORT_MTU=<number>``
-    This value corresponds to the max message size able to send and receive by TCP.
+    This value corresponds to the `Maximun Transmission Unit` able to send and receive by TCP.
     Internally a buffer is created with this size.
 
 ``CONFIG_SERIAL_TRANSPORT_MTU=<number>``
-    This value corresponds to the max message size able to send and receive by Serial.
+    This value corresponds to the `Maximun Transmission Unit` able to send and receive by Serial.
     Internally a buffer is created proportional to this size.
 
 API
 ---
 As a nomenclature, `Micro RTPS Client` API uses a ``mr_`` prefix in all of their public API functions and ``mr`` prefix in the types.
-In constants values, an ``MR_`` prefix is used.
+In constants values an ``MR_`` prefix is used.
 Functions without these rules `should not` be used.
 They are only for internal use.
 
@@ -143,7 +143,7 @@ Assigns the callback for the agent status messages.
 :session: Session structure previously initialized.
 :on_status_func: Function callback that will be called when a valid status message comes from the agent.
 :args: User pointer data.
-       The args will be pased to ``on_status_func`` function.
+       The args will be provided to ``on_status_func`` function.
 
 ------
 
@@ -157,7 +157,7 @@ The topics will be received only if a ``request_data`` function has been called.
 :session: Session structure previously initialized.
 :on_status_func: Function callback that will be called when a valid data message comes from the agent.
 :args: User pointer data.
-       The args will be pased to ``on_topic_func`` function.
+       The args will be provided to ``on_topic_func`` function.
 
 ------
 
@@ -166,7 +166,7 @@ The topics will be received only if a ``request_data`` function has been called.
     bool mr_create_session(mrSession* session);
 
 Creates a new session with the agent.
-This function logs in a session, enabling any other xrce communication with the agent.
+This function logs in a session, enabling any other XRCE communication with the agent.
 
 :session: Session structure previously initialized.
 
@@ -177,8 +177,8 @@ This function logs in a session, enabling any other xrce communication with the 
     bool mr_delete_session(mrSession* session);
 
 Deletes session previously created.
-All xrce entities created with the session will be removed.
-This function logs out a session, disabling any other xrce communication with the agent.
+All `XRCE` entities created with the session will be removed.
+This function logs out a session, disabling any other `XRCE` communication with the agent.
 
 :session: Session structure previously initialized.
 
@@ -188,7 +188,7 @@ This function logs out a session, disabling any other xrce communication with th
 
     mrStreamId mr_create_output_best_effort_stream(mrSession* session, uint8_t* buffer, size_t size);
 
-Creates and initializes a best effort stream for writing.
+Creates and initializes an output best effort stream for writing.
 The ``mrStreamId`` returned represents the new stream and can be used to manage it.
 The number of available calls to this function must be less or equal than ``CONFIG_MAX_OUTPUT_BEST_EFFORT_STREAMS`` value of the ``client.config`` file.
 
@@ -202,7 +202,7 @@ The number of available calls to this function must be less or equal than ``CONF
 
     mrStreamId mr_create_output_reliable_stream(mrSession* session, uint8_t* buffer, size_t size, size_t history);
 
-Creates and initializes a reliable stream for writing.
+Creates and initializes an output reliable stream for writing.
 The ``mrStreamId`` returned represents the new stream and can be used to manage it.
 The number of available calls to this function must be less or equal than ``CONFIG_MAX_OUTPUT_RELIABLE_STREAMS`` value of the ``client.config`` file.
 
@@ -219,7 +219,7 @@ The number of available calls to this function must be less or equal than ``CONF
 
     mrStreamId mr_create_input_best_effort_stream(mrSession* session);
 
-Creates and initializes a best effort stream for receiving messages.
+Creates and initializes an input best effort stream for receiving messages.
 The ``mrStreamId`` returned represents the new stream and can be used to manage it.
 The number of available calls to this function must be less or equal than ``CONFIG_MAX_INPUT_BEST_EFFORT_STREAMS`` value of the ``client.config`` file.
 
@@ -231,7 +231,7 @@ The number of available calls to this function must be less or equal than ``CONF
 
     mrStreamId mr_create_input_reliable_stream(mrSession* session, uint8_t* buffer, size_t size, size_t history);
 
-Creates and initializes a reliable stream for receiving messages.
+Creates and initializes an input reliable stream for receiving messages.
 The returned ``mrStreamId`` represents the new stream and can be used to manage it.
 The number of available calls to this function must be less or equal than ``CONFIG_MAX_INPUT_RELIABLE_STREAMS`` value of the ``client.config`` file.
 
@@ -254,7 +254,7 @@ This implies:
 
 1. Flashes all output streams sending the data through the transport.
 2. If there is any reliable stream, it will perform the asociated reliable behaviour to ensure the communication.
-3. Listenes messages from the agent and call the associated callback (a topic callback or a status callback).
+3. Listens messages from the agent and call the associated callback (a topic callback or a status callback).
 
 The ``_until_timeout`` suffix function version will perform these actions until the waiting for a new message reaches the timeout.
 Only if the time waiting for a message overcome the timeout, the function finished.
@@ -333,7 +333,7 @@ Create a `participant` entity in the agent.
             Later, the entity can be referenced with this id.
             The type must be ``MR_PARTICIPANT_ID``
 :xml: A xml representation of the new entity.
-:mode: Determine the creation entity mode.
+:mode: Determines the creation entity mode.
         Currently, only soported ``MR_REPLACE``.
         It will delete the entity previously in the agent if exists.
         A ``0`` value, implies that only creates the entity if it does not exists.
@@ -352,7 +352,7 @@ Create a `topic` entity in the agent.
             Later, the entity can be referenced with this id.
             The type must be ``MR_TOPIC_ID``
 :xml: A xml representation of the new entity.
-:mode: Determine the creation entity mode.
+:mode: Determines the creation entity mode.
         Currently, only soported ``MR_REPLACE``.
         It will delete the entity previously in the agent if exists.
         A ``0`` value, implies that only creates the entity if it does not exists.
@@ -371,7 +371,7 @@ Create a `publisher` entity in the agent.
             Later, the entity can be referenced with this id.
             The type must be ``MR_PUBLISHER_ID``
 :xml: A xml representation of the new entity.
-:mode: Determine the creation entity mode.
+:mode: Determines the creation entity mode.
         Currently, only soported ``MR_REPLACE``.
         It will delete the entity previously in the agent if exists.
         A ``0`` value, implies that only creates the entity if it does not exists.
@@ -390,7 +390,7 @@ Create a `publisher` entity in the agent.
             Later, the entity can be referenced with this id.
             The type must be ``MR_SUBSCRIBER_ID``
 :xml: A xml representation of the new entity.
-:mode: Determine the creation entity mode.
+:mode: Determines the creation entity mode.
         Currently, only soported ``MR_REPLACE``.
         It will delete the entity previously in the agent if exists.
         A ``0`` value, implies that only creates the entity if it does not exists.
@@ -409,7 +409,7 @@ Create a `datawriter_id` entity in the agent.
             Later, the entity can be referenced with this id.
             The type must be ``MR_DATAWRITER_ID``
 :xml: A xml representation of the new entity.
-:mode: Determine the creation entity mode.
+:mode: Determines the creation entity mode.
         Currently, only soported ``MR_REPLACE``.
         It will delete the entity previously in the agent if exists.
         A ``0`` value, implies that only creates the entity if it does not exists.
@@ -428,7 +428,7 @@ Create a `datareader` entity in the agent.
             Later, the entity can be referenced with this id.
             The type must be ``MR_DATAREADER_ID``
 :xml: A xml representation of the new entity.
-:mode: Determine the creation entity mode.
+:mode: Determines the creation entity mode.
         Currently, only soported ``MR_REPLACE``.
         It will delete the entity previously in the agent if exists.
         A ``0`` value, implies that only creates the entity if it does not exists.
@@ -454,7 +454,7 @@ Create a `datareader` entity in the agent.
             Later, the entity can be referenced with this id.
             The type must be ``MR_DATAREADER_ID``
 :xml: A xml representation of the new entity.
-:mode: Determine the creation entity mode.
+:mode: Determines the creation entity mode.
         Currently, only soported ``MR_REPLACE``.
         It will delete the entity previously in the agent if exists.
         A ``0`` value, implies that only creates the entity if it does not exists.
