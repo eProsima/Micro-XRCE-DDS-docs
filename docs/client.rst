@@ -36,7 +36,7 @@ Configuration
 -------------
 There are several definitions for configuring and building of the client library at **compile time**.
 These allow you to create a version of the library according to your requirements.
-These definitions can be modify at ``client.config`` file.
+These definitions can be modified at ``client.config`` file.
 For incorporating the changes to your project, is necessary to run the ``cmake`` command every time the definitions change.
 
 ``PROFILE_CREATE_ENTITIES_REF=<bool>``
