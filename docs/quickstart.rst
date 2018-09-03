@@ -205,8 +205,15 @@ The code of the *SubscriberHelloWorldClient* is the following:
     {
         if(args >= 2 && (0 == strcmp("-h", argv[1]) || 0 == strcmp("--help", argv[1]) || 0 == atoi(argv[1])))
         {
-            printf("usage: program [-h | --help | <topics>]\n");
-            return 0;
+            (void) session; (void) object_id; (void) request_id; (void) stream_id;
+        
+            HelloWorld topic;
+            HelloWorld_deserialize_topic(mb, &topic);
+        
+            printf("Received topic: %s, id: %i\n", topic.message, topic.index);
+        
+            uint32_t* count_ptr = (uint32_t*) args;
+            (*count_ptr)++;
         }
 
         uint32_t count = 0;
