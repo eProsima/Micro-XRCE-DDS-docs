@@ -100,15 +100,15 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
     For cross compiling, you must set this value manually with the endianness of the device that run the client.
 
 ``CONFIG_UDP_TRANSPORT_MTU=<number>``
-    This value corresponds to the `Maximun Transmission Unit` able to send and receive by UDP.
+    This value corresponds to the `Maximum Transmission Unit` able to send and receive by UDP.
     Internally a buffer is created with this size.
 
 ``CONFIG_TCP_TRANSPORT_MTU=<number>``
-    This value corresponds to the `Maximun Transmission Unit` able to send and receive by TCP.
+    This value corresponds to the `Maximum Transmission Unit` able to send and receive by TCP.
     Internally a buffer is created with this size.
 
 ``CONFIG_SERIAL_TRANSPORT_MTU=<number>``
-    This value corresponds to the `Maximun Transmission Unit` able to send and receive by Serial.
+    This value corresponds to the `Maximum Transmission Unit` able to send and receive by Serial.
     Internally a buffer is created proportional to this size.
 
 Streams
