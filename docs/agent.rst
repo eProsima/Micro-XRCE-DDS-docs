@@ -11,26 +11,83 @@ The Agent uses the entities to interact with the DDS Global Data Space on behalf
 The communication between a client and an agent currently supports UDP, TCP and serial (dependent on the platform).
 While running agent will attend any received request from your clients and answers back with the result of that request.
 
+Configuration
+-------------
+
+There are several configuration parameters which can be set at **compile time** in order to configure the *Micro RTPS Agent*.
+These parameters can be selected as CMake flags (``-D<parameter>=<value>``) before the compilation.
+The following is a list of the aforementioned parameters:
+
+``CONFIG_RELIABLE_STREAM_DEPTH``
+    Specify the history of the reliable streams (default 16).
+
+``CONFIG_BEST_EFFORT_STREAM_DEPTH``
+    Specify the history of the best-effort streams (default 16).
+
+``CONFIG_HEARTBEAT_PERIOD``
+    Specify the ``HEARTBEAT`` message period in millisecond (default 200).
+
+``CONFIG_SERIAL_TRANSPORT_MTU``
+    Specify the `Maximum Transmission Unit` able to send and receive by Serial (default 512).
+
+``CONFIG_UDP_TRANSPORT_MTU``
+    Specify the `Maximum Transmission Unit` able to send and receive by UDP (default 512).
+
+``CONFIG_TCP_TRANSPORT_MTU``
+    Specify the `Maximum Transmission Unit` able to send and receive by TCP (default 512).
+
+``CONFIG_TCP_MAX_CONNECTIONS``
+    Specify the maximum number of connections which the Agent is able to manage (default 100).
+
+``CONFIG_TCP_MAX_BACKLOG_CONNECTIONS``
+    Specify the maximum number of incoming connections which the Agent is able to manage (default 100).
+
+
+
 Run an Agent
 ------------
 
 To run the agent you should build it as indicated in :ref:`installation_label`.
 Once it is built successfully you just need to launch it executing the following command.
 
-For serial communication: ::
+For Serial communication: ::
 
-    $ ./MicroXRCE-DDSAgent serial <device>
+    $ ./MicroXRCEAgent serial <device>
 
-For udp communication: ::
+For UDP communication: ::
 
-    $ ./MicroXRCE-DDSAgent udp <port>
+    $ ./MicroXRCEAgent udp <port>
 
-For tcp communication: ::
+For TCP communication: ::
 
-    $ ./MicroXRCE-DDSAgent tcp <port>
+    $ ./MicroXRCEAgent tcp <port>
 
 If the transport used is a reliability transport, the use of a best effort stream over it is equivalent to use a reliable stream over a not reliable transport.
 
-For running the agent is necessary that the file ``DEFAULT_FASTRTPS_PROFILES.xml`` be located in the folder where the
-agent is located. Default installation place this file along with the agent executable into ``/usr/local/bin``.
+For running the agent is necessary that the file ``DEFAULT_FASTRTPS_PROFILES.xml`` be located in the folder where the agent is located.
+This file contains XML profiles of participants, publishers and subscribers referenced by a ``profile_name``.
+The client can use the aforementioned ``profile_name`` in order to create `Participants`, `DataWriters` and `DataReaders` using the reference representation.
+Let's see an example.
+
+The ``DEFAULT_FASTRTPS_PROFILES.xml`` contains the following participant profile:
+
+.. code-block:: xml
+
+    <profiles>
+      <participant profile_name="default_xrce_participant_profile">
+        <rtps>
+          <builtin>
+            <leaseDuration>
+              <durationbyname>INFINITE</durationbyname>
+            </leaseDuration>
+            <domainId>0</domainId>
+          </builtin>
+          <name>default_participant</name>
+        </rtps>
+      </participant>
+    </profile>
+
+therefore, the client can use `default_xrce_participant_profile` as ``ref`` in the ``mr_write_create_participant_ref`` function.
+
+Default installation place this file along with the agent executable into ``/usr/local/bin``.
 
