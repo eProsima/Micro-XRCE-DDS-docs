@@ -129,8 +129,9 @@ Once this function is called, a ``create_session`` call can be performed.
 :session: Session structure where manage the session data.
 :key: The identifying key of the client.
       All clients connected to an agent must have different key.
-:comm: Connection used for connecting to the agent.
-       All different transports have an attribute mrCommunication.
+:comm: Communication used for connecting to the agent.
+       All different transports have a common attribute mrCommunication.
+       This parameter can not be shared between active sessions.
 
 ------
 
