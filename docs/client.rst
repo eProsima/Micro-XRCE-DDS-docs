@@ -268,11 +268,11 @@ This implies:
 3. Listens messages from the agent and call the associated callback if exists (a topic callback or a status callback).
 
 The ``time`` suffix function version will perform these actions and will listen messages for a ``time`` duration.
-Only when the time waiting for a message overcome the ``time`` duration, the function finished.
+Only when the time waiting for a message overcome the ``time`` duration, the function finishes.
 The function will return ``true`` if the sent data have been confirmed, ``false`` otherwise.
 
 :session: Session structure previously initialized.
-:timeout: Time for waiting, in milliseconds.
+:time: Time for waiting, in milliseconds.
           For waiting without timeout, set the value to ``MR_TIMEOUT_INF``
 
 ------
@@ -290,7 +290,9 @@ This implies:
 3. Listens messages from the agent and call the associated callback if exists (a topic callback or a status callback).
 
 The ``_until_timeout`` suffix function version will perform these actions until receiving one message.
-The function will return ``true`` if has been received a message, ``false`` if the timeout has been reached.
+Once the message has been received or the timeout has been reached, the function finishes.
+Only when the time waiting for a message overcome the ``timeout`` duration, the function finishes.
+The function will return ``true`` if has received a message, ``false`` if the timeout has been reached.
 
 :session: Session structure previously initialized.
 :timeout: Time for waiting a new message, in milliseconds.
