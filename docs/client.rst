@@ -247,6 +247,37 @@ The number of available calls to this function must be less or equal than ``CONF
 
 .. code-block:: c
 
+    void mr_flash_output_streams(mrSession* session);
+
+Flashes all output streams sending the data through the transport.
+
+:session: Session structure previously initialized.
+
+------
+
+.. code-block:: c
+
+    void mr_run_session_time(mrSession* session, int time);
+
+The main library function.
+This function processes the internal functionality of a session.
+This implies:
+
+1. Flashes all output streams sending the data through the transport.
+2. If there is any reliable stream, it will perform the asociated reliable behaviour to ensure the communication.
+3. Listens messages from the agent and call the associated callback (a topic callback or a status callback).
+
+The ``time`` suffix function version will perform these actions and will listen messages for a `time` duration.
+The function will return ``true`` if the sent data have been confirmed, ``false`` otherwise.
+
+:session: Session structure previously initialized.
+:timeout: Time for waiting, in milliseconds.
+          For waiting without timeout, set the value to MR_TIMEOUT_INF
+
+------
+
+.. code-block:: c
+
     void mr_run_session_until_timeout(mrSession* session, int timeout);
 
 The main library function.
@@ -259,10 +290,10 @@ This implies:
 
 The ``_until_timeout`` suffix function version will perform these actions until the waiting for a new message reaches the timeout.
 Only if the time waiting for a message overcome the timeout, the function finished.
-The function will return ``true`` if the sent data have been confirmed, ``false`` otherwise.
+The function will return ``true`` if has been listened a message, ``false`` if the timeout has been reached.
 
 :session: Session structure previously initialized.
-:timeout: Time to waiting a new message, in milliseconds.
+:timeout: Time for waiting a new message, in milliseconds.
           For waiting without timeout, set the value to MR_TIMEOUT_INF
 
 ------
@@ -284,7 +315,7 @@ until the waiting for a new message reaches the timeout or until the output reli
 The function will return ``true`` if the sent data have been confirmed, ``false`` otherwise.
 
 :session: Session structure previously initialized.
-:timeout: Maximun time to wait for a new message, in milliseconds.
+:timeout: Maximun time for waiting to a new message, in milliseconds.
           For waiting without timeout, set the value to MR_TIMEOUT_INF
 
 ------
@@ -306,7 +337,7 @@ until the waiting for a new message reaches the timeout or until the requested s
 The function will return ``true`` if all status have been received and all of them have the value ``MR_STATUS_OK`` or ``MR_STATUS_OK_MATCHED``, ``false`` otherwise.
 
 :session: Session structure previously initialized.
-:timeout: Maximun time to wait for a new message, in milliseconds.
+:timeout: Maximun time for waiting to a new message, in milliseconds.
           For waiting without timeout, set the value to MR_TIMEOUT_INF
 :request_list: An array of request to confirm with a status.
 :status_list: An uninitialized array with the same size as ``request_list`` where the status values will be written.

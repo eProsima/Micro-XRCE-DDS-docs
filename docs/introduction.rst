@@ -33,7 +33,7 @@ RTPS is also the wire interoperability protocol defined for the `DDS` standard, 
 For deeper information please refer to the official documentation: `eProsima Fast RTPS <http://eprosima-fast-rtps.readthedocs.io>`_
 
 Operations and entities
-----------
+-----------------------
 *Micro RTPS* communication between XRCE Client and XRCE Agent is based upon :ref:`operations_label` and responses.
 Clients request operations to the Agent.
 The Agent will process the received operations and generate responses with the result of these operations.
