@@ -48,6 +48,9 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
 ``PROFILE_READ_ACCESS=<bool>``
     Enables or disables the functions related to read topics.
 
+``PROFILE_WRITE_ACCESS=<bool>``
+    Enables or disables the functions related to write topics.
+
 ``PROFILE_UDP_TRANSPORT=<bool>``
     Enables or disables the posibility to connect with the agent by UDP.
 
@@ -350,7 +353,7 @@ The function will return ``true`` if all status have been received and all of th
 
 Create entities by XML profile
 ``````````````````````````````
-These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` is enabled into ``client.config`` file.
+These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` is enabled in the ``client.config`` file.
 The declaration of these function can be found in ``micrortps/client/profile/session/create_entities_xml.h``.
 
 ------
@@ -471,7 +474,7 @@ Create a `datareader` entity in the agent.
 
 Create entities by reference profile
 ````````````````````````````````````
-These functions are enabled when ``PROFILE_CREATE_ENTITIES_REF`` is enabled into ``client.config`` file.
+These functions are enabled when ``PROFILE_CREATE_ENTITIES_REF`` is enabled in the ``client.config`` file.
 The declaration of these function can be found in ``micrortps/client/profile/session/create_entities_ref.h``.
 
 ------
@@ -497,7 +500,7 @@ Create a `datareader` entity in the agent.
 
 Create entities common profile
 ``````````````````````````````
-These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` or ``PROFILE_CREATE_ENTITIES_REF`` are enabled into ``client.config`` file.
+These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` or ``PROFILE_CREATE_ENTITIES_REF`` are enabled in the ``client.config`` file.
 The declaration of these function can be found in ``micrortps/client/profile/session/common_create_entities.h``.
 
 ------
@@ -516,7 +519,7 @@ Removes a entity.
 
 Read access profile
 ```````````````````
-These functions are enabled when PROFILE_READ_ACCESS is enabled into ``client.config`` file.
+These functions are enabled when PROFILE_READ_ACCESS is enabled in the ``client.config`` file.
 The declaration of these function can be found in ``micrortps/client/profile/session/read_access.h``.
 
 ------
@@ -543,23 +546,30 @@ If there is an error, a status error will be sent by the agent.
 
 Write access profile
 ````````````````````
-These functions are generated automatically by `MicroRTPSGen` utility with the ``-write-access-profile`` option enabled over an idl file with a topic `TOPICTYPE`.
-The declaration of these function can be found in the generated file ``TOPICTYPEWriter.h``.
+These functions are enabled when PROFILE_WRITE_ACCESS is enabled in the ``client.config`` file.
+The declaration of these function can be found in ``micrortps/client/profile/session/write_access.h``.
 
 ------
 
 .. code-block:: c
 
-    bool mr_write_TOPICTYPE_topic(mrSession* session, mrStreamId stream_id, mrObjectId datawriter_id, const TOPICTYPE* topic);
+    bool mr_prepare_output_stream(mrSession* session, mrStreamId stream_id, mrObjectId datawriter_id,
+                                  struct MicroBuffer* mb_topic, uint32_t topic_size);
 
-This function writes a topic into a stream.
-If the returned value is ``true``, the topic has been serialized.
+Requests a writing into a specific output stream.
+For that this function will initialize a ``MicroBuffer`` struct where a topic of ``topic_size`` size must be serialized.
+If the returned value is ``true``, exists the necessary gap for writing a ``topic_size`` bytes into the stream.
+If the returned value is ``false``, the topic can no be serialized into the stream.
 The topic will be sent in the next ``run_session`` function.
+
+NOTE: All `topic_size` bytes requested will be sent to the agent after a ``run_session`` call, no matter if the ``MicroBuffer`` has been used or not.
 
 :session: Session structure previously initialized.
 :stream_id: The output stream ID where the message will be written.
-:object_id: The DataWriter ID that will write the topic to the DDS World.
-:topic: The topic that will be sent to the agent.
+:datawriter_id: The DataWriter ID that will write the topic to the DDS World.
+:mb_topic: A ``MicroBuffer`` struct used to serialize the topic.
+           This struct points to a requested gap into the stream.
+:topic_size: The bytes that will be reserved in the stream.
 
 ------
 
@@ -603,6 +613,7 @@ It counts the number of bytes that the topic will need in a `MicroBuffer`.
 
 :topic: Struct to count the size.
 :size: Number of bytes already written into the `MicroBuffer`.
+       Typically its value is `0` if the purpose is to use in ``mr_prepare_output_stream`` function.
 
 ------
 

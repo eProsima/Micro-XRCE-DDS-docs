@@ -27,7 +27,7 @@ Types
     Analogous to create entities a session can to drop the entities on the *Agent*.
     To drop an entity you need to request a deletion of the entity to the *Agent* using the entity ID.
 
-`Read Data`
+`Request Data`
     This operation configures how do you want to receive data, and the Agent will deliver it from the DDS to your *Client*.
     This data will be receive asynchronously, in accordance with the data delivery control setted in this operation.
     Reading data is done using a DataReader entity.
