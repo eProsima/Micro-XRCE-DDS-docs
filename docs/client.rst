@@ -353,7 +353,7 @@ The function will return ``true`` if all status have been received and all of th
 
 Create entities by XML profile
 ``````````````````````````````
-These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` is enabled into ``client.config`` file.
+These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` is enabled in the ``client.config`` file.
 The declaration of these function can be found in ``micrortps/client/profile/session/create_entities_xml.h``.
 
 ------
@@ -474,7 +474,7 @@ Create a `datareader` entity in the agent.
 
 Create entities by reference profile
 ````````````````````````````````````
-These functions are enabled when ``PROFILE_CREATE_ENTITIES_REF`` is enabled into ``client.config`` file.
+These functions are enabled when ``PROFILE_CREATE_ENTITIES_REF`` is enabled in the ``client.config`` file.
 The declaration of these function can be found in ``micrortps/client/profile/session/create_entities_ref.h``.
 
 ------
@@ -500,7 +500,7 @@ Create a `datareader` entity in the agent.
 
 Create entities common profile
 ``````````````````````````````
-These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` or ``PROFILE_CREATE_ENTITIES_REF`` are enabled into ``client.config`` file.
+These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` or ``PROFILE_CREATE_ENTITIES_REF`` are enabled in the ``client.config`` file.
 The declaration of these function can be found in ``micrortps/client/profile/session/common_create_entities.h``.
 
 ------
@@ -519,7 +519,7 @@ Removes a entity.
 
 Read access profile
 ```````````````````
-These functions are enabled when PROFILE_READ_ACCESS is enabled into ``client.config`` file.
+These functions are enabled when PROFILE_READ_ACCESS is enabled in the ``client.config`` file.
 The declaration of these function can be found in ``micrortps/client/profile/session/read_access.h``.
 
 ------
@@ -546,7 +546,7 @@ If there is an error, a status error will be sent by the agent.
 
 Write access profile
 ````````````````````
-These functions are enabled when PROFILE_WRITE_ACCESS is enabled into ``client.config`` file.
+These functions are enabled when PROFILE_WRITE_ACCESS is enabled in the ``client.config`` file.
 The declaration of these function can be found in ``micrortps/client/profile/session/write_access.h``.
 
 ------
@@ -562,14 +562,14 @@ If the returned value is ``true``, exists the necessary gap for writing a ``topi
 If the returned value is ``false``, the topic can no be serialized into the stream.
 The topic will be sent in the next ``run_session`` function.
 
-NOTE: All `topic_size` bytes requested will be sent to the agent after a ``run_session`` call, no matter if the ``MicroBuffer`` has benn used or not.
+NOTE: All `topic_size` bytes requested will be sent to the agent after a ``run_session`` call, no matter if the ``MicroBuffer`` has been used or not.
 
 :session: Session structure previously initialized.
 :stream_id: The output stream ID where the message will be written.
 :datawriter_id: The DataWriter ID that will write the topic to the DDS World.
 :mb_topic: A ``MicroBuffer`` struct used to serialize the topic.
            This struct points to a requested gap into the stream.
-:topic_size: The bytes that will be reserved into the stream.
+:topic_size: The bytes that will be reserved in the stream.
 
 ------
 
@@ -613,7 +613,7 @@ It counts the number of bytes that the topic will need in a `MicroBuffer`.
 
 :topic: Struct to count the size.
 :size: Number of bytes already written into the `MicroBuffer`.
-       Typically its value is `0` if the purpose is to use into ``mr_prepare_output_stream`` function.
+       Typically its value is `0` if the purpose is to use in ``mr_prepare_output_stream`` function.
 
 ------
 
