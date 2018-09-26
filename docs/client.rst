@@ -327,7 +327,7 @@ The function will return ``true`` if the sent data have been confirmed, ``false`
 
 .. code-block:: c
 
-    bool mr_run_session_until_status(mrSession* session, int timeout, const uint16_t* request_list, uint8_t* status_list, size_t list_size);
+    bool mr_run_session_until_all_status(mrSession* session, int timeout, const uint16_t* request_list, uint8_t* status_list, size_t list_size);
 
 The main library function.
 This function processes the internal functionality of a session.
@@ -337,8 +337,8 @@ This implies:
 2. If there is any reliable stream, it will perform the asociated reliable behaviour to ensure the communication.
 3. Listenes messages from the agent and call the associated callback if exists (a topic callback or a status callback).
 
-The ``_until_status`` suffix function version will perform these actions during ``timeout`` duration
-or until the requested status had been received.
+The ``_until_all_status`` suffix function version will perform these actions during ``timeout`` duration
+or until all requested status had been received.
 The function will return ``true`` if all status have been received and all of them have the value ``MR_STATUS_OK`` or ``MR_STATUS_OK_MATCHED``, ``false`` otherwise.
 
 :session: Session structure previously initialized.
@@ -347,6 +347,32 @@ The function will return ``true`` if all status have been received and all of th
 :request_list: An array of request to confirm with a status.
 :status_list: An uninitialized array with the same size as ``request_list`` where the status values will be written.
               The position of a status in the list corresponds to the request at the same position in ``request_list``.
+:list_size: The size of ``request_list`` and ``status_list`` arrays.
+
+------
+
+.. code-block:: c
+
+    bool mr_run_session_until_one_status(mrSession* session, int timeout, const uint16_t* request_list, uint8_t* status_list, size_t list_size);
+
+The main library function.
+This function processes the internal functionality of a session.
+This implies:
+
+1. Flashes all output streams sending the data through the transport.
+2. If there is any reliable stream, it will perform the asociated reliable behaviour to ensure the communication.
+3. Listenes messages from the agent and call the associated callback if exists (a topic callback or a status callback).
+
+The ``_until_one_status`` suffix function version will perform these actions during ``timeout`` duration
+or until one requested status had been received.
+The function will return ``true`` if one status have been received and has the value ``MR_STATUS_OK`` or ``MR_STATUS_OK_MATCHED``, ``false`` otherwise.
+
+:session: Session structure previously initialized.
+:timeout: Maximun time for waiting to a new message, in milliseconds.
+          For waiting without timeout, set the value to ``MR_TIMEOUT_INF``
+:request_list: An array of request that can be confirmed.
+:status_list: An uninitialized array with the same size as ``request_list`` where the statu value will be written.
+              The position of the status in the list corresponds to the request at the same position in ``request_list``.
 :list_size: The size of ``request_list`` and ``status_list`` arrays.
 
 ------

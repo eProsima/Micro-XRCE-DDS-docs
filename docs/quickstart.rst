@@ -88,7 +88,7 @@ The code of the *PublishHelloWorldClient* is the following:
         // Send create entities message and wait its status
         uint8_t status[4];
         uint16_t requests[4] = {participant_req, topic_req, publisher_req, datawriter_req};
-        if(!mr_run_session_until_status(&session, 1000, requests, status, 4))
+        if(!mr_run_session_until_all_status(&session, 1000, requests, status, 4))
         {
             printf("Error at create entities: participant: %i topic: %i publisher: %i darawriter: %i\n", status[0], status[1], status[2], status[3]);
             return 1;
@@ -106,7 +106,7 @@ The code of the *PublishHelloWorldClient* is the following:
             mr_prepare_output_stream(&session, reliable_out, datawriter_id, &mb, topic_size);
             HelloWorld_serialize_topic(&mb, &topic);
 
-            connected = mr_run_session_until_timeout(&session, 1000);
+            connected = mr_run_session_until_time(&session, 1000);
             if(connected)
             {
                 printf("Sent topic: %s, id: %i\n", topic.message, topic.index);
@@ -207,7 +207,7 @@ The code of the *SubscriberHelloWorldClient* is the following:
             // Send create entities message and wait its status
             uint8_t status[4];
             uint16_t requests[4] = {participant_req, topic_req, subscriber_req, datareader_req};
-            if(!mr_run_session_until_status(&session, 1000, requests, status, 4))
+            if(!mr_run_session_until_all_status(&session, 1000, requests, status, 4))
             {
                 printf("Error at create entities: participant: %i topic: %i subscriber: %i datareader: %i\n", status[0], status[1], status[2], status[3]);
                 return 1;
@@ -223,7 +223,7 @@ The code of the *SubscriberHelloWorldClient* is the following:
             while(connected && count < max_topics)
             {
                 uint8_t read_data_status;
-                connected = mr_run_session_until_status(&session, MR_TIMEOUT_INF, &read_data_req, &read_data_status, 1);
+                connected = mr_run_session_until_all_status(&session, MR_TIMEOUT_INF, &read_data_req, &read_data_status, 1);
             }
 
             // Delete resources

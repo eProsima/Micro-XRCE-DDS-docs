@@ -176,13 +176,13 @@ The different status values that the agent can send to the client are the follow
     MR_STATUS_ERR_INCOMPATIBLE
     MR_STATUS_ERR_RESOURCES
 
-The status can be handle by the ``on_status_callback`` callback (configured in ``mr_set_status_callback`` function) or by the ``run_session_until_status`` as we will see.
+The status can be handle by the ``on_status_callback`` callback (configured in ``mr_set_status_callback`` function) or by the ``run_session_until_all_status`` as we will see.
 
 .. code-block:: C
 
     uint8_t status[6]; // we have 6 request to check.
     uint16_t requests[6] = {participant_req, topic_req, publisher_req, subscriber_req, datawriter_req, datareader_req};
-    if(!mr_run_session_until_status(&session, 1000, requests, status, 6))
+    if(!mr_run_session_until_all_status(&session, 1000, requests, status, 6))
     {
         printf("Error at create entities\n");
         return 1;
@@ -190,12 +190,14 @@ The status can be handle by the ``on_status_callback`` callback (configured in `
 
 The ``run_session`` functions are the main functions of the `Micro RTP Client` library.
 They performs serveral things: send the stream data to the agent, listen data from the agent, call callbacks, and manage the reliable connection.
-There are three variations of ``run_session`` function:
+There are five variations of ``run_session`` function:
+- ``mr_run_session_time``
 - ``mr_run_session_until_timeout``
 - ``mr_run_session_until_confirmed_delivery``
-- ``mr_run_session_until_status``
+- ``mr_run_session_until_all_status``
+- ``mr_run_session_until_one_status``
 
-Here we use the ``mr_run_session_until_status`` variation that will performs these actions until all status have been confirmed or the timeout has been reached.
+Here we use the ``mr_run_session_until_all_status`` variation that will performs these actions until all status have been confirmed or the timeout has been reached.
 This function will return ``true`` in case all status were `OK`.
 After call this function, the status can be read from the ``status`` array previously declared.
 
@@ -261,7 +263,7 @@ This id of the ``object_id`` corresponds to the DataReader that has read the Top
 The ``args`` argument correspond to user free data.
 
 Closing the Client
-^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 To close a *Client*, we must perform two steps.
 First, we need to tell the agent that the session is no longer available.
 This is done sending the next message:
