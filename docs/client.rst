@@ -580,20 +580,20 @@ The declaration of these function can be found in ``micrortps/client/profile/ses
 .. code-block:: c
 
     bool mr_prepare_output_stream(mrSession* session, mrStreamId stream_id, mrObjectId datawriter_id,
-                                  struct MicroBuffer* mb_topic, uint32_t topic_size);
+                                  struct mcBuffer* mb_topic, uint32_t topic_size);
 
 Requests a writing into a specific output stream.
-For that this function will initialize a ``MicroBuffer`` struct where a topic of ``topic_size`` size must be serialized.
+For that this function will initialize a ``mcBuffer`` struct where a topic of ``topic_size`` size must be serialized.
 If the returned value is ``true``, exists the necessary gap for writing a ``topic_size`` bytes into the stream.
 If the returned value is ``false``, the topic can no be serialized into the stream.
 The topic will be sent in the next ``run_session`` function.
 
-NOTE: All `topic_size` bytes requested will be sent to the agent after a ``run_session`` call, no matter if the ``MicroBuffer`` has been used or not.
+NOTE: All `topic_size` bytes requested will be sent to the agent after a ``run_session`` call, no matter if the ``mcBuffer`` has been used or not.
 
 :session: Session structure previously initialized.
 :stream_id: The output stream ID where the message will be written.
 :datawriter_id: The DataWriter ID that will write the topic to the DDS World.
-:mb_topic: A ``MicroBuffer`` struct used to serialize the topic.
+:mb_topic: A ``mcBuffer`` struct used to serialize the topic.
            This struct points to a requested gap into the stream.
 :topic_size: The bytes that will be reserved in the stream.
 
@@ -609,24 +609,24 @@ The declaration of these function can be found in the generated file ``TOPICTYPE
 
 .. code-block:: c
 
-    bool TOPICTYPE_serialize_topic(struct MicroBuffer* writer, const TOPICTYPE* topic);
+    bool TOPICTYPE_serialize_topic(struct mcBuffer* writer, const TOPICTYPE* topic);
 
-It serializes a topic into a MicroBuffer.
+It serializes a topic into a mcBuffer.
 The returned value indicates if the serialization was successful.
 
-:writer: A MicroBuffer representing the buffer for the serialization.
+:writer: A mcBuffer representing the buffer for the serialization.
 :topic: Struct to serialize.
 
 ------
 
 .. code-block:: c
 
-    bool TOPICTYPE_deserialize_topic(struct MicroBuffer* reader, TOPICTYPE* topic);
+    bool TOPICTYPE_deserialize_topic(struct mcBuffer* reader, TOPICTYPE* topic);
 
-It deserializes a topic from a MicroBuffer.
+It deserializes a topic from a mcBuffer.
 The returned value indicates if the serialization was successful.
 
-:reader: A MicroBuffer representing the buffer for the deserialization.
+:reader: A mcBuffer representing the buffer for the deserialization.
 :topic: Struct where deserialize.
 
 ------
@@ -635,10 +635,10 @@ The returned value indicates if the serialization was successful.
 
     uint32_t TOPICTYPE_size_of_topic(const TOPICTYPE* topic, uint32_t size);
 
-It counts the number of bytes that the topic will need in a `MicroBuffer`.
+It counts the number of bytes that the topic will need in a `mcBuffer`.
 
 :topic: Struct to count the size.
-:size: Number of bytes already written into the `MicroBuffer`.
+:size: Number of bytes already written into the `mcBuffer`.
        Typically its value is `0` if the purpose is to use in ``mr_prepare_output_stream`` function.
 
 ------
