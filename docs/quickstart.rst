@@ -2,8 +2,8 @@
 
 Quick start
 ===========
-`Micro RTPS` provides a C API which allows the creation of `Micro RTPS Clients` that publish and/or subscribe to topics from DDS Global Data Space.
-The following example shows how to create a simple `Micro RTPS Client` and `Micro RTPS Agent` for publishing and subscribing to the DDS world, using this HelloWorld.idl: ::
+`Micro XRCE-DDS` provides a C API which allows the creation of `Micro XRCE-DDS Clients` that publish and/or subscribe to topics from DDS Global Data Space.
+The following example shows how to create a simple `Micro XRCE-DDS Client` and `Micro XRCE-DDS Agent` for publishing and subscribing to the DDS world, using this HelloWorld.idl: ::
 
     struct HelloWorld
     {
@@ -13,7 +13,7 @@ The following example shows how to create a simple `Micro RTPS Client` and `Micr
 
 First of all, we launch the `Agent`. For this example, the `Client` - `Agent` communication will be done through UDP: ::
 
-    $ cd /usr/local/bin && MicroRTPSAgent udp 2018
+    $ cd /usr/local/bin && MicroXRCE-DDSAgent udp 2018
 
 Along with the `Agent`, the `PublishHelloWorldClient` example provided in the source code is launched.
 This `Client` example will publish in the DDS World the HelloWorld topic. ::
@@ -246,11 +246,11 @@ In order to see the messages from the DDS Global Data Space point of view, you c
 Learn More
 ----------
 
-To learn more about DDS and FastRTPS: `eProsima Fast RTPS <http://eprosima-fast-rtps.readthedocs.io>`_
+To learn more about DDS and Fast RTPS: `eProsima Fast RTPS <http://eprosima-fast-rtps.readthedocs.io>`_
 
-To learn how to install *Micro RTPS* read: :ref:`installation_label`
+To learn how to install *Micro XRCE-DDS* read: :ref:`installation_label`
 
-To learn more about *Micro RTPS* read :ref:`user`
+To learn more about *Micro XRCE-DDS* read :ref:`user`
 
-To learn more about *Micro RTPS Gen* read: :ref:`micrortpsgen_label`
+To learn more about *Micro XRCE-DDS Gen* read: :ref:`micrortpsgen_label`
 

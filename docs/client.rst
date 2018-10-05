@@ -1,11 +1,11 @@
 .. _micro_rtps_client_label:
 
-Micro RTPS Client
-=================
-In *Micro RTPS*, a *Client* can communicate with DDS Network as any other DDS actor could do.
+Micro XRCE-DDS Client
+=====================
+In *Micro XRCE-DDS*, a *Client* can communicate with DDS Network as any other DDS actor could do.
 *Clients* can publish and subscribe to data Topics in the DDS Global Data Space.
 
-*Micro RTPS* provides you with a C API to create *Micro RTPS Clients*.
+*Micro XRCE-DDS* provides you with a C API to create *Micro XRCE-DDS Clients*.
 All functions needed to set up the *Client* can be found into ``client.h`` header.
 This is the only header you need to include.
 
@@ -110,7 +110,7 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
 
 API
 ---
-As a nomenclature, `Micro RTPS Client` API uses a ``mr_`` prefix in all of their public API functions and ``mr`` prefix in the types.
+As a nomenclature, `Micro XRCE-DDS Client` API uses a ``mr_`` prefix in all of their public API functions and ``mr`` prefix in the types.
 In constants values an ``MR_`` prefix is used.
 Functions without these rules `should not` be used.
 They are only for internal use.
@@ -602,7 +602,7 @@ NOTE: All `topic_size` bytes requested will be sent to the agent after a ``run_s
 Topic serialization
 ```````````````````
 Functions to serialize and deserialize topics.
-These functions are generated automatically by `MicroRTPSGen` utility over an idl file with a topic `TOPICTYPE`.
+These functions are generated automatically by `MicroXRCE-DDSGen` utility over an idl file with a topic `TOPICTYPE`.
 The declaration of these function can be found in the generated file ``TOPICTYPE.h``.
 
 ------

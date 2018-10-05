@@ -2,7 +2,7 @@
 
 Getting started
 ===============
-This page shows how to get started with the *Micro RTPS Client* development.
+This page shows how to get started with the *Micro XRCE-DDS Client* development.
 We will create a *Client* that can publish and subscribe a topic.
 This tutorial has been extract from the examples found into ``examples/PublisherHelloWorld`` and ``examples/SubscriberHelloWorld``.
 

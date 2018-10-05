@@ -1,9 +1,9 @@
 .. _micrortpsgen_label:
 
-Micro RTPS Gen
-==============
+Micro XRCE-DDS Gen
+==================
 
-*Micro RTPS Gen* is a Java application used to generate source code for the *eProsima Micro RTPS* software.
+*Micro XRCE-DDS Gen* is a Java application used to generate source code for the *eProsima Micro XRCE-DDS* software.
 
 This tool is able to generate from a given IDL specification file, the C struct associated with the
 Topic, as well as, the serialization and deserialization methods.
@@ -64,7 +64,7 @@ it will generate the following header file and its corresponding source:
     #endif // _ShapeType_H_
 
 
-*Micro RTPS Gen* is also able to generate both *publisher* and *subscriber* source code examples related with the topic speficified in the IDL file adding the flag ``-example``: ::
+*Micro XRCE-DDS Gen* is also able to generate both *publisher* and *subscriber* source code examples related with the topic speficified in the IDL file adding the flag ``-example``: ::
 
     $ micrortpsgen -example <file.idl>
 
@@ -75,7 +75,7 @@ and the ``READ_ACCESS_PROFILE`` option for the *subscriber*.
 Installation
 ------------
 
-For use *Micro RTPS Gen* you have to follow the next steps:
+For use *Micro XRCE-DDS Gen* you have to follow the next steps:
 
 1. Install its dependencies:
 
@@ -85,8 +85,8 @@ For use *Micro RTPS Gen* you have to follow the next steps:
 
 2. Clone the code from the GitHub repository. ::
 
-    $ git clone --recursive https://github.com/eProsima/micro-RTPS-gen.git
-    $ cd micro-RTPS-gen
+    $ git clone --recursive https://github.com/eProsima/micro-XRCE-DDS-gen.git
+    $ cd micro-XRCE-DDS-gen
 
 3. Build the code with Gradle. ::
 
@@ -95,5 +95,5 @@ For use *Micro RTPS Gen* you have to follow the next steps:
 Notes
 -----
 
-At the present time, *Micro RTPS Gen* only supports Structs composed of integer, string, array and sequence types
-even though it is planned to enhance the capabilities of the *Micro RTPS Gen* tool in a near future.
+At the present time, *Micro XRCE-DDS Gen* only supports Structs composed of integer, string, array and sequence types
+even though it is planned to enhance the capabilities of the *Micro XRCE-DDS Gen* tool in a near future.

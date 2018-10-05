@@ -3,7 +3,7 @@
 Deployment example
 ==================
 
-This part will show how to deploy a system using *Micro RTPS* in a real enviroment.
+This part will show how to deploy a system using *Micro XRCE-DDS* in a real enviroment.
 An example of this can be found into ``examples/Deployment`` folder.
 
 Previous tutorials are based in `all in one` examples, that is, examples that create entities, publish or subscribe and then delete the resources.
