@@ -26,7 +26,7 @@ The code of the *PublishHelloWorldClient* is the following:
 
     #include "HelloWorldWriter.h"
 
-    #include <micrortps/client/client.h>
+    #include <uxr/client/client.h>
     #include <stdio.h>
     #include <string.h> //strcmp
     #include <stdlib.h> //atoi
@@ -130,7 +130,7 @@ The code of the *SubscriberHelloWorldClient* is the following:
 
         #include "HelloWorld.h"
 
-        #include <micrortps/client/client.h>
+        #include <uxr/client/client.h>
         #include <string.h> //strcmp
         #include <stdlib.h> //atoi
         #include <stdio.h>
@@ -252,5 +252,5 @@ To learn how to install *Micro XRCE-DDS* read: :ref:`installation_label`
 
 To learn more about *Micro XRCE-DDS* read :ref:`user`
 
-To learn more about *Micro XRCE-DDS Gen* read: :ref:`micrortpsgen_label`
+To learn more about *Micro XRCE-DDS Gen* read: :ref:`microxrceddsgen_label`
 

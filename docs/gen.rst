@@ -1,4 +1,4 @@
-.. _micrortpsgen_label:
+.. _microxrceddsgen_label:
 
 Micro XRCE-DDS Gen
 ==================
@@ -23,7 +23,7 @@ As an example of the powerful of this tool, the following shows the source code 
 
 If we will perform the following command: ::
 
-   $ micrortpsgen ShapeType.idl
+   $ microxrceddsgen ShapeType.idl
 
 it will generate the following header file and its corresponding source:
 
@@ -66,7 +66,7 @@ it will generate the following header file and its corresponding source:
 
 *Micro XRCE-DDS Gen* is also able to generate both *publisher* and *subscriber* source code examples related with the topic speficified in the IDL file adding the flag ``-example``: ::
 
-    $ micrortpsgen -example <file.idl>
+    $ microxrceddsgen -example <file.idl>
 
 
 In order to use these examples, the client library must be compiled with the ``WRITE_ACCESS_PROFILE`` option for the *publisher*

@@ -74,6 +74,6 @@ Topic Type
 ----------
 The data sent by the `Client` to the `DDS Global Data Space` uses the same principles as in `Fast RTPS`.
 The `Interface Definition Language (IDL) <https://www.omg.org/spec/IDL/4.2/PDF>`_ is used to define the type and must be known by the client.
-Having the type defined as `IDL` we provide the :ref:`micrortpsgen_label` tool.
+Having the type defined as `IDL` we provide the :ref:`microxrceddsgen_label` tool.
 This tool is able to generate a compatible type that the *Micro XRCE-DDS Client* can use to send and receive.
 The type should match the one used on the DDS Side.

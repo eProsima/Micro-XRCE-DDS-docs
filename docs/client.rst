@@ -1,4 +1,4 @@
-.. _micro_rtps_client_label:
+.. _micro_xrce_dds_client_label:
 
 Micro XRCE-DDS Client
 =====================
@@ -118,7 +118,7 @@ They are only for internal use.
 Session
 ```````
 These functions are available even if no profile has been enabled in ``client.config`` file.
-The declaration of these function can be found in ``micrortps/client/core/session/session.h``.
+The declaration of these function can be found in ``uxr/client/core/session/session.h``.
 
 ------
 
@@ -380,7 +380,7 @@ The function will return ``true`` if one status have been received and has the v
 Create entities by XML profile
 ``````````````````````````````
 These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` is enabled in the ``client.config`` file.
-The declaration of these function can be found in ``micrortps/client/profile/session/create_entities_xml.h``.
+The declaration of these function can be found in ``uxr/client/profile/session/create_entities_xml.h``.
 
 ------
 
@@ -501,7 +501,7 @@ Create a `datareader` entity in the agent.
 Create entities by reference profile
 ````````````````````````````````````
 These functions are enabled when ``PROFILE_CREATE_ENTITIES_REF`` is enabled in the ``client.config`` file.
-The declaration of these function can be found in ``micrortps/client/profile/session/create_entities_ref.h``.
+The declaration of these function can be found in ``uxr/client/profile/session/create_entities_ref.h``.
 
 ------
 
@@ -527,7 +527,7 @@ Create a `datareader` entity in the agent.
 Create entities common profile
 ``````````````````````````````
 These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` or ``PROFILE_CREATE_ENTITIES_REF`` are enabled in the ``client.config`` file.
-The declaration of these function can be found in ``micrortps/client/profile/session/common_create_entities.h``.
+The declaration of these function can be found in ``uxr/client/profile/session/common_create_entities.h``.
 
 ------
 
@@ -546,7 +546,7 @@ Removes a entity.
 Read access profile
 ```````````````````
 These functions are enabled when PROFILE_READ_ACCESS is enabled in the ``client.config`` file.
-The declaration of these function can be found in ``micrortps/client/profile/session/read_access.h``.
+The declaration of these function can be found in ``uxr/client/profile/session/read_access.h``.
 
 ------
 
@@ -573,7 +573,7 @@ If there is an error, a status error will be sent by the agent.
 Write access profile
 ````````````````````
 These functions are enabled when PROFILE_WRITE_ACCESS is enabled in the ``client.config`` file.
-The declaration of these function can be found in ``micrortps/client/profile/session/write_access.h``.
+The declaration of these function can be found in ``uxr/client/profile/session/write_access.h``.
 
 ------
 
@@ -602,7 +602,7 @@ NOTE: All `topic_size` bytes requested will be sent to the agent after a ``run_s
 Topic serialization
 ```````````````````
 Functions to serialize and deserialize topics.
-These functions are generated automatically by `MicroXRCE-DDSGen` utility over an idl file with a topic `TOPICTYPE`.
+These functions are generated automatically by `Micro XRCE-DDS Gen` utility over an idl file with a topic `TOPICTYPE`.
 The declaration of these function can be found in the generated file ``TOPICTYPE.h``.
 
 ------
@@ -646,7 +646,7 @@ It counts the number of bytes that the topic will need in a `mcBuffer`.
 General utilities
 `````````````````
 Utility functions.
-The declaration of these functions can be found in ``micrortps/client/core/session/stream_id.h`` and ``micrortps/client/core/session/object_id.h``.
+The declaration of these functions can be found in ``uxr/client/core/session/stream_id.h`` and ``uxr/client/core/session/object_id.h``.
 
 ------
 
@@ -702,7 +702,7 @@ Transport
 `````````
 These functions are platform dependent.
 The values ``PROFILE_XXX_TRANSPORT`` found into ``client.config`` allow to enable some of them.
-The declaration of these function can be found in ``micrortps/client/profile/transport/`` folder.
+The declaration of these function can be found in ``uxr/client/profile/transport/`` folder.
 The common init transport functions follow the next nomenclature.
 
 ------

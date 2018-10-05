@@ -14,9 +14,9 @@
 
 You can access the documentation online, which is hosted on Read the Docs.
 
-* [Start Page](http://micro-rtps.readthedocs.io)
-* [Installation manual](http://micro-rtps.readthedocs.io/en/latest/installation.html)
-* [User manual](http://micro-rtps.readthedocs.io/en/latest/introduction.html)
+* [Start Page](http://micro-xrce-dds.readthedocs.io)
+* [Installation manual](http://micro-xrce-dds.readthedocs.io/en/latest/installation.html)
+* [User manual](http://micro-xrce-dds.readthedocs.io/en/latest/introduction.html)
 
 ## Getting Help
 

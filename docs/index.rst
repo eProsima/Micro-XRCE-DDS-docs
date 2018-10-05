@@ -1,6 +1,6 @@
 .. eProsima Micro XRCE-DDS documentation master file.
 
-.. _micrortps_doc:
+.. _microxrcedds_doc:
 
 
 eProsima Micro XRCE-DDS
@@ -33,13 +33,13 @@ This example is useful to understand how XRCE protocol works along to the DDS Wo
 To create your own client, you can follow the the instructions of :ref:`getting_started_label` page.
 This is a tutorial that describe briefly how *Micro XRCE-DDS* API is and how it works.
 
-To know more about *Micro XRCE-DDS*, you can read the corresponding parts to the :ref:`micro_rtps_client_label` or the :ref:`micro_rtps_agent_label`.
+To know more about *Micro XRCE-DDS*, you can read the corresponding parts to the :ref:`micro_xrce_dds_client_label` or the :ref:`micro_xrce_dds_agent_label`.
 If you are interesting in how XRCE works, read :ref:`entities_label` and :ref:`operations_label` pages.
 
 Micro XRCE-DDS Gen
 ~~~~~~~~~~~~~~~~~~
-To create a serialization/deserialization topic code for *Micro XRCE-DDS Client* and make easy the built of examples using thoses topics, there is a tool called `micrortpsgen`.
-Information about this tool can be found in :ref:`micrortpsgen_label` page.
+To create a serialization/deserialization topic code for *Micro XRCE-DDS Client* and make easy the built of examples using thoses topics, there is a tool called `microxrceddsgen`.
+Information about this tool can be found in :ref:`microxrceddsgen_label` page.
 
 Index
 -----

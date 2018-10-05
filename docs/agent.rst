@@ -1,4 +1,4 @@
-.. _micro_rtps_agent_label:
+.. _micro_xrce_dds_agent_label:
 
 Micro XRCE-DDS Agent
 ====================
