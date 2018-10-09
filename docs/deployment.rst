@@ -3,7 +3,7 @@
 Deployment example
 ==================
 
-This part will show how to deploy a system using *Micro RTPS* in a real enviroment.
+This part will show how to deploy a system using *Micro XRCE-DDS* in a real enviroment.
 An example of this can be found into ``examples/Deployment`` folder.
 
 Previous tutorials are based in `all in one` examples, that is, examples that create entities, publish or subscribe and then delete the resources.
@@ -14,7 +14,7 @@ And other/s, that logs in the same session as the configure client (sharing the 
 
 This way allows to create easy clients in production only with the purpose of send and receive data.
 Related to it, exists the concept of `profile` that allow to build the client library only with the behavior choosen (only publish or only suscribe, for example).
-See :ref:`micro_rtps_client_label` for more information about this.
+See :ref:`micro_xrce_dds_client_label` for more information about this.
 
 Next diagram shows an example about how to configure the enviroment using a `configurator client`.
 
