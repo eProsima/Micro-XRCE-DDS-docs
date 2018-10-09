@@ -55,10 +55,10 @@ it will generate the following header file and its corresponding source:
 
     } ShapeType;
 
-    struct mcBuffer;
+    struct ucdrBuffer;
 
-    bool ShapeType_serialize_topic(struct mcBuffer* writer, const ShapeType* topic);
-    bool ShapeType_deserialize_topic(struct mcBuffer* reader, ShapeType* topic);
+    bool ShapeType_serialize_topic(struct ucdrBuffer* writer, const ShapeType* topic);
+    bool ShapeType_deserialize_topic(struct ucdrBuffer* reader, ShapeType* topic);
     uint32_t ShapeType_size_of_topic(const ShapeType* topic, uint32_t size);
 
     #endif // _ShapeType_H_

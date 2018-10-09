@@ -29,7 +29,7 @@ TCP           X           X        X
 Serial        X                    X
 ============ ========== ========= =========
 
-The addition of a new transport or an existant transport for a new platform can be easily implemented setting the callbacks of a ``mrCommunication`` structure.
+The addition of a new transport or an existant transport for a new platform can be easily implemented setting the callbacks of a ``uxrCommunication`` structure.
 See the current transport implementations as an example for a new custom transport.
 
 Configuration
@@ -62,19 +62,19 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
 
 ``CONFIG_MAX_OUTPUT_BEST_EFFORT_STREAMS=<number>``
     Configures the maximun output best effort streams that a session could have.
-    The calls to ``mr_create_output_best_effort_stream`` function for a session must be less or equal that this value.
+    The calls to ``uxr_create_output_best_effort_stream`` function for a session must be less or equal that this value.
 
 ``CONFIG_MAX_OUTPUT_RELIABLE_STREAMS=<number>``
     Configures the maximun output reliable streams that a session could have.
-    The calls to ``mr_create_output_reliable_stream`` function for a session must be less or equal that this value.
+    The calls to ``uxr_create_output_reliable_stream`` function for a session must be less or equal that this value.
 
 ``CONFIG_MAX_INPUT_BEST_EFFORT_STREAMS=<number>``
     Configure the maximun input best effort streams that a session could have.
-    The calls to ``mr_create_input_best_effort_stream`` function for a session must be less or equal that this value.
+    The calls to ``uxr_create_input_best_effort_stream`` function for a session must be less or equal that this value.
 
 ``CONFIG_MAX_INPUT_RELIABLE_STREAMS=<number>``
     Configures the maximun input reliable streams that a session could have.
-    The calls to ``mr_create_input_reliable_stream`` function for a session must be less or equal that this value.
+    The calls to ``uxr_create_input_reliable_stream`` function for a session must be less or equal that this value.
 
 ``CONFIG_MAX_SESSION_CONNECTION_ATTEMPTS=<number>``
     This value indicates the number of attempts that ``create_session`` and ``delete_session`` will perform until receiving an status message.
@@ -110,8 +110,8 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
 
 API
 ---
-As a nomenclature, `Micro XRCE-DDS Client` API uses a ``mr_`` prefix in all of their public API functions and ``mr`` prefix in the types.
-In constants values an ``MR_`` prefix is used.
+As a nomenclature, `Micro XRCE-DDS Client` API uses a ``uxr_`` prefix in all of their public API functions and ``uxr`` prefix in the types.
+In constants values an ``UXR_`` prefix is used.
 Functions without these rules `should not` be used.
 They are only for internal use.
 
@@ -124,7 +124,7 @@ The declaration of these function can be found in ``uxr/client/core/session/sess
 
 .. code-block:: c
 
-    void mr_init_session(mrSession* session, mrCommunication* comm, uint32_t key);
+    void uxr_init_session(uxrSession* session, uxrCommunication* comm, uint32_t key);
 
 Initializes a session structure.
 Once this function is called, a ``create_session`` call can be performed.
@@ -133,14 +133,14 @@ Once this function is called, a ``create_session`` call can be performed.
 :key: The identifying key of the client.
       All clients connected to an agent must have different key.
 :comm: Communication used for connecting to the agent.
-       All different transports have a common attribute mrCommunication.
+       All different transports have a common attribute uxrCommunication.
        This parameter can not be shared between active sessions.
 
 ------
 
 .. code-block:: c
 
-    void mr_set_status_callback(mrSession* session, mrOnStatusFunc on_status_func, void* args);
+    void uxr_set_status_callback(uxrSession* session, uxrOnStatusFunc on_status_func, void* args);
 
 Assigns the callback for the agent status messages.
 
@@ -153,7 +153,7 @@ Assigns the callback for the agent status messages.
 
 .. code-block:: c
 
-    void mr_set_topic_callback(mrSession* session, mrOnTopicFunc on_topic_func, void* args);
+    void uxr_set_topic_callback(uxrSession* session, uxrOnTopicFunc on_topic_func, void* args);
 
 Assigns the callback for topics.
 The topics will be received only if a ``request_data`` function has been called.
@@ -167,7 +167,7 @@ The topics will be received only if a ``request_data`` function has been called.
 
 .. code-block:: c
 
-    bool mr_create_session(mrSession* session);
+    bool uxr_create_session(uxrSession* session);
 
 Creates a new session with the agent.
 This function logs in a session, enabling any other XRCE communication with the agent.
@@ -178,7 +178,7 @@ This function logs in a session, enabling any other XRCE communication with the 
 
 .. code-block:: c
 
-    bool mr_delete_session(mrSession* session);
+    bool uxr_delete_session(uxrSession* session);
 
 Deletes session previously created.
 All `XRCE` entities created with the session will be removed.
@@ -190,10 +190,10 @@ This function logs out a session, disabling any other `XRCE` communication with 
 
 .. code-block:: c
 
-    mrStreamId mr_create_output_best_effort_stream(mrSession* session, uint8_t* buffer, size_t size);
+    uxrStreamId uxr_create_output_best_effort_stream(uxrSession* session, uint8_t* buffer, size_t size);
 
 Creates and initializes an output best effort stream for writing.
-The ``mrStreamId`` returned represents the new stream and can be used to manage it.
+The ``uxrStreamId`` returned represents the new stream and can be used to manage it.
 The number of available calls to this function must be less or equal than ``CONFIG_MAX_OUTPUT_BEST_EFFORT_STREAMS`` value of the ``client.config`` file.
 
 :session: Session structure previously initialized.
@@ -204,10 +204,10 @@ The number of available calls to this function must be less or equal than ``CONF
 
 .. code-block:: c
 
-    mrStreamId mr_create_output_reliable_stream(mrSession* session, uint8_t* buffer, size_t size, size_t history);
+    uxrStreamId uxr_create_output_reliable_stream(uxrSession* session, uint8_t* buffer, size_t size, size_t history);
 
 Creates and initializes an output reliable stream for writing.
-The ``mrStreamId`` returned represents the new stream and can be used to manage it.
+The ``uxrStreamId`` returned represents the new stream and can be used to manage it.
 The number of available calls to this function must be less or equal than ``CONFIG_MAX_OUTPUT_RELIABLE_STREAMS`` value of the ``client.config`` file.
 
 :session: Session structure previously initialized.
@@ -221,10 +221,10 @@ The number of available calls to this function must be less or equal than ``CONF
 
 .. code-block:: c
 
-    mrStreamId mr_create_input_best_effort_stream(mrSession* session);
+    uxrStreamId uxr_create_input_best_effort_stream(uxrSession* session);
 
 Creates and initializes an input best effort stream for receiving messages.
-The ``mrStreamId`` returned represents the new stream and can be used to manage it.
+The ``uxrStreamId`` returned represents the new stream and can be used to manage it.
 The number of available calls to this function must be less or equal than ``CONFIG_MAX_INPUT_BEST_EFFORT_STREAMS`` value of the ``client.config`` file.
 
 :session: Session structure previously initialized.
@@ -233,10 +233,10 @@ The number of available calls to this function must be less or equal than ``CONF
 
 .. code-block:: c
 
-    mrStreamId mr_create_input_reliable_stream(mrSession* session, uint8_t* buffer, size_t size, size_t history);
+    uxrStreamId uxr_create_input_reliable_stream(uxrSession* session, uint8_t* buffer, size_t size, size_t history);
 
 Creates and initializes an input reliable stream for receiving messages.
-The returned ``mrStreamId`` represents the new stream and can be used to manage it.
+The returned ``uxrStreamId`` represents the new stream and can be used to manage it.
 The number of available calls to this function must be less or equal than ``CONFIG_MAX_INPUT_RELIABLE_STREAMS`` value of the ``client.config`` file.
 
 :session: Session structure previously initialized.
@@ -250,7 +250,7 @@ The number of available calls to this function must be less or equal than ``CONF
 
 .. code-block:: c
 
-    void mr_flash_output_streams(mrSession* session);
+    void uxr_flash_output_streams(uxrSession* session);
 
 Flashes all output streams sending the data through the transport.
 
@@ -260,7 +260,7 @@ Flashes all output streams sending the data through the transport.
 
 .. code-block:: c
 
-    void mr_run_session_time(mrSession* session, int time);
+    void uxr_run_session_time(uxrSession* session, int time);
 
 The main library function.
 This function processes the internal functionality of a session.
@@ -276,13 +276,13 @@ The function will return ``true`` if the sent data have been confirmed, ``false`
 
 :session: Session structure previously initialized.
 :time: Time for waiting, in milliseconds.
-          For waiting without timeout, set the value to ``MR_TIMEOUT_INF``
+          For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
 
 ------
 
 .. code-block:: c
 
-    void mr_run_session_until_timeout(mrSession* session, int timeout);
+    void uxr_run_session_until_timeout(uxrSession* session, int timeout);
 
 The main library function.
 This function processes the internal functionality of a session.
@@ -299,13 +299,13 @@ The function will return ``true`` if has received a message, ``false`` if the ti
 
 :session: Session structure previously initialized.
 :timeout: Time for waiting a new message, in milliseconds.
-          For waiting without timeout, set the value to ``MR_TIMEOUT_INF``
+          For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
 
 ------
 
 .. code-block:: c
 
-    bool mr_run_session_until_confirm_delivery(mrSession* session, int timeout);
+    bool uxr_run_session_until_confirm_delivery(uxrSession* session, int timeout);
 
 The main library function.
 This function processes the internal functionality of a session.
@@ -321,13 +321,13 @@ The function will return ``true`` if the sent data have been confirmed, ``false`
 
 :session: Session structure previously initialized.
 :timeout: Maximun time for waiting to a new message, in milliseconds.
-          For waiting without timeout, set the value to ``MR_TIMEOUT_INF``
+          For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
 
 ------
 
 .. code-block:: c
 
-    bool mr_run_session_until_all_status(mrSession* session, int timeout, const uint16_t* request_list, uint8_t* status_list, size_t list_size);
+    bool uxr_run_session_until_all_status(uxrSession* session, int timeout, const uint16_t* request_list, uint8_t* status_list, size_t list_size);
 
 The main library function.
 This function processes the internal functionality of a session.
@@ -339,11 +339,11 @@ This implies:
 
 The ``_until_all_status`` suffix function version will perform these actions during ``timeout`` duration
 or until all requested status had been received.
-The function will return ``true`` if all status have been received and all of them have the value ``MR_STATUS_OK`` or ``MR_STATUS_OK_MATCHED``, ``false`` otherwise.
+The function will return ``true`` if all status have been received and all of them have the value ``UXR_STATUS_OK`` or ``UXR_STATUS_OK_MATCHED``, ``false`` otherwise.
 
 :session: Session structure previously initialized.
 :timeout: Maximun time for waiting to a new message, in milliseconds.
-          For waiting without timeout, set the value to ``MR_TIMEOUT_INF``
+          For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
 :request_list: An array of request to confirm with a status.
 :status_list: An uninitialized array with the same size as ``request_list`` where the status values will be written.
               The position of a status in the list corresponds to the request at the same position in ``request_list``.
@@ -353,7 +353,7 @@ The function will return ``true`` if all status have been received and all of th
 
 .. code-block:: c
 
-    bool mr_run_session_until_one_status(mrSession* session, int timeout, const uint16_t* request_list, uint8_t* status_list, size_t list_size);
+    bool uxr_run_session_until_one_status(uxrSession* session, int timeout, const uint16_t* request_list, uint8_t* status_list, size_t list_size);
 
 The main library function.
 This function processes the internal functionality of a session.
@@ -365,11 +365,11 @@ This implies:
 
 The ``_until_one_status`` suffix function version will perform these actions during ``timeout`` duration
 or until one requested status had been received.
-The function will return ``true`` if one status have been received and has the value ``MR_STATUS_OK`` or ``MR_STATUS_OK_MATCHED``, ``false`` otherwise.
+The function will return ``true`` if one status have been received and has the value ``UXR_STATUS_OK`` or ``UXR_STATUS_OK_MATCHED``, ``false`` otherwise.
 
 :session: Session structure previously initialized.
 :timeout: Maximun time for waiting to a new message, in milliseconds.
-          For waiting without timeout, set the value to ``MR_TIMEOUT_INF``
+          For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
 :request_list: An array of request that can be confirmed.
 :status_list: An uninitialized array with the same size as ``request_list`` where the statu value will be written.
               The position of the status in the list corresponds to the request at the same position in ``request_list``.
@@ -386,7 +386,7 @@ The declaration of these function can be found in ``uxr/client/profile/session/c
 
 .. code-block:: c
 
-    uint16_t mr_write_configure_participant_xml(mrSession* session, mrStreamId stream_id, mrObjectId object_id, uint16_t domain, const char* xml, uint8_t mode);
+    uint16_t uxr_write_configure_participant_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uint16_t domain, const char* xml, uint8_t mode);
 
 Create a `participant` entity in the agent.
 
@@ -394,10 +394,10 @@ Create a `participant` entity in the agent.
 :stream_id: The output stream ID where the message will be written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
-            The type must be ``MR_PARTICIPANT_ID``
+            The type must be ``UXR_PARTICIPANT_ID``
 :xml: A xml representation of the new entity.
 :mode: Determines the creation entity mode.
-        Currently, only soported ``MR_REPLACE``.
+        Currently, only soported ``UXR_REPLACE``.
         It will delete the entity previously in the agent if exists.
         A ``0`` value, implies that only creates the entity if it does not exists.
 
@@ -405,7 +405,7 @@ Create a `participant` entity in the agent.
 
 .. code-block:: c
 
-    uint16_t mr_write_configure_topic_xml(mrSession* session, mrStreamId stream_id, mrObjectId object_id, mrObjectId participant_id, const char* xml, uint8_t mode);
+    uint16_t uxr_write_configure_topic_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId participant_id, const char* xml, uint8_t mode);
 
 Create a `topic` entity in the agent.
 
@@ -413,10 +413,10 @@ Create a `topic` entity in the agent.
 :stream_id: The output stream ID where the message will be written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
-            The type must be ``MR_TOPIC_ID``
+            The type must be ``UXR_TOPIC_ID``
 :xml: A xml representation of the new entity.
 :mode: Determines the creation entity mode.
-        Currently, only soported ``MR_REPLACE``.
+        Currently, only soported ``UXR_REPLACE``.
         It will delete the entity previously in the agent if exists.
         A ``0`` value, implies that only creates the entity if it does not exists.
 
@@ -424,7 +424,7 @@ Create a `topic` entity in the agent.
 
 .. code-block:: c
 
-    uint16_t mr_write_configure_publisher_xml(mrSession* session, mrStreamId stream_id, mrObjectId object_id, mrObjectId participant_id, const char* xml, uint8_t mode);
+    uint16_t uxr_write_configure_publisher_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId participant_id, const char* xml, uint8_t mode);
 
 Create a `publisher` entity in the agent.
 
@@ -432,10 +432,10 @@ Create a `publisher` entity in the agent.
 :stream_id: The output stream ID where the message will be written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
-            The type must be ``MR_PUBLISHER_ID``
+            The type must be ``UXR_PUBLISHER_ID``
 :xml: A xml representation of the new entity.
 :mode: Determines the creation entity mode.
-        Currently, only soported ``MR_REPLACE``.
+        Currently, only soported ``UXR_REPLACE``.
         It will delete the entity previously in the agent if exists.
         A ``0`` value, implies that only creates the entity if it does not exists.
 
@@ -443,7 +443,7 @@ Create a `publisher` entity in the agent.
 
 .. code-block:: c
 
-    uint16_t mr_write_configure_subscriber_xml(mrSession* session, mrStreamId stream_id, mrObjectId object_id, mrObjectId participant_id, const char* xml, uint8_t mode);
+    uint16_t uxr_write_configure_subscriber_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId participant_id, const char* xml, uint8_t mode);
 
 Create a `publisher` entity in the agent.
 
@@ -451,10 +451,10 @@ Create a `publisher` entity in the agent.
 :stream_id: The output stream ID where the message will be written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
-            The type must be ``MR_SUBSCRIBER_ID``
+            The type must be ``UXR_SUBSCRIBER_ID``
 :xml: A xml representation of the new entity.
 :mode: Determines the creation entity mode.
-        Currently, only soported ``MR_REPLACE``.
+        Currently, only soported ``UXR_REPLACE``.
         It will delete the entity previously in the agent if exists.
         A ``0`` value, implies that only creates the entity if it does not exists.
 
@@ -462,7 +462,7 @@ Create a `publisher` entity in the agent.
 
 .. code-block:: c
 
-    uint16_t mr_write_configure_datawriter_xml(mrSession* session, mrStreamId stream_id, mrObjectId object_id, mrObjectId publisher_id, const char* xml, uint8_t mode);
+    uint16_t uxr_write_configure_datawriter_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId publisher_id, const char* xml, uint8_t mode);
 
 Create a `datawriter_id` entity in the agent.
 
@@ -470,10 +470,10 @@ Create a `datawriter_id` entity in the agent.
 :stream_id: The output stream ID where the message will be written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
-            The type must be ``MR_DATAWRITER_ID``
+            The type must be ``UXR_DATAWRITER_ID``
 :xml: A xml representation of the new entity.
 :mode: Determines the creation entity mode.
-        Currently, only soported ``MR_REPLACE``.
+        Currently, only soported ``UXR_REPLACE``.
         It will delete the entity previously in the agent if exists.
         A ``0`` value, implies that only creates the entity if it does not exists.
 
@@ -481,7 +481,7 @@ Create a `datawriter_id` entity in the agent.
 
 .. code-block:: c
 
-    uint16_t mr_write_configure_datareader_xml(mrSession* session, mrStreamId stream_id, mrObjectId object_id, mrObjectId subscriber_id, const char* xml, uint8_t mode);
+    uint16_t uxr_write_configure_datareader_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId subscriber_id, const char* xml, uint8_t mode);
 
 Create a `datareader` entity in the agent.
 
@@ -489,10 +489,10 @@ Create a `datareader` entity in the agent.
 :stream_id: The output stream ID where the message will be written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
-            The type must be ``MR_DATAREADER_ID``
+            The type must be ``UXR_DATAREADER_ID``
 :xml: A xml representation of the new entity.
 :mode: Determines the creation entity mode.
-        Currently, only soported ``MR_REPLACE``.
+        Currently, only soported ``UXR_REPLACE``.
         It will delete the entity previously in the agent if exists.
         A ``0`` value, implies that only creates the entity if it does not exists.
 
@@ -507,7 +507,7 @@ The declaration of these function can be found in ``uxr/client/profile/session/c
 
 .. code-block:: c
 
-    uint16_t mr_write_create_participant_ref(mrSession* session, mrStreamId stream_id, mrObjectId object_id, const char* ref, uint8_t mode);
+    uint16_t uxr_write_create_participant_ref(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, const char* ref, uint8_t mode);
 
 Create a `datareader` entity in the agent.
 
@@ -515,10 +515,10 @@ Create a `datareader` entity in the agent.
 :stream_id: The output stream ID where the message will be written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
-            The type must be ``MR_DATAREADER_ID``
+            The type must be ``UXR_DATAREADER_ID``
 :xml: A xml representation of the new entity.
 :mode: Determines the creation entity mode.
-        Currently, only soported ``MR_REPLACE``.
+        Currently, only soported ``UXR_REPLACE``.
         It will delete the entity previously in the agent if exists.
         A ``0`` value, implies that only creates the entity if it does not exists.
 
@@ -533,7 +533,7 @@ The declaration of these function can be found in ``uxr/client/profile/session/c
 
 .. code-block:: c
 
-    uint16_t mr_write_delete_entity(mrSession* session, mrStreamId stream_id, mrObjectId object_id);
+    uint16_t uxr_write_delete_entity(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id);
 
 Removes a entity.
 
@@ -552,13 +552,13 @@ The declaration of these function can be found in ``uxr/client/profile/session/r
 
 .. code-block:: c
 
-    uint16_t mr_write_request_data(mrSession* session, mrStreamId stream_id, mrObjectId datareader_id, mrStreamId data_stream_id, mrDeliveryControl* delivery_control);
+    uint16_t uxr_write_request_data(uxrSession* session, uxrStreamId stream_id, uxrObjectId datareader_id, uxrStreamId data_stream_id, uxrDeliveryControl* delivery_control);
 
 This function requests a read from a datareader of the agent.
 The returned value is an identifier of the request.
 All received topic will have the same request identifier.
 The topics will be received at the callback topic through the ``run_session`` function.
-If there is no error with the request data, the topics will be received generating a status callback with the value ``MR_STATUS_OK``.
+If there is no error with the request data, the topics will be received generating a status callback with the value ``UXR_STATUS_OK``.
 If there is an error, a status error will be sent by the agent.
 
 :session: Session structure previously initialized.
@@ -579,21 +579,21 @@ The declaration of these function can be found in ``uxr/client/profile/session/w
 
 .. code-block:: c
 
-    bool mr_prepare_output_stream(mrSession* session, mrStreamId stream_id, mrObjectId datawriter_id,
-                                  struct mcBuffer* mb_topic, uint32_t topic_size);
+    bool uxr_prepare_output_stream(uxrSession* session, uxrStreamId stream_id, uxrObjectId datawriter_id,
+                                  struct ucdrBuffer* mb_topic, uint32_t topic_size);
 
 Requests a writing into a specific output stream.
-For that this function will initialize a ``mcBuffer`` struct where a topic of ``topic_size`` size must be serialized.
+For that this function will initialize a ``ucdrBuffer`` struct where a topic of ``topic_size`` size must be serialized.
 If the returned value is ``true``, exists the necessary gap for writing a ``topic_size`` bytes into the stream.
 If the returned value is ``false``, the topic can no be serialized into the stream.
 The topic will be sent in the next ``run_session`` function.
 
-NOTE: All `topic_size` bytes requested will be sent to the agent after a ``run_session`` call, no matter if the ``mcBuffer`` has been used or not.
+NOTE: All `topic_size` bytes requested will be sent to the agent after a ``run_session`` call, no matter if the ``ucdrBuffer`` has been used or not.
 
 :session: Session structure previously initialized.
 :stream_id: The output stream ID where the message will be written.
 :datawriter_id: The DataWriter ID that will write the topic to the DDS World.
-:mb_topic: A ``mcBuffer`` struct used to serialize the topic.
+:mb_topic: A ``ucdrBuffer`` struct used to serialize the topic.
            This struct points to a requested gap into the stream.
 :topic_size: The bytes that will be reserved in the stream.
 
@@ -609,24 +609,24 @@ The declaration of these function can be found in the generated file ``TOPICTYPE
 
 .. code-block:: c
 
-    bool TOPICTYPE_serialize_topic(struct mcBuffer* writer, const TOPICTYPE* topic);
+    bool TOPICTYPE_serialize_topic(struct ucdrBuffer* writer, const TOPICTYPE* topic);
 
-It serializes a topic into a mcBuffer.
+It serializes a topic into a ucdrBuffer.
 The returned value indicates if the serialization was successful.
 
-:writer: A mcBuffer representing the buffer for the serialization.
+:writer: A ucdrBuffer representing the buffer for the serialization.
 :topic: Struct to serialize.
 
 ------
 
 .. code-block:: c
 
-    bool TOPICTYPE_deserialize_topic(struct mcBuffer* reader, TOPICTYPE* topic);
+    bool TOPICTYPE_deserialize_topic(struct ucdrBuffer* reader, TOPICTYPE* topic);
 
-It deserializes a topic from a mcBuffer.
+It deserializes a topic from a ucdrBuffer.
 The returned value indicates if the serialization was successful.
 
-:reader: A mcBuffer representing the buffer for the deserialization.
+:reader: A ucdrBuffer representing the buffer for the deserialization.
 :topic: Struct where deserialize.
 
 ------
@@ -635,11 +635,11 @@ The returned value indicates if the serialization was successful.
 
     uint32_t TOPICTYPE_size_of_topic(const TOPICTYPE* topic, uint32_t size);
 
-It counts the number of bytes that the topic will need in a `mcBuffer`.
+It counts the number of bytes that the topic will need in a `ucdrBuffer`.
 
 :topic: Struct to count the size.
-:size: Number of bytes already written into the `mcBuffer`.
-       Typically its value is `0` if the purpose is to use in ``mr_prepare_output_stream`` function.
+:size: Number of bytes already written into the `ucdrBuffer`.
+       Typically its value is `0` if the purpose is to use in ``uxr_prepare_output_stream`` function.
 
 ------
 
@@ -652,20 +652,20 @@ The declaration of these functions can be found in ``uxr/client/core/session/str
 
 .. code-block:: c
 
-    mrStreamId mr_stream_id(uint8_t index, mrStreamType type, mrStreamDirection direction);
+    uxrStreamId uxr_stream_id(uint8_t index, uxrStreamType type, uxrStreamDirection direction);
 
 Creates an stream identifier.
 This function does not create a new stream, only creates its identifier to be used in the `Client` API.
 
 :index: Identifier of the stream, its value correspond to the creation order of the stream, different for each `type`.
-:type: The type of the stream, it can be MR_BEST_EFFORT_STREAM or MR_RELIABLE_STREAM.
-:direction: Represents the direccion of the stream, it can be MR_INPUT_STREAM or MT_OUTPUT_STREAM.
+:type: The type of the stream, it can be UXR_BEST_EFFORT_STREAM or UXR_RELIABLE_STREAM.
+:direction: Represents the direccion of the stream, it can be UXR_INPUT_STREAM or MT_OUTPUT_STREAM.
 
 ------
 
 .. code-block:: c
 
-    mrStreamId mr_stream_id_from_raw(uint8_t stream_id_raw, mrStreamDirection direction);
+    uxrStreamId uxr_stream_id_from_raw(uint8_t stream_id_raw, uxrStreamDirection direction);
 
 Creates an stream identifier.
 This function does not create a new stream, only creates its identifier to be used in the `Client` API.
@@ -675,13 +675,13 @@ This function does not create a new stream, only creates its identifier to be us
       0 is for internal library use.
       1 to 127, for best effort.
       128 to 255, for reliable.
-:direction: Represents the direccion of the stream, it can be MR_INPUT_STREAM or MT_OUTPUT_STREAM.
+:direction: Represents the direccion of the stream, it can be UXR_INPUT_STREAM or MT_OUTPUT_STREAM.
 
 ------
 
 .. code-block:: c
 
-    mrObjectId mr_object_id(uint16_t id, uint8_t type);
+    uxrObjectId uxr_object_id(uint16_t id, uint8_t type);
 
 Creates a identifier for reference an entity.
 
@@ -689,12 +689,12 @@ Creates a identifier for reference an entity.
      (Can be several ids with the same id if they have different types)
 :type: The type of the entity.
        It can be:
-       * MR_PARTICIPANT_ID
-       * MR_TOPIC_ID
-       * MR_PUBLISHER_ID
-       * MR_SUBSCRIBER_ID
-       * MR_DATAWRITER_ID
-       * MR_DATAREADER_ID
+       * UXR_PARTICIPANT_ID
+       * UXR_TOPIC_ID
+       * UXR_PUBLISHER_ID
+       * UXR_SUBSCRIBER_ID
+       * UXR_DATAWRITER_ID
+       * UXR_DATAREADER_ID
 
 ------
 
@@ -709,7 +709,7 @@ The common init transport functions follow the next nomenclature.
 
 .. code-block:: c
 
-    bool mr_init_udp_transport(UDPTransport* transport, const char* ip, uint16_t port);
+    bool uxr_init_udp_transport(UDPTransport* transport, const char* ip, uint16_t port);
 
 Initializes an UDP connection.
 
@@ -722,7 +722,7 @@ Initializes an UDP connection.
 
 .. code-block:: c
 
-    bool mr_init_tcp_transport(TCPTransport* transport, const char* ip, uint16_t port);
+    bool uxr_init_tcp_transport(TCPTransport* transport, const char* ip, uint16_t port);
 
 Initializes a TCP connection.
 If the TCP is used, the behaviour of best effort streams will be similiar to reliable streams in UDP.
@@ -736,7 +736,7 @@ If the TCP is used, the behaviour of best effort streams will be similiar to rel
 
 .. code-block:: c
 
-    bool mr_init_serial_transport(SerialTransport* transport, const char* device, uint8_t remote_addr, uint8_t local_addr);
+    bool uxr_init_serial_transport(SerialTransport* transport, const char* device, uint8_t remote_addr, uint8_t local_addr);
 
 Initializes a Serial connection using a device.
 
@@ -751,7 +751,7 @@ Initializes a Serial connection using a device.
 
 .. code-block:: c
 
-    bool mr_init_serial_transport_fd(SerialTransport* transport, const int fd, uint8_t remote_addr, uint8_t local_addr);
+    bool uxr_init_serial_transport_fd(SerialTransport* transport, const int fd, uint8_t remote_addr, uint8_t local_addr);
 
 Initializes a Serial connection using a file descriptor
 
@@ -766,7 +766,7 @@ Initializes a Serial connection using a file descriptor
 
 .. code-block:: c
 
-    bool mr_close_PROTOCOL_transport(PROTOCOLTransport* transport);
+    bool uxr_close_PROTOCOL_transport(PROTOCOLTransport* transport);
 
 Closes a transport previously opened. `PROTOCOL` can be ``udp``, ``tcp`` or ``serial``.
 

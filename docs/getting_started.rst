@@ -37,15 +37,15 @@ Also, we will specify the max buffer for the streams and its historical associat
     #include "HelloWorldWriter.h"
 
     #define STREAM_HISTORY  8
-    #define BUFFER_SIZE     MR_CONFIG_UDP_TRANSPORT_MTU * STREAM_HISTORY
+    #define BUFFER_SIZE     UXR_CONFIG_UDP_TRANSPORT_MTU * STREAM_HISTORY
 
 First, we need to create a Session indicating the transport to use.
 The agent must be configured for listening from udp at port 2018.
 
 .. code-block:: C
 
-    mrUDPTransport transport;
-    if(!mr_init_udp_transport(&transport, "127.0.0.1", 2018))
+    uxrUDPTransport transport;
+    if(!uxr_init_udp_transport(&transport, "127.0.0.1", 2018))
     {
         printf("Error at create transport.\n");
         return 1;
@@ -55,21 +55,21 @@ Next, we will a session that allow us interact with the agent:
 
 .. code-block:: C
 
-    mrSession session;
-    mr_init_session(&session, &transport.comm, 0xABCDABCD);
-    mr_set_topic_callback(&session, on_topic, NULL);
-    if(!mr_create_session(&session))
+    uxrSession session;
+    uxr_init_session(&session, &transport.comm, 0xABCDABCD);
+    uxr_set_topic_callback(&session, on_topic, NULL);
+    if(!uxr_create_session(&session))
     {
         printf("Error at create session.\n");
         return 1;
     }
 
-The first function ``mr_init_session`` initializes the ``Session`` structure with the transport and the `Client Key` (the session identifier for an agent).
-The ``mr_set_topic_callback`` function is for registering the function ``on_topic`` which has been called when the `Client` receive a topic.
-Once the session has been initialized, we can send the first message for login the client in agent side: ``mr_create_session``.
+The first function ``uxr_init_session`` initializes the ``Session`` structure with the transport and the `Client Key` (the session identifier for an agent).
+The ``uxr_set_topic_callback`` function is for registering the function ``on_topic`` which has been called when the `Client` receive a topic.
+Once the session has been initialized, we can send the first message for login the client in agent side: ``uxr_create_session``.
 This function will try to connect with the agent by ``CONFIG_MAX_SESSION_CONNECTION_ATTEMPTS`` attempts (the value can be configurable at ``client.config``).
 
-Optionally, we also could add a status callback with the function ``mr_set_status_callback``, but for the purpose of this example we do not need it.
+Optionally, we also could add a status callback with the function ``uxr_set_status_callback``, but for the purpose of this example we do not need it.
 
 Once we have login the session successful, we can create the streams that we will use.
 In this case, we will use two, both reliables, for input and output.
@@ -77,10 +77,10 @@ In this case, we will use two, both reliables, for input and output.
 .. code-block:: C
 
     uint8_t output_reliable_stream_buffer[BUFFER_SIZE];
-    mrStreamId reliable_out = mr_create_output_reliable_stream(&session, output_reliable_stream_buffer, BUFFER_SIZE, STREAM_HISTORY);
+    uxrStreamId reliable_out = uxr_create_output_reliable_stream(&session, output_reliable_stream_buffer, BUFFER_SIZE, STREAM_HISTORY);
 
     uint8_t input_reliable_stream_buffer[BUFFER_SIZE];
-    mrStreamId reliable_in = mr_create_input_reliable_stream(&session, input_reliable_stream_buffer, BUFFER_SIZE, STREAM_HISTORY);
+    uxrStreamId reliable_in = uxr_create_input_reliable_stream(&session, input_reliable_stream_buffer, BUFFER_SIZE, STREAM_HISTORY);
 
 In order to publish and/or subscribe a topic, we need to create a hierarchy of XRCE entities in the agent side.
 These entities will be created from the client.
@@ -94,9 +94,9 @@ We can do this calling *Create participant* operation:
 
 .. code-block:: C
 
-    mrObjectId participant_id = mr_object_id(0x01, MR_PARTICIPANT_ID);
+    uxrObjectId participant_id = uxr_object_id(0x01, UXR_PARTICIPANT_ID);
     const char* participant_ref = "default participant";
-    uint16_t participant_req = mr_write_create_participant_ref(&session, reliable_out, participant_id, participant_ref, MR_REPLACE);
+    uint16_t participant_req = uxr_write_create_participant_ref(&session, reliable_out, participant_id, participant_ref, UXR_REPLACE);
 
 In any XRCE Operation that creates an entity, an `Object ID` is necessary.
 It is used to represent and manage the entity in the *Client* side.
@@ -112,9 +112,9 @@ Once the `Participant` has been created, we can use `Create topic` operation for
 
 .. code-block:: C
 
-    mrObjectId topic_id = mr_object_id(0x01, MR_TOPIC_ID);
+    uxrObjectId topic_id = uxr_object_id(0x01, UXR_TOPIC_ID);
     const char* topic_xml = "<dds><topic><name>HelloWorldTopic</name><dataType>HelloWorld</dataType></topic></dds>";
-    uint16_t topic_req = mr_write_configure_topic_xml(&session, reliable_out, topic_id, participant_id, topic_xml, MR_REPLACE);
+    uint16_t topic_req = uxr_write_configure_topic_xml(&session, reliable_out, topic_id, participant_id, topic_xml, UXR_REPLACE);
 
 As any other XRCE Operation used to create an entity, an Object ID must be specify to represent the entity.
 The ``participant_id`` is the participant where the Topic will be registered.
@@ -128,13 +128,13 @@ We create a publisher or subscriber on a participant entity, so it is necessary 
 
 .. code-block:: C
 
-    mrObjectId publisher_id = mr_object_id(0x01, MR_PUBLISHER_ID);
+    uxrObjectId publisher_id = uxr_object_id(0x01, UXR_PUBLISHER_ID);
     const char* publisher_xml = "<publisher name=\"MyPublisher\">";
-    uint16_t publisher_req = mr_write_configure_publisher_xml(&session, reliable_out, publisher_id, participant_id, publisher_xml, MR_REPLACE);
+    uint16_t publisher_req = uxr_write_configure_publisher_xml(&session, reliable_out, publisher_id, participant_id, publisher_xml, UXR_REPLACE);
 
-    mrObjectId subscriber_id = mr_object_id(0x01, MR_SUBSCRIBER_ID);
+    uxrObjectId subscriber_id = uxr_object_id(0x01, UXR_SUBSCRIBER_ID);
     const char* subscriber_xml = "<subscriber name=\"MySubscriber\">";
-    uint16_t subscriber_req = mr_write_configure_subscriber_xml(&session, reliable_out, subscriber_id, participant_id, subscriber_xml, MR_REPLACE);
+    uint16_t subscriber_req = uxr_write_configure_subscriber_xml(&session, reliable_out, subscriber_id, participant_id, subscriber_xml, UXR_REPLACE);
 
 DataWriters & DataReaders
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -145,13 +145,13 @@ The configuration about how these `DataReaders` and data writers works is contai
 
 .. code-block:: C
 
-    mrObjectId datawriter_id = mr_object_id(0x01, MR_DATAWRITER_ID);
+    uxrObjectId datawriter_id = uxr_object_id(0x01, UXR_DATAWRITER_ID);
     const char* datawriter_xml = "<profiles><publisher profile_name=\"default_xrce_publisher_profile\"><topic><kind>NO_KEY</kind><name>HelloWorldTopic</name><dataType>HelloWorld</dataType><historyQos><kind>KEEP_LAST</kind><depth>5</depth></historyQos><durability><kind>TRANSIENT_LOCAL</kind></durability></topic></publisher></profiles>";
-    uint16_t datawriter_req = mr_write_configure_datawriter_xml(&session, reliable_out, datawriter_id, publisher_id, datawriter_xml, MR_REPLACE);
+    uint16_t datawriter_req = uxr_write_configure_datawriter_xml(&session, reliable_out, datawriter_id, publisher_id, datawriter_xml, UXR_REPLACE);
 
-    mrObjectId datareader_id = mr_object_id(0x01, MR_DATAREADER_ID);
+    uxrObjectId datareader_id = uxr_object_id(0x01, UXR_DATAREADER_ID);
     const char* datareader_xml = "<profiles><subscriber profile_name=\"default_xrce_subscriber_profile\"><topic><kind>NO_KEY</kind><name>HelloWorldTopic</name><dataType>HelloWorld</dataType><historyQos><kind>KEEP_LAST</kind><depth>5</depth></historyQos><durability><kind>TRANSIENT_LOCAL</kind></durability></topic></subscriber></profiles>";
-    uint16_t datareader_req = mr_write_configure_datareader_xml(&session, reliable_out, datareader_id, subscriber_id, datareader_xml, MR_REPLACE);
+    uint16_t datareader_req = uxr_write_configure_datareader_xml(&session, reliable_out, datareader_id, subscriber_id, datareader_xml, UXR_REPLACE);
 
 Agent response
 ^^^^^^^^^^^^^^
@@ -165,24 +165,24 @@ The different status values that the agent can send to the client are the follow
 
 .. code-block:: C
 
-    MR_STATUS_OK
-    MR_STATUS_OK_MATCHED
-    MR_STATUS_ERR_DDS_ERROR
-    MR_STATUS_ERR_MISMATCH
-    MR_STATUS_ERR_ALREADY_EXISTS
-    MR_STATUS_ERR_DENIED
-    MR_STATUS_ERR_UNKNOWN_REFERENCE
-    MR_STATUS_ERR_INVALID_DATA
-    MR_STATUS_ERR_INCOMPATIBLE
-    MR_STATUS_ERR_RESOURCES
+    UXR_STATUS_OK
+    UXR_STATUS_OK_MATCHED
+    UXR_STATUS_ERR_DDS_ERROR
+    UXR_STATUS_ERR_MISMATCH
+    UXR_STATUS_ERR_ALREADY_EXISTS
+    UXR_STATUS_ERR_DENIED
+    UXR_STATUS_ERR_UNKNOWN_REFERENCE
+    UXR_STATUS_ERR_INVALID_DATA
+    UXR_STATUS_ERR_INCOMPATIBLE
+    UXR_STATUS_ERR_RESOURCES
 
-The status can be handle by the ``on_status_callback`` callback (configured in ``mr_set_status_callback`` function) or by the ``run_session_until_all_status`` as we will see.
+The status can be handle by the ``on_status_callback`` callback (configured in ``uxr_set_status_callback`` function) or by the ``run_session_until_all_status`` as we will see.
 
 .. code-block:: C
 
     uint8_t status[6]; // we have 6 request to check.
     uint16_t requests[6] = {participant_req, topic_req, publisher_req, subscriber_req, datawriter_req, datareader_req};
-    if(!mr_run_session_until_all_status(&session, 1000, requests, status, 6))
+    if(!uxr_run_session_until_all_status(&session, 1000, requests, status, 6))
     {
         printf("Error at create entities\n");
         return 1;
@@ -191,13 +191,13 @@ The status can be handle by the ``on_status_callback`` callback (configured in `
 The ``run_session`` functions are the main functions of the `Micro RTP Client` library.
 They performs serveral things: send the stream data to the agent, listen data from the agent, call callbacks, and manage the reliable connection.
 There are five variations of ``run_session`` function:
-- ``mr_run_session_time``
-- ``mr_run_session_until_timeout``
-- ``mr_run_session_until_confirmed_delivery``
-- ``mr_run_session_until_all_status``
-- ``mr_run_session_until_one_status``
+- ``uxr_run_session_time``
+- ``uxr_run_session_until_timeout``
+- ``uxr_run_session_until_confirmed_delivery``
+- ``uxr_run_session_until_all_status``
+- ``uxr_run_session_until_one_status``
 
-Here we use the ``mr_run_session_until_all_status`` variation that will performs these actions until all status have been confirmed or the timeout has been reached.
+Here we use the ``uxr_run_session_until_all_status`` variation that will performs these actions until all status have been confirmed or the timeout has been reached.
 This function will return ``true`` in case all status were `OK`.
 After call this function, the status can be read from the ``status`` array previously declared.
 
@@ -210,23 +210,23 @@ For creating a message with data, first we must to decide which stream we want t
 
     HelloWorld topic = {count++, "Hello DDS world!"};
 
-    mcBuffer mb;
+    ucdrBuffer mb;
     uint32_t topic_size = HelloWorld_size_of_topic(&topic, 0);
-    (void) mr_prepare_output_stream(&session, reliable_out, datawriter_id, &mb, topic_size);
+    (void) uxr_prepare_output_stream(&session, reliable_out, datawriter_id, &mb, topic_size);
     (void) HelloWorld_serialize_topic(&mb, &topic);
 
-    mr_run_session_until_confirmed_delivery(&session, 1000);
+    uxr_run_session_until_confirmed_delivery(&session, 1000);
 
 ``HelloWorld_size_of_topic`` and ``HelloWorld_serialize_topic`` functions are automatically generated by :ref:`microxrceddsgen_label` from the IDL.
-The function ``mr_prepare_output_stream`` requests a writing for a topic of ``topic_size`` size into the reliable stream represented by ``reliable_out``,
+The function ``uxr_prepare_output_stream`` requests a writing for a topic of ``topic_size`` size into the reliable stream represented by ``reliable_out``,
 with a ``datawriter_id`` (correspond to the data writer entity used for sending the data in the `DDS World`).
-If the stream is available and the topic fits in it, the function will initialize the ``mcBuffer`` structure ``mb``.
-Once the ``mcBuffer`` is prepared, the topic can be serialized into it.
-We are careless about ``mr_prepare_output_stream`` return value because the serialization only will occur if the ``mcBuffer` is valid``
+If the stream is available and the topic fits in it, the function will initialize the ``ucdrBuffer`` structure ``mb``.
+Once the ``ucdrBuffer`` is prepared, the topic can be serialized into it.
+We are careless about ``uxr_prepare_output_stream`` return value because the serialization only will occur if the ``ucdrBuffer` is valid``
 
 After the write function, as happend with the creation of entities, the topic has been serialized into the buffer but it has not been sent yet.
 To send the topic is necessary call to a ``run_session`` function.
-In this case, we call to ``mr_run_session_until_confirmed_delivery`` that will wait until the message was confirmed or until the timeout has been reached.
+In this case, we call to ``uxr_run_session_until_confirmed_delivery`` that will wait until the message was confirmed or until the timeout has been reached.
 
 Read Data
 ^^^^^^^^^
@@ -236,10 +236,10 @@ Current implementation sends one topic to the client for each read data operatio
 
 .. code-block:: C
 
-    mrDeliveryControl delivery_control = {0};
-    delivery_control.max_samples = MR_MAX_SAMPLES_UNLIMITED;
+    uxrDeliveryControl delivery_control = {0};
+    delivery_control.max_samples = UXR_MAX_SAMPLES_UNLIMITED;
 
-    uint16_t read_data_req = mr_write_request_data(&session, reliable_out, datareader_id, reliable_in, &delivery_control);
+    uint16_t read_data_req = uxr_write_request_data(&session, reliable_out, datareader_id, reliable_in, &delivery_control);
 
 In order to configure how the agent will send the topic, we must set the input stream. In this case, we use the input reliable stream previously defined.
 ``datareader_id`` corresponds with the `DataDeader` entity used for receiving the data.
@@ -250,7 +250,7 @@ The ``run_session`` function will call the topic callback each time a topic will
 
 .. code-block:: C
 
-    void on_topic(mrSession* session, mrObjectId object_id, uint16_t request_id, mrStreamId stream_id, struct mcBuffer* mb, void* args)
+    void on_topic(uxrSession* session, uxrObjectId object_id, uint16_t request_id, uxrStreamId stream_id, struct ucdrBuffer* mb, void* args)
     {
         (void) session; (void) object_id; (void) request_id; (void) stream_id; (void) args;
 
@@ -270,11 +270,11 @@ This is done sending the next message:
 
 .. code-block:: C
 
-    mr_delete_session(&session);
+    uxr_delete_session(&session);
 
 After this, we can close the transport used by the session.
 
 .. code-block:: C
 
-    mr_close_udp_transport(&transport);
+    uxr_close_udp_transport(&transport);
 
