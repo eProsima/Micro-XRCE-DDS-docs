@@ -391,7 +391,9 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
 
     uint16_t uxr_buffer_configure_participant_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uint16_t domain, const char* xml, uint8_t mode);
 
-Create a `participant` entity in the agent.
+Creates a `participant` entity in the agent.
+The message is only written into the stream buffer.
+To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
 
 :session: Session structure previously initialized.
 :stream_id: The output stream ID where the message will be written.
@@ -410,7 +412,9 @@ Create a `participant` entity in the agent.
 
     uint16_t uxr_buffer_configure_topic_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId participant_id, const char* xml, uint8_t mode);
 
-Create a `topic` entity in the agent.
+Creates a `topic` entity in the agent.
+The message is only written into the stream buffer.
+To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
 
 :session: Session structure previously initialized.
 :stream_id: The output stream ID where the message will be written.
@@ -430,6 +434,8 @@ Create a `topic` entity in the agent.
     uint16_t uxr_buffer_configure_publisher_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId participant_id, const char* xml, uint8_t mode);
 
 Create a `publisher` entity in the agent.
+The message is only written into the stream buffer.
+To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
 
 :session: Session structure previously initialized.
 :stream_id: The output stream ID where the message will be written.
@@ -449,6 +455,8 @@ Create a `publisher` entity in the agent.
     uint16_t uxr_buffer_configure_subscriber_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId participant_id, const char* xml, uint8_t mode);
 
 Create a `publisher` entity in the agent.
+The message is only written into the stream buffer.
+To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
 
 :session: Session structure previously initialized.
 :stream_id: The output stream ID where the message will be written.
@@ -468,6 +476,8 @@ Create a `publisher` entity in the agent.
     uint16_t uxr_buffer_configure_datawriter_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId publisher_id, const char* xml, uint8_t mode);
 
 Create a `datawriter_id` entity in the agent.
+The message is only written into the stream buffer.
+To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
 
 :session: Session structure previously initialized.
 :stream_id: The output stream ID where the message will be written.
@@ -487,6 +497,8 @@ Create a `datawriter_id` entity in the agent.
     uint16_t uxr_buffer_configure_datareader_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId subscriber_id, const char* xml, uint8_t mode);
 
 Create a `datareader` entity in the agent.
+The message is only written into the stream buffer.
+To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
 
 :session: Session structure previously initialized.
 :stream_id: The output stream ID where the message will be written.
@@ -513,6 +525,8 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
     uint16_t uxr_buffer_create_participant_ref(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, const char* ref, uint8_t mode);
 
 Create a `datareader` entity in the agent.
+The message is only written into the stream buffer.
+To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
 
 :session: Session structure previously initialized.
 :stream_id: The output stream ID where the message will be written.
@@ -539,6 +553,8 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
     uint16_t uxr_buffer_delete_entity(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id);
 
 Removes a entity.
+The message is only written into the stream buffer.
+To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
 
 :session: Session structure previously initialized.
 :stream_id: The output stream ID where the message will be written.
@@ -563,6 +579,8 @@ All received topic will have the same request identifier.
 The topics will be received at the callback topic through the ``run_session`` function.
 If there is no error with the request data, the topics will be received generating a status callback with the value ``UXR_STATUS_OK``.
 If there is an error, a status error will be sent by the agent.
+The message is only written into the stream buffer.
+To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
 
 :session: Session structure previously initialized.
 :stream_id: The output stream ID where the message will be written.
