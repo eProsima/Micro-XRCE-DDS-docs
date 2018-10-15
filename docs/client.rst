@@ -389,7 +389,7 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
 
 .. code-block:: c
 
-    uint16_t uxr_write_configure_participant_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uint16_t domain, const char* xml, uint8_t mode);
+    uint16_t uxr_buffer_configure_participant_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uint16_t domain, const char* xml, uint8_t mode);
 
 Create a `participant` entity in the agent.
 
@@ -408,7 +408,7 @@ Create a `participant` entity in the agent.
 
 .. code-block:: c
 
-    uint16_t uxr_write_configure_topic_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId participant_id, const char* xml, uint8_t mode);
+    uint16_t uxr_buffer_configure_topic_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId participant_id, const char* xml, uint8_t mode);
 
 Create a `topic` entity in the agent.
 
@@ -427,7 +427,7 @@ Create a `topic` entity in the agent.
 
 .. code-block:: c
 
-    uint16_t uxr_write_configure_publisher_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId participant_id, const char* xml, uint8_t mode);
+    uint16_t uxr_buffer_configure_publisher_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId participant_id, const char* xml, uint8_t mode);
 
 Create a `publisher` entity in the agent.
 
@@ -446,7 +446,7 @@ Create a `publisher` entity in the agent.
 
 .. code-block:: c
 
-    uint16_t uxr_write_configure_subscriber_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId participant_id, const char* xml, uint8_t mode);
+    uint16_t uxr_buffer_configure_subscriber_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId participant_id, const char* xml, uint8_t mode);
 
 Create a `publisher` entity in the agent.
 
@@ -465,7 +465,7 @@ Create a `publisher` entity in the agent.
 
 .. code-block:: c
 
-    uint16_t uxr_write_configure_datawriter_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId publisher_id, const char* xml, uint8_t mode);
+    uint16_t uxr_buffer_configure_datawriter_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId publisher_id, const char* xml, uint8_t mode);
 
 Create a `datawriter_id` entity in the agent.
 
@@ -484,7 +484,7 @@ Create a `datawriter_id` entity in the agent.
 
 .. code-block:: c
 
-    uint16_t uxr_write_configure_datareader_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId subscriber_id, const char* xml, uint8_t mode);
+    uint16_t uxr_buffer_configure_datareader_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId subscriber_id, const char* xml, uint8_t mode);
 
 Create a `datareader` entity in the agent.
 
@@ -510,7 +510,7 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
 
 .. code-block:: c
 
-    uint16_t uxr_write_create_participant_ref(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, const char* ref, uint8_t mode);
+    uint16_t uxr_buffer_create_participant_ref(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, const char* ref, uint8_t mode);
 
 Create a `datareader` entity in the agent.
 
@@ -536,7 +536,7 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
 
 .. code-block:: c
 
-    uint16_t uxr_write_delete_entity(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id);
+    uint16_t uxr_buffer_delete_entity(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id);
 
 Removes a entity.
 
@@ -555,7 +555,7 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
 
 .. code-block:: c
 
-    uint16_t uxr_write_request_data(uxrSession* session, uxrStreamId stream_id, uxrObjectId datareader_id, uxrStreamId data_stream_id, uxrDeliveryControl* delivery_control);
+    uint16_t uxr_buffer_request_data(uxrSession* session, uxrStreamId stream_id, uxrObjectId datareader_id, uxrStreamId data_stream_id, uxrDeliveryControl* delivery_control);
 
 This function requests a read from a datareader of the agent.
 The returned value is an identifier of the request.
