@@ -51,6 +51,9 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
 ``PROFILE_WRITE_ACCESS=<bool>``
     Enables or disables the functions related to write topics.
 
+``PROFILE_DISCOVERY=<bool>``
+    Enables or disables the functions the discovery feature.
+
 ``PROFILE_UDP_TRANSPORT=<bool>``
     Enables or disables the posibility to connect with the agent by UDP.
 
@@ -380,7 +383,7 @@ The function will return ``true`` if one status have been received and has the v
 Create entities by XML profile
 ``````````````````````````````
 These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` is enabled in the ``client.config`` file.
-The declaration of these function can be found in ``uxr/client/profile/session/create_entities_xml.h``.
+The declaration of these functions can be found in ``uxr/client/profile/session/create_entities_xml.h``.
 
 ------
 
@@ -501,7 +504,7 @@ Create a `datareader` entity in the agent.
 Create entities by reference profile
 ````````````````````````````````````
 These functions are enabled when ``PROFILE_CREATE_ENTITIES_REF`` is enabled in the ``client.config`` file.
-The declaration of these function can be found in ``uxr/client/profile/session/create_entities_ref.h``.
+The declaration of these functions can be found in ``uxr/client/profile/session/create_entities_ref.h``.
 
 ------
 
@@ -527,7 +530,7 @@ Create a `datareader` entity in the agent.
 Create entities common profile
 ``````````````````````````````
 These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` or ``PROFILE_CREATE_ENTITIES_REF`` are enabled in the ``client.config`` file.
-The declaration of these function can be found in ``uxr/client/profile/session/common_create_entities.h``.
+The declaration of these functions can be found in ``uxr/client/profile/session/common_create_entities.h``.
 
 ------
 
@@ -546,7 +549,7 @@ Removes a entity.
 Read access profile
 ```````````````````
 These functions are enabled when PROFILE_READ_ACCESS is enabled in the ``client.config`` file.
-The declaration of these function can be found in ``uxr/client/profile/session/read_access.h``.
+The declaration of these functions can be found in ``uxr/client/profile/session/read_access.h``.
 
 ------
 
@@ -573,7 +576,7 @@ If there is an error, a status error will be sent by the agent.
 Write access profile
 ````````````````````
 These functions are enabled when PROFILE_WRITE_ACCESS is enabled in the ``client.config`` file.
-The declaration of these function can be found in ``uxr/client/profile/session/write_access.h``.
+The declaration of these functions can be found in ``uxr/client/profile/session/write_access.h``.
 
 ------
 
@@ -596,6 +599,61 @@ NOTE: All `topic_size` bytes requested will be sent to the agent after a ``run_s
 :mb_topic: A ``ucdrBuffer`` struct used to serialize the topic.
            This struct points to a requested gap into the stream.
 :topic_size: The bytes that will be reserved in the stream.
+
+------
+
+Discovery profile
+```````````````````
+The discovery profile allows to discover agents in the network by UDP.
+The reachable agents will respond to the discovery call sending information about them, as their ip and port.
+There is two modes: multicast and unicast.
+The discovery phase can be performed before the `uxr_create_session` call in order to determine the agent to connect with.
+These functions are enabled when PROFILE_DISCOVERY is enabled in the ``client.config`` file.
+The declaration of these functions can be found in ``uxr/client/profile/discovery/discovery.h``.
+
+bool uxr_discovery_agents_multicast(uint32_t attemps, int period, uxrOnAgentFound on_agent_func, void* args, uxrAgentAddress* choosen);
+
+------
+
+.. code-block:: c
+
+    bool uxr_discovery_agents_multicast(uint32_t attempts, int period,
+                                        uxrOnAgentFound on_agent_func, void* args, uxrAgentAddress* choosen);
+
+Searches into the network using multicast ip "239.255.0.2" and port 7400 (default used by the agent) in order to discover agents.
+
+:attempts: The number of attempts to send the discovery message to the network.
+:period: How often will be sent the discovery message to the network.
+:on_agent_func: The callback function that will be called when an agent was discovered.
+                The callback returns a boolean value.
+                A `true` means that the discovery rutine will be end and exit.
+                The current agent will be selected as *choosen*.
+                A `false` implies that the discovery rutine must to continue searching agents.
+:args: User arguments passed to the callback function.
+:choosen: If the callback function was returned `true`, this value will contains the agent value of the callback.
+
+------
+
+.. code-block:: c
+
+    bool uxr_discovery_agents_unicast(uint32_t attempts, int period,
+                                      uxrOnAgentFound on_agent_func, void* args, uxrAgentAddress* choosen,
+                                      const uxrAgentAddress* agent_list, size_t agent_list_size);
+
+Searches into the network using a list of unicast directions in order to discover agents.
+
+:attempts: The number of attempts to send the discovery message to the network.
+:period: How often will be sent the discovery message to the network.
+:on_agent_func: The callback function that will be called when an agent was discovered.
+                The callback returns a boolean value.
+                A ``true`` means that the discovery rutine will be end and exit.
+                The current agent will be selected as *choosen*.
+                A ``false`` implies that the discovery rutine must to continue searching agents.
+:args: User arguments passed to the callback function.
+:choosen: If the callback function was returned ``true``, this value will contains the agent value of the callback.
+:agent_list: The list of address where discover agent.
+             By default the agents will be listen at **port 7400** the discovery messages..
+:agent_list_size: The size of the ``agent_list``.
 
 ------
 
