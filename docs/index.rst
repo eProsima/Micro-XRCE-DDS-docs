@@ -63,6 +63,7 @@ Index
    entities
    operations
    deployment
+   optimization
 
 .. toctree::
    :caption: Release Notes
