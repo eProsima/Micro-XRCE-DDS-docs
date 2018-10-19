@@ -39,19 +39,19 @@ Also, we will specify the max buffer for the streams and its historical associat
     #define STREAM_HISTORY  8
     #define BUFFER_SIZE     UXR_CONFIG_UDP_TRANSPORT_MTU * STREAM_HISTORY
 
-First, we need to create a Session indicating the transport to use.
-The agent must be configured for listening from udp at port 2018.
+Before create a Session we need to indicate the transport to use (the agent must be configured for listening from udp at port 2018).
 
 .. code-block:: C
 
     uxrUDPTransport transport;
-    if(!uxr_init_udp_transport(&transport, "127.0.0.1", 2018))
+    uxrUDPPlatform udp_platform;
+    if(!uxr_init_udp_transport(&transport, &udp_platform, "127.0.0.1", 2018))
     {
         printf("Error at create transport.\n");
         return 1;
     }
 
-Next, we will a session that allow us interact with the agent:
+Next, we will create a session that allow us interact with the agent:
 
 .. code-block:: C
 
@@ -95,13 +95,19 @@ We can do this calling *Create participant* operation:
 .. code-block:: C
 
     uxrObjectId participant_id = uxr_object_id(0x01, UXR_PARTICIPANT_ID);
-    const char* participant_ref = "default participant";
-    uint16_t participant_req = uxr_buffer_create_participant_ref(&session, reliable_out, participant_id, participant_ref, UXR_REPLACE);
+    const char* participant_xml = "<dds>"
+                                      "<participant>"
+                                          "<rtps>"
+                                              "<name>default_xrce_participant</name>"
+                                          "</rtps>"
+                                      "</participant>"
+                                  "</dds>";
+    uint16_t participant_req = uxr_buffer_create_participant_ref(&session, reliable_out, participant_id, participant_xml, UXR_REPLACE);
 
-In any XRCE Operation that creates an entity, an `Object ID` is necessary.
+In any `XRCE Operation` that creates an entity, an `Object ID` is necessary.
 It is used to represent and manage the entity in the *Client* side.
-The reference is the identifier of a DDS entity in the *Agent* side.
-Each operation, return a `Request ID`.
+In this case we will create the entity by its XML description, but also could be done by a reference of the entity in the agent.
+Each operation, returns a `Request ID`.
 This identifier of the operation can be used later for associating the status with the operation.
 In this case, the operation has been written into the stream ``reliable_out``.
 Later, in the ``run_session`` function, the data written in the stream will be sent to the agent.
@@ -113,10 +119,15 @@ Once the `Participant` has been created, we can use `Create topic` operation for
 .. code-block:: C
 
     uxrObjectId topic_id = uxr_object_id(0x01, UXR_TOPIC_ID);
-    const char* topic_xml = "<dds><topic><name>HelloWorldTopic</name><dataType>HelloWorld</dataType></topic></dds>";
+    const char* topic_xml = "<dds>"
+                                "<topic>"
+                                    "<name>HelloWorldTopic</name>"
+                                    "<dataType>HelloWorld</dataType>"
+                                "</topic>"
+                            "</dds>";
     uint16_t topic_req = uxr_buffer_create_topic_xml(&session, reliable_out, topic_id, participant_id, topic_xml, UXR_REPLACE);
 
-As any other XRCE Operation used to create an entity, an Object ID must be specify to represent the entity.
+As any other XRCE Operation used to create an entity, an Object ID must be specified to represent the entity.
 The ``participant_id`` is the participant where the Topic will be registered.
 In order to determine which topic will be used, an XML is sent to the agent for creating and defining the Topic in the DDS Global Data Space.
 That definition consists of a name and a type.
@@ -129,12 +140,14 @@ We create a publisher or subscriber on a participant entity, so it is necessary 
 .. code-block:: C
 
     uxrObjectId publisher_id = uxr_object_id(0x01, UXR_PUBLISHER_ID);
-    const char* publisher_xml = "<publisher name=\"MyPublisher\">";
+    const char* publisher_xml = "";
     uint16_t publisher_req = uxr_buffer_create_publisher_xml(&session, reliable_out, publisher_id, participant_id, publisher_xml, UXR_REPLACE);
 
     uxrObjectId subscriber_id = uxr_object_id(0x01, UXR_SUBSCRIBER_ID);
-    const char* subscriber_xml = "<subscriber name=\"MySubscriber\">";
+    const char* subscriber_xml = "";
     uint16_t subscriber_req = uxr_buffer_create_subscriber_xml(&session, reliable_out, subscriber_id, participant_id, subscriber_xml, UXR_REPLACE);
+
+The `Publisher` and `Subscriber` xml information is given when the `DataWriter` and `DataReader` be created.
 
 DataWriters & DataReaders
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -146,11 +159,27 @@ The configuration about how these `DataReaders` and data writers works is contai
 .. code-block:: C
 
     uxrObjectId datawriter_id = uxr_object_id(0x01, UXR_DATAWRITER_ID);
-    const char* datawriter_xml = "<profiles><publisher profile_name=\"default_xrce_publisher_profile\"><topic><kind>NO_KEY</kind><name>HelloWorldTopic</name><dataType>HelloWorld</dataType><historyQos><kind>KEEP_LAST</kind><depth>5</depth></historyQos><durability><kind>TRANSIENT_LOCAL</kind></durability></topic></publisher></profiles>";
+    const char* datawriter_xml = "<dds>"
+                                     "<data_writer>"
+                                         "<topic>"
+                                             "<kind>NO_KEY</kind>"
+                                             "<name>HelloWorldTopic</name>"
+                                             "<dataType>HelloWorld</dataType>"
+                                         "</topic>"
+                                     "</data_writer>"
+                                 "</dds>";
     uint16_t datawriter_req = uxr_buffer_create_datawriter_xml(&session, reliable_out, datawriter_id, publisher_id, datawriter_xml, UXR_REPLACE);
 
     uxrObjectId datareader_id = uxr_object_id(0x01, UXR_DATAREADER_ID);
-    const char* datareader_xml = "<profiles><subscriber profile_name=\"default_xrce_subscriber_profile\"><topic><kind>NO_KEY</kind><name>HelloWorldTopic</name><dataType>HelloWorld</dataType><historyQos><kind>KEEP_LAST</kind><depth>5</depth></historyQos><durability><kind>TRANSIENT_LOCAL</kind></durability></topic></subscriber></profiles>";
+    const char* datareader_xml = "<dds>"
+                                     "<data_reader>"
+                                         "<topic>"
+                                             "<kind>NO_KEY</kind>"
+                                             "<name>HelloWorldTopic</name>"
+                                             "<dataType>HelloWorld</dataType>"
+                                         "</topic>"
+                                     "</data_reader>"
+                                 "</dds>";
     uint16_t datareader_req = uxr_buffer_create_datareader_xml(&session, reliable_out, datareader_id, subscriber_id, datareader_xml, UXR_REPLACE);
 
 Agent response
@@ -158,10 +187,11 @@ Agent response
 In operations such as create session, create entity or request data from the *Agent*,
 an status is sent from the *Agent* to the *Client* indicating what happened.
 
-For `Create session` or `Detele session` operations the status value is storage into the ``session.info.last_request_status``.
+For `Create session` or `Detele session` operations the status value is stored into the ``session.info.last_request_status``.
 For the rest of the operations, the status are sent to the input reliable stream ``0x80``, that is, the first input reliable stream created, with index 0.
 
 The different status values that the agent can send to the client are the following:
+(You can see the definitions in ``uxr/client/core/sesssion/session_info.h`` file)
 
 .. code-block:: C
 
@@ -175,6 +205,7 @@ The different status values that the agent can send to the client are the follow
     UXR_STATUS_ERR_INVALID_DATA
     UXR_STATUS_ERR_INCOMPATIBLE
     UXR_STATUS_ERR_RESOURCES
+    UXR_STATUS_NONE (never send, only used when the status is known)
 
 The status can be handle by the ``on_status_callback`` callback (configured in ``uxr_set_status_callback`` function) or by the ``run_session_until_all_status`` as we will see.
 
@@ -189,7 +220,7 @@ The status can be handle by the ``on_status_callback`` callback (configured in `
     }
 
 The ``run_session`` functions are the main functions of the `Micro RTP Client` library.
-They performs serveral things: send the stream data to the agent, listen data from the agent, call callbacks, and manage the reliable connection.
+They performs serveral tasks: send the stream data to the agent, listen data from the agent, call callbacks, and manage the reliable connection.
 There are five variations of ``run_session`` function:
 - ``uxr_run_session_time``
 - ``uxr_run_session_until_timeout``
@@ -197,7 +228,7 @@ There are five variations of ``run_session`` function:
 - ``uxr_run_session_until_all_status``
 - ``uxr_run_session_until_one_status``
 
-Here we use the ``uxr_run_session_until_all_status`` variation that will performs these actions until all status have been confirmed or the timeout has been reached.
+Here we use the ``uxr_run_session_until_all_status`` variation that will perform these actions until all status have been confirmed or the timeout has been reached.
 This function will return ``true`` in case all status were `OK`.
 After call this function, the status can be read from the ``status`` array previously declared.
 
@@ -224,7 +255,7 @@ If the stream is available and the topic fits in it, the function will initializ
 Once the ``ucdrBuffer`` is prepared, the topic can be serialized into it.
 We are careless about ``uxr_prepare_output_stream`` return value because the serialization only will occur if the ``ucdrBuffer` is valid``
 
-After the write function, as happend with the creation of entities, the topic has been serialized into the buffer but it has not been sent yet.
+After the write function, as happened with the creation of entities, the topic has been serialized into the buffer but it has not been sent yet.
 To send the topic is necessary call to a ``run_session`` function.
 In this case, we call to ``uxr_run_session_until_confirmed_delivery`` that will wait until the message was confirmed or until the timeout has been reached.
 
@@ -259,12 +290,12 @@ The ``run_session`` function will call the topic callback each time a topic will
     }
 
 To know which kind of Topic has been received, we can use the ``object_id`` parameter or the ``request_id``.
-This id of the ``object_id`` corresponds to the DataReader that has read the Topic.
-The ``args`` argument correspond to user free data.
+The ``id`` of the ``object_id`` corresponds to the `DataReader` that has read the Topic, so it can be useful to discretize among diferent topics.
+The ``args`` argument correspond to user free data, that has been given at `uxr_set_status_callback` function.
 
 Closing the Client
 ^^^^^^^^^^^^^^^^^^
-To close a *Client*, we must perform two steps.
+To close a `Client`, we must perform two steps.
 First, we need to tell the agent that the session is no longer available.
 This is done sending the next message:
 

@@ -13,7 +13,7 @@ One for configurating the entities in the agent, and run possibly once, only for
 And other/s, that logs in the same session as the configure client (sharing the entities) and only publishes or subscribes data.
 
 This way allows to create easy clients in production only with the purpose of send and receive data.
-Related to it, exists the concept of `profile` that allow to build the client library only with the behavior choosen (only publish or only suscribe, for example).
+Related to it, exists the concept of `profile` that allows to build the client library only with the behavior chosen (only publish or only subscribe, for example).
 See :ref:`micro_xrce_dds_client_label` for more information about this.
 
 Next diagram shows an example about how to configure the enviroment using a `configurator client`.

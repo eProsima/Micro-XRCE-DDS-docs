@@ -14,7 +14,7 @@ Profiles
 
 The client library follows a profile concept that enables to choose add or remove some features in configuration time.
 This allows to reduce the client library size, if there are features that are not used.
-The profiles can be choosen in ``client.config`` and start with the prefix ``PROFILE``.
+The profiles can be chosen in ``client.config`` and start with the prefix ``PROFILE``.
 As part of these profiles, you can choose between several transport layers.
 Communication with the agent is done through the transport you choose.
 
@@ -183,7 +183,7 @@ This function logs in a session, enabling any other XRCE communication with the 
 
     bool uxr_delete_session(uxrSession* session);
 
-Deletes session previously created.
+Deletes a session previously created.
 All `XRCE` entities created with the session will be removed.
 This function logs out a session, disabling any other `XRCE` communication with the agent.
 
@@ -629,14 +629,14 @@ The discovery phase can be performed before the `uxr_create_session` call in ord
 These functions are enabled when PROFILE_DISCOVERY is enabled in the ``client.config`` file.
 The declaration of these functions can be found in ``uxr/client/profile/discovery/discovery.h``.
 
-bool uxr_discovery_agents_multicast(uint32_t attemps, int period, uxrOnAgentFound on_agent_func, void* args, uxrAgentAddress* choosen);
+bool uxr_discovery_agents_multicast(uint32_t attemps, int period, uxrOnAgentFound on_agent_func, void* args, uxrAgentAddress* chosen);
 
 ------
 
 .. code-block:: c
 
     bool uxr_discovery_agents_multicast(uint32_t attempts, int period,
-                                        uxrOnAgentFound on_agent_func, void* args, uxrAgentAddress* choosen);
+                                        uxrOnAgentFound on_agent_func, void* args, uxrAgentAddress* chosen);
 
 Searches into the network using multicast ip "239.255.0.2" and port 7400 (default used by the agent) in order to discover agents.
 
@@ -645,17 +645,17 @@ Searches into the network using multicast ip "239.255.0.2" and port 7400 (defaul
 :on_agent_func: The callback function that will be called when an agent was discovered.
                 The callback returns a boolean value.
                 A `true` means that the discovery rutine will be end and exit.
-                The current agent will be selected as *choosen*.
+                The current agent will be selected as *chosen*.
                 A `false` implies that the discovery rutine must to continue searching agents.
 :args: User arguments passed to the callback function.
-:choosen: If the callback function was returned `true`, this value will contains the agent value of the callback.
+:chosen: If the callback function was returned `true`, this value will contains the agent value of the callback.
 
 ------
 
 .. code-block:: c
 
     bool uxr_discovery_agents_unicast(uint32_t attempts, int period,
-                                      uxrOnAgentFound on_agent_func, void* args, uxrAgentAddress* choosen,
+                                      uxrOnAgentFound on_agent_func, void* args, uxrAgentAddress* chosen,
                                       const uxrAgentAddress* agent_list, size_t agent_list_size);
 
 Searches into the network using a list of unicast directions in order to discover agents.
@@ -665,10 +665,10 @@ Searches into the network using a list of unicast directions in order to discove
 :on_agent_func: The callback function that will be called when an agent was discovered.
                 The callback returns a boolean value.
                 A ``true`` means that the discovery rutine will be end and exit.
-                The current agent will be selected as *choosen*.
+                The current agent will be selected as *chosen*.
                 A ``false`` implies that the discovery rutine must to continue searching agents.
 :args: User arguments passed to the callback function.
-:choosen: If the callback function was returned ``true``, this value will contains the agent value of the callback.
+:chosen: If the callback function was returned ``true``, this value will contains the agent value of the callback.
 :agent_list: The list of address where discover agent.
              By default the agents will be listen at **port 7400** the discovery messages..
 :agent_list_size: The size of the ``agent_list``.
