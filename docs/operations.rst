@@ -2,9 +2,9 @@
 
 Operations
 ==========
-Operations are the possible actions your *Micro RTPS Client* can ask to the *Micro RTPS Agent*.
+Operations are the possible actions your *Micro XRCE-DDS Client* can ask to the *Micro XRCE-DDS Agent*.
 Operations revolve around `entities`. :ref:`entities_label`.
-*Micro RTPS Agent* will respond to all the requests with the status of the operation.
+*Micro XRCE-DDS Agent* will respond to all the requests with the status of the operation.
 
 Types
 -----
@@ -27,7 +27,7 @@ Types
     Analogous to create entities a session can to drop the entities on the *Agent*.
     To drop an entity you need to request a deletion of the entity to the *Agent* using the entity ID.
 
-`Read Data`
+`Request Data`
     This operation configures how do you want to receive data, and the Agent will deliver it from the DDS to your *Client*.
     This data will be receive asynchronously, in accordance with the data delivery control setted in this operation.
     Reading data is done using a DataReader entity.
@@ -38,4 +38,4 @@ Creating a Topic, a DataWriter or a DataReader needs to be done using DDS XML co
 That XML configuration follows the same rules as in *Fast RTPS*.
 
 Creating a Participant is done using the ``default participant`` profile found already preconfigured in the agent.
-Yo can change the Participant configuration changing the "DEFAULT_FASTRTPS_PROFILES.xml" file found along with de *Micro RTPS Agent* installation.
+Yo can change the Participant configuration changing the ``DEFAULT_FASTRTPS_PROFILES.xml`` file found along with de *Micro XRCE-DDS Agent* installation.

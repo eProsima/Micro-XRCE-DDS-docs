@@ -48,7 +48,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Micro RTPS'
+project = u'Micro XRCE-DDS'
 copyright = u'2017, eProsima'
 author = u'eProsima'
 
@@ -240,7 +240,7 @@ html_context = {
 # html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'MicroRTPSManual'
+htmlhelp_basename = 'MicroXRCE-DDSManual'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -266,7 +266,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'MicroRTPS.tex', u'MicroRTPS Documentation',
+    (master_doc, 'MicroXRCE-DDS.tex', u'MicroXRCE-DDS Documentation',
      u'eProsima', 'manual'),
 ]
 
@@ -308,7 +308,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'MicroRTPS', u'MicroRTPS Documentation',
+    (master_doc, 'MicroXRCE-DDS', u'MicroXRCE-DDS Documentation',
      [author], 1)
 ]
 
@@ -323,8 +323,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'MicroRTPS', u'MicroRTPS Documentation',
-     author, 'MicroRTPS', 'Documentation of eProsima MicroRTPS',
+    (master_doc, 'MicroXRCE-DDS', u'MicroXRCE-DDS Documentation',
+     author, 'MicroXRCE-DDS', 'Documentation of eProsima MicroXRCE-DDS',
      'Miscellaneous'),
 ]
 

@@ -1,9 +1,9 @@
-.. _micrortpsgen_label:
+.. _microxrceddsgen_label:
 
-Micro RTPS Gen
-==============
+Micro XRCE-DDS Gen
+==================
 
-*Micro RTPS Gen* is a Java application used to generate source code for the *eProsima Micro RTPS* software.
+*Micro XRCE-DDS Gen* is a Java application used to generate source code for the *eProsima Micro XRCE-DDS* software.
 
 This tool is able to generate from a given IDL specification file, the C struct associated with the
 Topic, as well as, the serialization and deserialization methods.
@@ -23,7 +23,7 @@ As an example of the powerful of this tool, the following shows the source code 
 
 If we will perform the following command: ::
 
-   $ micrortpsgen ShapeType.idl
+   $ microxrceddsgen ShapeType.idl
 
 it will generate the following header file and its corresponding source:
 
@@ -55,28 +55,27 @@ it will generate the following header file and its corresponding source:
 
     } ShapeType;
 
-    struct MicroBuffer;
+    struct ucdrBuffer;
 
-    bool ShapeType_serialize_topic(struct MicroBuffer* writer, const ShapeType* topic);
-    bool ShapeType_deserialize_topic(struct MicroBuffer* reader, ShapeType* topic);
+    bool ShapeType_serialize_topic(struct ucdrBuffer* writer, const ShapeType* topic);
+    bool ShapeType_deserialize_topic(struct ucdrBuffer* reader, ShapeType* topic);
     uint32_t ShapeType_size_of_topic(const ShapeType* topic, uint32_t size);
 
     #endif // _ShapeType_H_
 
-*Micro RTPS Gen* is also able to generate a writing function for the topic. It is enabled with the ``-write-access-profile`` option: ::
 
-    $ micrortpsgen -write-access-profile <file.idl>
+*Micro XRCE-DDS Gen* is also able to generate both *publisher* and *subscriber* source code examples related with the topic speficified in the IDL file adding the flag ``-example``: ::
 
-*Micro RTPS Gen* is also able to generate both *publisher* and *subscriber* source code examples related with the topic speficified in the IDL file adding the flag ``-example``: ::
+    $ microxrceddsgen -example <file.idl>
 
-    $ micrortpsgen -example <file.idl>
 
-With the ``-example`` flag, the ``-write_access-profile`` option is automatically enabled.
+In order to use these examples, the client library must be compiled with the ``WRITE_ACCESS_PROFILE`` option for the *publisher*
+and the ``READ_ACCESS_PROFILE`` option for the *subscriber*.
 
 Installation
 ------------
 
-For use *Micro RTPS Gen* you have to follow the next steps:
+For use *Micro XRCE-DDS Gen* you have to follow the next steps:
 
 1. Install its dependencies:
 
@@ -86,8 +85,8 @@ For use *Micro RTPS Gen* you have to follow the next steps:
 
 2. Clone the code from the GitHub repository. ::
 
-    $ git clone --recursive https://github.com/eProsima/micro-RTPS-gen.git
-    $ cd micro-RTPS-gen
+    $ git clone --recursive https://github.com/eProsima/micro-XRCE-DDS-gen.git
+    $ cd micro-XRCE-DDS-gen
 
 3. Build the code with Gradle. ::
 
@@ -96,5 +95,5 @@ For use *Micro RTPS Gen* you have to follow the next steps:
 Notes
 -----
 
-At the present time, *Micro RTPS Gen* only supports Structs composed of integer, string, array and sequence types
-even though it is planned to enhance the capabilities of the *Micro RTPS Gen* tool in a near future.
+At the present time, *Micro XRCE-DDS Gen* only supports Structs composed of integer, string, array and sequence types
+even though it is planned to enhance the capabilities of the *Micro XRCE-DDS Gen* tool in a near future.

@@ -1,9 +1,9 @@
-.. _micro_rtps_agent_label:
+.. _micro_xrce_dds_agent_label:
 
-Micro RTPS Agent
-================
+Micro XRCE-DDS Agent
+====================
 
-*Micro RTPS Agent* acts as a server between the DDS Network and *Micro RTPS Clients*.
+*Micro XRCE-DDS Agent* acts as a server between the DDS Network and *Micro XRCE-DDS Clients*.
 Agents receive messages containing operations from clients.
 Also agents keep track of the clients and the entities they create.
 The Agent uses the entities to interact with the DDS Global Data Space on behalf of the client.
@@ -19,15 +19,15 @@ Once it is built successfully you just need to launch it executing the following
 
 For serial communication: ::
 
-    $ ./MicroRTPSAgent serial <device>
+    $ ./MicroXRCE-DDSAgent serial <device>
 
 For udp communication: ::
 
-    $ ./MicroRTPSAgent udp <port>
+    $ ./MicroXRCE-DDSAgent udp <port>
 
 For tcp communication: ::
 
-    $ ./MicroRTPSAgent tcp <port>
+    $ ./MicroXRCE-DDSAgent tcp <port>
 
 If the transport used is a reliability transport, the use of a best effort stream over it is equivalent to use a reliable stream over a not reliable transport.
 
