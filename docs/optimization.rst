@@ -9,15 +9,15 @@ More information can be found at: :ref:`micro_xrce_dds_client_label`.
 
 Runtime size
 ------------
-The client is static memory free.
-This implies that all memory charge depends of how the stack grows during the execution.
-To control the stack, there are some values that can be modified and impact to a large degree:
+The client is dynamic memory free and static memory free.
+This implies that all memory charge depends only on how the stack grows during the execution.
+To control the stack, there are some values that can be modified and that impact to a large degree:
 
 Stream buffers
 ~~~~~~~~~~~~~~
 1. Make sure you defined only the streams that will be used.
    You can define a maximun `127` best effort streams and `128` reliable streams,
-   but for the majory of purposes, only one streams of either best effort or reliable can be used.
+   but for the majory of purposes, only one stream of either best effort or reliable can be used.
 
 2. The history of a reliable streams is used for recovering from lost messages and speeding up the communication.
    For output streams, more history value will allow writing and send more messages without wait confirmation.
