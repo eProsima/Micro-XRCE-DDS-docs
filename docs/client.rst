@@ -351,7 +351,7 @@ or until the output reliable streams confirm that the sent messages have been re
 The function will return ``true`` if the sent data have been confirmed, ``false`` otherwise.
 
 :session: Session structure previously initialized.
-:timeout: Maximun time for waiting to a new message, in milliseconds.
+:timeout: Maximun waiting time for a new message, in milliseconds.
           For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
 
 ------
@@ -373,7 +373,7 @@ or until all requested status had been received.
 The function will return ``true`` if all status have been received and all of them have the value ``UXR_STATUS_OK`` or ``UXR_STATUS_OK_MATCHED``, ``false`` otherwise.
 
 :session: Session structure previously initialized.
-:timeout: Maximun time for waiting to a new message, in milliseconds.
+:timeout: Maximun waiting time for a new message, in milliseconds.
           For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
 :request_list: An array of request to confirm with a status.
 :status_list: An uninitialized array with the same size as ``request_list`` where the status values will be written.
@@ -399,7 +399,7 @@ or until one requested status had been received.
 The function will return ``true`` if one status have been received and has the value ``UXR_STATUS_OK`` or ``UXR_STATUS_OK_MATCHED``, ``false`` otherwise.
 
 :session: Session structure previously initialized.
-:timeout: Maximun time for waiting to a new message, in milliseconds.
+:timeout: Maximun waiting time for a new message, in milliseconds.
           For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
 :request_list: An array of request that can be confirmed.
 :status_list: An uninitialized array with the same size as ``request_list`` where the statu value will be written.
@@ -449,6 +449,8 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_TOPIC_ID``
+:participant_id: The identifier of the associated participant.
+            The type must be ``UXR_PARTICIPANT_ID``
 :xml: A xml representation of the new entity.
 :mode: Determines the creation entity mode.
         Currently, only soported ``UXR_REPLACE``.
@@ -470,6 +472,8 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_PUBLISHER_ID``
+:participant_id: The identifier of the associated participant.
+            The type must be ``UXR_PARTICIPANT_ID``
 :xml: A xml representation of the new entity.
 :mode: Determines the creation entity mode.
         Currently, only soported ``UXR_REPLACE``.
@@ -482,7 +486,7 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
 
     uint16_t uxr_buffer_create_subscriber_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId participant_id, const char* xml, uint8_t mode);
 
-Creates a `publisher` entity in the agent.
+Creates a `subscriber` entity in the agent.
 The message is only written into the stream buffer.
 To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
 
@@ -491,6 +495,8 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_SUBSCRIBER_ID``
+:participant_id: The identifier of the associated participant.
+            The type must be ``UXR_PARTICIPANT_ID``
 :xml: A xml representation of the new entity.
 :mode: Determines the creation entity mode.
         Currently, only soported ``UXR_REPLACE``.
@@ -503,7 +509,7 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
 
     uint16_t uxr_buffer_create_datawriter_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId publisher_id, const char* xml, uint8_t mode);
 
-Creates a `datawriter_id` entity in the agent.
+Creates a `datawriter` entity in the agent.
 The message is only written into the stream buffer.
 To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
 
@@ -512,6 +518,8 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_DATAWRITER_ID``
+:publisher_id: The identifier of the associated participant.
+            The type must be ``UXR_PARTICIPANT_ID``
 :xml: A xml representation of the new entity.
 :mode: Determines the creation entity mode.
         Currently, only soported ``UXR_REPLACE``.
@@ -533,6 +541,8 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_DATAREADER_ID``
+:subscriber_id: The identifier of the associated participant.
+            The type must be ``UXR_PARTICIPANT_ID``
 :xml: A xml representation of the new entity.
 :mode: Determines the creation entity mode.
         Currently, only soported ``UXR_REPLACE``.
