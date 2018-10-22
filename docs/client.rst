@@ -111,12 +111,30 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
     This value corresponds to the `Maximun Transmission Unit` able to send and receive by Serial.
     Internally a buffer is created proportional to this size.
 
+Streams
+-------
+The client communication is performed by streams.
+The streams can be seen as a communication chanels.
+There are two types of streams: best effort and reliable streams and you can create several of them.
+
+- Best effort streams will send and receive the data leaving the reliability to the transport layer.
+  For that, the best effort streams consume less resources than a reliable stream.
+
+- Reliable streams perform the communication without lost regardless of the transport layer.
+  To archive this, the reliable streams use aditional messages to confirm the delivery, along to a history of the messages sent and received.
+  The history is used for save the messages that have not been confirmed yet.
+  A high history will reduce the data traffic of confirmation messages in a transport with high lost rate.
+  This implies that a reliable stream is more expensive than a best effort streams, in both, memory and bandwidth.
+
+The streams are maybe the highest memory load part of the application.
+For that, choose a great configuration for the application purpose is highly recommendable, especially when the target is a low level resource device.
+The :ref:`optimization_label` page explain more about how to archive this.
+
 API
 ---
 As a nomenclature, `Micro XRCE-DDS Client` API uses a ``uxr_`` prefix in all of their public API functions and ``uxr`` prefix in the types.
 In constants values an ``UXR_`` prefix is used.
-Functions without these rules `should not` be used.
-They are only for internal use.
+The functions belonging to the public interface of the library are only those with the tag ``UXRDDLAPI`` in their declarations.
 
 Session
 ```````
