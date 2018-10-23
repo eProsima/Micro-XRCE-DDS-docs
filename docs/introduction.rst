@@ -21,7 +21,7 @@ DDS entities are created and stored on the XRCE Agent side so the XRCE Clients c
 `Micro XRCE-DDS` implements the DDS-XRCE protocol using a *Micro XRCE-DDS Agent* as server and providing a C API for developing XRCE Clients.
 `Micro XRCE-DDS Agent` uses `Fast RTPS` to reach the DDS Global Data Space.
 
-.. image:: images/xrcedds_architecture.svg
+.. image:: images/xrcedds_architecture.png
 
 Fast RTPS
 `````````
