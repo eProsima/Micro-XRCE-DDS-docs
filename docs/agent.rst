@@ -76,12 +76,6 @@ The ``DEFAULT_FASTRTPS_PROFILES.xml`` contains the following participant profile
     <profiles>
       <participant profile_name="default_xrce_participant_profile">
         <rtps>
-          <builtin>
-            <leaseDuration>
-              <durationbyname>INFINITE</durationbyname>
-            </leaseDuration>
-            <domainId>0</domainId>
-          </builtin>
           <name>default_participant</name>
         </rtps>
       </participant>
