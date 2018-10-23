@@ -3,9 +3,9 @@ External dependencies
 
 Required dependences
 --------------------
-*Micro XRCE-DDS - Client* does not require external dependencies.
+*Micro XRCE-DDS Client* does not require external dependencies.
 
-*Micro XRCE-DDS - Agent* requires following packages to work:
+*Micro XRCE-DDS Agent* requires following packages to work:
 
 Fast RTPS
     *eProsima Fast RTPS* could be installed following the instructions:

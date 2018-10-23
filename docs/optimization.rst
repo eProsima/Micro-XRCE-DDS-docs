@@ -9,6 +9,9 @@ In order to manage the executable code size, the library can be compiled enablin
 To add or remove a profile from the library, edit the ``client.config`` file.
 More information can be found at: :ref:`micro_xrce_dds_client_label`.
 
+NOTE: If you are compiling your app with *gcc*, its highly recommended compile it with the linker flag: ``-Wl,--gc-sections``.
+This will remove the code that your app do not use from the final executable.
+
 Runtime size
 ------------
 The client is dynamic memory free and static memory free.
