@@ -118,7 +118,7 @@ The streams can be seen as communication channels.
 There are two types of streams: best effort and reliable streams and you can create several of them.
 
 - Best effort streams will send and receive the data leaving the reliability to the transport layer.
-  For that, the best effort streams consume less resources than a reliable stream.
+  As a result, the best effort streams consume fewer resources than a reliable stream.
 
 - Reliable streams perform the communication without lost regardless of the transport layer.
   To archive this, the reliable streams use aditional messages to confirm the delivery, along to a history of the messages sent and received.
