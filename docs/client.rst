@@ -121,7 +121,7 @@ There are two types of streams: best effort and reliable streams and you can cre
   As a result, the best effort streams consume fewer resources than a reliable stream.
 
 - Reliable streams perform the communication without lost regardless of the transport layer.
-  To archive this, the reliable streams use aditional messages to confirm the delivery, along to a history of the messages sent and received.
+  To avoid message losses, the reliable streams use additional messages to confirm the delivery, along to a history of the messages sent and received.
   The history is used for save the messages that have not been confirmed yet.
   A high history will reduce the data traffic of confirmation messages in a transport with high lost rate.
   This implies that a reliable stream is more expensive than a best effort streams, in both, memory and bandwidth.
