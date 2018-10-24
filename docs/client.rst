@@ -114,7 +114,7 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
 Streams
 -------
 The client communication is performed by streams.
-The streams can be seen as a communication chanels.
+The streams can be seen as communication channels.
 There are two types of streams: best effort and reliable streams and you can create several of them.
 
 - Best effort streams will send and receive the data leaving the reliability to the transport layer.
