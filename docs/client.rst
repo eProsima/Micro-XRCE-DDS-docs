@@ -122,9 +122,12 @@ There are two types of streams: best effort and reliable streams and you can cre
 
 - Reliable streams perform the communication without lost regardless of the transport layer.
   To avoid message losses, the reliable streams use additional messages to confirm the delivery, along to a history of the messages sent and received.
-  The history is used to save the messages that have not been confirmed yet.
+  The history is used to storage messages that can no be currently processed because of the delivery order, or must be send again if the message can not be confirmed.
+  If the history is full, all messages written to the agent or received from the agent will be discarded, and must be requested later.
+  For that, a low history causes that more messages to be discarted, increasing the data traffic beacusen they need to be sent again.
   A high history will reduce the data traffic of confirmation messages in transports with a high loss rate.
-  This implies that a reliable stream is more expensive than best effort streams, in both, memory and bandwidth.
+  This internal management of the communication implies that a reliable stream is more expensive than best effort streams,
+  in both, memory and bandwidth, but is possible to play with these values using the history size.
 
 The streams are maybe the highest memory load part of the application.
 For that, the choice of a right configuration for the application purpose is highly recommendable, especially when the target is a limited resources device.
