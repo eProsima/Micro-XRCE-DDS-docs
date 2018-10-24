@@ -127,7 +127,7 @@ There are two types of streams: best effort and reliable streams and you can cre
   This implies that a reliable stream is more expensive than best effort streams, in both, memory and bandwidth.
 
 The streams are maybe the highest memory load part of the application.
-For that, choose a great configuration for the application purpose is highly recommendable, especially when the target is a low level resource device.
+For that, the choice of a right configuration for the application purpose is highly recommendable, especially when the target is a limited resources device.
 The :ref:`optimization_label` page explain more about how to archive this.
 
 API
