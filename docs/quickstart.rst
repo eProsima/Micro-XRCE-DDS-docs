@@ -326,7 +326,7 @@ To learn more about DDS and Fast RTPS: `eProsima Fast RTPS <http://eprosima-fast
 
 To learn how to install *Micro XRCE-DDS* read: :ref:`installation_label`
 
-To learn more about *Micro XRCE-DDS* read :ref:`user`
+To learn more about *Micro XRCE-DDS* read: :ref:`user`
 
 To learn more about *Micro XRCE-DDS Gen* read: :ref:`microxrceddsgen_label`
 

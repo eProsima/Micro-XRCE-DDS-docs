@@ -39,7 +39,7 @@ Also, we will specify the max buffer for the streams and its historical associat
     #define STREAM_HISTORY  8
     #define BUFFER_SIZE     UXR_CONFIG_UDP_TRANSPORT_MTU * STREAM_HISTORY
 
-Before create a Session we need to indicate the transport to use (the agent must be configured for listening from udp at port 2018).
+Before create a Session we need to indicate the transport to use (the *Agent* must be configured for listening from UDP at port 2018).
 
 .. code-block:: C
 
@@ -51,7 +51,7 @@ Before create a Session we need to indicate the transport to use (the agent must
         return 1;
     }
 
-Next, we will create a session that allow us interact with the agent:
+Next, we will create a session that allows us interact with the *Agent*:
 
 .. code-block:: C
 
@@ -64,10 +64,10 @@ Next, we will create a session that allow us interact with the agent:
         return 1;
     }
 
-The first function ``uxr_init_session`` initializes the ``Session`` structure with the transport and the `Client Key` (the session identifier for an agent).
-The ``uxr_set_topic_callback`` function is for registering the function ``on_topic`` which has been called when the `Client` receive a topic.
-Once the session has been initialized, we can send the first message for login the client in agent side: ``uxr_create_session``.
-This function will try to connect with the agent by ``CONFIG_MAX_SESSION_CONNECTION_ATTEMPTS`` attempts (the value can be configurable at ``client.config``).
+The first function ``uxr_init_session`` initializes the ``session`` structure with the transport and the `Client Key` (the session identifier for an *Agent*).
+The ``uxr_set_topic_callback`` function is for registering the function ``on_topic`` which will be called when the `Client` receive a topic.
+Once the session has been initialized, we can send the first message for login the `Client` in *Agent* side: ``uxr_create_session``.
+This function will try to connect with the *Agent* by ``CONFIG_MAX_SESSION_CONNECTION_ATTEMPTS`` attempts (configurable at ``client.config``).
 
 Optionally, we also could add a status callback with the function ``uxr_set_status_callback``, but for the purpose of this example we do not need it.
 
@@ -82,14 +82,14 @@ In this case, we will use two, both reliables, for input and output.
     uint8_t input_reliable_stream_buffer[BUFFER_SIZE];
     uxrStreamId reliable_in = uxr_create_input_reliable_stream(&session, input_reliable_stream_buffer, BUFFER_SIZE, STREAM_HISTORY);
 
-In order to publish and/or subscribe a topic, we need to create a hierarchy of XRCE entities in the agent side.
-These entities will be created from the client.
+In order to publish and/or subscribe a topic, we need to create a hierarchy of XRCE entities in the *Agent* side.
+These entities will be created from the *Client*.
 
 .. image:: images/entities_hierarchy.svg
 
 Setup a Participant
 ^^^^^^^^^^^^^^^^^^^
-For establishing DDS communication we need to create a `Participant` entity for the `Client` in the `Agent`.
+For establishing DDS communication we need to create a `Participant` entity for the `Client` in the *Agent*.
 We can do this calling *Create participant* operation:
 
 .. code-block:: C
@@ -106,11 +106,11 @@ We can do this calling *Create participant* operation:
 
 In any `XRCE Operation` that creates an entity, an `Object ID` is necessary.
 It is used to represent and manage the entity in the *Client* side.
-In this case we will create the entity by its XML description, but also could be done by a reference of the entity in the agent.
+In this case we will create the entity by its XML description, but also could be done by a reference of the entity in the *Agent*.
 Each operation, returns a `Request ID`.
 This identifier of the operation can be used later for associating the status with the operation.
 In this case, the operation has been written into the stream ``reliable_out``.
-Later, in the ``run_session`` function, the data written in the stream will be sent to the agent.
+Later, in the ``run_session`` function, the data written in the stream will be sent to the *Agent*.
 
 Creating  topics
 ^^^^^^^^^^^^^^^^
@@ -129,7 +129,7 @@ Once the `Participant` has been created, we can use `Create topic` operation for
 
 As any other XRCE Operation used to create an entity, an Object ID must be specified to represent the entity.
 The ``participant_id`` is the participant where the Topic will be registered.
-In order to determine which topic will be used, an XML is sent to the agent for creating and defining the Topic in the DDS Global Data Space.
+In order to determine which topic will be used, an XML is sent to the *Agent* for creating and defining the Topic in the DDS Global Data Space.
 That definition consists of a name and a type.
 
 Publishers & Subscribers
@@ -147,7 +147,7 @@ We create a publisher or subscriber on a participant entity, so it is necessary 
     const char* subscriber_xml = "";
     uint16_t subscriber_req = uxr_buffer_create_subscriber_xml(&session, reliable_out, subscriber_id, participant_id, subscriber_xml, UXR_REPLACE);
 
-The `Publisher` and `Subscriber` xml information is given when the `DataWriter` and `DataReader` be created.
+The `Publisher` and `Subscriber` XML information is given when the `DataWriter` and `DataReader` are created.
 
 DataWriters & DataReaders
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -190,8 +190,7 @@ an status is sent from the *Agent* to the *Client* indicating what happened.
 For `Create session` or `Detele session` operations the status value is stored into the ``session.info.last_request_status``.
 For the rest of the operations, the status are sent to the input reliable stream ``0x80``, that is, the first input reliable stream created, with index 0.
 
-The different status values that the agent can send to the client are the following:
-(You can see the definitions in ``uxr/client/core/sesssion/session_info.h`` file)
+The different status values that the *Agent* can send to the *Client* are the following (defined in ``uxr/client/core/session/session_info.h``):
 
 .. code-block:: C
 
@@ -220,7 +219,7 @@ The status can be handle by the ``on_status_callback`` callback (configured in `
     }
 
 The ``run_session`` functions are the main functions of the `Micro RTP Client` library.
-They performs serveral tasks: send the stream data to the agent, listen data from the agent, call callbacks, and manage the reliable connection.
+They performs serveral tasks: send the stream data to the *Agent*, listen data from the *Agent*, call callbacks, and manage the reliable connection.
 There are five variations of ``run_session`` function:
 - ``uxr_run_session_time``
 - ``uxr_run_session_until_timeout``
@@ -253,7 +252,7 @@ The function ``uxr_prepare_output_stream`` requests a writing for a topic of ``t
 with a ``datawriter_id`` (correspond to the data writer entity used for sending the data in the `DDS World`).
 If the stream is available and the topic fits in it, the function will initialize the ``ucdrBuffer`` structure ``mb``.
 Once the ``ucdrBuffer`` is prepared, the topic can be serialized into it.
-We are careless about ``uxr_prepare_output_stream`` return value because the serialization only will occur if the ``ucdrBuffer` is valid``
+We are careless about ``uxr_prepare_output_stream`` return value because the serialization only will occur if the ``ucdrBuffer`` is valid.
 
 After the write function, as happened with the creation of entities, the topic has been serialized into the buffer but it has not been sent yet.
 To send the topic is necessary call to a ``run_session`` function.
@@ -262,8 +261,8 @@ In this case, we call to ``uxr_run_session_until_confirmed_delivery`` that will 
 Read Data
 ^^^^^^^^^
 Once we have created a valid `DataReader` entity, we can read data from the DDS Global Data Space using the read operation.
-This operation configures how the agent will send the data to the client.
-Current implementation sends one topic to the client for each read data operation of the client.
+This operation configures how the *Agent* will send the data to the *Client*.
+Current implementation sends one topic to the *Client* for each read data operation of the *Client*.
 
 .. code-block:: C
 
@@ -272,12 +271,12 @@ Current implementation sends one topic to the client for each read data operatio
 
     uint16_t read_data_req = uxr_buffer_request_data(&session, reliable_out, datareader_id, reliable_in, &delivery_control);
 
-In order to configure how the agent will send the topic, we must set the input stream. In this case, we use the input reliable stream previously defined.
+In order to configure how the *Agent* will send the topic, we must set the input stream. In this case, we use the input reliable stream previously defined.
 ``datareader_id`` corresponds with the `DataDeader` entity used for receiving the data.
-The ``delivery_control`` parameter is option, and allow to specify how the data will be deliverd to the client.
-For the example purpose, we set it as `unlimited`, so any number HelloWorld topic will be delivered to the client.
+The ``delivery_control`` parameter is optional, and allows to specify how the data will be delivered to the *Client*.
+For the example purpose, we set it as `unlimited`, so any number HelloWorld topic will be delivered to the *Client*.
 
-The ``run_session`` function will call the topic callback each time a topic will be received from the agent.
+The ``run_session`` function will call the topic callback each time a topic will be received from the *Agent*.
 
 .. code-block:: C
 
@@ -296,7 +295,7 @@ The ``args`` argument correspond to user free data, that has been given at `uxr_
 Closing the Client
 ^^^^^^^^^^^^^^^^^^
 To close a `Client`, we must perform two steps.
-First, we need to tell the agent that the session is no longer available.
+First, we need to tell the *Agent* that the session is no longer available.
 This is done sending the next message:
 
 .. code-block:: C

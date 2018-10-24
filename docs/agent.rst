@@ -3,13 +3,13 @@
 Micro XRCE-DDS Agent
 ====================
 
-*Micro XRCE-DDS Agent* acts as a server between the DDS Network and *Micro XRCE-DDS Clients*.
-Agents receive messages containing operations from clients.
-Also agents keep track of the clients and the entities they create.
-The Agent uses the entities to interact with the DDS Global Data Space on behalf of the client.
+*Micro XRCE-DDS Agent* acts as a server between the DDS Network and *Micro XRCE-DDS Clients* applications.
+*Agents* receive messages containing operations from *Clients*.
+Also *Agents* keep track of the *Clients* and the entities they create.
+The *Agent* uses the entities to interact with the DDS Global Data Space on behalf of the *Clients*.
 
-The communication between a client and an agent currently supports UDP, TCP and serial (dependent on the platform).
-While running agent will attend any received request from your clients and answers back with the result of that request.
+The communication between a *Client* and an *Agent* currently supports UDP, TCP and Serial (dependent on the platform).
+While it is running, the *Agent* will attend any received request from the *Clients* and answers back with the result of that request.
 
 Configuration
 -------------
@@ -37,17 +37,17 @@ The following is a list of the aforementioned parameters:
     Specify the `Maximum Transmission Unit` able to send and receive by TCP (default 512).
 
 ``CONFIG_TCP_MAX_CONNECTIONS``
-    Specify the maximum number of connections which the Agent is able to manage (default 100).
+    Specify the maximum number of connections which the *Agent* is able to manage (default 100).
 
 ``CONFIG_TCP_MAX_BACKLOG_CONNECTIONS``
-    Specify the maximum number of incoming connections which the Agent is able to manage (default 100).
+    Specify the maximum number of incoming connections which the *Agent* is able to manage (default 100).
 
 
 
 Run an Agent
 ------------
 
-To run the agent you should build it as indicated in :ref:`installation_label`.
+To run the *Agent* you should build it as indicated in :ref:`installation_label`.
 Once it is built successfully you just need to launch it executing the following command.
 
 For Serial communication: ::
@@ -56,17 +56,17 @@ For Serial communication: ::
 
 For UDP communication: ::
 
-    $ ./MicroXRCEAgent udp <port>
+    $ ./MicroXRCEAgent udp <port> [<discovery-port>]
 
 For TCP communication: ::
 
-    $ ./MicroXRCEAgent tcp <port>
+    $ ./MicroXRCEAgent tcp <port> [<discovery-port>]
 
-If the transport used is a reliability transport, the use of a best effort stream over it is equivalent to use a reliable stream over a not reliable transport.
+If the transport used is a reliability transport, the use of a best-effort stream over it is equivalent to use a reliable stream over a not reliable transport.
 
-For running the agent is necessary that the file ``DEFAULT_FASTRTPS_PROFILES.xml`` be located in the folder where the agent is located.
-This file contains XML profiles of participants, publishers and subscribers referenced by a ``profile_name``.
-The client can use the aforementioned ``profile_name`` in order to create `Participants`, `DataWriters` and `DataReaders` using the reference representation.
+For running the *Agent* is necessary that the file ``DEFAULT_FASTRTPS_PROFILES.xml`` is located in the runtime folder.
+This file contains XML profiles of `Participants`, `Topic`, `DataWriters` and `DataReaders` referenced by a ``profile_name``.
+The *Client* can use the aforementioned ``profile_name`` in order to create these entities using the reference representation.
 Let's see an example.
 
 The ``DEFAULT_FASTRTPS_PROFILES.xml`` contains the following participant profile:
@@ -81,7 +81,7 @@ The ``DEFAULT_FASTRTPS_PROFILES.xml`` contains the following participant profile
       </participant>
     </profile>
 
-therefore, the client can use `default_xrce_participant_profile` as ``ref`` in the ``mr_write_create_participant_ref`` function.
+therefore, the *Client* can use `default_xrce_participant_profile` as ``ref`` in the ``mr_write_create_participant_ref`` function.
 
-Default installation place this file along with the agent executable into ``/usr/local/bin``.
+Default installation place this file along with the *Agent* executable into ``/usr/local/bin``.
 
