@@ -117,13 +117,20 @@ The client communication is performed by streams.
 The streams can be seen as communication channels.
 There are two types of streams: best effort and reliable streams and you can create several of them.
 
-- Best effort streams will send and receive the data leaving the reliability to the transport layer.
+* Best effort streams will send and receive the data leaving the reliability to the transport layer.
   As a result, the best effort streams consume fewer resources than a reliable stream.
 
-- Reliable streams perform the communication without lost regardless of the transport layer.
+* Reliable streams perform the communication without lost regardless of the transport layer.
   To avoid message losses, the reliable streams use additional messages to confirm the delivery, along to a history of the messages sent and received.
   The history is used to storage messages that can no be currently processed because of the delivery order, or must be send again if the message can not be confirmed.
-  If the history is full, all messages written to the agent or received from the agent will be discarded, and must be requested later.
+  If the history is full:
+
+  * The messages that will be written to the agent will be discarded until the history get space to store them.
+    So, the user must wait to write in those streams (they can be considered blocked).
+
+  * The messages received from the agent will be discarded.
+    The library will treat to recovery the discarded messages requests them to the agent (increasing the bandwidth consumption in that process).
+
   For that, a low history causes that more messages to be discarted, increasing the data traffic beacusen they need to be sent again.
   A high history will reduce the data traffic of confirmation messages in transports with a high loss rate.
   This internal management of the communication implies that a reliable stream is more expensive than best effort streams,
