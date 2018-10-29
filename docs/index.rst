@@ -44,7 +44,7 @@ Easy to use.
 
 Implementation of the DDS-XRCE standard.
     `DDS-XRCE <https://www.omg.org/spec/DDS-XRCE/1.0/Beta1/PDF>`_ is a standard communication protocol of OMG consortium
-    focused in communicating eXtremely Resource Constrained Environments with the DDS world.
+    focused on communicating eXtremely Resource Constrained Environments with the DDS world.
 
 Best effort and reliable communication.
     *Micro XRCE-DDS* supports both, *best effort* for a fast and light communication and *reliable* when the communication reliability is needed.
