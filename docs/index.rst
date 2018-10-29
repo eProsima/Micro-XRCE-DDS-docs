@@ -38,7 +38,7 @@ Free and Open Source.
 
 Easy to use.
     The project comes with examples of a publisher and a subscriber,
-    an example of how MicroXRCE-DDS is deployed into a stage and
+    an example of how Micro XRCE-DDS is deployed into a stage and
     an interactive demo that can be used with the `ShapesDemo <https://github.com/eProsima/ShapesDemo>`_ with the purpose of understanding the DDS-XRCE protocol and making tests.
     The client API es completely explained and documentation comes with a guided example of how create your own client application.
 
