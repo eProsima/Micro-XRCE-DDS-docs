@@ -40,7 +40,7 @@ Easy to use.
     The project comes with examples of a publisher and a subscriber,
     an example of how Micro XRCE-DDS is deployed into a stage and
     an interactive demo that can be used with the `ShapesDemo <https://github.com/eProsima/ShapesDemo>`_ with the purpose of understanding the DDS-XRCE protocol and making tests.
-    The client API es completely explained and documentation comes with a guided example of how create your own client application.
+    The client API is thoroughly explained, and a guided example of how to create your client application is distributed as part of the documentation.
 
 Implementation of the DDS-XRCE standard.
     `DDS-XRCE <https://www.omg.org/spec/DDS-XRCE/1.0/Beta1/PDF>`_ is a standard communication protocol of OMG consortium
