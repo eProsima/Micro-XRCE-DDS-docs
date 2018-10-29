@@ -20,7 +20,7 @@ and enables them to take part as DDS publishers and/or subscribers in the DDS Gl
 Main features
 ~~~~~~~~~~~~~
 High performance.
-    Uses a static low level serialization library `(MicroCDR) <https://github.com/eProsima/Micro-CDR>`_ that serialize in `XCDR <https://www.omg.org/spec/DDS-XTypes/1.2/PDF>`_.
+    Uses a static low-level serialization library `(MicroCDR) <https://github.com/eProsima/Micro-CDR>`_ that serialize in `XCDR <https://www.omg.org/spec/DDS-XTypes/1.2/PDF>`_.
 
 Low resouces.
     The client library is dynamic memory free and static memory free.
