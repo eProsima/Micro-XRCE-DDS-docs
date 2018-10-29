@@ -24,7 +24,7 @@ High performance.
 
 Low resouces.
     The client library is dynamic memory free and static memory free.
-    This means that the only memory charge is due by the stack growth.
+    This means that the only memory charge is due to the stack growth.
     It can manage a simple publisher/subscriber with less of 2KB of RAM.
     Besides, the client is built with a *profiles* concept, that allows to add or remove functionality to the library in order to reduce the binary size.
 
