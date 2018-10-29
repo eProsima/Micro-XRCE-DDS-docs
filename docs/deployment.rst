@@ -12,8 +12,8 @@ This can be done creating two differents *Clients*.
 One in charge of configure the entities in the *Agent*, and run possibly once, only for creating the entities at configuration time.
 And other/s that logs in the same session as the configure *Client* (sharing the entities) and only publishes or subscribes data.
 
-This way allows to create easily *Clients* in a real scenario only with the purpose of send and receive data.
-Related to it, the concept of `profile` allows to build the *Client* library only with the behavior chosen (only publish or only subscribe, for example).
+This way allows to easily create *Clients* in a real scenario only with the purpose of send and receive data.
+Related to it, the concept of `profile` allows to build the *Client* library only with the chosen behavior (only publish or only subscribe, for example).
 See :ref:`micro_xrce_dds_client_label` for more information about this.
 
 Next diagram shows an example about how to configure the environment using a `configurator client`.
@@ -36,10 +36,10 @@ Configurate the publisher
         :align: center
 
 In this state a `configurator client` is connected to the *Agent* `A` with the `client key` that will be used by the future `publisher client` (0xAABBCCDD).
-Once a session is logged in, the `configurator client` creates all necessary entities for the `publisher client`.
+Once a session is logged in, the `configurator client` creates all the necessary entities for the `publisher client`.
 This implies the creation of `participant`, `topic`, `publisher`, and `datawriter` entities.
 These entities have a representation as DDS entities, and can be reached now from the DDS world.
-That implies that a possible `subscriber DDS entity` could be already listed topics if it match with a `publisher DDS entity` through `DDS` world.
+That implies that a possible `subscriber DDS entity` could already be listening topics if it matches with a `publisher DDS entity` through `DDS` world.
 
 Publish
 -------
@@ -50,7 +50,7 @@ Publish
 Then, the `publisher client` is connected to the *Agent* `A`.
 This *Client* logs in session with its *Client* key (0xAABBCCDD).
 At that moment, it can use all entities created related to this `client key`.
-Because all entities that it used were created successful by the `configurator client`, the `publisher client` can immediately publish to `DDS`.
+Because all entities that it used were successfully created by the `configurator client`, the `publisher client` can immediately publish to `DDS`.
 
 
 Configurate the subscriber

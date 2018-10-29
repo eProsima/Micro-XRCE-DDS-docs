@@ -13,7 +13,7 @@ Profiles
 --------
 
 The *Client* library follows a profile concept that enables to choose, add or remove some features in configuration time.
-This allows to reduce the *Client* library size, if there are features that are not used.
+This allows to customize the *Client* library size, if there are features that are not used.
 The profiles can be chosen in ``client.config`` and start with the prefix ``PROFILE``.
 As part of these profiles, you can choose between several transport layers.
 Communication with the *Agent* is done through the transport you choose.

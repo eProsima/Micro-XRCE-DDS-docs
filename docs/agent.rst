@@ -37,10 +37,10 @@ The following is a list of the aforementioned parameters:
     Specify the `Maximum Transmission Unit` able to send and receive by TCP (default 512).
 
 ``CONFIG_TCP_MAX_CONNECTIONS``
-    Specify the maximum number of connections which the *Agent* is able to manage (default 100).
+    Specify the maximum number of connections, the *Agent* is able to manage (default 100).
 
 ``CONFIG_TCP_MAX_BACKLOG_CONNECTIONS``
-    Specify the maximum number of incoming connections which the *Agent* is able to manage (default 100).
+    Specify the maximum number of incoming connections (peding to establish), the *Agent* is able to manage (default 100).
 
 
 
@@ -62,7 +62,7 @@ For TCP communication: ::
 
     $ ./MicroXRCEAgent tcp <port> [<discovery-port>]
 
-If the transport used is a reliability transport, the use of a best-effort stream over it is equivalent to use a reliable stream over a not reliable transport.
+If the transport used is a reliable transport, the use of a best-effort stream over it is equivalent to use a reliable stream over a not reliable transport.
 
 For running the *Agent* is necessary that the file ``DEFAULT_FASTRTPS_PROFILES.xml`` is located in the runtime folder.
 This file contains XML profiles of `Participants`, `Topic`, `DataWriters` and `DataReaders` referenced by a ``profile_name``.
@@ -81,7 +81,8 @@ The ``DEFAULT_FASTRTPS_PROFILES.xml`` contains the following participant profile
       </participant>
     </profile>
 
-therefore, the *Client* can use `default_xrce_participant_profile` as ``ref`` in the ``mr_write_create_participant_ref`` function.
+therefore, the *Client* can use `default_xrce_participant_profile` as ``ref`` in the ``mr_buffer_create_participant_ref`` function.
 
-Default installation place this file along with the *Agent* executable into ``/usr/local/bin``.
+Default installation place this file along with the *Agent* executable into ``/usr/local/bin`` for Linux or ``C:/Program Files/microxrcedds_agent/bin`` for Windows.
+
 

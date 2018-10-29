@@ -66,7 +66,7 @@ Next, we will create a session that allows us interact with the *Agent*:
 
 The first function ``uxr_init_session`` initializes the ``session`` structure with the transport and the `Client Key` (the session identifier for an *Agent*).
 The ``uxr_set_topic_callback`` function is for registering the function ``on_topic`` which will be called when the `Client` receive a topic.
-Once the session has been initialized, we can send the first message for login the `Client` in *Agent* side: ``uxr_create_session``.
+Once the session has been initialized, we can send the first message for login the `Client` in the *Agent* side: ``uxr_create_session``.
 This function will try to connect with the *Agent* by ``CONFIG_MAX_SESSION_CONNECTION_ATTEMPTS`` attempts (configurable at ``client.config``).
 
 Optionally, we also could add a status callback with the function ``uxr_set_status_callback``, but for the purpose of this example we do not need it.
