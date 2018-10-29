@@ -49,7 +49,7 @@ Implementation of the DDS-XRCE standard.
 Best effort and reliable communication.
     *Micro XRCE-DDS* supports both, *best effort* for a fast and light communication and *reliable* when the communication reliability is needed.
 
-Transport layer pluggable.
+Pluggable tansport layer.
     Micro XRCE-DDS is not built over a specific transport as *serial* or *UDP*.
     It is agnostic about the transport used, and give to the user the posibility of implement easily his own transport.
     By the fault, *UPD*, *TCP*, and *serial* transports are provided.
