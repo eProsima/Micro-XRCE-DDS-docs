@@ -54,8 +54,8 @@ Pluggable tansport layer.
     It is agnostic about the transport used, and give to the user the posibility of implement easily his own transport.
     By the fault, *UPD*, *TCP*, and *serial* transports are provided.
 
-Commercial support available at `support@eprosima.com`
-    Available: `info@eprosima.com`
+Commercial support
+    Available at `support@eprosima.com`
 
 Installation
 ~~~~~~~~~~~~
