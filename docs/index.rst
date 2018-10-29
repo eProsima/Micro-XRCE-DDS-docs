@@ -47,7 +47,7 @@ Implementation of the DDS-XRCE standard.
     focused on communicating eXtremely Resource Constrained Environments with the DDS world.
 
 Best effort and reliable communication.
-    *Micro XRCE-DDS* supports both, *best effort* for a fast and light communication and *reliable* when the communication reliability is needed.
+    *Micro XRCE-DDS* supports both, *best effort* for fast and light communication and *reliable* when the communication reliability is needed.
 
 Pluggable tansport layer.
     Micro XRCE-DDS is not built over a specific transport as *serial* or *UDP*.
