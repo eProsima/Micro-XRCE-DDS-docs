@@ -30,7 +30,7 @@ Low resouces.
 
 Multi-platform.
     The OS dependencies are treated as pluggable modules.
-    The user can implement easily his own platform modules in order to use *Micro XRCE-DDS Client* library in his specific platform.
+    The user can easily implement his platform modules to *Micro XRCE-DDS Client* library in his specific platform.
     By default the proyect can run over `Linux`, `Windows` and `Nuttx`.
 
 Free and Open Source.
