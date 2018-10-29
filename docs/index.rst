@@ -34,7 +34,7 @@ Multi-platform.
     By default, the project can run over `Linux`, `Windows` and `Nuttx`.
 
 Free and Open Source.
-   The client library, among with the agent executable, the generator tool and internal dependencies as *MicroCDR* or *FastRTPS* are all of them free and open source.
+   The client library, the agent executable, the generator tool and internal dependencies as *MicroCDR* or *FastRTPS* are all of them free and open source.
 
 Easy to use.
     The project comes with examples of a publisher and a subscriber,
