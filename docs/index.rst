@@ -33,6 +33,10 @@ Multi-platform.
     The user can easily implement his platform modules to *Micro XRCE-DDS Client* library in his specific platform.
     By default, the project can run over `Linux`, `Windows` and `Nuttx`.
 
+Compiler dependencies free.
+    The client library uses pure c99 standard.
+    No `C` compiler extensions are used.
+
 Free and Open Source.
    The client library, the agent executable, the generator tool and internal dependencies as *MicroCDR* or *FastRTPS* are all of them free and open source.
 
