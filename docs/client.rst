@@ -122,7 +122,7 @@ There are two types of streams: best effort and reliable streams and you can cre
 
 * Reliable streams perform the communication without lost regardless of the transport layer.
   To avoid message losses, the reliable streams use additional messages to confirm the delivery, along to a history of the messages sent and received.
-  The history is used to storage messages that can no be currently processed because of the delivery order, or must be send again if the message can not be confirmed.
+  The history is used to store messages that can not be currently processed because of the delivery order or must be sent again if the message can not be confirmed.
   If the history is full:
 
   * The messages that will be written to the agent will be discarded until the history get space to store them.
