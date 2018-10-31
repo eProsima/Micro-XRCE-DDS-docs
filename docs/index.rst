@@ -55,7 +55,7 @@ Best effort and reliable communication.
 
 Pluggable tansport layer.
     Micro XRCE-DDS is not built over a specific transport as *serial* or *UDP*.
-    It is agnostic about the transport used, and give to the user the posibility of implement easily his own transport.
+    It is agnostic about the transport used, and give the user the possibility of implement easily his tailored transport.
     By the fault, *UPD*, *TCP*, and *serial* transports are provided.
 
 Commercial support
