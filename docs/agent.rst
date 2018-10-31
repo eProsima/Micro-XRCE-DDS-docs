@@ -40,7 +40,7 @@ The following is a list of the aforementioned parameters:
     Specify the maximum number of connections, the *Agent* is able to manage (default 100).
 
 ``CONFIG_TCP_MAX_BACKLOG_CONNECTIONS``
-    Specify the maximum number of incoming connections (peding to establish), the *Agent* is able to manage (default 100).
+    Specify the maximum number of incoming connections (pending to establish), the *Agent* is able to manage (default 100).
 
 
 
