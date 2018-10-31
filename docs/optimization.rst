@@ -1,3 +1,5 @@
+.. _optimization_label:
+
 Memory optimization
 ===================
 

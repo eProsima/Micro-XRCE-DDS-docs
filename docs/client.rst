@@ -111,12 +111,40 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
     This value corresponds to the `Maximun Transmission Unit` able to send and receive by Serial.
     Internally a buffer is created proportional to this size.
 
+Streams
+-------
+The client communication is performed by streams.
+The streams can be seen as communication channels.
+There are two types of streams: best effort and reliable streams and you can create several of them.
+
+* Best effort streams will send and receive the data leaving the reliability to the transport layer.
+  As a result, the best effort streams consume fewer resources than a reliable stream.
+
+* Reliable streams perform the communication without lost regardless of the transport layer.
+  To avoid message losses, the reliable streams use additional messages to confirm the delivery, along to a history of the messages sent and received.
+  The history is used to store messages that can not be currently processed because of the delivery order or must be sent again if the message can not be confirmed.
+  If the history is full:
+
+  * The messages that will be written to the agent will be discarded until the history get space to store them.
+    So, the user must wait to write in those streams (they can be considered blocked).
+
+  * The messages received from the agent will be discarded.
+    The library will try to recover the discarded messages requesting them to the agent (increasing the bandwidth consumption in that process).
+
+  For that, a low history causes more messages to be discarded, increasing the data traffic because they need to be sent again.
+  A long history will reduce the data traffic of confirmation messages in transports with a high loss rate.
+  This internal management of the communication implies that a reliable stream is more expensive than best effort streams,
+  in both, memory and bandwidth, but is possible to play with these values using the history size.
+
+The streams are maybe the highest memory load part of the application.
+For that, the choice of a right configuration for the application purpose is highly recommendable, especially when the target is a limited resources device.
+The :ref:`optimization_label` page explain more about how to archive this.
+
 API
 ---
 As a nomenclature, `Micro XRCE-DDS Client` API uses a ``uxr_`` prefix in all of their public API functions and ``uxr`` prefix in the types.
 In constants values an ``UXR_`` prefix is used.
-Functions without these rules `should not` be used.
-They are only for internal use.
+The functions belonging to the public interface of the library are only those with the tag ``UXRDDLAPI`` in their declarations.
 
 Session
 ```````
