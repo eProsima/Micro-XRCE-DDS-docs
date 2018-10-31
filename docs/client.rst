@@ -129,7 +129,7 @@ There are two types of streams: best effort and reliable streams and you can cre
     So, the user must wait to write in those streams (they can be considered blocked).
 
   * The messages received from the agent will be discarded.
-    The library will treat to recover the discarded messages requesting them to the agent (increasing the bandwidth consumption in that process).
+    The library will try to recover the discarded messages requesting them to the agent (increasing the bandwidth consumption in that process).
 
   For that, a low history causes more messages to be discarded, increasing the data traffic because they need to be sent again.
   A long history will reduce the data traffic of confirmation messages in transports with a high loss rate.
