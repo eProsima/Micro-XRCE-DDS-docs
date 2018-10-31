@@ -132,7 +132,7 @@ There are two types of streams: best effort and reliable streams and you can cre
     The library will treat to recover the discarded messages requesting them to the agent (increasing the bandwidth consumption in that process).
 
   For that, a low history causes more messages to be discarded, increasing the data traffic because they need to be sent again.
-  A high history will reduce the data traffic of confirmation messages in transports with a high loss rate.
+  A long history will reduce the data traffic of confirmation messages in transports with a high loss rate.
   This internal management of the communication implies that a reliable stream is more expensive than best effort streams,
   in both, memory and bandwidth, but is possible to play with these values using the history size.
 
