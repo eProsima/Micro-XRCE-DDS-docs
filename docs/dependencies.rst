@@ -3,9 +3,9 @@ External dependencies
 
 Required dependences
 --------------------
-*Micro XRCE-DDS - Client* does not require external dependencies.
+*Micro XRCE-DDS Client* does not require external dependencies.
 
-*Micro XRCE-DDS - Agent* requires following packages to work:
+*Micro XRCE-DDS Agent* requires the following packages to work:
 
 Fast RTPS
     *eProsima Fast RTPS* could be installed following the instructions:
@@ -13,8 +13,8 @@ Fast RTPS
 
 Windows
 ~~~~~~~
-Microsoft Visual C++ 2013 or 2015
-    *eProsima Micro XRCE-DDS* is supported on Windows over Microsoft Visual C++ 2013 or 2015 framework.
+Microsoft Visual C++ 2015 or 2017
+    *eProsima Micro XRCE-DDS* is supported on Windows over Microsoft Visual C++ 2015 or 2017 framework.
 
 Additional Dependencies
 -----------------------

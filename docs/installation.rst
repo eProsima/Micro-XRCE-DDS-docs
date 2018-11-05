@@ -71,13 +71,13 @@ On Windows first select the Visual Studio version: ::
     $ cmake --build . --target install
 
 If you want to install the *Micro XRCE-DDS Client* examples you can add ``-DEPROSIMA_BUILD_EXAMPLES=ON`` to the CMake command line options.
-This flag will enable the compilation of the examples when the project it is compiled.
+This flag will enable the compilation of the examples when the project is compiled.
 There are several CMake definitions for configuring the build of the client library at compile time.
 You can found them in :ref:`micro_xrce_dds_client_label` page under `Configuration` section.
 
 Compiling an app with the Client library
 ----------------------------------------
-For building your client program you need to build against the following libs: ::
+For building your Client app you need to build against the following libs: ::
 
     gcc <your_main.c> -lmicrocdr -lmicroxrcedds_client
 

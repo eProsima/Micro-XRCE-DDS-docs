@@ -11,7 +11,7 @@ The *Micro XRCE-DDS Agent* acts on behalf of the *Micro XRCE-DDS Clients* and en
 
 *Micro XRCE-DDS* provides both, a plug and play *Micro XRCE-DDS Agent* and an API layer which allows you to implement your *Micro XRCE-DDS Clients*.
 
-![Architecture](docs/images/xrcedds_architecture.svg)
+![Architecture](docs/images/xrcedds_architecture.png)
 
 ## Documentation
 
