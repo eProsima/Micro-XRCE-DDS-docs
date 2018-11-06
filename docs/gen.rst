@@ -7,7 +7,7 @@ Micro XRCE-DDS Gen
 
 This tool is able to generate from a given IDL specification file, the C struct associated with the
 Topic, as well as, the serialization and deserialization methods.
-Also, it has the possibility of generate a sample demo that works with proposed topic.
+Also, it has the possibility to generate a sample demo that works with the proposed topic.
 As an example of the powerful of this tool, the following shows the source code generated from the ShapeDemo IDL file.
 
 ::
@@ -64,18 +64,18 @@ it will generate the following header file and its corresponding source:
     #endif // _ShapeType_H_
 
 
-*Micro XRCE-DDS Gen* is also able to generate both *publisher* and *subscriber* source code examples related with the topic speficified in the IDL file adding the flag ``-example``: ::
+*Micro XRCE-DDS Gen* is also able to generate both *publisher* and *subscriber* source code examples, related with the topic specified in the IDL file, by adding the flag ``-example``: ::
 
     $ microxrceddsgen -example <file.idl>
 
 
-In order to use these examples, the client library must be compiled with the ``WRITE_ACCESS_PROFILE`` option for the *publisher*
+In order to use these examples, the *Client* library must be compiled with the ``WRITE_ACCESS_PROFILE`` option for the *publisher*
 and the ``READ_ACCESS_PROFILE`` option for the *subscriber*.
 
 Installation
 ------------
 
-For use *Micro XRCE-DDS Gen* you have to follow the next steps:
+In order to use *Micro XRCE-DDS Gen*, it is needed to follow the next steps:
 
 1. Install its dependencies:
 
