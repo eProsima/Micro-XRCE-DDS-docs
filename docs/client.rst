@@ -119,10 +119,14 @@ There are two types of streams: best effort and reliable streams and you can cre
 
 * Best effort streams will send and receive the data leaving the reliability to the transport layer.
   As a result, the best effort streams consume fewer resources than a reliable stream.
+  Also, the message size sent or receive by a best effort stream must be less or equal than the *MTU* defined in the transport used.
 
-* Reliable streams perform the communication without lost regardless of the transport layer.
+* Reliable streams perform the communication without lost regardless of the transport layer
+  and allow message fragmentation in order to send and receive messages longer than the *MTU*.
+
   To avoid message losses, the reliable streams use additional messages to confirm the delivery, along to a history of the messages sent and received.
-  The history is used to store messages that can not be currently processed because of the delivery order or must be sent again if the message can not be confirmed.
+  The history is used to store messages that can not be currently processed because of several reasons such us:
+  delivery order, incomplete fragments, or messages that can not be confirmed yet.
   If the history is full:
 
   * The messages that will be written to the agent will be discarded until the history get space to store them.
@@ -343,7 +347,7 @@ This implies:
 2. If there is any reliable stream, it will perform the asociated reliable behaviour to ensure the communication.
 3. Listenes messages from the *Agent* and call the associated callback if exists (a topic callback or an status callback).
 
-The ``_until_confirm_delivery`` suffix function version will perform these actions during ``timeout`` 
+The ``_until_confirm_delivery`` suffix function version will perform these actions during ``timeout``
 or until the output reliable streams confirm that the sent messages have been received by the *Agent*.
 The function will return ``true`` if the sent data have been confirmed, ``false`` otherwise.
 
@@ -920,7 +924,7 @@ The following table summarize the behaviour of the *Agent* under entity creation
 Don't care                  NO                Entity is created.
 ``0``                       YES               No action is taken, and ``UXR_STATUS_ERR_ALREADY_EXITS`` is returned.
 ``UXR_REPLACE``             YES               Existing entity is deleted, requested entity is created and ``UXR_STATUS_OK`` is returned.
-``UXR_REUSE``               YES               | If entity matches no action is taken and ``UXR_STATUS_OK_MATCHED`` is returned. 
+``UXR_REUSE``               YES               | If entity matches no action is taken and ``UXR_STATUS_OK_MATCHED`` is returned.
                                               | If entity does not match no action is taken and ``UXR_STATUS_ERR_MISMATCH`` is returned.
 ``UXR_REUSE | UXR_REPLACE`` YES               | If entity matches no action is taken and ``UXR_STATUS_OK_MATCHED`` is returned.
                                               | If entity does not match, exiting entity is deleted, requested entity is created and ``UXR_STATUS_OK`` is returned.

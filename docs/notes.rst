@@ -1,6 +1,27 @@
-Version 1.0.0
+Version 1.1.0
 =============
 
+This release includes the following features:
+
+* Message fragmentation.
+* Minor changes.
+* Improved tests.
+* Reorganized project.
+* Bug fixes.
+
+Previous versions
+------------------
+
+Version 1.0.1
+~~~~~~~~~~~~~
+This release includes the following features:
+
+* More tests.
+* Reorganized project.
+* Bug fixes.
+
+Version 1.0.0
+~~~~~~~~~~~~~
 This release includes the following features:
 
 * Extended C topic code generation tool (strings, sequences and n-dimensional arrays).
@@ -15,9 +36,6 @@ This release includes the following features:
 * Reorganized project.
 * Bug fixes.
 * API changes.
-
-Previous versions
-------------------
 
 Version 1.0.0Beta2
 ~~~~~~~~~~~~~~~~~~
