@@ -30,13 +30,14 @@ Stream buffers
    For input streams, the history is used for recovering faster when the messages are lost using less extra band-width.
    If your connection is highly reliable and to save memory is a priority, a reduced history can be used.
 
-3. The size of the stream corresponds to the total reserved memory for the stream.
-   The size must be according to the next value: ``MAX_MESSAGE_SIZE * HISTORY``.
-   The ``MAX_MESSAGE_SIZE`` must be less or equal than the transport MTU used.
+3. The *size* of the stream corresponds to the total reserved memory for the stream.
+   This *size* must be according to the next value: ``MAX_MESSAGE_SIZE * HISTORY``.
+   The ``MAX_MESSAGE_SIZE`` value represents the maximum message size that can be sent without fragment the message.
+   ``MAX_MESSAGE_SIZE`` must be less or equal than the transport *MTU* used.
 
 Transport MTUs
 ~~~~~~~~~~~~~~
-Each transport have a different MTU.
-The MTU value can be defined into the ``client.config`` file.
-The MTU will represent the ``MAX_MESSAGE_SIZE`` that can be send or received.
-The transport uses the MTU value to create an internal buffer.
+Each transport have a different *MTU*.
+The *MTU* value can be defined into the ``client.config`` file.
+The *MTU* will represent the ``MAX_MESSAGE_SIZE`` that can be send or received.
+The transport uses the *MTU* value to create an internal buffer, so this value will affect increasing transport struct size.
