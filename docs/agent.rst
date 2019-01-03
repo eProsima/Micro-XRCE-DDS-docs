@@ -1,11 +1,11 @@
 .. _micro_xrce_dds_agent_label:
 
-Micro XRCE-DDS Agent
+eProsima Micro XRCE-DDS Agent
 ====================
 
-*Micro XRCE-DDS Agent* acts as a server between the DDS Network and *Micro XRCE-DDS Clients* applications.
+*eProsima Micro XRCE-DDS Agent* acts as a server between the DDS Network and *eProsima Micro XRCE-DDS Clients* applications.
 *Agents* receive messages containing operations from *Clients*.
-Also *Agents* keep track of the *Clients* and the entities they create.
+Also, *Agents* keep track of the *Clients* and the entities they create.
 The *Agent* uses the entities to interact with the DDS Global Data Space on behalf of the *Clients*.
 
 The communication between a *Client* and an *Agent* currently supports UDP, TCP and Serial (dependent on the platform).
@@ -14,7 +14,7 @@ While it is running, the *Agent* will attend any received request from the *Clie
 Configuration
 -------------
 
-There are several configuration parameters which can be set at **compile time** in order to configure the *Micro RTPS Agent*.
+There are several configuration parameters which can be set at **compile time** in order to configure the *eProsima Micro XRCE-DDS Agent*.
 These parameters can be selected as CMake flags (``-D<parameter>=<value>``) before the compilation.
 The following is a list of the aforementioned parameters:
 
@@ -48,7 +48,7 @@ Run an Agent
 ------------
 
 To run the *Agent* you should build it as indicated in :ref:`installation_label`.
-Once it is built successfully you just need to launch it executing the following command.
+Once it is built successfully, you just need to launch it executing the following command.
 
 For Serial communication: ::
 
@@ -62,7 +62,7 @@ For TCP communication: ::
 
     $ ./MicroXRCEAgent tcp <port> [<discovery-port>]
 
-If the transport used is a reliable transport, the use of a best-effort stream over it is equivalent to use a reliable stream over a not reliable transport.
+If the transport used is a reliable transport, the use of a best-effort stream over it is equivalent to use a reliable stream over not reliable transport.
 
 For running the *Agent* is necessary that the file ``DEFAULT_FASTRTPS_PROFILES.xml`` is located in the runtime folder.
 This file contains XML profiles of `Participants`, `Topic`, `DataWriters` and `DataReaders` referenced by a ``profile_name``.
@@ -81,7 +81,7 @@ The ``DEFAULT_FASTRTPS_PROFILES.xml`` contains the following participant profile
       </participant>
     </profile>
 
-therefore, the *Client* can use `default_xrce_participant_profile` as ``ref`` in the ``mr_buffer_create_participant_ref`` function.
+Therefore, the *Client* can use `default_xrce_participant_profile` as ``ref`` in the ``mr_buffer_create_participant_ref`` function.
 
 Default installation place this file along with the *Agent* executable into ``/usr/local/bin`` for Linux or ``C:/Program Files/microxrcedds_agent/bin`` for Windows.
 

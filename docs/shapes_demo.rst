@@ -3,8 +3,8 @@
 Shapes Demo
 ===========
 
-`ShapesDemo <https://github.com/eProsima/ShapesDemo>`_ is an interactive example for testing how `Fast RTPS` working in the `DDS Global Data Space`.
-Because the aim of `Micro XRCE-DDS` is connect an `XRCE Client` to the `DDS World`, in this example we will create a *Client* which will interact with the `Shapes Demo`.
+`ShapesDemo <https://github.com/eProsima/ShapesDemo>`_ is an interactive example for testing how *eProsima Fast RTPS* working in the `DDS Global Data Space`.
+Because the aim of *eProsima Micro XRCE-DDS* is connected an `XRCE Client` to the `DDS World`, in this example we will create a *Client* which will interact with the `Shapes Demo`.
 It can be found at `examples/uxr/client/ShapeDemoClient` inside of the installation directory.
 This interactive *Client* waits for user input indicating commands to execute.
 
@@ -44,7 +44,7 @@ tree, entity_tree            <id>:
 h, help:
     Shows this message.
 
-For example, to create a publisher *Client* that sends an square Topic in reliable mode, you need to run the following commands: ::
+For example, to create a publisher *Client* that sends a square Topic in reliable mode, you need to run the following commands: ::
 
     > create_session
     > create_participant 1
@@ -64,7 +64,7 @@ In case of a subscriber *Client* that receives square topics in a reliable mode,
     > create_datareader 1 1
     > request_data 1 128 5
 
-This *Client* will received 5 topics in reliable mode.
+This *Client* will receive 5 topics in reliable mode.
 
 To create the entities tree easily, you can run the command ``entity_tree <id>``.
 For example, the following command creates the necessary entities for publishing and subscribing data with id `3`: ::
@@ -79,9 +79,9 @@ For example, the following command creates the necessary entities for publishing
 
 To modify the output default stream, you can change it with `stream <id>`.
 
-The maximun available streams corresponds with the ``CONFIG_MAX_OUTPUT_BEST_EFFORT_STREAMS`` and
+The maximum available streams corresponds with the ``CONFIG_MAX_OUTPUT_BEST_EFFORT_STREAMS`` and
 ``CONFIG_MAX_OUTPUT_RELIABLE_STREAMS`` properties configurable in ``client.config`` file.
 
     > stream 1
 
-Now the messages will be send in best effort mode.
+Now the messages will be sent in best-effort mode.

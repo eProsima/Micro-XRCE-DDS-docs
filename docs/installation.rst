@@ -24,7 +24,7 @@ On Windows choose the Visual Studio version using the CMake option *-G*, for exa
     $ cmake -G "Visual Studio 14 2015 Win64" -DTHIRDPARTY=ON ..
     $ cmake --build . --target install
 
-Now you have *Micro XRCE-DDS Agent* and *Micro XRCE-DDS Client* installed in your system.
+Now you have *eProsima Micro XRCE-DDS Agent* and *eProsima Micro XRCE-DDS Client* installed in your system.
 
 Installing the Agent stand-alone
 --------------------------------
@@ -46,7 +46,7 @@ On Windows first select the Visual Studio version: ::
     $ cmake -G "Visual Studio 14 2015 Win64" -DTHIRDPARTY=ON ..
     $ cmake --build . --target install
 
-Now you have the executable `Micro XRCE-DDS Agent` installed in your system. Before running it, you need to add ``/usr/local/lib`` to the dynamic loader-linker directories. ::
+Now you have the executable *eProsima Micro XRCE-DDS Agent* installed in your system. Before running it, you need to add ``/usr/local/lib`` to the dynamic loader-linker directories. ::
 
     sudo ldconfig /usr/local/lib/
 
@@ -70,7 +70,7 @@ On Windows first select the Visual Studio version: ::
     $ cmake -G "Visual Studio 14 2015 Win64" -DTHIRDPARTY=ON ..
     $ cmake --build . --target install
 
-If you want to install the *Micro XRCE-DDS Client* examples you can add ``-DEPROSIMA_BUILD_EXAMPLES=ON`` to the CMake command line options.
+If you want to install the *eProsima Micro XRCE-DDS Client* examples, you can add ``-DEPROSIMA_BUILD_EXAMPLES=ON`` to the CMake command line options.
 This flag will enable the compilation of the examples when the project is compiled.
 There are several CMake definitions for configuring the build of the client library at compile time.
 You can found them in :ref:`micro_xrce_dds_client_label` page under `Configuration` section.

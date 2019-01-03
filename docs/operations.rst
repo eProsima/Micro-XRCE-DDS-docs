@@ -2,9 +2,9 @@
 
 Operations
 ==========
-Operations are the possible actions your *Micro XRCE-DDS Client* can ask to the *Micro XRCE-DDS Agent*.
+Operations are the possible actions your *eProsima Micro XRCE-DDS Client* can ask to the *eProsima Micro XRCE-DDS Agent*.
 Operations revolve around :ref:`entities_label`.
-*Micro XRCE-DDS Agent* will respond to all the requests with the status of the operation.
+*eProsima Micro XRCE-DDS Agent* will respond to all the requests with the status of the operation.
 
 Types
 -----
@@ -29,10 +29,10 @@ Types
 
 `Request Data`
     This operation configures how do you want to receive data, and the *Agent* will deliver it from the DDS to your *Client*.
-    This data will be receive asynchronously, in accordance with the data delivery control setted in this operation.
+    This data will be received asynchronously, in accordance with the data delivery control setted in this operation.
     Reading data is done using a `DataReader` entity.
 
 About XML Representation
 ------------------------
 `Participats`, `Topics`, `DataWriters` and `DataReaders` creation needs to be done using DDS XML configuration of the object to create.
-That XML configuration follows the same rules as in *Fast RTPS*.
+That XML configuration follows the same rules as in *eProsima Fast RTPS*.
