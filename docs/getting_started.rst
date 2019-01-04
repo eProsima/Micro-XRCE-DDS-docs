@@ -2,7 +2,7 @@
 
 Getting started
 ===============
-This page shows how to get started with the *Micro XRCE-DDS Client* development.
+This page shows how to get started with the *eProsima Micro XRCE-DDS Client* development.
 We will create a *Client* that can publish and subscribe a topic.
 This tutorial has been extract from the examples found into ``examples/PublisherHelloWorld`` and ``examples/SubscriberHelloWorld``.
 
@@ -29,7 +29,7 @@ This is done automatically by :ref:`microxrceddsgen_label`: ::
 
 Initialize a Session
 ^^^^^^^^^^^^^^^^^^^^
-In the source example file, we include the generated type code, in order to have access to its serialization/deserialization functions along to the write function.
+In the source example file, we include the generated type code, in order to have access to its serialization/deserialization functions along to the writing function.
 Also, we will specify the max buffer for the streams and its historical associated for the reliable streams.
 
 .. code-block:: C
@@ -185,7 +185,7 @@ The configuration about how these `DataReaders` and data writers works is contai
 Agent response
 ^^^^^^^^^^^^^^
 In operations such as create session, create entity or request data from the *Agent*,
-an status is sent from the *Agent* to the *Client* indicating what happened.
+a status is sent from the *Agent* to the *Client* indicating what happened.
 
 For `Create session` or `Detele session` operations the status value is stored into the ``session.info.last_request_status``.
 For the rest of the operations, the status are sent to the input reliable stream ``0x80``, that is, the first input reliable stream created, with index 0.
@@ -206,7 +206,7 @@ The different status values that the *Agent* can send to the *Client* are the fo
     UXR_STATUS_ERR_RESOURCES
     UXR_STATUS_NONE (never send, only used when the status is known)
 
-The status can be handle by the ``on_status_callback`` callback (configured in ``uxr_set_status_callback`` function) or by the ``run_session_until_all_status`` as we will see.
+The status can be handled by the ``on_status_callback`` callback (configured in ``uxr_set_status_callback`` function) or by the ``run_session_until_all_status`` as we will see.
 
 .. code-block:: C
 
@@ -218,8 +218,8 @@ The status can be handle by the ``on_status_callback`` callback (configured in `
         return 1;
     }
 
-The ``run_session`` functions are the main functions of the `Micro RTP Client` library.
-They performs serveral tasks: send the stream data to the *Agent*, listen data from the *Agent*, call callbacks, and manage the reliable connection.
+The ``run_session`` functions are the main functions of the *eProsima Micro XRCE-DDS Client* library.
+They perform serveral tasks: send the stream data to the *Agent*, listen data from the *Agent*, call callbacks, and manage the reliable connection.
 There are five variations of ``run_session`` function:
 - ``uxr_run_session_time``
 - ``uxr_run_session_until_timeout``
@@ -233,8 +233,8 @@ After call this function, the status can be read from the ``status`` array previ
 
 Write Data
 ^^^^^^^^^^
-Once we have created a valid data writer entity, we can write data into the DDS Global Data Space using the write operation.
-For creating a message with data, first we must to decide which stream we want to use, and write that topic in this stream.
+Once we have created a valid data writer entity, we can write data into the DDS Global Data Space using the writing operation.
+For creating a message with data, first we must decide which stream we want to use, and write that topic in this stream.
 
 .. code-block:: C
 
@@ -254,7 +254,7 @@ If the stream is available and the topic fits in it, the function will initializ
 Once the ``ucdrBuffer`` is prepared, the topic can be serialized into it.
 We are careless about ``uxr_prepare_output_stream`` return value because the serialization only will occur if the ``ucdrBuffer`` is valid.
 
-After the write function, as happened with the creation of entities, the topic has been serialized into the buffer but it has not been sent yet.
+After the writing function, as happened with the creation of entities, the topic has been serialized into the buffer but it has not been sent yet.
 To send the topic is necessary call to a ``run_session`` function.
 In this case, we call to ``uxr_run_session_until_confirmed_delivery`` that will wait until the message was confirmed or until the timeout has been reached.
 
@@ -273,7 +273,7 @@ Current implementation sends one topic to the *Client* for each read data operat
 
 In order to configure how the *Agent* will send the topic, we must set the input stream. In this case, we use the input reliable stream previously defined.
 ``datareader_id`` corresponds with the `DataDeader` entity used for receiving the data.
-The ``delivery_control`` parameter is optional, and allows to specify how the data will be delivered to the *Client*.
+The ``delivery_control`` parameter is optional, and allows specifying how the data will be delivered to the *Client*.
 For the example purpose, we set it as `unlimited`, so any number HelloWorld topic will be delivered to the *Client*.
 
 The ``run_session`` function will call the topic callback each time a topic will be received from the *Agent*.

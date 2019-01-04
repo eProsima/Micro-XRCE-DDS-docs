@@ -2,8 +2,8 @@
 
 Quick start
 ===========
-`Micro XRCE-DDS` provides a C API which allows the creation of `Micro XRCE-DDS Clients` that publish and/or subscribe to topics from DDS Global Data Space.
-The following example shows how to create a simple `Micro XRCE-DDS Client` and `Micro XRCE-DDS Agent` for publishing and subscribing to the DDS world, using this HelloWorld.idl: ::
+*Prosima Micro XRCE-DDS* provides a C API which allows the creation of *eProsima Micro XRCE-DDS Clients* that publish and/or subscribe to topics from DDS Global Data Space.
+The following example shows how to create a simple *eProsima Micro XRCE-DDS Client* and *eProsima Micro XRCE-DDS Agent* for publishing and subscribing to the DDS world, using this HelloWorld.idl: ::
 
     struct HelloWorld
     {
@@ -312,7 +312,7 @@ The code of the *SubscriberHelloWorldClient* is the following:
 
 At this moment, the subscriber will receive the topics that are sending by the publisher.
 
-In order to see the messages from the DDS Global Data Space point of view, you can use *Fast RTPS* HelloWorld example running a subscriber
+In order to see the messages from the DDS Global Data Space point of view, you can use *eProsima Fast RTPS* HelloWorld example running a subscriber
 (`Fast RTPS HelloWorld <http://eprosima-fast-rtps.readthedocs.io/en/latest/introduction.html#building-your-first-application>`_): ::
 
     $ cd /usr/local/examples/C++/HelloWorldExample
@@ -322,11 +322,11 @@ In order to see the messages from the DDS Global Data Space point of view, you c
 Learn More
 ----------
 
-To learn more about DDS and Fast RTPS: `eProsima Fast RTPS <http://eprosima-fast-rtps.readthedocs.io>`_
+To learn more about DDS and *eProsima Fast RTPS*: `eProsima Fast RTPS <http://eprosima-fast-rtps.readthedocs.io>`_
 
-To learn how to install *Micro XRCE-DDS* read: :ref:`installation_label`
+To learn how to install *eProsima Micro XRCE-DDS* read: :ref:`installation_label`
 
-To learn more about *Micro XRCE-DDS* read: :ref:`user`
+To learn more about *eProsima Micro XRCE-DDS* read: :ref:`user`
 
-To learn more about *Micro XRCE-DDS Gen* read: :ref:`microxrceddsgen_label`
+To learn more about *eProsima Micro XRCE-DDS Gen* read: :ref:`microxrceddsgen_label`
 

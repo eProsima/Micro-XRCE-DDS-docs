@@ -48,7 +48,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Micro XRCE-DDS'
+project = u'eProsima Micro XRCE-DDS'
 copyright = u'2018, eProsima'
 author = u'eProsima'
 

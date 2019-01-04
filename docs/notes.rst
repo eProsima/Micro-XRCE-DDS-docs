@@ -26,7 +26,7 @@ This release includes the following features:
 
 * Extended C topic code generation tool (strings, sequences and n-dimensional arrays).
 * Discovery profile.
-* Native write access profile (without using Micro XRCE-DDS Gen)
+* Native write access profile (without using *eProsima Micro XRCE-DDS Gen*)
 * Creation and configuration by XML.
 * Creation by reference.
 * Added `REUSE` flag at create entities.

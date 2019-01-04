@@ -1,11 +1,11 @@
 .. _micro_xrce_dds_client_label:
 
-Micro XRCE-DDS Client
+eProsima Micro XRCE-DDS Client
 =====================
-In *Micro XRCE-DDS*, a *Client* can communicate with DDS Network as any other DDS actor could do.
+In *eProsima Micro XRCE-DDS*, a *Client* can communicate with DDS Network as any other DDS actor could do.
 *Clients* can publish and subscribe to data Topics in the DDS Global Data Space.
 
-*Micro XRCE-DDS* provides you with a C API to create *Micro XRCE-DDS Clients* application.
+*eProsima Micro XRCE-DDS* provides you with a C API to create *eProsima Micro XRCE-DDS Clients* application.
 All functions needed to set up the *Client* can be found into ``client.h`` header.
 This is the only header you need to include.
 
@@ -146,7 +146,7 @@ The :ref:`optimization_label` page explain more about how to archive this.
 
 API
 ---
-As a nomenclature, `Micro XRCE-DDS Client` API uses a ``uxr_`` prefix in all of their public API functions and ``uxr`` prefix in the types.
+As a nomenclature, *eProsima Micro XRCE-DDS Client* API uses a ``uxr_`` prefix in all of their public API functions and ``uxr`` prefix in the types.
 In constants values an ``UXR_`` prefix is used.
 The functions belonging to the public interface of the library are only those with the tag ``UXRDDLAPI`` in their declarations.
 
@@ -761,7 +761,7 @@ Searches into the network using a list of unicast directions in order to discove
 Topic serialization
 ```````````````````
 Functions to serialize and deserialize topics.
-These functions are generated automatically by `Micro XRCE-DDS Gen` utility over an IDL file with a topic `TOPICTYPE`.
+These functions are generated automatically by *eProsima Micro XRCE-DDS Gen* utility over an IDL file with a topic `TOPICTYPE`.
 The declaration of these function can be found in the generated file ``TOPICTYPE.h``.
 
 ------
