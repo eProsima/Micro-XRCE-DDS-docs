@@ -8,7 +8,7 @@ DDS-XRCE protocol
 
 *eProsima Micro XRCE-DDS* implements `DDS-XRCE protocol <https://www.omg.org/spec/DDS-XRCE/1.0/Beta1/PDF>`_
 specified in the `DDS for eXtremely Resource Constrained Environments` proposal submitted to the `Object Management Group (OMG)` consortium.
-This protocol allows communicating resource constrained devices with a larger `DDS (Data Distribution Service)` network.
+This protocol allows resource constrained devices to communicate with a larger `DDS (Data Distribution Service)` network.
 This communication is done using a client-server architecture,
 where the server (Agent) acts as an intermediary between clients and `DDS Global Data Space`.
 
