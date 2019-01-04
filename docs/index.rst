@@ -26,7 +26,7 @@ Low resouces.
     The client library is dynamic memory free and static memory free.
     This means that the only memory charge is due to the stack growth.
     It can manage a simple publisher/subscriber with less of 2KB of RAM.
-    Besides, the client is built with a *profiles* concept, that allows adding or remove functionality to the library changing the binary size.
+    Besides, the client is built with a *profiles* concept, that allows adding or removing functionality to the library changing the binary size.
 
 Multi-platform.
     The OS dependencies are treated as pluggable modules.
