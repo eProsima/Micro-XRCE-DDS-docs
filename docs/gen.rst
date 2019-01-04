@@ -8,7 +8,7 @@ eProsima Micro XRCE-DDS Gen
 This tool is able to generate from a given IDL specification file, the C struct associated with the
 Topic, as well as, the serialization and deserialization methods.
 Also, it has the possibility to generate a sample demo that works with the proposed topic.
-As an example of the power of this tool, the following shows the source code generated from the ShapeDemo IDL file.
+As an example of the potential of this tool, the following shows the source code generated from the ShapeDemo IDL file.
 
 ::
 
