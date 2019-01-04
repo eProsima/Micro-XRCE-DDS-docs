@@ -714,7 +714,7 @@ The discovery phase can be performed before the `uxr_create_session` call in ord
 These functions are enabled when ``PROFILE_DISCOVERY`` is selected in the ``client.config`` file.
 The declaration of these functions can be found in ``uxr/client/profile/discovery/discovery.h``.
 
-*This feature is only available on linux.*
+*This feature is only available on Linux.*
 
 ------
 
