@@ -1,7 +1,7 @@
 .. _micro_xrce_dds_client_label:
 
 eProsima Micro XRCE-DDS Client
-=====================
+==============================
 In *eProsima Micro XRCE-DDS*, a *Client* can communicate with DDS Network as any other DDS actor could do.
 *Clients* can publish and subscribe to data Topics in the DDS Global Data Space.
 
