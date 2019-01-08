@@ -81,7 +81,7 @@ To know more about *eProsima Micro XRCE-DDS*, you can read the corresponding par
 If you are interested in how XRCE works, read :ref:`entities_label` and :ref:`operations_label` pages.
 
 eProsima Micro XRCE-DDS Gen
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 To create a serialization/deserialization topic code for *eProsima Micro XRCE-DDS Client* and make easy the built of examples using thoses topics, there is a tool called `microxrceddsgen`.
 Information about this tool can be found in :ref:`microxrceddsgen_label` page.
 

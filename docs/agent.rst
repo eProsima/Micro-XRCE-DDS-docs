@@ -1,7 +1,7 @@
 .. _micro_xrce_dds_agent_label:
 
 eProsima Micro XRCE-DDS Agent
-====================
+=============================
 
 *eProsima Micro XRCE-DDS Agent* acts as a server between the DDS Network and *eProsima Micro XRCE-DDS Clients* applications.
 *Agents* receive messages containing operations from *Clients*.
@@ -27,21 +27,11 @@ The following is a list of the aforementioned parameters:
 ``CONFIG_HEARTBEAT_PERIOD``
     Specify the ``HEARTBEAT`` message period in millisecond (default 200).
 
-``CONFIG_SERIAL_TRANSPORT_MTU``
-    Specify the `Maximum Transmission Unit` able to send and receive by Serial (default 512).
-
-``CONFIG_UDP_TRANSPORT_MTU``
-    Specify the `Maximum Transmission Unit` able to send and receive by UDP (default 512).
-
-``CONFIG_TCP_TRANSPORT_MTU``
-    Specify the `Maximum Transmission Unit` able to send and receive by TCP (default 512).
-
 ``CONFIG_TCP_MAX_CONNECTIONS``
     Specify the maximum number of connections, the *Agent* is able to manage (default 100).
 
 ``CONFIG_TCP_MAX_BACKLOG_CONNECTIONS``
     Specify the maximum number of incoming connections (pending to establish), the *Agent* is able to manage (default 100).
-
 
 
 Run an Agent
@@ -56,13 +46,15 @@ For Serial communication: ::
 
 For UDP communication: ::
 
-    $ ./MicroXRCEAgent udp <port> [<discovery-port>]
+    $ ./MicroXRCEAgent udp <port> [--discovery [<discovery_port>] ]
 
 For TCP communication: ::
 
-    $ ./MicroXRCEAgent tcp <port> [<discovery-port>]
+    $ ./MicroXRCEAgent tcp <port> [--discovery [<discovery_port>] ]
 
 If the transport used is a reliable transport, the use of a best-effort stream over it is equivalent to use a reliable stream over not reliable transport.
+
+Information about the *discovery* profile can be found in :ref:`micro_xrce_dds_client_label` page.
 
 For running the *Agent* is necessary that the file ``DEFAULT_FASTRTPS_PROFILES.xml`` is located in the runtime folder.
 This file contains XML profiles of `Participants`, `Topic`, `DataWriters` and `DataReaders` referenced by a ``profile_name``.
