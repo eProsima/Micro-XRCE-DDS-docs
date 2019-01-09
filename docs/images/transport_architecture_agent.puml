@@ -1,0 +1,64 @@
+@startuml
+
+skinparam roundcorner 20
+skinparam monochrome true
+
+interface Server {
+    +virtual void <b>on_create_client()</b> = 0
+    +virtual void <b>on_delete_client()</b> = 0
+    ....
+    -virtual bool <b>init()</b> = 0
+    -virtual bool <b>close()</b> = 0
+    -virtual bool <b>recv_message()</b> = 0
+    -virtual bool <b>send_message()</b> = 0
+    -virtual int <b>get_error()</b> = 0
+}
+
+package "session manager" <<Rectangle>> {
+    class UDPServerBase
+}
+
+class UDPServerBase {
+    +void <b>on_create_client()</b> override
+    +void <b>on_delete_client()</b> override
+}
+
+package "platform dependent implementation" <<Rectangle>> {
+    class UDPServerLinux
+    class UDPServerWindows
+}
+
+class UDPServerLinux {
+    -bool <b>init()</b> override
+    -bool <b>close()</b> override
+    -bool <b>recv_message()</b> override
+    -bool <b>send_message()</b> override
+    -int <b>get_error()</b> override
+}
+
+class UDPServerWindows {
+    -bool <b>init()</b> override
+    -bool <b>close()</b> override
+    -bool <b>recv_message()</b> override
+    -bool <b>send_message()</b> override
+    -int <b>get_error()</b> override
+}
+
+Server <|-- UDPServerBase
+UDPServerBase <|-- UDPServerLinux
+UDPServerBase <|-- UDPServerWindows
+
+
+'abstract EndPoint
+'class UDPEndPoint {
+'    -uint32_t addr_;
+'    -uint16_t port_;
+'    +uint32_t get_addr()
+'    +uint16_t get_port()
+'}
+'
+'EndPoint <|-- UDPEndPoint
+'"session manager" --> UDPEndPoint
+'Server --> EndPoint
+
+@enduml
