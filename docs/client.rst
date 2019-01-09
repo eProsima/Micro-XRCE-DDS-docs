@@ -52,7 +52,7 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
     Enables or disables the functions related to write topics.
 
 ``PROFILE_DISCOVERY=<bool>``
-    Enables or disables the functions the discovery feature.
+    Enables or disables the functions of the discovery feature (currently, only for Linux).
 
 ``PROFILE_UDP_TRANSPORT=<bool>``
     Enables or disables the posibility to connect with the *Agent* by UDP.
@@ -713,6 +713,8 @@ There are two modes: multicast and unicast.
 The discovery phase can be performed before the `uxr_create_session` call in order to determine the *Agent* to connect with.
 These functions are enabled when ``PROFILE_DISCOVERY`` is selected in the ``client.config`` file.
 The declaration of these functions can be found in ``uxr/client/profile/discovery/discovery.h``.
+
+*This feature is only available on Linux.*
 
 ------
 
