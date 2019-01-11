@@ -18,7 +18,7 @@ First of all, we launch the `Agent`. For this example, the `Client` - `Agent` co
 Along with the `Agent`, the `PublishHelloWorldClient` example provided in the source code is launched.
 This `Client` example will publish in the DDS World the HelloWorld topic. ::
 
-    $ examples/uxr/client/PublishHelloWorld/PublishHelloWorldClient
+    $ examples/uxr/client/PublishHelloWorld/PublishHelloWorldClient 127.0.0.1 2018
 
 The code of the *PublishHelloWorldClient* is the following:
 
@@ -52,13 +52,16 @@ The code of the *PublishHelloWorldClient* is the following:
 
     int main(int args, char** argv)
     {
-        if(args >= 2 && (0 == strcmp("-h", argv[1]) || 0 == strcmp("--help", argv[1]) || 0 == atoi(argv[1])))
+        // CLI
+        if(3 > args || 0 == atoi(argv[2]))
         {
-            printf("usage: program [-h | --help | <topics>]\n");
+            printf("usage: program [-h | --help] | ip port [<topics>]\n");
             return 0;
         }
 
-        uint32_t max_topics = (args == 2) ? (uint32_t)atoi(argv[1]) : UINT32_MAX;
+        char* ip = argv[1];
+        uint16_t port = (uint16_t)atoi(argv[2]);
+        uint32_t max_topics = (args == 4) ? (uint32_t)atoi(argv[3]) : UINT32_MAX;
 
         // Transport
         uxrUDPTransport transport;
@@ -158,7 +161,7 @@ The code of the *PublishHelloWorldClient* is the following:
 
 After it, we will launch the *SubscriberHelloWorldClient*. This `Client` example will subscribe to HelloWorld topic from the DDS World. ::
 
-    $ examples/uxr/client/SubscriberHelloWorld/SubscribeHelloWorldClient
+    $ examples/uxr/client/SubscriberHelloWorld/SubscribeHelloWorldClient 127.0.0.1 2018
 
 The code of the *SubscriberHelloWorldClient* is the following:
 
@@ -203,21 +206,19 @@ The code of the *SubscriberHelloWorldClient* is the following:
 
     int main(int args, char** argv)
     {
-        if(args >= 2 && (0 == strcmp("-h", argv[1]) || 0 == strcmp("--help", argv[1]) || 0 == atoi(argv[1])))
+        // CLI
+        if(3 > args || 0 == atoi(argv[2]))
         {
-            (void) session; (void) object_id; (void) request_id; (void) stream_id;
-        
-            HelloWorld topic;
-            HelloWorld_deserialize_topic(mb, &topic);
-        
-            printf("Received topic: %s, id: %i\n", topic.message, topic.index);
-        
-            uint32_t* count_ptr = (uint32_t*) args;
-            (*count_ptr)++;
+            printf("usage: program [-h | --help] | ip port [<topics>]\n");
+            return 0;
         }
 
+        char* ip = argv[1];
+        uint16_t port = (uint16_t)atoi(argv[2]);
+        uint32_t max_topics = (args == 4) ? (uint32_t)atoi(argv[3]) : UINT32_MAX;
+
+        // State
         uint32_t count = 0;
-        uint32_t max_topics = (args == 2) ? (uint32_t)atoi(argv[1]) : UINT32_MAX;
 
         // Transport
         uxrUDPTransport transport;
