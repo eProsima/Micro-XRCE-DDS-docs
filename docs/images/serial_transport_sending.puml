@@ -1,0 +1,19 @@
+@startuml
+
+skinparam roundcorner 20
+skinparam monochrome true
+
+|XRCE Protocol|
+:Send Topic;
+:Topic>
+:Serialization;
+:Output Stream Buffer|
+|Serial Transport|
+:Send;
+:Framing;
+:Framing Buffer|
+|System|
+:Write;
+:Device Buffer|
+
+@enduml

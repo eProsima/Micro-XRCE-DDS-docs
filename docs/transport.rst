@@ -93,17 +93,62 @@ For example, in the case of UDP there are: ::
 
 Custom Serial Transport
 -----------------------
+*eProsima Micro XRCE-DDS* has a **Custom Serial Transport** with the following features:
 
-The Custom Serial Transport implemented in *eProsima Micro XRCE-DDS* is inspired by the `PPP protocol <https://tools.ietf.org/html/rfc1662>`_. ::
+* **HDLC Framing**: each serial framing begins with a ``begin_frame`` octet ``(0x7E)`` and the rest of the frame is byte stuffing using the ``space`` octet ``(0x7D)`` following by the original octet exclusive-or with ``0x20``.
+  For example, if the frame contains the octet `0x7E` it is encoded as `0x7D, 0x5E`; and the same for the octet `0x7E` which is encoded as `0x7D, 0x5D`.
+* **CRC Calculation**: serial frames end with a CRC-16 for detecting frame corruption. The CRC-16 is computed using the polinomy ``x^16 + x^12 + x^5 + 1`` after the frame stuffing for each octet of the frame and including the ``begin_frame``.
+* **Routing header**: the Serial Transport provides ``source`` and ``remote`` address in the framing, which could be used for implement a routing protocol.
+
+All the aforementioned features are addressed using the following frame format: ::
 
     0        8        16       24                40                 X                X+16
     +--------+--------+--------+--------+--------+--------//--------+--------+--------+
     |  FLAG  |  SADD  |  RADD  |       LEN       |      PAYLOAD     |       CRC       |
     +--------+--------+--------+--------+--------+--------//--------+--------+--------+
 
-* ``FLAG``: is the flag of message initialization ...
-* ``SADD``: is the source address of the device which sent the message ...
-* ``RADD``: is the remote address of the device to which the message should be addressed ...
-* ``LEN``: is the length of the **payload with framing** ...
-* ``PAYLOAD``: is the payload of the message **with framing** ...
-* ``CRC``: is the CRC of the message **with the framing** ...
+* ``FLAG``: is a ``begin_frame`` octet for frame initialization.
+* ``SADD``: is the address of the device which sent the message, that is, the ``source`` address.
+* ``RADD``: is the address of the device which should receive the message, that is, the ``remote`` address.
+* ``LEN``: is the length of the **payload without framing**. It is encoded as a 2-bytes array in little endian.
+* ``PAYLOAD``: is the payload of the message.
+* ``CRC``: is the CRC of the message **after the stuffing**.
+
+Data Sending
+^^^^^^^^^^^^
+The figure below shows the workflow of the data sending.
+This workflow could be divided in the following steps:
+
+    1. A publisher application calls the *Client* library to send a given topic.
+    2. The *Client* library serializes the topic inside a XRCE message using *Micro CDR*.
+       As result, the XRCE message with the topic is stored in a **Output Stream Buffer**.
+    3. The *Client* library calls the Serial Transport in order to send the serialized message.
+    4. The Serial Transport frames the message, that is, add the header, payload and CRC of the frame taking into account the stuffing.
+       This step takes place in an auxiliary buffer called **Framing Buffer**.
+    5. Each time the Framing Buffer is full, the data is flushed into the **Device Buffer** calling the writing system function.
+
+.. image:: images/serial_transport_sending.svg
+
+This approach has some advantages which should be pointed out:
+
+    1. The HDLD framing and the CRC control provides **integrity** and **security** to the Serial Transport.
+    2. The framing technique allows to **reducing memory usage**.
+       This is because the Framing Buffer size (42 bytes) bounds the Device Buffer size.
+    3. The framing technique also allows sending **large data** over serial.
+       This is because the message size is not bounded by the Device Buffer size, since the message is fragmented and stuffing during the framing stage.
+
+Data Receiving
+^^^^^^^^^^^^^^
+The workflow of the data receiving is analogous to the data sending workflow:
+
+    1. A subscriber application call the *Client* library to receive a given topic.
+    2. The *Client* library calls the Serial Transport in order to receive the serial message.
+    3. The Serial Transport reads data from the **Device Buffer** and unframes the raw data received from the Device Buffer in the **Unframing Buffer**.
+    4. Once the Unframing Buffer is full, the Serial Transport append the fragment into the **Input Stream Buffer**.
+       This operation is repeated until a complete message is received.
+    5. The *Client* library deserialized the topic from the Input Stream Buffer to the user topic struct.
+
+.. image:: images/serial_transport_receiving.svg
+
+It should point out that this approach has the same advantages that the sending one.
+
