@@ -3,9 +3,15 @@
 skinparam roundcorner 20
 skinparam monochrome true
 
+package "server layer" <<Rectangle>> {
+    class Server 
+}
+
 interface Server {
     +virtual void <b>on_create_client()</b> = 0
     +virtual void <b>on_delete_client()</b> = 0
+    +virtual ClientKey <b>get_client_key()</b> = 0
+    +virtual EndPoint <b>get_source()</b> = 0
     ....
     -virtual bool <b>init()</b> = 0
     -virtual bool <b>close()</b> = 0
@@ -14,16 +20,18 @@ interface Server {
     -virtual int <b>get_error()</b> = 0
 }
 
-package "session manager" <<Rectangle>> {
+package "transport layer" <<Rectangle>> {
     class UDPServerBase
 }
 
 class UDPServerBase {
     +void <b>on_create_client()</b> override
     +void <b>on_delete_client()</b> override
+    +virtual ClientKey <b>get_client_key()</b> = 0
+    +virtual EndPoint <b>get_source()</b> = 0
 }
 
-package "platform dependent implementation" <<Rectangle>> {
+package "platform layer" <<Rectangle>> {
     class UDPServerLinux
     class UDPServerWindows
 }
@@ -47,18 +55,5 @@ class UDPServerWindows {
 Server <|-- UDPServerBase
 UDPServerBase <|-- UDPServerLinux
 UDPServerBase <|-- UDPServerWindows
-
-
-'abstract EndPoint
-'class UDPEndPoint {
-'    -uint32_t addr_;
-'    -uint16_t port_;
-'    +uint32_t get_addr()
-'    +uint16_t get_port()
-'}
-'
-'EndPoint <|-- UDPEndPoint
-'"session manager" --> UDPEndPoint
-'Server --> EndPoint
 
 @enduml
