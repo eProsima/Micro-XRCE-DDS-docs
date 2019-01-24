@@ -93,7 +93,7 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
     The wait time for the next heartbeat will be double.
     It is measured in milliseconds.
 
-``CONFIG_BIG_ENDIANNESS=<number>``
+``CONFIG_BIG_ENDIANNESS=<bool>``
     This value must be correspond to the memory endianness of the device in which the *Client* is running.
     `0` implies that the machine is little endian and `1` implies big endian.
 
