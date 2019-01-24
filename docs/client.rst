@@ -93,11 +93,9 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
     The wait time for the next heartbeat will be double.
     It is measured in milliseconds.
 
-``CONFIG_MACHINE_ENDIANNESS=<number>``
+``CONFIG_BIG_ENDIANNESS=<number>``
     This value must be correspond to the memory endianness of the device in which the *Client* is running.
     `0` implies that the machine is little endian and `1` implies big endian.
-    It this entry is not in the ``client.config`` the build system will get this value from the machine that is compiling the library.
-    For cross compiling, you must set this value manually with the endianness of the device that run the *Client*.
 
 ``CONFIG_UDP_TRANSPORT_MTU=<number>``
     This value corresponds to the `Maximum Transmission Unit` able to send and receive by UDP.
@@ -343,7 +341,7 @@ This implies:
 2. If there is any reliable stream, it will perform the asociated reliable behaviour to ensure the communication.
 3. Listenes messages from the *Agent* and call the associated callback if exists (a topic callback or an status callback).
 
-The ``_until_confirm_delivery`` suffix function version will perform these actions during ``timeout`` 
+The ``_until_confirm_delivery`` suffix function version will perform these actions during ``timeout``
 or until the output reliable streams confirm that the sent messages have been received by the *Agent*.
 The function will return ``true`` if the sent data have been confirmed, ``false`` otherwise.
 
@@ -920,7 +918,7 @@ The following table summarize the behaviour of the *Agent* under entity creation
 Don't care                  NO                Entity is created.
 ``0``                       YES               No action is taken, and ``UXR_STATUS_ERR_ALREADY_EXITS`` is returned.
 ``UXR_REPLACE``             YES               Existing entity is deleted, requested entity is created and ``UXR_STATUS_OK`` is returned.
-``UXR_REUSE``               YES               | If entity matches no action is taken and ``UXR_STATUS_OK_MATCHED`` is returned. 
+``UXR_REUSE``               YES               | If entity matches no action is taken and ``UXR_STATUS_OK_MATCHED`` is returned.
                                               | If entity does not match no action is taken and ``UXR_STATUS_ERR_MISMATCH`` is returned.
 ``UXR_REUSE | UXR_REPLACE`` YES               | If entity matches no action is taken and ``UXR_STATUS_OK_MATCHED`` is returned.
                                               | If entity does not match, exiting entity is deleted, requested entity is created and ``UXR_STATUS_OK`` is returned.
