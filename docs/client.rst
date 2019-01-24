@@ -95,7 +95,7 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
 
 ``CONFIG_BIG_ENDIANNESS=<bool>``
     This value must be correspond to the memory endianness of the device in which the *Client* is running.
-    `0` implies that the machine is little endian and `1` implies big endian.
+    `FALSE` implies that the machine is little endian and `TRUE` implies big endian.
 
 ``CONFIG_UDP_TRANSPORT_MTU=<number>``
     This value corresponds to the `Maximum Transmission Unit` able to send and receive by UDP.
