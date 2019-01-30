@@ -50,10 +50,6 @@ Run an Agent
 To run the *Agent* you should build it as indicated in :ref:`installation_label`.
 Once it is built successfully you just need to launch it executing the following command.
 
-For Serial communication: ::
-
-    $ ./MicroXRCEAgent serial <device>
-
 For UDP communication: ::
 
     $ ./MicroXRCEAgent udp <port> [<discovery-port>]
@@ -61,6 +57,23 @@ For UDP communication: ::
 For TCP communication: ::
 
     $ ./MicroXRCEAgent tcp <port> [<discovery-port>]
+
+For Serial communication (only Linux): ::
+
+    $ ./MicroXRCEAgent serial <device> [<baudrate>]
+
+The ``<device>`` is the device file that represents the serial port, and the ``<baudrate>`` is the baud rate of the communication which can take the following values:
+0, 50, 75, 110, 134, 150, 200, 300, 600, 1200, 1800, 240, 4800, 9600, 19200, 38400, 57600, 115200 (default), 230400, 460800, 500000, 576000, 921600, 1000000, 1152000, 1500000, 2000000, 2500000, 3000000, 3500000 or 4000000 Bd;
+any other value will be converted to ``int`` using the ``atoi`` function.
+
+For Pseudo-Serial communication (only Linux): ::
+
+    $ ./MicroXRCEAgent pseudo-serial [<baudrate>]
+
+In this case, a pseudo-terminal will be created in order to simulate a serial communication.
+As in the serial transport, the baud rate could be set using the ``<baudrate>`` parameter.
+
+If the transport used is a reliable transport, the use of a best-effort stream over it is equivalent to use a reliable stream over not reliable transport.
 
 If the transport used is a reliable transport, the use of a best-effort stream over it is equivalent to use a reliable stream over a not reliable transport.
 
