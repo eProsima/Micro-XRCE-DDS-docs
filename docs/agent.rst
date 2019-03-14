@@ -5,7 +5,7 @@ Micro XRCE-DDS Agent
 
 *Micro XRCE-DDS Agent* acts as a server between the DDS Network and *Micro XRCE-DDS Clients* applications.
 *Agents* receive messages containing operations from *Clients*.
-Also *Agents* keep track of the *Clients* and the entities they create.
+Also, *Agents* keep track of the *Clients* and the entities they create.
 The *Agent* uses the entities to interact with the DDS Global Data Space on behalf of the *Clients*.
 
 The communication between a *Client* and an *Agent* currently supports UDP, TCP and Serial (dependent on the platform).
@@ -48,54 +48,50 @@ Run an Agent
 ------------
 
 To run the *Agent* you should build it as indicated in :ref:`installation_label`.
-Once it is built successfully you just need to launch it executing the following command.
+Once it is built successfully, you just need to launch it executing the following command.
 
-For UDP communication: ::
+**UDP communication** ::
 
-    $ ./MicroXRCEAgent udp <port> [<discovery-port>]
+    $ ./MicroXRCEAgent --udp <local-port> [--discovery <discovery-port>] [--refs <refs-file>]
 
-For TCP communication: ::
+Launch a UDP server over port ``<local-port>``. It has the following options:
 
-    $ ./MicroXRCEAgent tcp <port> [<discovery-port>]
+* ``--discovery <discovery-port>`` (only Linux): select a port for the discovery server which has the port number ``<7400>`` by default.
+* ``--refs <refs-file>``: load a reference file using the relative path to the working directory.
+  This reference file shall be composed by a set of Fast RTPS profiles following the `XML syntax <https://eprosima-fast-rtps.readthedocs.io/en/latest/xmlprofiles.html>`_ described in Fast RTPS.
+  The ``profile_name`` attribute of each profile represents a reference to an XRCE-Entity so that it could be used by the *Clients* to create entities by reference.
 
-For Serial communication (only Linux): ::
+**TCP communication** ::
 
-    $ ./MicroXRCEAgent serial <device> [<baudrate>]
+    $ ./MicroXRCEAgent --tcp <local-port> [--discovery <discovery-port>] [--refs <refs-file>]
 
-The ``<device>`` is the device file that represents the serial port, and the ``<baudrate>`` is the baud rate of the communication which can take the following values:
-0, 50, 75, 110, 134, 150, 200, 300, 600, 1200, 1800, 240, 4800, 9600, 19200, 38400, 57600, 115200 (default), 230400, 460800, 500000, 576000, 921600, 1000000, 1152000, 1500000, 2000000, 2500000, 3000000, 3500000 or 4000000 Bd;
-any other value will be converted to ``int`` using the ``atoi`` function.
+Launch a TCP server over port ``<local-port>``. It has the following options:
 
-For Pseudo-Serial communication (only Linux): ::
+* ``--discovery <discovery-port>`` (only Linux): select a port for the discovery server which has the port number ``<7400>`` by default.
+* ``--refs <refs-file>``: load a reference file using the relative path to the working directory.
+  This reference file shall be composed by a set of Fast RTPS profiles following the `XML syntax <https://eprosima-fast-rtps.readthedocs.io/en/latest/xmlprofiles.html>`_ described in Fast RTPS.
+  The ``profile_name`` attribute of each profile represents a reference to an XRCE-Entity so that it could be used by the *Clients* to create entities by reference.
 
-    $ ./MicroXRCEAgent pseudo-serial [<baudrate>]
+**Serial communication** (only Linux) ::
 
-In this case, a pseudo-terminal will be created in order to simulate a serial communication.
-As in the serial transport, the baud rate could be set using the ``<baudrate>`` parameter.
+    $ ./MicroXRCEAgent --serial <device-name> [--baudrate <baudrate>] [--refs <refs-file>]
 
-If the transport used is a reliable transport, the use of a best-effort stream over it is equivalent to use a reliable stream over not reliable transport.
+Launch a Serial server over device ``<device-name>``. It has the following options:
 
-If the transport used is a reliable transport, the use of a best-effort stream over it is equivalent to use a reliable stream over a not reliable transport.
+* ``--baudrate <baudrate>``: set the baud rate of the communication. It can take the following values:
+  0, 50, 75, 110, 134, 150, 200, 300, 600, 1200, 1800, 240, 4800, 9600, 19200, 38400, 57600, 115200 (default), 230400, 460800, 500000, 576000, 921600, 1000000, 1152000, 1500000, 2000000, 2500000, 3000000, 3500000 or 4000000 Bd.
+* ``--refs <refs-file>``: load a reference file using the relative path to the working directory.
+  This reference file shall be composed by a set of Fast RTPS profiles following the `XML syntax <https://eprosima-fast-rtps.readthedocs.io/en/latest/xmlprofiles.html>`_ described in Fast RTPS.
+  The ``profile_name`` attribute of each profile represents a reference to an XRCE-Entity so that it could be used by the *Clients* to create entities by reference.
 
-For running the *Agent* is necessary that the file ``DEFAULT_FASTRTPS_PROFILES.xml`` is located in the runtime folder.
-This file contains XML profiles of `Participants`, `Topic`, `DataWriters` and `DataReaders` referenced by a ``profile_name``.
-The *Client* can use the aforementioned ``profile_name`` in order to create these entities using the reference representation.
-Let's see an example.
+**Pseudo-Serial communication** (only Linux) ::
 
-The ``DEFAULT_FASTRTPS_PROFILES.xml`` contains the following participant profile:
+    $ ./MicroXRCEAgent --pseudo-serial [--baudrate <baudrate>] [--refs <refs-file>]
 
-.. code-block:: xml
+Launch a pseudo-serial server which provide a device to which *Clients* can connect. It has the following options:
 
-    <profiles>
-      <participant profile_name="default_xrce_participant_profile">
-        <rtps>
-          <name>default_participant</name>
-        </rtps>
-      </participant>
-    </profile>
-
-therefore, the *Client* can use `default_xrce_participant_profile` as ``ref`` in the ``mr_buffer_create_participant_ref`` function.
-
-Default installation place this file along with the *Agent* executable into ``/usr/local/bin`` for Linux or ``C:/Program Files/microxrcedds_agent/bin`` for Windows.
-
-
+* ``--baudrate <baudrate>``: set the baud rate of the communication. It can take the following values:
+  0, 50, 75, 110, 134, 150, 200, 300, 600, 1200, 1800, 240, 4800, 9600, 19200, 38400, 57600, 115200 (default), 230400, 460800, 500000, 576000, 921600, 1000000, 1152000, 1500000, 2000000, 2500000, 3000000, 3500000 or 4000000 Bd.
+* ``--refs <refs-file>``: load a reference file using the relative path to the working directory.
+  This reference file shall be composed by a set of Fast RTPS profiles following the `XML syntax <https://eprosima-fast-rtps.readthedocs.io/en/latest/xmlprofiles.html>`_ described in Fast RTPS.
+  The ``profile_name`` attribute of each profile represents a reference to an XRCE-Entity so that it could be used by the *Clients* to create entities by reference.
