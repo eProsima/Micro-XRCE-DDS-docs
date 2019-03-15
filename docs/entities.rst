@@ -18,7 +18,7 @@ Participants
     Participants can hold any number of Publishers and/or Subscribers
 
 Publisher
-    Publishers can hold any number of data readers.
+    Publishers can hold any number of data writers.
 
 Subscriber
     Subscribers can hold any number of data readers.

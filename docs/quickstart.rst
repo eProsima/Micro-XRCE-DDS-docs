@@ -13,7 +13,7 @@ The following example shows how to create a simple *eProsima Micro XRCE-DDS Clie
 
 First of all, we launch the `Agent`. For this example, the `Client` - `Agent` communication will be done through UDP: ::
 
-    $ cd /usr/local/bin && MicroXRCE-DDSAgent udp 2018
+    $ cd /usr/local/bin && MicroXRCEAgent --udp 2018
 
 Along with the `Agent`, the `PublishHelloWorldClient` example provided in the source code is launched.
 This `Client` example will publish in the DDS World the HelloWorld topic. ::
