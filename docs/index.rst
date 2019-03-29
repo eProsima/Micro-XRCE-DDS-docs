@@ -121,6 +121,6 @@ Release notes
 =============
 
 .. toctree::
-   :caption: Release Notes
+   :caption: Release notes
 
    notes
