@@ -60,7 +60,7 @@ The first 4 virtual function are transport specific (Transport Layer).
 These functions are override by the ``UDPServerBase`` class which is in charge of managing the sessions between *Clients* and the *Agent*.
 
 On the other hand, the last 5 virtual function are platform specific (Platform Layer).
-These functions are override by the ``UDPServerLinux`` and ``UDPServerWindows`` for Linux and Windows systems respectively.
+These functions are overridden by the ``UDPServerLinux`` and ``UDPServerWindows`` for Linux and Windows systems respectively.
 
 Client Transport Architecture
 -----------------------------
