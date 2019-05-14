@@ -7,7 +7,7 @@ Furthermore, this section describes how to add your own custom transport in *ePr
 
 Introduction
 ------------
-In contract to other IoT middleware such as MQTT and CoaP which work over a particular transport protocol, the XRCE protocol is design to support multiple transport protocol natively.
+In contrast to other IoT middleware such as MQTT and CoaP which work over a particular transport protocol, the XRCE protocol is designed to support multiple transport protocols natively.
 This feature of XRCE is enhanced by *eProsima Micro XRCE-DDS* in two ways.
 On the one hand, both *Agent* and *Client* have the logic of the protocol complete separate from the transport protocol through a set of interfaces, which will be explained in the following sections.
 On the other hand, taking advantage of the transport interface flexibility, one custom Serial Transport has been implemented in order to provide support to serial communication.
