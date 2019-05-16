@@ -26,6 +26,7 @@ Table Of contents
    operations
    deployment
    optimization
+   transport
 
 .. toctree::
    :caption: Release Notes

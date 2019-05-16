@@ -2,11 +2,13 @@
 
 Transport
 =========
+
 This section shows how the transport layer is implemented in both *eProsima Micro XRCE-DDS Agent* and *eProsima Micro XRCE-DDS Client*.
 Furthermore, this section describes how to add your custom transport in *eProsima Micro XRCE-DDS*.
 
 Introduction
 ------------
+
 In contrast to other IoT middleware such as MQTT and CoaP, which work over a particular transport protocol, the XRCE protocol is design to support multiple transport protocol natively.
 This feature of XRCE is enhanced by *eProsima Micro XRCE-DDS* in two ways.
 On the one hand, both *Agent* and *Client* have the logic of the protocol complete separate from the transport protocol through a set of interfaces, which will be explained in the following sections.
@@ -125,6 +127,7 @@ For example, in the case of Linux under UDP transport protocol, the ``uxrUDPPlat
 
 Custom Serial Transport
 -----------------------
+
 *eProsima Micro XRCE-DDS* has a **Custom Serial Transport** with the following features:
 
 * **HDLC Framing**: each serial framing begins with a ``begin_frame`` octet ``(0x7E)``, and the rest of the frame is byte stuffing using the ``space`` octet ``(0x7D)`` following by the original octet exclusive-or with ``0x20``.
@@ -149,6 +152,7 @@ All the aforementioned features are addressed using the following frame format: 
 
 Data Sending
 ^^^^^^^^^^^^
+
 The figure below shows the workflow of the data sending.
 This workflow could be divided into the following steps:
 
@@ -172,6 +176,7 @@ This approach has some advantages which should be pointed out:
 
 Data Receiving
 ^^^^^^^^^^^^^^
+
 The workflow of the data receiving is analogous to the data sending workflow:
 
     1. A subscriber application calls the *Client* library to receive a given topic.
