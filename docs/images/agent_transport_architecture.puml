@@ -1,0 +1,59 @@
+@startuml
+
+skinparam roundcorner 20
+skinparam monochrome true
+
+package "server layer" <<Rectangle>> {
+    class Server 
+}
+
+interface Server {
+    +virtual void <b>on_create_client()</b> = 0
+    +virtual void <b>on_delete_client()</b> = 0
+    +virtual ClientKey <b>get_client_key()</b> = 0
+    +virtual EndPoint <b>get_source()</b> = 0
+    ....
+    -virtual bool <b>init()</b> = 0
+    -virtual bool <b>close()</b> = 0
+    -virtual bool <b>recv_message()</b> = 0
+    -virtual bool <b>send_message()</b> = 0
+    -virtual int <b>get_error()</b> = 0
+}
+
+package "transport layer" <<Rectangle>> {
+    class UDPServerBase
+}
+
+class UDPServerBase {
+    +void <b>on_create_client()</b> override
+    +void <b>on_delete_client()</b> override
+    +virtual ClientKey <b>get_client_key()</b> = 0
+    +virtual EndPoint <b>get_source()</b> = 0
+}
+
+package "platform layer" <<Rectangle>> {
+    class UDPServerLinux
+    class UDPServerWindows
+}
+
+class UDPServerLinux {
+    -bool <b>init()</b> override
+    -bool <b>close()</b> override
+    -bool <b>recv_message()</b> override
+    -bool <b>send_message()</b> override
+    -int <b>get_error()</b> override
+}
+
+class UDPServerWindows {
+    -bool <b>init()</b> override
+    -bool <b>close()</b> override
+    -bool <b>recv_message()</b> override
+    -bool <b>send_message()</b> override
+    -int <b>get_error()</b> override
+}
+
+Server <|-- UDPServerBase
+UDPServerBase <|-- UDPServerLinux
+UDPServerBase <|-- UDPServerWindows
+
+@enduml
