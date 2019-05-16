@@ -129,7 +129,8 @@ Custom Serial Transport
 
 * **HDLC Framing**: each serial framing begins with a ``begin_frame`` octet ``(0x7E)``, and the rest of the frame is byte stuffing using the ``space`` octet ``(0x7D)`` following by the original octet exclusive-or with ``0x20``.
   For example, if the frame contains the octet `0x7E` it is encoded as `0x7D, 0x5E`; and the same for the octet `0x7E` which is encoded as `0x7D, 0x5D`.
-* **CRC Calculation**: serial frames end with a CRC-16 for detecting frame corruption. The CRC-16 is computed using the polynomial ``x^16 + x^12 + x^5 + 1`` after the frame stuffing for each octet of the frame and including the ``begin_frame``.
+* **CRC Calculation**: serial frames end with the CRC-16 for detecting frame corruption.
+  The CRC-16 is computed  using the polynomial ``x^16 + x^12 + x^5 + 1`` after the frame stuffing for each octet of the frame and including the ``begin_frame``, as it is describes in `RFC 1662 <https://tools.ietf.org/html/rfc1662>`_ (see sec. C.2).
 * **Routing header**: the Serial Transport provides ``source`` and ``remote`` address in the framing, which could be used for implement a routing protocol.
 
 All the aforementioned features are addressed using the following frame format: ::
