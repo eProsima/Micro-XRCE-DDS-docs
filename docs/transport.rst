@@ -201,7 +201,7 @@ This subsection shows how a **Shapes Topic**, defined by the IDL below, is packe
 
     ShapeType topic = {"red", 11, 11, 89};
 
-In Serial Transport, the topic packaging could be divided into 2 steps:
+In Serial Transport, the topic packaging could be divided into two steps:
 
     1. The Session Layer adds the XRCE header and subheader.
        It adds an overhead of 12 bytes to the topic.
