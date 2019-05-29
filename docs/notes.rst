@@ -1,4 +1,16 @@
-Version 1.1.0
+Version 1.0.3
+=============
+
+**Agent 1.0.3 | Client 1.0.1**
+
+This version includes the following changes in the Agent:
+
+* Agent 1.0.3:
+    * Fast RTPS version upgraded to 1.7.2.
+    * Baud rate support improvements.
+    * Bugfixes.
+
+Version 1.0.2
 =============
 
 **Agent 1.0.2 | Client 1.0.1**
