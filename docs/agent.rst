@@ -1,9 +1,9 @@
 .. _micro_xrce_dds_agent_label:
 
-Micro XRCE-DDS Agent
-====================
+eProsima Micro XRCE-DDS Agent
+=============================
 
-*Micro XRCE-DDS Agent* acts as a server between the DDS Network and *Micro XRCE-DDS Clients* applications.
+*eProsima Micro XRCE-DDS Agent* acts as a server between the DDS Network and *eProsima Micro XRCE-DDS Clients* applications.
 *Agents* receive messages containing operations from *Clients*.
 Also, *Agents* keep track of the *Clients* and the entities they create.
 The *Agent* uses the entities to interact with the DDS Global Data Space on behalf of the *Clients*.
@@ -14,7 +14,7 @@ While it is running, the *Agent* will attend any received request from the *Clie
 Configuration
 -------------
 
-There are several configuration parameters which can be set at **compile time** in order to configure the *Micro RTPS Agent*.
+There are several configuration parameters which can be set at **compile time** in order to configure the *eProsima Micro XRCE-DDS Agent*.
 These parameters can be selected as CMake flags (``-D<parameter>=<value>``) before the compilation.
 The following is a list of the aforementioned parameters:
 
@@ -27,21 +27,11 @@ The following is a list of the aforementioned parameters:
 ``CONFIG_HEARTBEAT_PERIOD``
     Specify the ``HEARTBEAT`` message period in millisecond (default 200).
 
-``CONFIG_SERIAL_TRANSPORT_MTU``
-    Specify the `Maximum Transmission Unit` able to send and receive by Serial (default 512).
-
-``CONFIG_UDP_TRANSPORT_MTU``
-    Specify the `Maximum Transmission Unit` able to send and receive by UDP (default 512).
-
-``CONFIG_TCP_TRANSPORT_MTU``
-    Specify the `Maximum Transmission Unit` able to send and receive by TCP (default 512).
-
 ``CONFIG_TCP_MAX_CONNECTIONS``
     Specify the maximum number of connections, the *Agent* is able to manage (default 100).
 
 ``CONFIG_TCP_MAX_BACKLOG_CONNECTIONS``
     Specify the maximum number of incoming connections (pending to establish), the *Agent* is able to manage (default 100).
-
 
 
 Run an Agent

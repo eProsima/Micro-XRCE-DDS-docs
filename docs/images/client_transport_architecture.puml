@@ -1,0 +1,67 @@
+@startuml
+
+skinparam roundcorner 20
+skinparam monochrome true
+
+package "session layer" <<Rectangle>> {
+    class uxrCommunication
+}
+
+interface uxrCommunication {
+    void* instance
+    +virtual bool <b>send_msg_func()</b> = 0
+    +virtual bool <b>recv_msg_func()</b> = 0
+    +virtual uint8_t <b>comm_error_func()</b> = 0
+    uint16_t mtu
+}
+
+package "transport layer" <<Rectangle>> {
+    class uxrUDPTransport
+}
+
+interface uxrUDPTransport {
+    uxrCommunication comm
+    uxrUDPPlatform* platform
+    uint8_t buffer[mtu_size]
+    ----
+    +bool <b>send_udp_message()</b> override
+    +bool <b>recv_udp_message()</b> override
+    +bool <b>get_udp_error()</b> override
+    ....
+    +bool <b>uxr_init_udp_transport()</b>
+    +bool <b>uxr_close_udp_transport()</b>
+    ....
+    -virtual bool <b>uxr_init_udp_platform()</b> = 0
+    -virtual bool <b>uxr_close_udp_platform()</b> = 0
+    -virtual size_t <b>uxr_write_udp_data_platform()</b> = 0
+    -virtual size_t <b>uxr_read_udp_data_platform()</b> = 0
+}
+
+package "platform layer" <<Rectangle>> {
+    class "uxrUDPPlatform <<Linux>>"
+    class "uxrUDPPlatform <<Windows>>"
+}
+
+class "uxrUDPPlatform <<Linux>>" {
+    -struct sockaddr remote_addr
+    -struct pollfd poll_fd
+    -bool <b>uxr_init_udp_platform()</b> override
+    -bool <b>uxr_close_udp_platform()</b> override
+    -size_t <b>uxr_write_udp_data_platform()</b> override 
+    -size_t <b>uxr_read_udp_data_platform()</b> override
+}
+
+class "uxrUDPPlatform <<Windows>>" {
+    -struct sockaddr remote_addr
+    -WSAPOLLFD pollfd poll_fd
+    -bool <b>uxr_init_udp_platform()</b> override
+    -bool <b>uxr_close_udp_platform()</b> override
+    -size_t <b>uxr_write_udp_data_platform()</b> override 
+    -size_t <b>uxr_read_udp_data_platform()</b> override
+}
+
+uxrCommunication <|-- uxrUDPTransport
+uxrUDPTransport <|-- "uxrUDPPlatform <<Linux>>"
+uxrUDPTransport <|-- "uxrUDPPlatform <<Windows>>"
+
+@enduml

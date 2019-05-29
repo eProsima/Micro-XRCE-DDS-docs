@@ -3,14 +3,14 @@
 Deployment example
 ==================
 
-This part will show how to deploy a system using *Micro XRCE-DDS* in a real environment.
+This part will show how to deploy a system using *eProsima Micro XRCE-DDS* in a real environment.
 An example of this can be found into ``examples/Deployment`` folder.
 
 Previous tutorials are based in `all in one` examples, that is, examples that create entities, publish or subscribe and then delete the resources.
 One possible real purpose of this, consists in differentiate the logic of `creating entities` and the actions of `publishing and subscribing`.
 This can be done creating two differents *Clients*.
 One in charge of configure the entities in the *Agent*, and run possibly once, only for creating the entities at configuration time.
-And other/s that logs in the same session as the configure *Client* (sharing the entities) and only publishes or subscribes data.
+And other/s that logs in the same session as the configured *Client* (sharing the entities) and only publishes or subscribes data.
 
 This way allows to easily create *Clients* in a real scenario only with the purpose of send and receive data.
 Related to it, the concept of `profile` allows to build the *Client* library only with the chosen behavior (only publish or only subscribe, for example).
@@ -72,6 +72,6 @@ Subscriber
         :align: center
 
 Once the subscriber is configured, the `subscriber client` logs in the *Agent* `B`.
-As all their entities have been created previously, so it only need to configure the read after log in.
+As all their entities have been created previously, so it only needs to configure the read after log in.
 Once the data request message has been sent, the subscriber will receive the topics from the publisher through `DDS` world.
 
