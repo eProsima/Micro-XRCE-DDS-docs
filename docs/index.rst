@@ -4,7 +4,7 @@
 
 
 eProsima Micro XRCE-DDS
------------------------
+=======================
 
 *eProsima Micro XRCE-DDS* is a software solution which allows communicating eXtremely Resource Constrained Environments (XRCEs) with an existing DDS network.
 This implementation complies with the specification proposal, "DDS for eXtremely Resource Constrained Environments" submitted to the Object Management Group (OMG) consortium.
@@ -17,8 +17,9 @@ and enables them to take part as DDS publishers and/or subscribers in the DDS Gl
 
 .. image:: images/xrcedds_architecture.png
 
-Main features
-~~~~~~~~~~~~~
+Main Features
+-------------
+
 High performance.
     Uses a static low-level serialization library `(eProsima Micro CDR) <https://github.com/eProsima/Micro-CDR>`_ that serialize in `XCDR <https://www.omg.org/spec/DDS-XTypes/1.2/PDF>`_.
 
@@ -62,11 +63,13 @@ Commercial support
     Available at `support@eprosima.com`
 
 Installation
-~~~~~~~~~~~~
+------------
+
 To install *eProsima Micro XRCE-DDS*, follow the instructions of :ref:`installation_label` page.
 
 User manual
-~~~~~~~~~~~
+-----------
+
 To test *eProsima Micro XRCE-DDS* in your computer, you can follow the :ref:`quickstart_label` instructions.
 This page shows how to create a simple publisher as a XRCE client that send topics into the DDS World.
 
@@ -81,12 +84,13 @@ To know more about *eProsima Micro XRCE-DDS*, you can read the corresponding par
 If you are interested in how XRCE works, read :ref:`entities_label` and :ref:`operations_label` pages.
 
 eProsima Micro XRCE-DDS Gen
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
+
 To create a serialization/deserialization topic code for *eProsima Micro XRCE-DDS Client* and make easy the built of examples using thoses topics, there is a tool called `microxrceddsgen`.
 Information about this tool can be found in :ref:`microxrceddsgen_label` page.
 
-Index
------
+Installation manual
+===================
 
 .. toctree::
    :caption: Installation manual
@@ -94,8 +98,11 @@ Index
    dependencies
    installation
 
+User manual
+===========
+
 .. toctree::
-   :caption: User Manual
+   :caption: User manual 
 
    introduction
    quickstart
@@ -110,7 +117,10 @@ Index
    optimization
    transport
 
+Release notes
+=============
+
 .. toctree::
-   :caption: Release Notes
+   :caption: Release notes
 
    notes

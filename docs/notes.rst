@@ -1,6 +1,63 @@
 Version 1.1.0
 =============
 
+**Agent 1.0.2 | Client 1.0.1**
+
+This version includes the following changes in the Agent:
+
+* Agent 1.0.2:
+    * Fast RTPS version upgraded to 1.7.0.
+    * Added dockerfile.
+    * Documentation fixes.
+
+Previous Versions
+-----------------
+
+Version 1.0.1
+~~~~~~~~~~~~~
+
+**Agent 1.0.1 | Client 1.0.1**
+
+This release includes the following changes in both Agent and Client:
+
+* Agent 1.0.1:
+    * Fixed Windows installation.
+    * Fast CDR version upgraded.
+    * Simplified CMake code.
+    * Bug fixes.
+
+* Client 1.0.1:
+    * Fixed Windows configuration.
+    * MicroCDR version upgraded.
+    * Cleaned unused code.
+    * Fixed documentation.
+    * Bug fixes.
+
+
+Version 1.0.0
+~~~~~~~~~~~~~
+
+This release includes the following features:
+
+* Message fragmentation.
+* Minor changes.
+* Improved tests.
+* Reorganized project.
+* Bug fixes.
+
+Previous versions
+------------------
+
+Version 1.0.1
+~~~~~~~~~~~~~
+This release includes the following features:
+
+* More tests.
+* Reorganized project.
+* Bug fixes.
+
+Version 1.0.0
+~~~~~~~~~~~~~
 This release includes the following features:
 
 * Message fragmentation.
@@ -39,6 +96,7 @@ This release includes the following features:
 
 Version 1.0.0Beta2
 ~~~~~~~~~~~~~~~~~~
+
 This release includes the following features:
 
 * Reliability.

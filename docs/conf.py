@@ -29,7 +29,7 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = []
+extensions = ["sphinx.ext.imgconverter"]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -266,7 +266,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'MicroXRCE-DDS.tex', u'MicroXRCE-DDS Documentation',
+    ("contents", 'MicroXRCE-DDS.tex', u'MicroXRCE-DDS Documentation',
      u'eProsima', 'manual'),
 ]
 
