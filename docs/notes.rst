@@ -1,14 +1,19 @@
 Version 1.0.3
 =============
 
-**Agent 1.0.3 | Client 1.0.1**
+**Agent 1.0.3 | Client 1.0.2**
 
-This version includes the following changes in the Agent:
+This version includes the following changes in the Agent and Client:
 
 * Agent 1.0.3:
     * Fast RTPS version upgraded to 1.7.2.
     * Baud rate support improvements.
     * Bugfixes.
+
+* Client 1.0.2:
+    * Uses new Fast RTPS 1.7.2 XML format.
+    * Add Raspberry Pi toolchain.
+    * Fix bugs.
 
 Version 1.0.2
 =============
