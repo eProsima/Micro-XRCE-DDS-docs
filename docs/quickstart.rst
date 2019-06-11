@@ -13,18 +13,18 @@ The following example shows how to create a simple *eProsima Micro XRCE-DDS Clie
 
 First of all, we launch the `Agent`. For this example, the `Client` - `Agent` communication will be done through UDP: ::
 
-    $ cd /usr/local/bin && MicroXRCEAgent --udp 2018
+    $ cd /usr/local/bin && MicroXRCEAgent udp -p 2019 -r <references-file>
 
 Along with the `Agent`, the `PublishHelloWorldClient` example provided in the source code is launched.
 This `Client` example will publish in the DDS World the HelloWorld topic. ::
 
-    $ examples/uxr/client/PublishHelloWorld/PublishHelloWorldClient 127.0.0.1 2018
+    $ examples/uxr/client/PublishHelloWorld/PublishHelloWorldClient 127.0.0.1 2019
 
 The code of the *PublishHelloWorldClient* is the following:
 
 .. code-block:: C
 
-    // Copyright 2017 Proyectos y Sistemas de Mantenimiento SL (eProsima).
+    // Copyright 2019 Proyectos y Sistemas de Mantenimiento SL (eProsima).
     //
     // Licensed under the Apache License, Version 2.0 (the "License");
     // you may not use this file except in compliance with the License.
@@ -66,7 +66,7 @@ The code of the *PublishHelloWorldClient* is the following:
         // Transport
         uxrUDPTransport transport;
         uxrUDPPlatform udp_platform;
-        if(!uxr_init_udp_transport(&transport, &udp_platform, "127.0.0.1", 2018))
+        if(!uxr_init_udp_transport(&transport, &udp_platform, ip, port))
         {
             printf("Error at create transport.\n");
             return 1;
@@ -161,13 +161,13 @@ The code of the *PublishHelloWorldClient* is the following:
 
 After it, we will launch the *SubscriberHelloWorldClient*. This `Client` example will subscribe to HelloWorld topic from the DDS World. ::
 
-    $ examples/uxr/client/SubscriberHelloWorld/SubscribeHelloWorldClient 127.0.0.1 2018
+    $ examples/uxr/client/SubscriberHelloWorld/SubscribeHelloWorldClient 127.0.0.1 2019
 
 The code of the *SubscriberHelloWorldClient* is the following:
 
 .. code-block:: C
 
-    // Copyright 2017 Proyectos y Sistemas de Mantenimiento SL (eProsima).
+    // Copyright 2019 Proyectos y Sistemas de Mantenimiento SL (eProsima).
     //
     // Licensed under the Apache License, Version 2.0 (the "License");
     // you may not use this file except in compliance with the License.
@@ -223,7 +223,7 @@ The code of the *SubscriberHelloWorldClient* is the following:
         // Transport
         uxrUDPTransport transport;
         uxrUDPPlatform udp_platform;
-        if(!uxr_init_udp_transport(&transport, &udp_platform, "127.0.0.1", 2018))
+        if(!uxr_init_udp_transport(&transport, &udp_platform, ip, port))
         {
             printf("Error at create transport.\n");
             return 1;
