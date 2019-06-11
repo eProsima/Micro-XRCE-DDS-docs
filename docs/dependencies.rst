@@ -11,12 +11,11 @@ Required dependences
     *eProsima Fast RTPS* could be installed following the instructions:
     `eProsima Fast RTPS installation guide <http://eprosima-fast-rtps.readthedocs.io/en/latest/index.html#installation>`_.
 
-NOTE: *eProsima Micro XRCE-DDS Agent* is currently working under *eProsima Fast RTPS* develop branch until new *eProsima Fast RTPS* v1.7.0 Release is launched.
 
 Windows
 ~~~~~~~
 Microsoft Visual C++ 2015 or 2017
-    *eProsima Micro XRCE-DDS* is supported on Windows over Microsoft Visual C++ 2015 or 2017 framework.
+    *eProsima Micro XRCE-DDS* is supported on Windows over Microsoft Visual C++ 2015 and 2017 framework.
 
 Additional Dependencies
 -----------------------
