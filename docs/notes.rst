@@ -1,9 +1,51 @@
+Version 1.1.0
+=============
+
+**Agent 1.1.0 | Client 1.1.1**
+
+This version include the following changes in both Agent and Client:
+
+* Agent 1.1.0:
+    * Add
+        * Message fragmentation.
+        * P2P communication.
+        * API.
+        * Time synchronization.
+        * Windows discovery support.
+        * New unitary tests.
+        * API documentation.
+        * Logger.
+        * Command Line Interface.
+        * Centralized middleware.
+        * Remove Asio dependency.
+    * Change
+        * CMake approach.
+        * Server's thread pattern.
+    * Fix
+        * Serial transport.
+
+* Client 1.1.1:
+    * Add
+        * Message fragmentation.
+        * Time synchronization.
+        * Windows discovery support.
+        * New unitary tests.
+        * API documentation.
+        * Raspberry Pi support.
+    * Change
+        * Memory usage improvement.
+        * CMake approach.
+        * Discovery API.
+        * Examples usage.
+    * Fix
+        * Acknack reading.
+
 Version 1.0.3
 =============
 
 **Agent 1.0.3 | Client 1.0.2**
 
-This version includes the following changes in the Agent and Client:
+This version includes the following changes in both Agent and Client:
 
 * Agent 1.0.3:
     * Fast RTPS version upgraded to 1.7.2.
