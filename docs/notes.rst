@@ -39,6 +39,7 @@ This version include the following changes in both Agent and Client:
         * Examples usage.
     * Fix
         * Acknack reading.
+        * User data bad aligment.
 
 Version 1.0.3
 =============

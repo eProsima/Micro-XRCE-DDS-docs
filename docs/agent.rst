@@ -50,7 +50,7 @@ Once it is built successfully, you just need to launch it executing one of the f
       -m,--middleware TEXT in {ced,dds}=dds   Select the kind of Middleware
       -r,--refs FILE                          Load a reference file
       -v,--verbose UINT in {0,1,2,3,4,5,6}=4  Select log level from less to more verbose
-      -d,--discovery                          Active the Discovery server
+      -d,--discovery                          Activate the Discovery server
       --disport UINT=7400 Needs: --discovery  Select the port for the Discovery server
       --p2p UINT                              Activate the P2P profile using the given port
 
@@ -64,13 +64,13 @@ Once it is built successfully, you just need to launch it executing one of the f
       -m,--middleware TEXT in {ced,dds}=dds   Select the kind of Middleware
       -r,--refs FILE                          Load a reference file
       -v,--verbose UINT in {0,1,2,3,4,5,6}=4  Select log level from less to more verbose
-      -d,--discovery                          Active the Discovery server
+      -d,--discovery                          Activate the Discovery server
       --disport UINT=7400 Needs: --discovery  Select the port for the Discovery server
       --p2p UINT                              Activate the P2P profile using the given port
 
 **Serial server** (only Linux) ::
 
-    $ ./MicroXRCEAgent serial
+    $ ./MicroXRCEAgent serial [OPTIONS]
 
     Options:
       -h,--help                               Print this help message and exit
@@ -79,13 +79,13 @@ Once it is built successfully, you just need to launch it executing one of the f
       -m,--middleware TEXT in {ced,dds}=dds   Select the kind of Middleware
       -r,--refs FILE                          Load a reference file
       -v,--verbose UINT in {0,1,2,3,4,5,6}=4  Select log level from less to more verbose
-      -d,--discovery                          Active the Discovery server
+      -d,--discovery                          Activate the Discovery server
       --disport UINT=7400 Needs: --discovery  Select the port for the Discovery server
       --p2p UINT                              Activate the P2P profile using the given port
 
 **Pseudo-Serial server** (only Linux) ::
 
-    $ ./MicroXRCEAgent pseudo-serial
+    $ ./MicroXRCEAgent pseudo-serial [OPTIONS]
 
     Options:
       -h,--help                               Print this help message and exit
@@ -94,16 +94,14 @@ Once it is built successfully, you just need to launch it executing one of the f
       -m,--middleware TEXT in {ced,dds}=dds   Select the kind of Middleware
       -r,--refs FILE                          Load a reference file
       -v,--verbose UINT in {0,1,2,3,4,5,6}=4  Select log level from less to more verbose
-      -d,--discovery                          Active the Discovery server
+      -d,--discovery                          Activate the Discovery server
       --disport UINT=7400 Needs: --discovery  Select the port for the Discovery server
       --p2p UINT                              Activate the P2P profile using the given port
 
-* ``-d,--discovery <discovery-port>`` select a port for the discovery server which has the port number ``<7400>`` by default.
-* ``-r,--refs <refs-file>``: load a reference file using the relative path to the working directory.
-  This reference file shall be composed by a set of Fast RTPS profiles following the `XML syntax <https://eprosima-fast-rtps.readthedocs.io/en/latest/xmlprofiles.html>`_ described in Fast RTPS.
+* The reference file shall be composed by a set of Fast RTPS profiles following the `XML syntax <https://eprosima-fast-rtps.readthedocs.io/en/latest/xmlprofiles.html>`_ described in Fast RTPS.
   The ``profile_name`` attribute of each profile represents a reference to an XRCE-Entity so that it could be used by the *Clients* to create entities by reference.
-* ``-b,--baudrate <baudrate>``: set the baud rate of the communication. It can take the following values:
+* The ``-b,--baudrate <baudrate>`` options sets the baud rate of the communication. It can take the following values:
   0, 50, 75, 110, 134, 150, 200, 300, 600, 1200, 1800, 240, 4800, 9600, 19200, 38400, 57600, 115200 (default), 230400, 460800, 500000, 576000, 921600, 1000000, 1152000, 1500000, 2000000, 2500000, 3000000, 3500000 or 4000000 Bd.
-* ``-v,--verbose <level[0-6]>``: set log level from less to more verbose, in  level 0 the logger is off.
+* The ``-v,--verbose <level[0-6]>`` option sets log level from less to more verbose, in  level 0 the logger is off.
 * ``-m,--middleware <middleware-impl>``: set the middleware implementation to use. There are two: DDS (specified by the XRCE standard) and Centralized (topic are managed by the Agent similarly MQTT).
-* ``--p2p <port>``: enable P2P communication. Centralized middleware is necessary for this option.
+* The ``--p2p <port>`` option enables P2P communication. Centralized middleware is necessary for this option.
