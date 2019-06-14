@@ -41,6 +41,9 @@ This version include the following changes in both Agent and Client:
         * Acknack reading.
         * User data bad aligment.
 
+Previous Versions
+-----------------
+
 Version 1.0.3
 =============
 
@@ -70,11 +73,8 @@ This version includes the following changes in the Agent:
     * Added dockerfile.
     * Documentation fixes.
 
-Previous Versions
------------------
-
 Version 1.0.1
-~~~~~~~~~~~~~
+=============
 
 **Agent 1.0.1 | Client 1.0.1**
 
@@ -93,52 +93,9 @@ This release includes the following changes in both Agent and Client:
     * Fixed documentation.
     * Bug fixes.
 
-
 Version 1.0.0
-~~~~~~~~~~~~~
+=============
 
-This release includes the following features:
-
-* Message fragmentation.
-* Minor changes.
-* Improved tests.
-* Reorganized project.
-* Bug fixes.
-
-Previous versions
-------------------
-
-Version 1.0.1
-~~~~~~~~~~~~~
-This release includes the following features:
-
-* More tests.
-* Reorganized project.
-* Bug fixes.
-
-Version 1.0.0
-~~~~~~~~~~~~~
-This release includes the following features:
-
-* Message fragmentation.
-* Minor changes.
-* Improved tests.
-* Reorganized project.
-* Bug fixes.
-
-Previous versions
-------------------
-
-Version 1.0.1
-~~~~~~~~~~~~~
-This release includes the following features:
-
-* More tests.
-* Reorganized project.
-* Bug fixes.
-
-Version 1.0.0
-~~~~~~~~~~~~~
 This release includes the following features:
 
 * Extended C topic code generation tool (strings, sequences and n-dimensional arrays).
@@ -155,7 +112,7 @@ This release includes the following features:
 * API changes.
 
 Version 1.0.0Beta2
-~~~~~~~~~~~~~~~~~~
+==================
 
 This release includes the following features:
 

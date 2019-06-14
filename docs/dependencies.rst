@@ -11,7 +11,6 @@ Required dependences
     *eProsima Fast RTPS* could be installed following the instructions:
     `eProsima Fast RTPS installation guide <http://eprosima-fast-rtps.readthedocs.io/en/latest/index.html#installation>`_.
 
-
 Windows
 ~~~~~~~
 Microsoft Visual C++ 2015 or 2017
