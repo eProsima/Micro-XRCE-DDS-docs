@@ -21,6 +21,7 @@ This version include the following changes in both Agent and Client:
     * Change
         * CMake approach.
         * Server's thread pattern.
+        * Fast RTPS version upgraded to 1.8.0.
     * Fix
         * Serial transport.
 
