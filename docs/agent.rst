@@ -105,3 +105,41 @@ Once it is built successfully, you just need to launch it executing one of the f
 * The ``-v,--verbose <level[0-6]>`` option sets log level from less to more verbose, in  level 0 the logger is off.
 * ``-m,--middleware <middleware-impl>``: set the middleware implementation to use. There are two: DDS (specified by the XRCE standard) and Centralized (topic are managed by the Agent similarly MQTT).
 * The ``--p2p <port>`` option enables P2P communication. Centralized middleware is necessary for this option.
+
+Middleware Abstraction Layer
+----------------------------
+
+* What is the Middleware Abstraction Layer?
+* What is the propose of it?
+* Which implementations are available?
+
+.. image:: images/middleware_abstraction_layer.svg
+
+FastMiddleware
+^^^^^^^^^^^^^^
+
+* Use *eProsima Fast RTPS* a C++ implementation of the RTPS (Real Time Publish Subscribe) protocol.
+* The middleware that DDS-XRCE specified by default.
+
+.. _ced_middleware_label:
+
+CedMiddleware
+^^^^^^^^^^^^^
+
+* Middleware similar a MQTT, that is, the *Agent* acts as a MQTT broker:
+
+  * accepting connection from *Clients*,
+  * accepting topics messages published by *Client*,
+  * processing the subcribe and unsubscribe requests from *Client*,
+  * forwarding topics messages that match *Client* subscriptions,
+  * and closing the connection from the *Client*.
+
+How to add a middleware
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Easy... steps:
+
+#. step 1
+#. step 2
+#. ....
+

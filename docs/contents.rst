@@ -27,6 +27,7 @@ Table Of contents
    deployment
    optimization
    transport
+   p2p
 
 .. toctree::
    :caption: Release Notes

@@ -116,6 +116,7 @@ User manual
    deployment
    optimization
    transport
+   p2p
 
 Release notes
 =============
