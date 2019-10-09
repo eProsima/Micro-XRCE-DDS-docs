@@ -109,37 +109,44 @@ Once it is built successfully, you just need to launch it executing one of the f
 Middleware Abstraction Layer
 ----------------------------
 
-* What is the Middleware Abstraction Layer?
-* What is the propose of it?
-* Which implementations are available?
+The Middleware Abstraction Layer is an interface whose purpose is isolated the XRCE core from the middleware, as well as, to allow providing multiple middleware implementations.
+The interface has a set of pure virtual functions, which are called by the `ProxyClient` each time a *Client* requests for creating/deleting an entity or write/read data.
 
 .. image:: images/middleware_abstraction_layer.svg
+
+For the moment, the *Agent* accounts with two middleware implementations: *FastMiddleware* and *CedMiddleware*.
 
 FastMiddleware
 ^^^^^^^^^^^^^^
 
-* Use *eProsima Fast RTPS* a C++ implementation of the RTPS (Real Time Publish Subscribe) protocol.
-* The middleware that DDS-XRCE specified by default.
+The *FastMiddleware* uses *eProsima Fast RTPS*, a C++ implementation of the RTPS (Real Time Publish Subscribe) protocol.
+This middleware allows *Client* to produce and consume data in the DDS Global Data Space, and consequently in the ROS 2 system.
+In that case, the *Agent* has the default behaviour describes in the DDS-XRCE standard, that is, for each DDS-XRCE entity and DDS proxy entity is created, and the writing/reading action produces a publishing/subscribing operation in the DDS world.
 
 .. _ced_middleware_label:
 
 CedMiddleware
 ^^^^^^^^^^^^^
 
-* Middleware similar a MQTT, that is, the *Agent* acts as a MQTT broker:
+The *CedMiddleware* (Centralized Middleware) works similar to MQTT, that is, the *Agent* acts as a MQTT broker:
 
-  * accepting connection from *Clients*,
-  * accepting topics messages published by *Client*,
-  * processing the subcribe and unsubscribe requests from *Client*,
-  * forwarding topics messages that match *Client* subscriptions,
-  * and closing the connection from the *Client*.
+* accepting connection from *Clients*,
+* accepting topics messages published by *Client*,
+* processing subscribe and unsubscribe requests from *Client*,
+* forwarding topics messages that match *Client* subscriptions,
+* and closing the connection from the *Client*.
+ 
+By default, this middleware does not allow communication between *Client* connected to different *Agent*, but the :ref:`P2P communication <p2p_communication_label>` enable this feature.
 
 How to add a middleware
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Easy... steps:
+Adding a new middleware implementation is quite simple, just the following steps must be taken:
 
-#. step 1
-#. step 2
-#. ....
+#. Create a class that implement the `Middleware` class (see *inclue/uxr/agent/middleware/fast/FastMiddleware.hpp* and *src/cpp/middleware/fast.cpp* as examples).
+#. Add a `enum` member protected by defines in `Middleware::Kind` at *include/uxr/agent/middleware/Middleware.hpp*.
+#. Add a case in the switch of the `ProxyClient` constructor at *src/cpp/client/ProxyClient.cpp*.
+#. In *CMakeLists.txt* add an option similar to `UAGENT_FAST_PROFILE` and add the source to `SRCS` variable.
+#. In *include/uxr/agent/config.hpp.in* add a `#cmakedefine` with the name of the CMake option.
+#. Finally, add the CLI middleware option in `MiddlewareOpt` constructor at *include/uxr/agent/utils/CLI.hpp*.
 
