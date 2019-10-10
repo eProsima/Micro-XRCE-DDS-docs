@@ -109,26 +109,26 @@ Once it is built successfully, you just need to launch it executing one of the f
 Middleware Abstraction Layer
 ----------------------------
 
-The Middleware Abstraction Layer is an interface whose purpose is isolated the XRCE core from the middleware, as well as, to allow providing multiple middleware implementations.
+The Middleware Abstraction Layer is an interface whose purpose is to isolated the XRCE core from the middleware, as well as, to allow providing multiple middleware implementations.
 The interface has a set of pure virtual functions, which are called by the `ProxyClient` each time a *Client* requests for creating/deleting an entity or write/read data.
 
 .. image:: images/middleware_abstraction_layer.svg
 
-For the moment, the *Agent* accounts with two middleware implementations: *FastMiddleware* and *CedMiddleware*.
+For the moment, the *Agent* counts with two middleware implementations: *FastMiddleware* and *CedMiddleware*.
 
 FastMiddleware
 ^^^^^^^^^^^^^^
 
 The *FastMiddleware* uses *eProsima Fast RTPS*, a C++ implementation of the RTPS (Real Time Publish Subscribe) protocol.
 This middleware allows *Client* to produce and consume data in the DDS Global Data Space, and consequently in the ROS 2 system.
-In that case, the *Agent* has the default behaviour describes in the DDS-XRCE standard, that is, for each DDS-XRCE entity and DDS proxy entity is created, and the writing/reading action produces a publishing/subscribing operation in the DDS world.
+In that case, the *Agent* has the default behaviour as described in the DDS-XRCE standard, that is, for each DDS-XRCE entity a DDS proxy entity is created, and the writing/reading action produces a publishing/subscribing operation in the DDS world.
 
 .. _ced_middleware_label:
 
 CedMiddleware
 ^^^^^^^^^^^^^
 
-The *CedMiddleware* (Centralized Middleware) works similar to MQTT, that is, the *Agent* acts as a MQTT broker:
+The *CedMiddleware* (Centralized Middleware) works similar to MQTT, that is, the *Agent* acts as a broker:
 
 * accepting connection from *Clients*,
 * accepting topics messages published by *Client*,
