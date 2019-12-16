@@ -55,28 +55,28 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
     Enables or disables the functions of the discovery feature (currently, only for Linux).
 
 ``PROFILE_UDP_TRANSPORT=<bool>``
-    Enables or disables the posibility to connect with the *Agent* by UDP.
+    Enables or disables the possibility to connect with the *Agent* by UDP.
 
 ``PROFILE_TCP_TRANSPORT=<bool>``
-    Enables or disables the posibility to connect with the *Agent* by TCP.
+    Enables or disables the possibility to connect with the *Agent* by TCP.
 
 ``PROFILE_SERIAL_TRANSPORT=<bool>``
-    Enables or disables the posibility to connect with the *Agent* by Serial.
+    Enables or disables the possibility to connect with the *Agent* by Serial.
 
 ``CONFIG_MAX_OUTPUT_BEST_EFFORT_STREAMS=<number>``
-    Configures the maximun output best-effort streams that a session could have.
+    Configures the maximum output best-effort streams that a session could have.
     The calls to ``uxr_create_output_best_effort_stream`` function for a session must be less or equal that this value.
 
 ``CONFIG_MAX_OUTPUT_RELIABLE_STREAMS=<number>``
-    Configures the maximun output reliable streams that a session could have.
+    Configures the maximum output reliable streams that a session could have.
     The calls to ``uxr_create_output_reliable_stream`` function for a session must be less or equal that this value.
 
 ``CONFIG_MAX_INPUT_BEST_EFFORT_STREAMS=<number>``
-    Configures the maximun input best-effort streams that a session could have.
+    Configures the maximum input best-effort streams that a session could have.
     The calls to ``uxr_create_input_best_effort_stream`` function for a session must be less or equal that this value.
 
 ``CONFIG_MAX_INPUT_RELIABLE_STREAMS=<number>``
-    Configures the maximun input reliable streams that a session could have.
+    Configures the maximum input reliable streams that a session could have.
     The calls to ``uxr_create_input_reliable_stream`` function for a session must be less or equal that this value.
 
 ``CONFIG_MAX_SESSION_CONNECTION_ATTEMPTS=<number>``
@@ -94,7 +94,7 @@ For incorporating the changes to your project, is necessary to run the ``cmake``
     It is measured in milliseconds.
 
 ``CONFIG_BIG_ENDIANNESS=<bool>``
-    This value must be correspond to the memory endianness of the device in which the *Client* is running.
+    This value must correspond with the memory endianness of the device in which the *Client* is running.
     `FALSE` implies that the machine is little endian and `TRUE` implies big endian.
 
 ``CONFIG_UDP_TRANSPORT_MTU=<number>``
@@ -195,6 +195,32 @@ The topics will be received only if a ``request_data`` function has been called.
 :on_status_func: Function callback that will be called when a valid data message comes from the *Agent*.
 :args: User pointer data.
        The args will be provided to ``on_topic_func`` function.
+
+------
+
+.. code-block:: c
+
+    void uxr_set_request_callback(uxrSession* session, uxrOnRequestFunc on_request_func, void* args);
+
+Set the request callback. This will be called when the *Agent* sends ``READ_DATA`` submessage associated with a ``Requester``.
+
+:session: Session structure previously initialized.
+:on_request_func: Function callback that will be called.
+:args: User pointer data.
+       The args will be privided to ``on_request_func`` function.
+
+------
+
+.. code-block:: c
+
+    void uxr_set_reply_callback(uxrSession* session, uxrOnReplyFunc on_reply_func, void* args);
+
+Set the request callback. This will be called when the *Agent* sends ``READ_DATA`` submessage associated with a ``Replier``.
+
+:session: Session structure previously initialized.
+:on_reply_func: Function callback that will be called.
+:args: User pointer data.
+       The args will be privided to ``on_reply_func`` function.
 
 ------
 
@@ -424,10 +450,10 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
 :stream_id: The output stream ID where the message will be written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
-            The type must be ``UXR_PARTICIPANT_ID``
-:xml: A XML representation of the new entity.
+            The type must be ``UXR_PARTICIPANT_ID``.
+:xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table decribes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
 
 ------
 
@@ -443,12 +469,12 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
 :stream_id: The output stream ID where the message will be written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
-            The type must be ``UXR_TOPIC_ID``
+            The type must be ``UXR_TOPIC_ID``.
 :participant_id: The identifier of the associated participant.
-            The type must be ``UXR_PARTICIPANT_ID``
-:xml: A XML representation of the new entity.
+            The type must be ``UXR_PARTICIPANT_ID``.
+:xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table decribes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
 
 ------
 
@@ -464,12 +490,12 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
 :stream_id: The output stream ID where the message will be written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
-            The type must be ``UXR_PUBLISHER_ID``
+            The type must be ``UXR_PUBLISHER_ID``.
 :participant_id: The identifier of the associated participant.
-            The type must be ``UXR_PARTICIPANT_ID``
-:xml: A XML representation of the new entity.
+            The type must be ``UXR_PARTICIPANT_ID``.
+:xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table decribes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
 
 ------
 
@@ -485,12 +511,12 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
 :stream_id: The output stream ID where the message will be written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
-            The type must be ``UXR_SUBSCRIBER_ID``
+            The type must be ``UXR_SUBSCRIBER_ID``.
 :participant_id: The identifier of the associated participant.
-            The type must be ``UXR_PARTICIPANT_ID``
-:xml: A XML representation of the new entity.
+            The type must be ``UXR_PARTICIPANT_ID``.
+:xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table decribes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
 
 ------
 
@@ -506,12 +532,12 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
 :stream_id: The output stream ID where the message will be written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
-            The type must be ``UXR_DATAWRITER_ID``
-:publisher_id: The identifier of the associated participant.
-            The type must be ``UXR_PUBLISHER_ID``
-:xml: A XML representation of the new entity.
+            The type must be ``UXR_DATAWRITER_ID``.
+:publisher_id: The identifier of the associated publisher.
+            The type must be ``UXR_PUBLISHER_ID``.
+:xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table decribes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
 
 ------
 
@@ -527,12 +553,54 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
 :stream_id: The output stream ID where the message will be written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
-            The type must be ``UXR_DATAREADER_ID``
-:subscriber_id: The identifier of the associated participant.
-            The type must be ``UXR_SUBSCRIBER_ID``
-:xml: A XML representation of the new entity.
+            The type must be ``UXR_DATAREADER_ID``.
+:subscriber_id: The identifier of the associated subscriber.
+            The type must be ``UXR_SUBSCRIBER_ID``.
+:xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table decribes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+
+------
+
+.. code-block:: c
+
+    uint16_t uxr_buffer_create_requester_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId participant_id, const char* xml, uint8_t mode);
+
+Creates a `requester` entity in the *Agent*.
+The message is only written into the stream buffer.
+To send the message it is necessary to call ``uxr_flash_output_streams`` or ``uxr_run_session`` function.
+
+:session: Session structure previously initialized.
+:stream_id: The output stream ID where the message will be written.
+:object_id: The identifier of the new entity.
+            Later, the entity can be referenced with this id.
+            The type must be ``UXR_REQUESTER_ID``.
+:participant_id: The identifier of the associated participant.
+            The type must be ``UXR_PARTICIPANT_ID``.
+:xml: An XML representation of the new entity.
+:mode: Determines the creation entity mode.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+
+------
+
+.. code-block:: c
+
+    uint16_t uxr_buffer_create_replier_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId participant_id, const char* xml, uint8_t mode);
+
+Creates a `replier` entity in the *Agent*.
+The message is only written into the stream buffer.
+To send the message it is necessary to call ``uxr_flash_output_streams`` or ``uxr_run_session`` function.
+
+:session: Session structure previously initialized.
+:stream_id: The output stream ID where the message will be written.
+:object_id: The identifier of the new entity.
+            Later, the entity can be referenced with this id.
+            The type must be ``UXR_REPLIER_ID``.
+:participant_id: The identifier of the associated participant.
+            The type must be ``UXR_PARTICIPANT_ID``.
+:xml: An XML representation of the new entity.
+:mode: Determines the creation entity mode.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
 
 ------
 
@@ -558,7 +626,7 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
             The type must be ``UXR_PARTICIPANT_ID``
 :ref: A reference to the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table decribes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
 
 ------
 
@@ -579,7 +647,7 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
             The type must be ``UXR_PARTICIPANT_ID``
 :ref: A reference to the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table decribes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
 
 ------
 
@@ -600,7 +668,7 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
             The type must be ``UXR_PUBLISHER_ID``
 :ref: A reference to the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table decribes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
 
 ------
 
@@ -621,7 +689,49 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
             The type must be ``UXR_SUBSCRIBER_ID``.
 :ref: A reference to the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table decribes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+
+------
+
+.. code-block:: c
+
+    uint16_t uxr_buffer_create_requester_ref(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId participant_id, const char* ref, uint8_t mode);
+
+Creates a `requester` entity in the *Agent*.
+The message is only written into the stream buffer.
+To send the message it is necessary to call ``uxr_flash_output_streams`` or ``uxr_run_session`` function.
+
+:session: Session structure previously initialized.
+:stream_id: The output stream ID where the message will be written.
+:object_id: The identifier of the new entity.
+            Later, the entity can be referenced with this id.
+            The type must be ``UXR_REQUESTER_ID``.
+:participant_id: The identifier of the associated participant.
+            The type must be ``UXR_PARTICIPANT_ID``.
+:ref: A reference to the new entity.
+:mode: Determines the creation entity mode.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+
+------
+
+.. code-block:: c
+
+    uint16_t uxr_buffer_create_replier_ref(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id, uxrObjectId participant_id, const char* ref, uint8_t mode);
+
+Creates a `replier` entity in the *Agent*.
+The message is only written into the stream buffer.
+To send the message it is necessary to call ``uxr_flash_output_streams`` or ``uxr_run_session`` function.
+
+:session: Session structure previously initialized.
+:stream_id: The output stream ID where the message will be written.
+:object_id: The identifier of the new entity.
+            Later, the entity can be referenced with this id.
+            The type must be ``UXR_REPLIER_ID``.
+:participant_id: The identifier of the associated participant.
+            The type must be ``UXR_PARTICIPANT_ID``.
+:ref: A reference to the new entity.
+:mode: Determines the creation entity mode.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
 
 ------
 
@@ -700,6 +810,36 @@ NOTE: All ``topic_size`` bytes requested will be sent to the *Agent* after a ``r
 :mb_topic: An ``ucdrBuffer`` struct used to serialize the topic.
            This struct points to a requested gap into the stream.
 :topic_size: The bytes that will be reserved in the stream.
+
+------
+
+.. code-block:: c
+
+    bool uxr_buffer_request(uxrSession* session, uxrStreamId stream_id, uxrObjectId requester_id, uint8_t* buffer, size_t len);
+
+Buffers a request into a specific output stream.
+The request will be sent in the next ``run_session`` function call.
+
+:session: Session structure previously initialized.
+:stream_id: The output stream ID where the message will be written.
+:requester_id: The `requester`'s ID that will write the request to the DDS World.
+:buffer: The raw buffer that contains the serialized request.
+:len: The size of the serialized request.
+
+------
+
+.. code-block:: c
+
+    bool uxr_buffer_reply(uxrSession* session, uxrStreamId stream_id, uxrObjectId replier_id, uint8_t* buffer, size_t len);
+
+Buffers a reply into a specific output stream.
+The request will be sent in the next ``run_session`` function call.
+
+:session: Session structure previously initialized.
+:stream_id: The output stream ID where the message will be written.
+:replier_id: The `replier`'s ID that will write the reply to the DDS World.
+:buffer: The raw buffer that contains the serialized reply.
+:len: The size of the serialized reply.
 
 ------
 
