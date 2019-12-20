@@ -182,6 +182,40 @@ The configuration about how these `DataReaders` and data writers works is contai
                                  "</dds>";
     uint16_t datareader_req = uxr_buffer_create_datareader_xml(&session, reliable_out, datareader_id, subscriber_id, datareader_xml, UXR_REPLACE);
 
+Requester & Replier
+^^^^^^^^^^^^^^^^^^^
+There is another pair of coupled entities, the Requester and the Replier.
+These entities provide request-reply functionality using the underlining publish-subscribe pattern.
+It is achieved through a mirror configuration between a Requester and a Replier, that is,
+both entities contain a `Publisher` and a `Subscriber`,
+the `Publisher` of the `Requester` and the `Subscriber` of the `Replier` are associated with the same `Topic` and vice versa.
+In that way, each time a `Requester` publishes a request it will be received by the `Replier`,
+then this last will generate a publish a reply.
+
+The following shows how to create a `Requester` and a `Replier` using the XML representation.
+
+.. code-block:: C
+
+    uxrObjectId requester_id = uxr_object_id(0x01, UXR_REQUESTER_ID);
+    const char* requester_xml = "<dds>"
+                                    "<requester profile_name=\"my_requester\""
+                                               "service_name=\"service_name\""
+                                               "request_type=\"request_type\""
+                                               "reply_type=\"reply_type\">"
+                                    "</requester>"
+                                "</dds>";
+    uint16_t requester_req = uxr_buffer_create_requester_xml(&session, reliable_out, requester_id, participant_id, requester_xml, UXR_REPLACE);
+
+    replier_id = uxr_object_id(0x01, UXR_REPLIER_ID);
+    const char* replier_xml = "<dds>"
+                                  "<replier profile_name=\"my_requester\""
+                                           "service_name=\"service_name\""
+                                           "request_type=\"request_type\""
+                                           "reply_type=\"reply_type\">"
+                                  "</replier>"
+                             "</dds>";
+    uint16_t replier_req = uxr_buffer_create_replier_xml(&session, reliable_out, replier_id, participant_id, replier_xml, UXR_REPLACE);
+
 Agent response
 ^^^^^^^^^^^^^^
 In operations such as create session, create entity or request data from the *Agent*,
