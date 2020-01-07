@@ -28,6 +28,7 @@ Table Of contents
    optimization
    transport
    p2p
+   client_service
 
 .. toctree::
    :caption: Release Notes
