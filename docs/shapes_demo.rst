@@ -53,7 +53,7 @@ For example, to create a publisher *Client* that sends a square Topic in reliabl
     > create_datawriter 1 1
     > write_data 1 128 200 200 40 BLUE
 
-This *Client* will publish a topic in reliable mode that will have color BLUE, x coordinate 200, y coordinate 200 and size 40.
+This *Client* will publish a topic in the reliable mode that will have color BLUE, x coordinate 200, y coordinate 200, and size 40.
 
 In case of a subscriber *Client* that receives square topics in a reliable mode, run the following: ::
 
