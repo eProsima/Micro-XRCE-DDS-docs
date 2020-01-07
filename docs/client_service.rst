@@ -14,7 +14,7 @@ as well as to list the functions related to both entities.
 Requester
 ^^^^^^^^^
 
-The `Requester` entity is composed by a `Publisher` and a `Subscriber` associated to a `RequestTopic` and a `ReplyTopic` respectively.
+The `Requester` entity is composed of a `Publisher` and a `Subscriber` associated with a `RequestTopic` and a `ReplyTopic` respectively.
 The `Publisher` is in charge of sending the request, while the `Susbscriber` receives the replies.
 
 To create a `Requester` entity, the `uxr_buffer_create_requester_xml` or `uxr_buffer_create_requester_ref` shall be used.
@@ -30,14 +30,14 @@ the `Publisher` is associated to the `ReplyTopic` and the `Subscriber` to the `R
 In that case, the `Subscriber` is in charge of receiving the request from the `Requester`, while the `Publisher` sends the replies.
 
 To create a `Replier` entity, the `uxr_buffer_create_replier_xml` or `uxr_buffer_create_replier_ref` shall be used.
-Once created, replies can be sent through `uxr_buffer_reply`, and requester can be received making a data request to the *Agent* using the `uxr_buffer_request_data`. 
+Once created, replies can be sent through `uxr_buffer_reply`, and requestes can be received making a data request to the *Agent* using the `uxr_buffer_request_data`. 
 Requests are received through the `on_request` callback which shall be set by the `uxr_set_request_callback`.
 This callback has a parameter `sample_id` which identify the request and should be used in the `uxr_buffer_reply`.
 
 Client example
-==============
+^^^^^^^^^^^^^^
 
-The code below shows the *RequestAdder* example available at `eProsima Micro XRCE-DDS Client <https://github.com/eProsima/Micro-XRCE-DDS-Client/tree/master/examples/RequesterAdder>`_.
+The code below shows the *RequestAdder* example available at `eProsima Micro XRCE-DDS Client <https://github.com/eProsima/Micro-XRCE-DDS-Client/tree/master/examples/RequesterAdder>`__.
 This example represents a client application that sends two integers as requests, and receives the sum of both integer as response.
 
 .. code-block:: C
@@ -180,10 +180,10 @@ This example represents a client application that sends two integers as requests
     }
 
 Service example
-===============
+^^^^^^^^^^^^^^^
 
-The code below shows the *ReplyAdder* example available at `eProsima Micro XRCE-DDS Client <https://github.com/eProsima/Micro-XRCE-DDS-Client/tree/master/examples/ReplyAdder>`_.
-This examples represents a service application that receives requests composed by two integers, sums both number, and finally sends the response.
+The code below shows the *ReplyAdder* example available at `eProsima Micro XRCE-DDS Client <https://github.com/eProsima/Micro-XRCE-DDS-Client/tree/master/examples/ReplyAdder>`__.
+This example represents a service application that receives requests composed by two integers, sums both number, and finally sends the response.
 
 .. code-block:: C
 
