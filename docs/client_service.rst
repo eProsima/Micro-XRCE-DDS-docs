@@ -17,28 +17,28 @@ Requester
 The `Requester` entity is composed of a `Publisher` and a `Subscriber` associated with a `RequestTopic` and a `ReplyTopic` respectively.
 The `Publisher` is in charge of sending the request, while the `Susbscriber` receives the replies.
 
-To create a `Requester` entity, the `uxr_buffer_create_requester_xml` or `uxr_buffer_create_requester_ref` shall be used.
-Once created, requests can be sent through `uxr_buffer_request`, and replies can be received making a data request to the *Agent* using the `uxr_buffer_request_data`.
-Replies are received through the `on_reply` callback which shall be set by the `uxr_set_reply_callback`.
-This callback has a parameter `reply_id` which corresponds to the identifier returned by the `uxr_buffer_request` call.
+To create a `Requester` entity, the ``uxr_buffer_create_requester_xml`` or ``uxr_buffer_create_requester_ref`` shall be used.
+Once created, requests can be sent through ``uxr_buffer_request``, and replies can be received, making a data request to the *Agent* using the ``uxr_buffer_request_data``.
+Replies are received through the `on_reply` callback which shall be set by the ``uxr_set_reply_callback``.
+This callback has a parameter `reply_id` which corresponds to the identifier returned by the ``uxr_buffer_request`` call.
 
 Replier
 ^^^^^^^
 
 The `Reply` entity is a mirror of the `Requester`, that is, it contains a `Publisher` and a `Subscriber` also, but the topic association is reversed,
-the `Publisher` is associated to the `ReplyTopic` and the `Subscriber` to the `RequestTopic`.
+the `Publisher` is associated with the `ReplyTopic` and the `Subscriber` to the `RequestTopic`.
 In that case, the `Subscriber` is in charge of receiving the request from the `Requester`, while the `Publisher` sends the replies.
 
-To create a `Replier` entity, the `uxr_buffer_create_replier_xml` or `uxr_buffer_create_replier_ref` shall be used.
-Once created, replies can be sent through `uxr_buffer_reply`, and requestes can be received making a data request to the *Agent* using the `uxr_buffer_request_data`. 
-Requests are received through the `on_request` callback which shall be set by the `uxr_set_request_callback`.
-This callback has a parameter `sample_id` which identify the request and should be used in the `uxr_buffer_reply`.
+To create a `Replier` entity, the ``uxr_buffer_create_replier_xml`` or ``uxr_buffer_create_replier_ref`` shall be used.
+Once created, replies can be sent through ``uxr_buffer_reply``, and requests can be received, making a data request to the *Agent* using the ``uxr_buffer_request_data``. 
+Requests are received through the `on_request` callback which shall be set by the ``uxr_set_request_callback``.
+This callback has a parameter `sample_id` which identifies the request and should be used in the ``uxr_buffer_reply``.
 
 Client example
 ^^^^^^^^^^^^^^
 
 The code below shows the *RequestAdder* example available at `eProsima Micro XRCE-DDS Client <https://github.com/eProsima/Micro-XRCE-DDS-Client/tree/master/examples/RequesterAdder>`__.
-This example represents a client application that sends two integers as requests, and receives the sum of both integer as response.
+This example represents a client application that sends two integers as requests, and receives the sum of both integers as response.
 
 .. code-block:: C
 
