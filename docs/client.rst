@@ -286,7 +286,7 @@ Flashes all output streams sending the data through the transport.
 This function processes the internal functionality of a session.
 It implies:
 
-1. Flashing all output streams sending the data through the transport.
+1. Flushing all output streams sending the data through the transport.
 2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
 3. Listening messages from the *Agent* and calling the associated callback if it exists (a topic callback or a status callback).
 
@@ -307,7 +307,7 @@ The function will return ``true`` if the sending data have been confirmed, ``fal
 This function processes the internal functionality of a session.
 It implies:
 
-1. Flashing all output streams sending the data through the transport.
+1. Flushing all output streams sending the data through the transport.
 2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
 3. Listening messages from the *Agent* and call the associated callback if it exists (a topic callback or a status callback).
 
@@ -329,7 +329,7 @@ The function will return ``true`` if it has received a message, ``false`` if the
 This function processes the internal functionality of a session.
 It implies:
 
-1. Flashing all output streams sending the data through the transport.
+1. Flushing all output streams sending the data through the transport.
 2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
 3. Listening messages from the *Agent* and call the associated callback if it exists (a topic callback or a status callback).
 
@@ -350,7 +350,7 @@ The function will return ``true`` if the sent data have been confirmed, ``false`
 This function processes the internal functionality of a session.
 It implies:
 
-1. Flashing all output streams sending the data through the transport.
+1. Flushing all output streams sending the data through the transport.
 2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
 3. Listening messages from the *Agent* and call the associated callback if it exists (a topic callback or a status callback).
 
@@ -375,7 +375,7 @@ The function will return ``true`` if all status have been received and all of th
 This function processes the internal functionality of a session.
 It implies:
 
-1. Flashing all output streams sending the data through the transport.
+1. Flushing all output streams sending the data through the transport.
 2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
 3. Listening messages from the *Agent* and call the associated callback if it exists (a topic callback or a status callback).
 

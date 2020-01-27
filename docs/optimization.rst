@@ -15,7 +15,7 @@ It will remove the code that your app does not use from the final executable.
 Runtime size
 ------------
 The *Client* is dynamic memory free and static memory free.
-It implies that all memory charge depends only on how the stack grows during the execution.
+It implies that all memory footprint depends only on how the stack grows during the execution.
 Some values can be modified to control the stack and impact to a large degree:
 
 Stream buffers
