@@ -5,9 +5,9 @@ eProsima Micro XRCE-DDS Gen
 
 *eProsima Micro XRCE-DDS Gen* is a Java application used to generate source code for the *eProsima Micro XRCE-DDS* software.
 
-This tool is able to generate from a given IDL specification file, the C struct associated with the
-Topic, as well as, the serialization and deserialization methods.
-Also, it has the possibility to generate a sample demo that works with the proposed topic.
+This tool can generate from a given IDL specification file, the C struct associated with the
+Topic, as well as the serialization and deserialization methods.
+Also, it can generate a sample demo that works with the proposed topic.
 As an example of the potential of this tool, the following shows the source code generated from the ShapeDemo IDL file.
 
 ::
@@ -69,13 +69,13 @@ it will generate the following header file and its corresponding source:
     $ microxrceddsgen -example <file.idl>
 
 
-In order to use these examples, the *Client* library must be compiled with the ``WRITE_ACCESS_PROFILE`` option for the *publisher*
+The *Client* library must be compiled with the ``WRITE_ACCESS_PROFILE`` option for the *publisher*, to use these examples
 and the ``READ_ACCESS_PROFILE`` option for the *subscriber*.
 
 Installation
 ------------
 
-In order to use *eProsima Micro XRCE-DDS Gen*, it is needed to follow the next steps:
+To use *eProsima Micro XRCE-DDS Gen*, it is needed to follow the next steps:
 
 1. Install its dependencies:
 
@@ -95,5 +95,5 @@ In order to use *eProsima Micro XRCE-DDS Gen*, it is needed to follow the next s
 Notes
 -----
 
-At the present time, *eProsima Micro XRCE-DDS Gen* only supports Structs composed of integer, string, array and sequence types
+At present, *eProsima Micro XRCE-DDS Gen* only supports Structs composed of integer, string, array and sequence types,
 even though it is planned to enhance the capabilities of the *eProsima Micro XRCE-DDS Gen* tool in a near future.

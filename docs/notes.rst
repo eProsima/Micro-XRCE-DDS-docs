@@ -3,7 +3,7 @@ Version 1.1.0
 
 **Agent 1.1.0 | Client 1.1.1**
 
-This version include the following changes in both Agent and Client:
+This version includes the following changes in both Agent and Client:
 
 * Agent 1.1.0:
     * Add
@@ -40,7 +40,7 @@ This version include the following changes in both Agent and Client:
         * Examples usage.
     * Fix
         * Acknack reading.
-        * User data bad aligment.
+        * User data bad alignment.
 
 Previous Versions
 -----------------
@@ -99,12 +99,12 @@ Version 1.0.0
 
 This release includes the following features:
 
-* Extended C topic code generation tool (strings, sequences and n-dimensional arrays).
+* Extended C topic code generation tool (strings, sequences, and n-dimensional arrays).
 * Discovery profile.
 * Native write access profile (without using *eProsima Micro XRCE-DDS Gen*)
 * Creation and configuration by XML.
 * Creation by reference.
-* Added `REUSE` flag at create entities.
+* Added `REUSE` flag at entities creation.
 * Added prefix to functions.
 * Transport stack modification.
 * More tests.
@@ -119,6 +119,6 @@ This release includes the following features:
 
 * Reliability.
 * Stream concept (best-effort, reliable).
-* Multiples streams of same type.
+* Multiples streams of the same type.
 * Configurable data delivery control.
 * C Topic example code generation tool.

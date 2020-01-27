@@ -21,7 +21,7 @@ The *Agent* transport architecture is composed by 3 different layers:
 
 .. image:: images/agent_transport_stack.svg
 
-* **Server Layer**: is an interface from which each transport specific server inherits.
+* **Server Layer**: is an interface from which each transport-specific server inherits.
   This interface implements four different threads:
 
   * *Sender thread*: in charge of sending the messages to the *Clients*.
@@ -29,8 +29,8 @@ The *Agent* transport architecture is composed by 3 different layers:
   * *Processing thread*: in charge of processing the messages received from the *Clients*.
   * *Heartbeat thread* in charge of handling reliability with the *Clients*.
 
-* **Transport Layer**: is a transport specific class which manages the sessions established between the *Agent* and the *Clients*. This class inherits from the *Server* interface.
-* **Platform Layer**: is a platform-specific class which implements the sending and receiving functions for a given transport in a given platform. It should be noted that it is the only class which has platform dependencies.
+* **Transport Layer**: is a transport-specific class which manages the sessions established between the *Agent* and the *Clients*. This class inherits from the *Server* interface.
+* **Platform Layer**: is a platform-specific class which implements the sending and receiving functions for a given transport in a given platform. It should be noted that it is the only class that has platform dependencies.
 
 UDP Server Example
 ^^^^^^^^^^^^^^^^^^
@@ -59,10 +59,10 @@ This ``Server`` interface has the following pure virtual functions:
     virtual int get_error() = 0;
 
 The first four virtual functions are transport specific (Transport Layer).
-These functions are overridden by the ``UDPServerBase`` class which is in charge of managing the sessions between *Clients* and the *Agent*.
+These functions are overridden by the ``UDPServerBase`` class, which is in charge of managing the sessions between *Clients* and the *Agent*.
 
 On the other hand, the last five virtual functions are platform specific (Platform Layer).
-These functions are override by the ``UDPServerLinux`` and ``UDPServerWindows`` for Linux and Windows systems respectively.
+These functions are override by the ``UDPServerLinux`` and ``UDPServerWindows`` for Linux and Windows systems, respectively.
 
 Client Transport Architecture
 -----------------------------
@@ -72,7 +72,7 @@ There are also three different layers, but instead of the Server Layer, there is
 
 .. image:: images/client_transport_stack.svg
 
-* **Session Layer**: implements the XRCE protocol logic and it only knows about sending and receiving messages.
+* **Session Layer**: implements the XRCE protocol logic, and it only knows about sending and receiving messages.
 * **Transport Layer**: implements the sending and receiving **message functions** for each transport protocol, calling to the Platform Layer functions.
   This layer only knows about sending and receiving messages through a given transport protocol.
 * **Platform Layer**: implements the sending and receiving **data functions** for each platform.
@@ -133,10 +133,10 @@ Custom Serial Transport
 * **HDLC Framing**: each serial framing begins with a ``begin_frame`` octet ``(0x7E)``, and the rest of the frame is byte stuffing using the ``space`` octet ``(0x7D)`` following by the original octet exclusive-or with ``0x20``.
   For example, if the frame contains the octet `0x7E` it is encoded as `0x7D, 0x5E`; and the same for the octet `0x7E` which is encoded as `0x7D, 0x5D`.
 * **CRC Calculation**: serial frames end with the CRC-16 for detecting frame corruption.
-  The CRC-16 is computed  using the polynomial ``x^16 + x^12 + x^5 + 1`` after the frame stuffing for each octet of the frame and including the ``begin_frame``, as it is describes in `RFC 1662 <https://tools.ietf.org/html/rfc1662>`_ (see sec. C.2).
+  The CRC-16 is computed using the polynomial ``x^16 + x^12 + x^5 + 1`` after the frame stuffing for each octet of the frame and including the ``begin_frame``, as it is described in `RFC 1662 <https://tools.ietf.org/html/rfc1662>`_ (see sec. C.2).
 * **Routing header**: the Serial Transport provides ``source`` and ``remote`` address in the framing, which could be used for implement a routing protocol.
 
-All the aforementioned features are addressed using the following frame format: ::
+All the previous features are addressed using the following frame format: ::
 
     0        8        16       24                40                 X                X+16
     +--------+--------+--------+--------+--------+--------//--------+--------+--------+
@@ -146,7 +146,7 @@ All the aforementioned features are addressed using the following frame format: 
 * ``FLAG``: is a ``begin_frame`` octet for frame initialization.
 * ``SADD``: is the address of the device which sent the message, that is, the ``source`` address.
 * ``RADD``: is the address of the device which should receive the message, that is, the ``remote`` address.
-* ``LEN``: is the length of the **payload without framing**. It is encoded as a 2-bytes array in little endian.
+* ``LEN``: is the length of the **payload without framing**. It is encoded as a 2-bytes array in little-endian.
 * ``PAYLOAD``: is the payload of the message.
 * ``CRC``: is the CRC of the message **after the stuffing**.
 
@@ -160,19 +160,19 @@ This workflow could be divided into the following steps:
     2. The *Client* library serializes the topic inside an XRCE message using *Micro CDR*.
        As a result, the XRCE message with the topic is stored in an **Output Stream Buffer**.
     3. The *Client* library calls the Serial Transport to send the serialized message.
-    4. The Serial Transport frames the message, that is, adds the header, payload and CRC of the frame taking into account the stuffing.
+    4. The Serial Transport frames the message, that is, adds the header, payload, and CRC of the frame, taking into account the stuffing.
        This step takes place in an auxiliary buffer called **Framing Buffer**.
-    5. Each time the Framing Buffer is full, the data is flushed into the **Device Buffer** calling the writing system function.
+    5. Each time the Framing Buffer is full, the data is flushed into the **Device Buffer**, calling the writing system function.
 
 .. image:: images/serial_transport_sending.svg
 
 This approach has some advantages which should be pointed out:
 
-    1. The HDLD framing and the CRC control provides **integrity** and **security** to the Serial Transport.
+    1. The HDLD framing and the CRC control provide **integrity** and **security** to the Serial Transport.
     2. The framing technique allows to **reducing memory usage**.
-       This is because the Framing Buffer size (42 bytes) bounds the Device Buffer size.
+       It is because the Framing Buffer size (42 bytes) bounds the Device Buffer size.
     3. The framing technique also allows sending **large data** over serial.
-       This is because the message size is not bounded by the Device Buffer size, since the message is fragmented and stuffing during the framing stage.
+       It is because the message size is not bounded by the Device Buffer size, since the message is fragmented and stuffing during the framing stage.
 
 Data Receiving
 ^^^^^^^^^^^^^^
@@ -207,7 +207,7 @@ This subsection shows how a **Shapes Topic**, defined by the IDL below, is packe
 
     ShapeType topic = {"red", 11, 11, 89};
 
-In Serial Transport, the topic packaging could be divided into two steps:
+In Serial Transport, the topic's packaging could be divided into two steps:
 
     1. The Session Layer adds the XRCE header and subheader.
        It adds an overhead of 12 bytes to the topic.
@@ -217,5 +217,5 @@ In Serial Transport, the topic packaging could be divided into two steps:
 .. image:: images/serial_transport_stack.svg
 
 The figure above shows the overhead added by Serial Transport.
-In the best case, it is **only 19 bytes**, but it should be noted that in this example the message stuffing has been neglected.
+In the best case, it is **only 19 bytes**, but it should be noted that, in this example, the message stuffing has been neglected.
 

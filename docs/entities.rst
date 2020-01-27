@@ -32,6 +32,6 @@ DataWriter
 DataReader
     This is the endpoint able to read Topic data.
 
-This figure shows the entities hierarchy
+This figure shows the entities' hierarchy
 
 .. image:: images/entities_hierarchy.svg
