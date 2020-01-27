@@ -4,7 +4,7 @@ Time synchronization
 ====================
 
 *eProsima Micro XRCE-DDS* offers a synchronization mechanism based on the NTP protocol.
-It allows synchronizing *Client* with *Agents*, something very useful when working in embedded environments that do not any provide time synchronization mechanism.
+It allows synchronizing *Client* with *Agents*, something very useful when working in embedded environments that do not provide any time synchronization mechanism.
 The use of this feature is quite simple. 
 The *Client* library provides the function ``uxr_sync_session`` which is all that is needed.
 This function involves an exchange of messages between *Client* and *Agent* that allows the *Client* compute its time offset using the NTP protocol.
