@@ -36,7 +36,7 @@ Requester
     This is the endpoint able to write Request data and to read Reply data.
 
 Replier
-    This is the entpoint able to read Request data and to write Request data.
+    This is the endpoint able to read Request data and to write Reply data.
 
 This figure shows the entities hierarchy
 

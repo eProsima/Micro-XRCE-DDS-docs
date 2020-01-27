@@ -207,7 +207,7 @@ Set the request callback. This will be called when the *Agent* sends ``READ_DATA
 :session: Session structure previously initialized.
 :on_request_func: Function callback that will be called.
 :args: User pointer data.
-       The args will be privided to ``on_request_func`` function.
+       The args will be provided to ``on_request_func`` function.
 
 ------
 
@@ -220,7 +220,7 @@ Set the request callback. This will be called when the *Agent* sends ``READ_DATA
 :session: Session structure previously initialized.
 :on_reply_func: Function callback that will be called.
 :args: User pointer data.
-       The args will be privided to ``on_reply_func`` function.
+       The args will be provided to ``on_reply_func`` function.
 
 ------
 

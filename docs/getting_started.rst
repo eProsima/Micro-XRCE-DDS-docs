@@ -192,7 +192,7 @@ the `Publisher` of the `Requester` and the `Subscriber` of the `Replier` are ass
 In that way, each time a `Requester` publishes a request it will be received by the `Replier`,
 then this last will generate a reply and publish it, and finally, this reply will be received by the `Requester`.
 
-The following shows how to create a `Requester` and a `Replier` using the XML representation.
+The following code shows how to create a `Requester` and a `Replier` using the XML representation.
 
 .. code-block:: C
 
@@ -341,4 +341,3 @@ After this, we can close the transport used by the session.
 .. code-block:: C
 
     uxr_close_udp_transport(&transport);
-

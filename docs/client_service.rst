@@ -8,7 +8,7 @@ This applicatión has two ends, the client (*RequestAdder*) and the service (*Re
 On the one hand, the client is in charge of sending requests which contain two integers, as well as receiving the responses from the service.
 On the other hand, the service is in charge of receiving the requests from the client, summing the two integers, and finally sending the response to the client.
 
-Before considering the client and service examples, it is first necessary to briefly summarize how the `Requester` and `Replier` entities works,
+Before considering the client and service examples, it is first necessary to briefly summarize how the `Requester` and `Replier` entities work,
 as well as to list the functions related to both entities.
 
 Requester
