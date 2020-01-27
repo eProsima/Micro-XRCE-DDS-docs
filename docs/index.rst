@@ -117,6 +117,7 @@ User manual
    optimization
    transport
    p2p
+   client_service
 
 Release notes
 =============
