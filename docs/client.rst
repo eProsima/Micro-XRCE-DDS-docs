@@ -393,6 +393,37 @@ The function will return ``true`` if one status have been received and has the v
 
 ------
 
+.. code-block:: c
+
+    bool uxr_sync_session(uxrSession* session, int timeout);
+
+This function synchronizes the session time with the *Agent* using the NTP protocol by default.
+
+:session: Session structure previously initialized.
+:timeout: The waiting time in milliseconds.
+
+------
+
+.. code-block:: c
+
+    int64_t uxr_epoch_millis(uxrSession* session);
+
+This function returns the epoch time in milliseconds taking into account the offset computed during the time synchronization.
+
+:session: Session structure previously initialized.
+
+------
+
+.. code-block:: c
+
+    int64_t uxr_epoch_nanos(uxrSession* session);
+
+This function returns the epoch time in nanoseconds taking into account the offset computed during the time synchronization.
+
+:session: Session structure previously initialized.
+
+------
+
 Create entities by XML profile
 ``````````````````````````````
 These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` is selected in the ``client.config`` file.
