@@ -28,6 +28,7 @@ Table Of contents
    optimization
    transport
    p2p
+   time_sync
    client_service
 
 .. toctree::
