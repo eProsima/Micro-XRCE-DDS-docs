@@ -6,14 +6,14 @@ In *eProsima Micro XRCE-DDS*, a *Client* can communicate with DDS Network as any
 *Clients* can publish and subscribe to data Topics in the DDS Global Data Space.
 
 *eProsima Micro XRCE-DDS* provides you with a C API to create *eProsima Micro XRCE-DDS Clients* application.
-All functions needed to set up the *Client* can be found into ``client.h`` header.
-This is the only header you need to include.
+All functions needed to set up the *Client* can be found in ``client.h`` header.
+That is the only header you need to include.
 
 Profiles
 --------
 
 The *Client* library follows a profile concept that enables to choose, add or remove some features in configuration time.
-This allows to customize the *Client* library size, if there are features that are not used.
+That allows customizing the *Client* library size, if there are features that are not used.
 The profiles can be chosen in ``client.config`` and start with the prefix ``PROFILE``.
 As part of these profiles, you can choose between several transport layers.
 Communication with the *Agent* is done through the transport you choose.
@@ -30,26 +30,14 @@ Serial        X                    X
 ============ ========== ========= =========
 
 The addition of a new transport or an existant transport for a new platform can be easily implemented setting the callbacks of a ``uxrCommunication`` structure.
-See the current transport implementations as an example for new custom transport.
+See the current transport implementations as an example of new custom transport.
 
 Configuration
 -------------
-There are several definitions for configuring and building of the *Client* library at **compile time**.
+There are several definitions for configuring and building of the *Client* library at **compile-time**.
 These definitions allow you to create a version of the library according to your requirements.
 These definitions can be modified at ``client.config`` file.
-For incorporating the changes to your project, is necessary to run the ``cmake`` command every time the definitions change.
-
-``PROFILE_CREATE_ENTITIES_REF=<bool>``
-    Enables or disables the functions related to create entities by reference.
-
-``PROFILE_CREATE_ENTITIES_XML=<bool>``
-    Enables or disables the functions related to create entities by XML.
-
-``PROFILE_READ_ACCESS=<bool>``
-    Enables or disables the functions related to read topics.
-
-``PROFILE_WRITE_ACCESS=<bool>``
-    Enables or disables the functions related to write topics.
+For incorporating the changes to your project, it is necessary to run the ``cmake`` command every time the definitions change.
 
 ``PROFILE_DISCOVERY=<bool>``
     Enables or disables the functions of the discovery feature (currently, only for Linux).
@@ -120,10 +108,10 @@ There are two types of streams: best-effort and reliable streams and you can cre
   Also, the message size sent or received by a best-effort stream must be less or equal than the *MTU* defined in the transport used.
 
 * Reliable streams perform the communication without lost regardless of the transport layer
-  and allow message fragmentation in order to send and receive messages longer than the *MTU*.
+  and allow message fragmentation to send and receive messages longer than the *MTU*.
 
-  To avoid message losses, the reliable streams use additional messages to confirm the delivery, along to a history of the messages sent and received.
-  The history is used to store messages that can not be currently processed because of several reasons such us:
+  To avoid a loss of data, the reliable streams use additional messages to confirm the delivery, along with a history of the messages sent and received.
+  The history is used to store messages that can not be currently processed because of several reasons such as:
   delivery order, incomplete fragments or messages that can not be confirmed yet.
   If the history is full:
 
@@ -136,16 +124,16 @@ There are two types of streams: best-effort and reliable streams and you can cre
   For that, a low history causes more messages to be discarded, increasing the data traffic because they need to be sent again.
   A long history will reduce the data traffic of confirmation messages in transports with a high loss rate.
   This internal management of the communication implies that a reliable stream is more expensive than best-effort streams,
-  in both, memory and bandwidth, but is possible to play with these values using the history size.
+  in both, memory and bandwidth, but it is possible to play with these values using the history size.
 
 The streams are maybe the highest memory load part of the application.
 For that, the choice of a right configuration for the application purpose is highly recommendable, especially when the target is a limited resource device.
-The :ref:`optimization_label` page explain more about how to archive this.
+The :ref:`optimization_label` page explains more about how to archive this.
 
 API
 ---
 As a nomenclature, *eProsima Micro XRCE-DDS Client* API uses a ``uxr_`` prefix in all of their public API functions and ``uxr`` prefix in the types.
-In constants values an ``UXR_`` prefix is used.
+In constants values, an ``UXR_`` prefix is used.
 The functions belonging to the public interface of the library are only those with the tag ``UXRDDLAPI`` in their declarations.
 
 Session
@@ -164,7 +152,7 @@ Once this function is called, a ``create_session`` call can be performed.
 
 :session: Session structure where manage the session data.
 :key: The key identifier of the *Client*.
-      All *Clients* connected to an *Agent* must have different key.
+      All *Clients* connected to an *Agent* must have a different key.
 :comm: Communication used for connecting to the *Agent*.
        All different transports have a common attribute uxrCommunication.
        This parameter can not be shared between active sessions.
@@ -272,8 +260,8 @@ The number of available calls to this function must be less or equal than ``CONF
 :session: Session structure previously initialized.
 :buffer: Memory block where the messages will be written.
 :size: Buffer size.
-:history: History used for the reliable connection.
-          The buffer size will be splited into smaller buffers using this value.
+:history: History used for reliable connection.
+          The buffer size will be split into smaller buffers using this value.
           The history must be a power of two.
 
 ------
@@ -301,8 +289,8 @@ The number of available calls to this function must be less or equal than ``CONF
 :session: Session structure previously initialized.
 :buffer: Memory block where the messages will be storaged.
 :size: Buffer size.
-:history: History used for the reliable connection.
-          The buffer will be splited into smaller buffers using this value.
+:history: History used for reliable connection.
+          The buffer will be split into smaller buffers using this value.
           The history must be a power of two.
 
 ------
@@ -322,13 +310,13 @@ Flashes all output streams sending the data through the transport.
     void uxr_run_session_time(uxrSession* session, int time);
 
 This function processes the internal functionality of a session.
-This implies:
+It implies:
 
-1. Flashes all output streams sending the data through the transport.
-2. If there is any reliable stream, it will perform the asociated reliable behaviour to ensure the communication.
-3. Listens messages from the *Agent* and call the associated callback if exists (a topic callback or a status callback).
+1. Flushing all output streams sending the data through the transport.
+2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
+3. Listening messages from the *Agent* and calling the associated callback if it exists (a topic callback or a status callback).
 
-The ``time`` suffix function version will perform these actions and will listen messages for a ``time`` duration.
+The ``time`` suffix function version will perform these actions and will listen to messages for a ``time`` duration.
 Only when the time waiting for a message overcome the ``time`` duration, the function finishes.
 The function will return ``true`` if the sending data have been confirmed, ``false`` otherwise.
 
@@ -343,19 +331,19 @@ The function will return ``true`` if the sending data have been confirmed, ``fal
     void uxr_run_session_until_timeout(uxrSession* session, int timeout);
 
 This function processes the internal functionality of a session.
-This implies:
+It implies:
 
-1. Flashes all output streams sending the data through the transport.
-2. If there is any reliable stream, it will perform the asociated reliable behaviour to ensure the communication.
-3. Listens messages from the *Agent* and call the associated callback if exists (a topic callback or a status callback).
+1. Flushing all output streams sending the data through the transport.
+2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
+3. Listening messages from the *Agent* and call the associated callback if it exists (a topic callback or a status callback).
 
 The ``_until_timeout`` suffix function version will perform these actions until receiving one message.
 Once the message has been received or the timeout has been reached, the function finishes.
 Only when the time waiting for a message overcome the ``timeout`` duration, the function finishes.
-The function will return ``true`` if has received a message, ``false`` if the timeout has been reached.
+The function will return ``true`` if it has received a message, ``false`` if the timeout has been reached.
 
 :session: Session structure previously initialized.
-:timeout: Time for waiting a new message, in milliseconds.
+:timeout: Time for waiting for a new message, in milliseconds.
           For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
 
 ------
@@ -365,18 +353,18 @@ The function will return ``true`` if has received a message, ``false`` if the ti
     bool uxr_run_session_until_confirm_delivery(uxrSession* session, int timeout);
 
 This function processes the internal functionality of a session.
-This implies:
+It implies:
 
-1. Flashes all output streams sending the data through the transport.
-2. If there is any reliable stream, it will perform the asociated reliable behaviour to ensure the communication.
-3. Listenes messages from the *Agent* and call the associated callback if exists (a topic callback or a status callback).
+1. Flushing all output streams sending the data through the transport.
+2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
+3. Listening messages from the *Agent* and call the associated callback if it exists (a topic callback or a status callback).
 
 The ``_until_confirm_delivery`` suffix function version will perform these actions during ``timeout``
 or until the output reliable streams confirm that the sent messages have been received by the *Agent*.
 The function will return ``true`` if the sent data have been confirmed, ``false`` otherwise.
 
 :session: Session structure previously initialized.
-:timeout: Maximun waiting time for a new message, in milliseconds.
+:timeout: Maximum waiting time for a new message, in milliseconds.
           For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
 
 ------
@@ -386,22 +374,22 @@ The function will return ``true`` if the sent data have been confirmed, ``false`
     bool uxr_run_session_until_all_status(uxrSession* session, int timeout, const uint16_t* request_list, uint8_t* status_list, size_t list_size);
 
 This function processes the internal functionality of a session.
-This implies:
+It implies:
 
-1. Flashes all output streams sending the data through the transport.
-2. If there is any reliable stream, it will perform the asociated reliable behaviour to ensure the communication.
-3. Listenes messages from the *Agent* and call the associated callback if exists (a topic callback or a status callback).
+1. Flushing all output streams sending the data through the transport.
+2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
+3. Listening messages from the *Agent* and call the associated callback if it exists (a topic callback or a status callback).
 
 The ``_until_all_status`` suffix function version will perform these actions during ``timeout`` duration
 or until all requested status had been received.
 The function will return ``true`` if all status have been received and all of them have the value ``UXR_STATUS_OK`` or ``UXR_STATUS_OK_MATCHED``, ``false`` otherwise.
 
 :session: Session structure previously initialized.
-:timeout: Maximun waiting time for a new message, in milliseconds.
+:timeout: Maximum waiting time for a new message, in milliseconds.
           For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
-:request_list: An array of request to confirm with a status.
+:request_list: An array of requests to confirm with a status.
 :status_list: An uninitialized array with the same size as ``request_list`` where the status values will be written.
-              The position of a status in the list corresponds to the request at the same position in ``request_list``.
+              The position of status in the list corresponds to the request at the same position in ``request_list``.
 :list_size: The size of ``request_list`` and ``status_list`` arrays.
 
 ------
@@ -411,21 +399,21 @@ The function will return ``true`` if all status have been received and all of th
     bool uxr_run_session_until_one_status(uxrSession* session, int timeout, const uint16_t* request_list, uint8_t* status_list, size_t list_size);
 
 This function processes the internal functionality of a session.
-This implies:
+It implies:
 
-1. Flashes all output streams sending the data through the transport.
-2. If there is any reliable stream, it will perform the asociated reliable behaviour to ensure the communication.
-3. Listenes messages from the *Agent* and call the associated callback if exists (a topic callback or a status callback).
+1. Flushing all output streams sending the data through the transport.
+2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
+3. Listening messages from the *Agent* and call the associated callback if it exists (a topic callback or a status callback).
 
 The ``_until_one_status`` suffix function version will perform these actions during ``timeout`` duration
 or until one requested status had been received.
 The function will return ``true`` if one status have been received and has the value ``UXR_STATUS_OK`` or ``UXR_STATUS_OK_MATCHED``, ``false`` otherwise.
 
 :session: Session structure previously initialized.
-:timeout: Maximun waiting time for a new message, in milliseconds.
+:timeout: Maximum waiting time for a new message, in milliseconds.
           For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
-:request_list: An array of request that can be confirmed.
-:status_list: An uninitialized array with the same size as ``request_list`` where the statu value will be written.
+:request_list: An array of requests that can be confirmed.
+:status_list: An uninitialized array with the same size as ``request_list`` where the status value will be written.
               The position of the status in the list corresponds to the request at the same position in ``request_list``.
 :list_size: The size of ``request_list`` and ``status_list`` arrays.
 
@@ -798,7 +786,7 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
 
     uint16_t uxr_buffer_request_data(uxrSession* session, uxrStreamId stream_id, uxrObjectId datareader_id, uxrStreamId data_stream_id, uxrDeliveryControl* delivery_control);
 
-This function requests a read from a datareader of the *Agent*.
+This function requests a read from a `datareader` of the *Agent*.
 The returned value is an identifier of the request.
 All received topic will have the same request identifier.
 The topics will be received at the callback topic through the ``run_session`` function.
@@ -829,8 +817,8 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
                                   struct ucdrBuffer* mb_topic, uint32_t topic_size);
 
 Requests a writing into a specific output stream.
-For this function will initialize an ``ucdrBuffer`` struct where a topic of ``topic_size`` size must be serialized.
-Whether the necessary gap for writting a ``topic_size`` bytes into the stream, the returned value is ``true``, otherwise ``false``.
+This function will initialize an ``ucdrBuffer`` struct where a topic of ``topic_size`` size must be serialized.
+Whether the necessary gap for writing a ``topic_size`` bytes into the stream, the returned value is ``true``, otherwise ``false``.
 The topic will be sent in the next ``run_session`` function.
 
 NOTE: All ``topic_size`` bytes requested will be sent to the *Agent* after a ``run_session`` call, no matter if the ``ucdrBuffer`` has been used or not.
@@ -879,7 +867,7 @@ Discovery profile
 The discovery profile allows discovering *Agents* in the network by UDP.
 The reachable *Agents* will respond to the discovery call sending information about them, as their IP and port.
 There are two modes: multicast and unicast.
-The discovery phase can be performed before the `uxr_create_session` call in order to determine the *Agent* to connect with.
+The discovery phase can be performed before the `uxr_create_session` call to determine the *Agent* to connect with.
 These functions are enabled when ``PROFILE_DISCOVERY`` is selected in the ``client.config`` file.
 The declaration of these functions can be found in ``uxr/client/profile/discovery/discovery.h``.
 
@@ -892,7 +880,7 @@ The declaration of these functions can be found in ``uxr/client/profile/discover
     bool uxr_discovery_agents_multicast(uint32_t attempts, int period,
                                         uxrOnAgentFound on_agent_func, void* args, uxrAgentAddress* chosen);
 
-Searches into the network using multicast IP "239.255.0.2" and port 7400 (default used by the *Agent*) in order to discover *Agents*.
+Searches into the network using multicast IP "239.255.0.2" and port 7400 (default used by the *Agent*) to discover *Agents*.
 
 :attempts: The number of attempts to send the discovery message to the network.
 :period: How will often be sent the discovery message to the network.
@@ -912,7 +900,7 @@ Searches into the network using multicast IP "239.255.0.2" and port 7400 (defaul
                                       uxrOnAgentFound on_agent_func, void* args, uxrAgentAddress* chosen,
                                       const uxrAgentAddress* agent_list, size_t agent_list_size);
 
-Searches into the network using a list of unicast directions in order to discover *Agents*.
+Searches into the network using a list of unicast directions to discover *Agents*.
 
 :attempts: The number of attempts to send the discovery message to the network.
 :period: How will often be sent the discovery message to the network.
@@ -933,7 +921,7 @@ Topic serialization
 ```````````````````
 Functions to serialize and deserialize topics.
 These functions are generated automatically by *eProsima Micro XRCE-DDS Gen* utility over an IDL file with a topic `TOPICTYPE`.
-The declaration of these function can be found in the generated file ``TOPICTYPE.h``.
+The declaration of these functions can be found in the generated file ``TOPICTYPE.h``.
 
 ------
 
@@ -987,9 +975,9 @@ The declaration of these functions can be found in ``uxr/client/core/session/str
 Creates a stream identifier.
 This function does not create a new stream, only creates its identifier to be used in the *Client* API.
 
-:index: Identifier of the stream, its value correspond to the creation order of the stream, different for each `type`.
+:index: Identifier of the stream, its value corresponding to the creation order of the stream, different for each `type`.
 :type: The type of the stream, it can be ``UXR_BEST_EFFORT_STREAM`` or ``UXR_RELIABLE_STREAM``.
-:direction: Represents the direccion of the stream, it can be ``UXR_INPUT_STREAM`` or ``UXR_OUTPUT_STREAM``.
+:direction: Represents the direction of the stream. It can be ``UXR_INPUT_STREAM`` or ``UXR_OUTPUT_STREAM``.
 
 ------
 
@@ -1005,7 +993,7 @@ This function does not create a new stream, only creates its identifier to be us
       0 is for internal library use.
       1 to 127, for best effort.
       128 to 255, for reliable.
-:direction: Represents the direction of the stream, it can be ``UXR_INPUT_STREAM`` or ``MT_OUTPUT_STREAM``.
+:direction: Represents the direction of the stream. It can be ``UXR_INPUT_STREAM`` or ``MT_OUTPUT_STREAM``.
 
 ------
 
@@ -1025,8 +1013,8 @@ Creates an identifier for reference an entity.
 Transport
 `````````
 These functions are platform dependent.
-The values ``PROFILE_XXX_TRANSPORT`` found into ``client.config`` allow to enable some of them.
-The declaration of these function can be found in ``uxr/client/profile/transport/`` folder.
+The values ``PROFILE_XXX_TRANSPORT`` found into ``client.config`` allow enabling some of them.
+The declaration of these functions can be found in ``uxr/client/profile/transport/`` folder.
 The common init transport functions follow the next nomenclature.
 
 ------
@@ -1039,7 +1027,7 @@ Initializes a UDP connection.
 
 :transport: The uninitialized structure used for managing the transport.
             This structure must be accessible during the connection.
-:platform: Structure which contains platform dependent members.
+:platform: Structure that contains platform-dependent members.
 :ip: *Agent* IP.
 :port: *Agent* port.
 
@@ -1054,7 +1042,7 @@ If the TCP is used, the behaviour of best-effort streams will be similar to reli
 
 :transport: The uninitialized structure used for managing the transport.
             This structure must be accessible during the connection.
-:platform: Structure which contains platform dependent members.
+:platform: Structure that contains platform-dependent members.
 :ip: *Agent* IP.
 :port: *Agent* port.
 
@@ -1068,8 +1056,8 @@ Initializes a Serial connection using a file descriptor
 
 :transport: The uninitialized structure used for managing the transport.
             This structure must be accessible during the connection.
-:platform: Structure which contains platform dependent members.
-:fd: File descriptor of the serial connection. Usually, the fd comes from the ``open`` OS function.
+:platform: Structure that contains platform-dependent members.
+:fd: File descriptor of the serial connection. Usually, the `fd` comes from the ``open`` OS function.
 :remote_addr: Identifier of the *Agent* in the serial connection.
               By default, the *Agent* identifier in a serial is 0.
 :local_addr: Identifier of the *Client* in the serial connection.
@@ -1087,7 +1075,7 @@ Closes a transport previously opened. `PROTOCOL` can be ``udp``, ``tcp`` or ``se
 Creation Mode Table
 ###################
 
-The following table summarize the behaviour of the *Agent* under entity creation request.
+The following table summarizes the behaviour of the *Agent* under entity creation request.
 
 =========================== ================= ==========
 **Creation flags**          **Entity exists** **Result**
@@ -1096,7 +1084,7 @@ Don't care                  NO                Entity is created.
 ``0``                       YES               No action is taken, and ``UXR_STATUS_ERR_ALREADY_EXITS`` is returned.
 ``UXR_REPLACE``             YES               Existing entity is deleted, requested entity is created and ``UXR_STATUS_OK`` is returned.
 ``UXR_REUSE``               YES               | If entity matches no action is taken and ``UXR_STATUS_OK_MATCHED`` is returned.
-                                              | If entity does not match no action is taken and ``UXR_STATUS_ERR_MISMATCH`` is returned.
+                                              | If entity does not match any action is taken and ``UXR_STATUS_ERR_MISMATCH`` is returned.
 ``UXR_REUSE | UXR_REPLACE`` YES               | If entity matches no action is taken and ``UXR_STATUS_OK_MATCHED`` is returned.
                                               | If entity does not match, exiting entity is deleted, requested entity is created and ``UXR_STATUS_OK`` is returned.
 =========================== ================= ==========

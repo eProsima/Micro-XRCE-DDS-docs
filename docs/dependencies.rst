@@ -18,7 +18,7 @@ Microsoft Visual C++ 2015 or 2017
 
 Additional Dependencies
 -----------------------
-The following dependences are not necessary to run *eProsima Micro XRCE-DDS*.
+The following dependencies are not necessary to run *eProsima Micro XRCE-DDS*.
 
 GTEST
     Gtest is the framework used to test the code through a complete set of tests.

@@ -14,7 +14,7 @@ While it is running, the *Agent* will attend any received request from the *Clie
 Configuration
 -------------
 
-There are several configuration parameters which can be set at **compile time** in order to configure the *eProsima Micro XRCE-DDS Agent*.
+There are several configuration parameters, which can be set at **compile-time** to configure the *eProsima Micro XRCE-DDS Agent*.
 These parameters can be selected as CMake flags (``-D<parameter>=<value>``) before the compilation.
 The following is a list of the aforementioned parameters:
 
@@ -28,17 +28,17 @@ The following is a list of the aforementioned parameters:
     Specify the ``HEARTBEAT`` message period in millisecond (default 200).
 
 ``UAGENT_CONFIG_TCP_MAX_CONNECTIONS``
-    Specify the maximum number of connections, the *Agent* is able to manage (default 100).
+    Specify the maximum number of connections. The *Agent* can manage (default 100).
 
 ``UAGENT_CONFIG_TCP_MAX_BACKLOG_CONNECTIONS``
-    Specify the maximum number of incoming connections (pending to establish), the *Agent* is able to manage (default 100).
+    Specify the maximum number of incoming connections (pending to establish). The *Agent* can manage (default 100).
 
 
 Run an Agent
 ------------
 
-To run the *Agent* you should build it as indicated in :ref:`installation_label`.
-Once it is built successfully, you just need to launch it executing one of the following commands:
+To run the *Agent*, build it as indicated in :ref:`installation_label`.
+Once it is built successfully, launch it executing one of the following commands:
 
 **UDP server** ::
 
