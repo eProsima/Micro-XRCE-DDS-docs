@@ -82,7 +82,7 @@ For incorporating the changes to your project, it is necessary to run the ``cmak
     It is measured in milliseconds.
 
 ``CONFIG_BIG_ENDIANNESS=<bool>``
-    This value must correspond with the memory endianness of the device in which the *Client* is running.
+    This value must correspond to the memory endianness of the device in which the *Client* is running.
     `FALSE` implies that the machine is little endian and `TRUE` implies big endian.
 
 ``CONFIG_UDP_TRANSPORT_MTU=<number>``
