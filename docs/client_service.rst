@@ -25,9 +25,9 @@ This callback has a parameter `reply_id` which corresponds to the identifier ret
 Replier
 ^^^^^^^
 
-The `Reply` entity is a mirror of the `Requester`, that is, it contains a `Publisher` and a `Subscriber` also, but the topic association is reversed,
-the `Publisher` is associated with the `ReplyTopic` and the `Subscriber` to the `RequestTopic`.
-In that case, the `Subscriber` is in charge of receiving the request from the `Requester`, while the `Publisher` sends the replies.
+The `Reply` entity is a mirror of the `Requester`, that is, it contains a `Publisher` and a `Subscriber` as well, but the topic association is reversed,
+as the `Publisher` is associated with the `ReplyTopic` and the `Subscriber` to the `RequestTopic`.
+In this case, the `Subscriber` is in charge of receiving the request from the `Requester`, while the `Publisher` sends the replies.
 
 To create a `Replier` entity, the ``uxr_buffer_create_replier_xml`` or ``uxr_buffer_create_replier_ref`` shall be used.
 Once created, replies can be sent through ``uxr_buffer_reply``, and requests can be received, making a data request to the *Agent* using the ``uxr_buffer_request_data``. 
@@ -183,7 +183,7 @@ Service example
 ^^^^^^^^^^^^^^^
 
 The code below shows the *ReplyAdder* example available at `eProsima Micro XRCE-DDS Client <https://github.com/eProsima/Micro-XRCE-DDS-Client/tree/master/examples/ReplyAdder>`__.
-This example represents a service application that receives requests composed by two integers, sums both number, and finally sends the response.
+This example represents a service application that receives requests composed by two integers, sums both numbers, and finally sends the response.
 
 .. code-block:: C
 

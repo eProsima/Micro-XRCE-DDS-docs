@@ -190,7 +190,7 @@ The topics will be received only if a ``request_data`` function has been called.
 
     void uxr_set_request_callback(uxrSession* session, uxrOnRequestFunc on_request_func, void* args);
 
-Set the request callback. This will be called when the *Agent* sends ``READ_DATA`` submessage associated with a ``Requester``.
+Sets the request callback. This will be called when the *Agent* sends a ``READ_DATA`` submessage associated with a ``Requester``.
 
 :session: Session structure previously initialized.
 :on_request_func: Function callback that will be called.
@@ -203,7 +203,7 @@ Set the request callback. This will be called when the *Agent* sends ``READ_DATA
 
     void uxr_set_reply_callback(uxrSession* session, uxrOnReplyFunc on_reply_func, void* args);
 
-Set the request callback. This will be called when the *Agent* sends ``READ_DATA`` submessage associated with a ``Replier``.
+Sets the request callback. This will be called when the *Agent* sends a ``READ_DATA`` submessage associated with a ``Replier``.
 
 :session: Session structure previously initialized.
 :on_reply_func: Function callback that will be called.
@@ -587,7 +587,7 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
 
 Creates a `requester` entity in the *Agent*.
 The message is only written into the stream buffer.
-To send the message it is necessary to call ``uxr_flash_output_streams`` or ``uxr_run_session`` function.
+To send the message it is necessary to call the ``uxr_flash_output_streams`` or ``uxr_run_session`` functions.
 
 :session: Session structure previously initialized.
 :stream_id: The output stream ID where the message will be written.
@@ -608,7 +608,7 @@ To send the message it is necessary to call ``uxr_flash_output_streams`` or ``ux
 
 Creates a `replier` entity in the *Agent*.
 The message is only written into the stream buffer.
-To send the message it is necessary to call ``uxr_flash_output_streams`` or ``uxr_run_session`` function.
+To send the message it is necessary to call the ``uxr_flash_output_streams`` or ``uxr_run_session`` functions.
 
 :session: Session structure previously initialized.
 :stream_id: The output stream ID where the message will be written.
@@ -718,7 +718,7 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
 
 Creates a `requester` entity in the *Agent*.
 The message is only written into the stream buffer.
-To send the message it is necessary to call ``uxr_flash_output_streams`` or ``uxr_run_session`` function.
+To send the message it is necessary to call the ``uxr_flash_output_streams`` or ``uxr_run_session`` functions.
 
 :session: Session structure previously initialized.
 :stream_id: The output stream ID where the message will be written.
@@ -739,7 +739,7 @@ To send the message it is necessary to call ``uxr_flash_output_streams`` or ``ux
 
 Creates a `replier` entity in the *Agent*.
 The message is only written into the stream buffer.
-To send the message it is necessary to call ``uxr_flash_output_streams`` or ``uxr_run_session`` function.
+To send the message it is necessary to call the ``uxr_flash_output_streams`` or ``uxr_run_session`` functions.
 
 :session: Session structure previously initialized.
 :stream_id: The output stream ID where the message will be written.
