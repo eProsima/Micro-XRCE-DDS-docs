@@ -118,6 +118,7 @@ User manual
    transport
    p2p
    time_sync
+   client_service
 
 Release notes
 =============

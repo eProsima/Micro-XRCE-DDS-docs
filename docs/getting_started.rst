@@ -45,7 +45,7 @@ Before create a Session we need to indicate the transport to use (the *Agent* mu
 
     uxrUDPTransport transport;
     uxrUDPPlatform udp_platform;
-    if(!uxr_init_udp_transport(&transport, &udp_platform, "127.0.0.1", 2018))
+    if(!uxr_init_udp_transport(&transport, &udp_platform, UXR_IPv4, "127.0.0.1", "2018"))
     {
         printf("Error at create transport.\n");
         return 1;
@@ -182,6 +182,40 @@ The configuration of these `DataReaders` and `DataWriters` are contained in the 
                                  "</dds>";
     uint16_t datareader_req = uxr_buffer_create_datareader_xml(&session, reliable_out, datareader_id, subscriber_id, datareader_xml, UXR_REPLACE);
 
+Requester & Replier
+^^^^^^^^^^^^^^^^^^^
+There is another pair of coupled entities, the Requester and the Replier.
+These entities provide request-reply functionality using the underlining publish-subscribe pattern.
+It is achieved through a mirror configuration between a Requester and a Replier, that is,
+both entities contain a `Publisher` and a `Subscriber`,
+the `Publisher` of the `Requester` and the `Subscriber` of the `Replier` are associated with the same `Topic` and vice versa.
+In that way, each time a `Requester` publishes a request it will be received by the `Replier`,
+then the latter will generate a reply and publish it, and finally, this reply will be received by the `Requester`.
+
+The following code shows how to create a `Requester` and a `Replier` using the XML representation.
+
+.. code-block:: C
+
+    uxrObjectId requester_id = uxr_object_id(0x01, UXR_REQUESTER_ID);
+    const char* requester_xml = "<dds>"
+                                    "<requester profile_name=\"my_requester\""
+                                               "service_name=\"service_name\""
+                                               "request_type=\"request_type\""
+                                               "reply_type=\"reply_type\">"
+                                    "</requester>"
+                                "</dds>";
+    uint16_t requester_req = uxr_buffer_create_requester_xml(&session, reliable_out, requester_id, participant_id, requester_xml, UXR_REPLACE);
+
+    replier_id = uxr_object_id(0x01, UXR_REPLIER_ID);
+    const char* replier_xml = "<dds>"
+                                  "<replier profile_name=\"my_requester\""
+                                           "service_name=\"service_name\""
+                                           "request_type=\"request_type\""
+                                           "reply_type=\"reply_type\">"
+                                  "</replier>"
+                             "</dds>";
+    uint16_t replier_req = uxr_buffer_create_replier_xml(&session, reliable_out, replier_id, participant_id, replier_xml, UXR_REPLACE);
+
 Agent response
 ^^^^^^^^^^^^^^
 In operations such as create a session, create entity or request data from the *Agent*,
@@ -280,9 +314,9 @@ The ``run_session`` function will call the topic callback each time a topic will
 
 .. code-block:: C
 
-    void on_topic(uxrSession* session, uxrObjectId object_id, uint16_t request_id, uxrStreamId stream_id, struct ucdrBuffer* ub, void* args)
+    void on_topic(uxrSession* session, uxrObjectId object_id, uint16_t request_id, uxrStreamId stream_id, struct ucdrBuffer* ub, uint16_t length, void* args)
     {
-        (void) session; (void) object_id; (void) request_id; (void) stream_id; (void) args;
+        (void) session; (void) object_id; (void) request_id; (void) stream_id; (void) length; (void) args;
 
         HelloWorld topic;
         HelloWorld_deserialize_topic(ub, &topic);
@@ -307,4 +341,3 @@ After this, we can close the transport used by the session.
 .. code-block:: C
 
     uxr_close_udp_transport(&transport);
-

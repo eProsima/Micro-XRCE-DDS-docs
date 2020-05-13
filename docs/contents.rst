@@ -29,6 +29,7 @@ Table Of contents
    transport
    p2p
    time_sync
+   client_service
 
 .. toctree::
    :caption: Release Notes

@@ -32,6 +32,12 @@ DataWriter
 DataReader
     This is the endpoint able to read Topic data.
 
-This figure shows the entities' hierarchy
+Requester
+    This is the endpoint able to write Request data and to read Reply data.
+
+Replier
+    This is the endpoint able to read Request data and to write Reply data.
+
+This figure shows the entities hierarchy
 
 .. image:: images/entities_hierarchy.svg
