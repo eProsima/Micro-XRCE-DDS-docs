@@ -1,3 +1,30 @@
+Version 1.2.0
+=============
+
+**Agent 1.3.0 | Client 1.2.1**
+
+This version includes the following changes in both Agent and Client:
+
+* Agent 1.3.0
+    * Add
+        * IPv6 support.
+        * Requester/Replier support.
+        * Packaging compatibility with colcon.
+        * Isolated installation option.
+        * Raspberry Pi support.
+    * Change
+        * Serial transport.
+
+* Client 1.2.1
+    * Add
+        * IPv6 support.
+        * Requester/Replier support.
+        * Packaging compatibility with colcon.
+        * Isolated installation option.
+
+Previous Versions
+-----------------
+
 Version 1.1.0
 =============
 
@@ -41,9 +68,6 @@ This version includes the following changes in both Agent and Client:
     * Fix
         * Acknack reading.
         * User data bad alignment.
-
-Previous Versions
------------------
 
 Version 1.0.3
 =============
