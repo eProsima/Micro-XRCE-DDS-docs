@@ -36,64 +36,63 @@ Configuration
 -------------
 There are several definitions for configuring and building of the *Client* library at **compile-time**.
 These definitions allow you to create a version of the library according to your requirements.
-These definitions can be modified at ``client.config`` file.
-For incorporating the changes to your project, it is necessary to run the ``cmake`` command every time the definitions change.
+These definitions can be modified through CMake flags:
 
-``PROFILE_DISCOVERY=<bool>``
+``UCLIENT_PROFILE_DISCOVERY=<bool>``
     Enables or disables the functions of the discovery feature (currently, only for Linux).
 
-``PROFILE_UDP_TRANSPORT=<bool>``
+``UCLIENT_PROFILE_UDP=<bool>``
     Enables or disables the possibility to connect with the *Agent* by UDP.
 
-``PROFILE_TCP_TRANSPORT=<bool>``
+``UCLIENT_PROFILE_TCP=<bool>``
     Enables or disables the possibility to connect with the *Agent* by TCP.
 
-``PROFILE_SERIAL_TRANSPORT=<bool>``
+``UCLIENT_PROFILE_SERIAL=<bool>``
     Enables or disables the possibility to connect with the *Agent* by Serial.
 
-``CONFIG_MAX_OUTPUT_BEST_EFFORT_STREAMS=<number>``
+``UCLIENT_MAX_OUTPUT_BEST_EFFORT_STREAMS=<number>``
     Configures the maximum output best-effort streams that a session could have.
     The calls to ``uxr_create_output_best_effort_stream`` function for a session must be less or equal that this value.
 
-``CONFIG_MAX_OUTPUT_RELIABLE_STREAMS=<number>``
+``UCLIENT_MAX_OUTPUT_RELIABLE_STREAMS=<number>``
     Configures the maximum output reliable streams that a session could have.
     The calls to ``uxr_create_output_reliable_stream`` function for a session must be less or equal that this value.
 
-``CONFIG_MAX_INPUT_BEST_EFFORT_STREAMS=<number>``
+``UCLIENT_MAX_INPUT_BEST_EFFORT_STREAMS=<number>``
     Configures the maximum input best-effort streams that a session could have.
     The calls to ``uxr_create_input_best_effort_stream`` function for a session must be less or equal that this value.
 
-``CONFIG_MAX_INPUT_RELIABLE_STREAMS=<number>``
+``UCLIENT_MAX_INPUT_RELIABLE_STREAMS=<number>``
     Configures the maximum input reliable streams that a session could have.
     The calls to ``uxr_create_input_reliable_stream`` function for a session must be less or equal that this value.
 
-``CONFIG_MAX_SESSION_CONNECTION_ATTEMPTS=<number>``
+``UCLIENT_MAX_SESSION_CONNECTION_ATTEMPTS=<number>``
     This value indicates the number of attempts that ``create_session`` and ``delete_session`` will perform until receiving a status message.
     After a failed attempt, the wait time for the next attempt will be double.
 
-``CONFIG_MIN_SESSION_CONNECTION_INTERVAL=<number>``
+``UCLIENT_MIN_SESSION_CONNECTION_INTERVAL=<number>``
     This value represents how long it will take to send a new ``create_session`` or ``delete_session`` if the first sent has not answered.
     The wait time for each attempt will be double until reach ``CONFIG_MAX_SESSION_CONNECTION_ATTEMPTS``.
     It is measured in milliseconds.
 
-``CONFIG_MIN_HEARTBEAT_TIME_INTERVAL=<number>``
+``UCLIENT_MIN_HEARTBEAT_TIME_INTERVAL=<number>``
     Into a reliable communication, this value represents how long it will take the first heartbeat to be sent.
     The wait time for the next heartbeat will be double.
     It is measured in milliseconds.
 
-``CONFIG_BIG_ENDIANNESS=<bool>``
+``UCLIENT_BIG_ENDIANNESS=<bool>``
     This value must correspond to the memory endianness of the device in which the *Client* is running.
-    `FALSE` implies that the machine is little endian and `TRUE` implies big endian.
+    `FALSE` implies that the machine is little-endian and `TRUE` implies big-endian.
 
-``CONFIG_UDP_TRANSPORT_MTU=<number>``
+``UCLIENT_UDP_TRANSPORT_MTU=<number>``
     This value corresponds to the `Maximum Transmission Unit` able to send and receive by UDP.
     Internally a buffer is created with this size.
 
-``CONFIG_TCP_TRANSPORT_MTU=<number>``
+``UCLIENT_TCP_TRANSPORT_MTU=<number>``
     This value corresponds to the `Maximum Transmission Unit` able to send and receive by TCP.
     Internally a buffer is created with this size.
 
-``CONFIG_SERIAL_TRANSPORT_MTU=<number>``
+``UCLIENT_SERIAL_TRANSPORT_MTU=<number>``
     This value corresponds to the `Maximum Transmission Unit` able to send and receive by Serial.
     Internally a buffer is created proportional to this size.
 
