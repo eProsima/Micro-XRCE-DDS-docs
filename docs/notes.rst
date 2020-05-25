@@ -1,3 +1,24 @@
+Version 1.3.0
+=============
+
+**Agent 1.4.0 | Client 1.2.3**
+
+This version includes the following changes in both Agent and Client:
+
+* Agent 1.4.0:
+    * Add
+        * FastDDS middleware (compatible with ROS 2 Foxy).
+    * Fix
+        * TermiosAgent's baudrate setting.
+* Client 1.2.3:
+    * Modify
+        * Examples installation.
+    * Fix
+        * Minor Windows visibility function fixes.
+
+Previous Versions
+-----------------
+
 Version 1.2.0
 =============
 
@@ -21,9 +42,6 @@ This version includes the following changes in both Agent and Client:
         * Requester/Replier support.
         * Packaging compatibility with colcon.
         * Isolated installation option.
-
-Previous Versions
------------------
 
 Version 1.1.0
 =============

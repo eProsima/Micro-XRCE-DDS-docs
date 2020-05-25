@@ -45,65 +45,65 @@ Once it is built successfully, launch it executing one of the following commands
     $ ./MicroXRCEAgent udp [OPTIONS]
 
     Options:
-      -h,--help                               Print this help message and exit
-      -p,--port UINT REQUIRED                 Select the port
-      -m,--middleware TEXT in {ced,dds}=dds   Select the kind of Middleware
-      -r,--refs FILE                          Load a reference file
-      -v,--verbose UINT in {0,1,2,3,4,5,6}=4  Select log level from less to more verbose
-      -d,--discovery                          Activate the Discovery server
-      --disport UINT=7400 Needs: --discovery  Select the port for the Discovery server
-      --p2p UINT                              Activate the P2P profile using the given port
+      -h,--help                                    Print this help message and exit
+      -p,--port UINT REQUIRED                      Select the port
+      -m,--middleware TEXT in {ced,rtps,dds}=dds   Select the kind of Middleware
+      -r,--refs FILE                               Load a reference file
+      -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from less to more verbose
+      -d,--discovery                               Activate the Discovery server
+      --disport UINT=7400 Needs: --discovery       Select the port for the Discovery server
+      --p2p UINT                                   Activate the P2P profile using the given port
 
 **TCP server** ::
 
     $ ./MicroXRCEAgent tcp [OPTIONS]
 
     Options:
-      -h,--help                               Print this help message and exit
-      -p,--port UINT REQUIRED                 Select the port
-      -m,--middleware TEXT in {ced,dds}=dds   Select the kind of Middleware
-      -r,--refs FILE                          Load a reference file
-      -v,--verbose UINT in {0,1,2,3,4,5,6}=4  Select log level from less to more verbose
-      -d,--discovery                          Activate the Discovery server
-      --disport UINT=7400 Needs: --discovery  Select the port for the Discovery server
-      --p2p UINT                              Activate the P2P profile using the given port
+      -h,--help                                    Print this help message and exit
+      -p,--port UINT REQUIRED                      Select the port
+      -m,--middleware TEXT in {ced,rtps,dds}=dds   Select the kind of Middleware
+      -r,--refs FILE                               Load a reference file
+      -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from less to more verbose
+      -d,--discovery                               Activate the Discovery server
+      --disport UINT=7400 Needs: --discovery       Select the port for the Discovery server
+      --p2p UINT                                   Activate the P2P profile using the given port
 
 **Serial server** (only Linux) ::
 
     $ ./MicroXRCEAgent serial [OPTIONS]
 
     Options:
-      -h,--help                               Print this help message and exit
-      --dev FILE REQUIRED                     Select the serial device
-      -b,--baudrate TEXT=115200               Select the baudrate
-      -m,--middleware TEXT in {ced,dds}=dds   Select the kind of Middleware
-      -r,--refs FILE                          Load a reference file
-      -v,--verbose UINT in {0,1,2,3,4,5,6}=4  Select log level from less to more verbose
-      -d,--discovery                          Activate the Discovery server
-      --disport UINT=7400 Needs: --discovery  Select the port for the Discovery server
-      --p2p UINT                              Activate the P2P profile using the given port
+      -h,--help                                    Print this help message and exit
+      --dev FILE REQUIRED                          Select the serial device
+      -b,--baudrate TEXT=115200                    Select the baudrate
+      -m,--middleware TEXT in {ced,rtps,dds}=dds   Select the kind of Middleware
+      -r,--refs FILE                               Load a reference file
+      -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from less to more verbose
+      -d,--discovery                               Activate the Discovery server
+      --disport UINT=7400 Needs: --discovery       Select the port for the Discovery server
+      --p2p UINT                                   Activate the P2P profile using the given port
 
 **Pseudo-Serial server** (only Linux) ::
 
     $ ./MicroXRCEAgent pseudo-serial [OPTIONS]
 
     Options:
-      -h,--help                               Print this help message and exit
-      --dev FILE REQUIRED                     Select the serial device
-      -b,--baudrate TEXT=115200               Select the baudrate
-      -m,--middleware TEXT in {ced,dds}=dds   Select the kind of Middleware
-      -r,--refs FILE                          Load a reference file
-      -v,--verbose UINT in {0,1,2,3,4,5,6}=4  Select log level from less to more verbose
-      -d,--discovery                          Activate the Discovery server
-      --disport UINT=7400 Needs: --discovery  Select the port for the Discovery server
-      --p2p UINT                              Activate the P2P profile using the given port
+      -h,--help                                    Print this help message and exit
+      --dev FILE REQUIRED                          Select the serial device
+      -b,--baudrate TEXT=115200                    Select the baudrate
+      -m,--middleware TEXT in {ced,rtps,dds}=dds   Select the kind of Middleware
+      -r,--refs FILE                               Load a reference file
+      -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from less to more verbose
+      -d,--discovery                               Activate the Discovery server
+      --disport UINT=7400 Needs: --discovery       Select the port for the Discovery server
+      --p2p UINT                                   Activate the P2P profile using the given port
 
 * The reference file shall be composed by a set of Fast RTPS profiles following the `XML syntax <https://eprosima-fast-rtps.readthedocs.io/en/latest/xmlprofiles.html>`_ described in Fast RTPS.
   The ``profile_name`` attribute of each profile represents a reference to an XRCE-Entity so that it could be used by the *Clients* to create entities by reference.
 * The ``-b,--baudrate <baudrate>`` options sets the baud rate of the communication. It can take the following values:
   0, 50, 75, 110, 134, 150, 200, 300, 600, 1200, 1800, 240, 4800, 9600, 19200, 38400, 57600, 115200 (default), 230400, 460800, 500000, 576000, 921600, 1000000, 1152000, 1500000, 2000000, 2500000, 3000000, 3500000 or 4000000 Bd.
 * The ``-v,--verbose <level[0-6]>`` option sets log level from less to more verbose, in  level 0 the logger is off.
-* ``-m,--middleware <middleware-impl>``: set the middleware implementation to use. There are two: DDS (specified by the XRCE standard) and Centralized (topic are managed by the Agent similarly MQTT).
+* ``-m,--middleware <middleware-impl>``: set the middleware implementation to use. There are three: RPTS (based on eProsima Fast RTPS), DDS (specified by the XRCE standard) and Centralized (topic are managed by the Agent similarly MQTT).
 * The ``--p2p <port>`` option enables P2P communication. Centralized middleware is necessary for this option.
 
 Middleware Abstraction Layer
@@ -122,6 +122,13 @@ FastMiddleware
 The *FastMiddleware* uses *eProsima Fast RTPS*, a C++ implementation of the RTPS (Real Time Publish Subscribe) protocol.
 This middleware allows *Client* to produce and consume data in the DDS Global Data Space, and consequently in the ROS 2 system.
 In that case, the *Agent* has the default behaviour as described in the DDS-XRCE standard, that is, for each DDS-XRCE entity a DDS proxy entity is created, and the writing/reading action produces a publishing/subscribing operation in the DDS world.
+
+FastDDSMiddleware
+^^^^^^^^^^^^^^
+
+The *FastDDSMiddleware* uses *eProsima Fast DDS*, a C++ implementation of the DDS standard.
+This middleware allows *Client* to produce and consume data in the DDS Global Data Space, and consequently in the ROS 2 system.
+As in the previous case, for each DDS-XRCE entity a DDS proxy entity is created, and the writing/reading action produces a publishing/subscribing operation in the DDS world (as described in the DDS-XRCE standard).
 
 .. _ced_middleware_label:
 
