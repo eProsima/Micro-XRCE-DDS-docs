@@ -420,6 +420,27 @@ The function will return ``true`` if one status have been received and has the v
 
 .. code-block:: c
 
+    bool uxr_run_session_until_data(uxrSession* session, int timeout);
+
+This function processes the internal functionality of a session.
+It implies:
+
+1. Flushing all output streams sending the data through the transport.
+2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
+3. Listening messages from the *Agent* and call the associated callback if it exists (a topic callback or a status callback).
+
+The ``_until_data`` suffix function version will perform these actions during ``timeout`` duration
+or until one subscription data, request or reply is received.
+The function will return ``true`` if one subscription data, request or reply is received, ``false`` otherwise.
+
+:session: Session structure previously initialized.
+:timeout: Maximum waiting time for a new message, in milliseconds.
+          For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
+
+------
+
+.. code-block:: c
+
     bool uxr_sync_session(uxrSession* session, int timeout);
 
 This function synchronizes the session time with the *Agent* using the NTP protocol by default.
