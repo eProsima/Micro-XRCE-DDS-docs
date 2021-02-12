@@ -1053,13 +1053,12 @@ The common init transport functions follow the next nomenclature.
 
 .. code-block:: c
 
-    bool uxr_init_udp_transport(uxrUDPTransport* transport, uxrUDPPlatform* platform, const char* ip, uint16_t port);
+    bool uxr_init_udp_transport(uxrUDPTransport* transport, const char* ip, uint16_t port);
 
 Initializes a UDP connection.
 
 :transport: The uninitialized structure used for managing the transport.
             This structure must be accessible during the connection.
-:platform: Structure that contains platform-dependent members.
 :ip: *Agent* IP.
 :port: *Agent* port.
 
@@ -1067,14 +1066,13 @@ Initializes a UDP connection.
 
 .. code-block:: c
 
-    bool uxr_init_tcp_transport(uxrTCPTransport* transport, uxrTCPPlatform* platform, const char* ip, uint16_t port);
+    bool uxr_init_tcp_transport(uxrTCPTransport* transport, const char* ip, uint16_t port);
 
 Initializes a TCP connection.
 If the TCP is used, the behaviour of best-effort streams will be similar to reliable streams in UDP.
 
 :transport: The uninitialized structure used for managing the transport.
             This structure must be accessible during the connection.
-:platform: Structure that contains platform-dependent members.
 :ip: *Agent* IP.
 :port: *Agent* port.
 
@@ -1082,13 +1080,12 @@ If the TCP is used, the behaviour of best-effort streams will be similar to reli
 
 .. code-block:: c
 
-    bool uxr_init_serial_transport(uxrSerialTransport* transport, uxrSerialPlatform* platform, const int fd, uint8_t remote_addr, uint8_t local_addr);
+    bool uxr_init_serial_transport(uxrSerialTransport* transport, const int fd, uint8_t remote_addr, uint8_t local_addr);
 
 Initializes a Serial connection using a file descriptor
 
 :transport: The uninitialized structure used for managing the transport.
             This structure must be accessible during the connection.
-:platform: Structure that contains platform-dependent members.
 :fd: File descriptor of the serial connection. Usually, the `fd` comes from the ``open`` OS function.
 :remote_addr: Identifier of the *Agent* in the serial connection.
               By default, the *Agent* identifier in a serial is 0.

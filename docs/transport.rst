@@ -112,7 +112,7 @@ These functions are implemented by the ``uxrUDPTransport``, which is in charge o
 
 .. code-block:: c
 
-    bool uxr_init_udp_transport(uxrUDPTransport* transport, uxrUDPPlatform* platform, const char* ip, uint8_t port);
+    bool uxr_init_udp_transport(uxrUDPTransport* transport, const char* ip, uint8_t port);
     bool uxr_close_udp_transport(uxrUDPTransport* transport);
 
 For each platform, there is an implementation of these functions defined in the Transport Layer interface.

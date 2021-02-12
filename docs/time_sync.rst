@@ -54,8 +54,7 @@ This example could be found in `eProsima Micro XRCE-DDS Client <https://github.c
     
         // Transport
         uxrUDPTransport transport;
-        uxrUDPPlatform udp_platform;
-        if(!uxr_init_udp_transport(&transport, &udp_platform, ip, port))
+        if(!uxr_init_udp_transport(&transport, ip, port))
         {
             printf("Error at create transport.\n");
             return 1;
@@ -154,8 +153,7 @@ In particular, this example implements the NTP protocol with average computation
 
         // Transport
         uxrUDPTransport transport;
-        uxrUDPPlatform udp_platform;
-        if(!uxr_init_udp_transport(&transport, &udp_platform, ip, port))
+        if(!uxr_init_udp_transport(&transport, ip, port))
         {
             printf("Error at create transport.\n");
             return 1;

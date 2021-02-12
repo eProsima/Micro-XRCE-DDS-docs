@@ -65,8 +65,7 @@ The code of the *PublishHelloWorldClient* is the following:
 
         // Transport
         uxrUDPTransport transport;
-        uxrUDPPlatform udp_platform;
-        if(!uxr_init_udp_transport(&transport, &udp_platform, UXR_IPv4, ip, port))
+        if(!uxr_init_udp_transport(&transport, UXR_IPv4, ip, port))
         {
             printf("Error at create transport.\n");
             return 1;
@@ -227,8 +226,7 @@ The code of the *SubscriberHelloWorldClient* is the following:
     
         // Transport
         uxrUDPTransport transport;
-        uxrUDPPlatform udp_platform;
-        if(!uxr_init_udp_transport(&transport, &udp_platform, UXR_IPv4, ip, port))
+        if(!uxr_init_udp_transport(&transport, UXR_IPv4, ip, port))
         {
             printf("Error at create transport.\n");
             return 1;

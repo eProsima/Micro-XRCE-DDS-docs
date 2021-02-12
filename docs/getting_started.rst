@@ -44,8 +44,7 @@ Before create a Session we need to indicate the transport to use (the *Agent* mu
 .. code-block:: C
 
     uxrUDPTransport transport;
-    uxrUDPPlatform udp_platform;
-    if(!uxr_init_udp_transport(&transport, &udp_platform, UXR_IPv4, "127.0.0.1", "2018"))
+    if(!uxr_init_udp_transport(&transport, UXR_IPv4, "127.0.0.1", "2018"))
     {
         printf("Error at create transport.\n");
         return 1;

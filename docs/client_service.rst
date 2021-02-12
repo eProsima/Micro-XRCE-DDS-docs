@@ -98,8 +98,7 @@ This example represents a client application that sends two integers as requests
 
         // Transport
         uxrUDPTransport transport;
-        uxrUDPPlatform udp_platform;
-        if (!uxr_init_udp_transport(&transport, &udp_platform, UXR_IPv4, ip, port))
+        if (!uxr_init_udp_transport(&transport, UXR_IPv4, ip, port))
         {
             printf("Error at init transport.\n");
             return 1;
@@ -259,8 +258,7 @@ This example represents a service application that receives requests composed by
 
         // Transport
         uxrUDPTransport transport;
-        uxrUDPPlatform udp_platform;
-        if (!uxr_init_udp_transport(&transport, &udp_platform, UXR_IPv4, ip, port))
+        if (!uxr_init_udp_transport(&transport, UXR_IPv4, ip, port))
         {
             printf("Error at init transport.\n");
             return 1;
