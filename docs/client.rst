@@ -224,7 +224,7 @@ This function logs in a session, enabling any other XRCE communication with the 
 
 .. code-block:: c
 
-    void uxr_create_session_retries(uxrSession* session, int retries);
+    void uxr_create_session_retries(uxrSession* session, size_t retries);
 
 Creates a new session with the *Agent* with retries.
 This function logs in a session, enabling any other XRCE communication with the *Agent*.
@@ -1100,6 +1100,29 @@ Initializes a Serial connection using a file descriptor
 Closes a transport previously opened. `PROTOCOL` can be ``udp``, ``tcp`` or ``serial``.
 
 :transport: The transport to close.
+
+------
+
+.. code-block:: c
+
+    bool uxr_ping_agent(const uxrCommunication* comm, const int timeout);
+
+[TODO]
+
+:comm: [TODO]
+:timeout: [TODO]
+
+------
+
+.. code-block:: c
+
+    bool uxr_ping_agent_attempts(const uxrCommunication* comm, const int timeout, const uint8_t attempts);
+
+[TODO]
+
+:comm: [TODO]
+:timeout: [TODO]
+:attempts: [TODO]
 
 Creation Mode Table
 ###################
