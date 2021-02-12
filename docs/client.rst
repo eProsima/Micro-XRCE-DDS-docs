@@ -224,6 +224,18 @@ This function logs in a session, enabling any other XRCE communication with the 
 
 .. code-block:: c
 
+    void uxr_create_session_retries(uxrSession* session, int retries);
+
+Creates a new session with the *Agent* with retries.
+This function logs in a session, enabling any other XRCE communication with the *Agent*.
+
+:session: Session structure previously initialized.
+:retries: Number of retries to try to create a session.
+
+------
+
+.. code-block:: c
+
     bool uxr_delete_session(uxrSession* session);
 
 Deletes a session previously created.
