@@ -44,6 +44,10 @@ On Linux, inside of ``build`` folder, execute the following commands: ::
     $ make
     $ sudo make install
 
+Now you have the executable *eProsima Micro XRCE-DDS Client* installed in your system. Before running it, you need to add ``/usr/local/lib`` to the dynamic loader-linker directories. ::
+
+    sudo ldconfig /usr/local/lib/
+
 On Windows first select the Visual Studio version: ::
 
     $ cmake -G "Visual Studio 14 2015 Win64" ..
