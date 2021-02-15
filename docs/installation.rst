@@ -85,3 +85,5 @@ On Windows choose the Visual Studio version using the CMake option *-G*, for exa
 
 Now you have *eProsima Micro XRCE-DDS Agent* and *eProsima Micro XRCE-DDS Client* installed in your system.
 
+Usually is useful to install examples along with the XRCE-DDS suite, for doing so, just use `cmake .. -DUXRCE_BUILD_EXAMPLES=ON`.
+
