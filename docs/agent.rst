@@ -33,6 +33,14 @@ The following is a list of the aforementioned parameters:
 ``UAGENT_CONFIG_TCP_MAX_BACKLOG_CONNECTIONS``
     Specify the maximum number of incoming connections (pending to establish). The *Agent* can manage (default 100).
 
+``UAGENT_CONFIG_SERVER_QUEUE_MAX_SIZE``
+    Maximum server's queues size (default 32000).
+
+``UAGENT_CONFIG_CLIENT_DEAD_TIME``
+    Client dead time in milliseconds. (default 30000).
+
+``UAGENT_SERVER_BUFFER_SIZE``
+    Server buffer size. (default 65535).
 
 Run an Agent
 ------------
