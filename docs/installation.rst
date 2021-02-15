@@ -63,6 +63,22 @@ For building your Client app, you need to build against the following libs: ::
 
     gcc <your_main.c> -lmicrocdr -lmicroxrcedds_client
 
+Installing the XRCE-DDS Gen standalone
+--------------------------------
+
+Clone the project from GitHub: ::
+
+    $ sudo apt install git openjdk-8-jdk gradle
+    $ git clone https://github.com/eProsima/Micro-XRCE-DDS-Gen.git
+    $ cd Micro-XRCE-DDS-Gen
+    $ git submodules init
+    $ git submodules update
+    $ gradle build -Dbranch=v1.2.5  
+
+You will have the XRCE-DDS available as: ::
+
+    $ ./scripts/microxrceddsgen -help 
+
 Installing Agent and Client
 ---------------------------
 
