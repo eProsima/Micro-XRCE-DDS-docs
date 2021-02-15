@@ -6,7 +6,7 @@ Memory optimization
 Executable code size
 --------------------
 To manage the executable code size, the library can be compiled enabling or disabling several profiles.
-To add or remove a profile from the library, edit the ``client.config`` file.
+To add or remove a profile from the library, enable or disable profiles as CMake arguments.
 More information can be found at: :ref:`micro_xrce_dds_client_label`.
 
 NOTE: If you are compiling your app with *gcc*, its highly recommended compile it with the linker flag: ``-Wl,--gc-sections``.
@@ -39,6 +39,6 @@ Stream buffers
 Transport MTUs
 ~~~~~~~~~~~~~~
 Each transport has a different *MTU*.
-The *MTU* value can be defined into the ``client.config`` file.
+The *MTU* value can be defined as a CMake argument.
 The *MTU* will represent the ``MAX_MESSAGE_SIZE`` that can be sent or received.
 The transport uses the *MTU* value to create an internal buffer, so this value will affect increasing transport struct size.

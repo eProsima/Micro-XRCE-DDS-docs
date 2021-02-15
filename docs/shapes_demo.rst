@@ -80,7 +80,7 @@ For example, the following command creates the necessary entities for publishing
 To modify the output default stream, you can change it with `stream <id>`.
 
 The maximum available streams corresponds with the ``CONFIG_MAX_OUTPUT_BEST_EFFORT_STREAMS`` and
-``CONFIG_MAX_OUTPUT_RELIABLE_STREAMS`` properties configurable in ``client.config`` file.
+``CONFIG_MAX_OUTPUT_RELIABLE_STREAMS`` properties as CMake argument.
 
     > stream 1
 

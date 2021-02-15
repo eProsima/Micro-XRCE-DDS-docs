@@ -14,7 +14,7 @@ Profiles
 
 The *Client* library follows a profile concept that enables to choose, add or remove some features in configuration time.
 That allows customizing the *Client* library size, if there are features that are not used.
-The profiles can be chosen in ``client.config`` and start with the prefix ``PROFILE``.
+The profiles can be chosen using CMake arguments and start with the prefix ``PROFILE``.
 As part of these profiles, you can choose between several transport layers.
 Communication with the *Agent* is done through the transport you choose.
 
@@ -137,7 +137,7 @@ The functions belonging to the public interface of the library are only those wi
 
 Session
 ```````
-These functions are available even if no profile has been enabled in ``client.config`` file.
+These functions are available even if no profile has been enabled.
 The declaration of these function can be found in ``uxr/client/core/session/session.h``.
 
 ------
@@ -252,7 +252,7 @@ This function logs out a session, disabling any other `XRCE` communication with 
 
 Creates and initializes an output best-effort stream for writing.
 The ``uxrStreamId`` returned represents the new stream and can be used to manage it.
-The number of available calls to this function must be less or equal than ``CONFIG_MAX_OUTPUT_BEST_EFFORT_STREAMS`` value of the ``client.config`` file.
+The number of available calls to this function must be less or equal than ``CONFIG_MAX_OUTPUT_BEST_EFFORT_STREAMS`` CMake argument.
 
 :session: Session structure previously initialized.
 :buffer: Memory block where the messages will be written.
@@ -266,7 +266,7 @@ The number of available calls to this function must be less or equal than ``CONF
 
 Creates and initializes an output reliable stream for writing.
 The ``uxrStreamId`` returned represents the new stream and can be used to manage it.
-The number of available calls to this function must be less or equal than ``CONFIG_MAX_OUTPUT_RELIABLE_STREAMS`` value of the ``client.config`` file.
+The number of available calls to this function must be less or equal than ``CONFIG_MAX_OUTPUT_RELIABLE_STREAMS`` CMake argument.
 
 :session: Session structure previously initialized.
 :buffer: Memory block where the messages will be written.
@@ -283,7 +283,7 @@ The number of available calls to this function must be less or equal than ``CONF
 
 Creates and initializes an input best-effort stream for receiving messages.
 The ``uxrStreamId`` returned represents the new stream and can be used to manage it.
-The number of available calls to this function must be less or equal than ``CONFIG_MAX_INPUT_BEST_EFFORT_STREAMS`` value of the ``client.config`` file.
+The number of available calls to this function must be less or equal than ``CONFIG_MAX_INPUT_BEST_EFFORT_STREAMS`` CMake argument.
 
 :session: Session structure previously initialized.
 
@@ -295,7 +295,7 @@ The number of available calls to this function must be less or equal than ``CONF
 
 Creates and initializes an input reliable stream for receiving messages.
 The returned ``uxrStreamId`` represents the new stream and can be used to manage it.
-The number of available calls to this function must be less or equal than ``CONFIG_MAX_INPUT_RELIABLE_STREAMS`` value of the ``client.config`` file.
+The number of available calls to this function must be less or equal than ``CONFIG_MAX_INPUT_RELIABLE_STREAMS`` CMake argument.
 
 :session: Session structure previously initialized.
 :buffer: Memory block where the messages will be storaged.
@@ -484,7 +484,7 @@ This function returns the epoch time in nanoseconds taking into account the offs
 
 Create entities by XML profile
 ``````````````````````````````
-These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` is selected in the ``client.config`` file.
+These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` is enabled as a CMake argument.
 The declaration of these functions can be found in ``uxr/client/profile/session/create_entities_xml.h``.
 
 ------
@@ -657,7 +657,7 @@ To send the message it is necessary to call the ``uxr_flash_output_streams`` or 
 
 Create entities by reference profile
 ````````````````````````````````````
-These functions are enabled when ``PROFILE_CREATE_ENTITIES_REF`` is selected in the ``client.config`` file.
+These functions are enabled when ``PROFILE_CREATE_ENTITIES_REF`` is enabled as a CMake argument.
 The declaration of these functions can be found in ``uxr/client/profile/session/create_entities_ref.h``.
 
 ------
@@ -788,7 +788,7 @@ To send the message it is necessary to call the ``uxr_flash_output_streams`` or 
 
 Create entities common profile
 ``````````````````````````````
-These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` or ``PROFILE_CREATE_ENTITIES_REF`` are selected in the ``client.config`` file.
+These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` or ``PROFILE_CREATE_ENTITIES_REF`` are enabled as CMake arguments.
 The declaration of these functions can be found in ``uxr/client/profile/session/common_create_entities.h``.
 
 ------
@@ -809,7 +809,7 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
 
 Read access profile
 ```````````````````
-These functions are enabled when ``PROFILE_READ_ACCESS`` is selected in the ``client.config`` file.
+These functions are enabled when ``PROFILE_READ_ACCESS`` is enabled as a CMake argument.
 The declaration of these functions can be found in ``uxr/client/profile/session/read_access.h``.
 
 ------
@@ -838,7 +838,7 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
 
 Write access profile
 ````````````````````
-These functions are enabled when ``PROFILE_WRITE_ACCESS`` is selected in the ``client.config`` file.
+These functions are enabled when ``PROFILE_WRITE_ACCESS`` is enabled as a CMake argument.
 The declaration of these functions can be found in ``uxr/client/profile/session/write_access.h``.
 
 ------
@@ -900,7 +900,7 @@ The discovery profile allows discovering *Agents* in the network by UDP.
 The reachable *Agents* will respond to the discovery call sending information about them, as their IP and port.
 There are two modes: multicast and unicast.
 The discovery phase can be performed before the `uxr_create_session` call to determine the *Agent* to connect with.
-These functions are enabled when ``PROFILE_DISCOVERY`` is selected in the ``client.config`` file.
+These functions are enabled when ``PROFILE_DISCOVERY`` is enabled as a CMake argument.
 The declaration of these functions can be found in ``uxr/client/profile/discovery/discovery.h``.
 
 *This feature is only available on Linux.*
@@ -1045,7 +1045,6 @@ Creates an identifier for reference an entity.
 Transport
 `````````
 These functions are platform dependent.
-The values ``PROFILE_XXX_TRANSPORT`` found into ``client.config`` allow enabling some of them.
 The declaration of these functions can be found in ``uxr/client/profile/transport/`` folder.
 The common init transport functions follow the next nomenclature.
 
