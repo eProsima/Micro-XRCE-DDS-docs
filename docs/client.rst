@@ -657,7 +657,7 @@ To send the message it is necessary to call the ``uxr_flash_output_streams`` or 
 
 Create entities by reference profile
 ````````````````````````````````````
-These functions are enabled when ``PROFILE_CREATE_ENTITIES_REF`` is enabled as a CMake argument.
+These functions are enabled when ``PROFILE_CREATE_ENTITIES_REF`` is activated as a CMake argument.
 The declaration of these functions can be found in ``uxr/client/profile/session/create_entities_ref.h``.
 
 ------
