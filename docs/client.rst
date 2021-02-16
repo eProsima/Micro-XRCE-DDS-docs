@@ -788,7 +788,7 @@ To send the message it is necessary to call the ``uxr_flash_output_streams`` or 
 
 Create entities common profile
 ``````````````````````````````
-These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` or ``PROFILE_CREATE_ENTITIES_REF`` are enabled as CMake arguments.
+These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` or ``PROFILE_CREATE_ENTITIES_REF`` are activated as CMake arguments.
 The declaration of these functions can be found in ``uxr/client/profile/session/common_create_entities.h``.
 
 ------
