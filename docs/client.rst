@@ -909,7 +909,7 @@ NOTE: This approach is not valid with best-effort streams.
 :stream_id: The output stream ID where the message will be written.
 :datawriter_id: The `datawriter` ID that will write the topic to the DDS World.
 :mb_topic: An ``ucdrBuffer`` struct used to serialize the topic.
-           This struct points to a requested gap into the stream.
+           This struct points to a requested memory slot in the stream.
 :topic_size: The bytes that will be reserved in the stream.
 :flush_callback: Callback for flushing the output buffers.
 
