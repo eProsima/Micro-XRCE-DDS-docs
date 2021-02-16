@@ -17,7 +17,7 @@ On the other hand, taking advantage of the transport interface flexibility, the 
 This feature allows using *eProsima Micro XRCE-DDS* over two kinds of transports layers:
 
 * **Packet-oriented transports**: communication protocols that allow sending whole packets.
-* **Stream oriented transports**: communication protocols that follows a stream logic.
+* **Stream-oriented transports**: communication protocols that follow a stream logic.
 
 Agent Transport Architecture
 ----------------------------
