@@ -31,7 +31,7 @@ The following is a list of the aforementioned parameters:
     Specify the maximum number of connections. The *Agent* can manage (default 100).
 
 ``UAGENT_CONFIG_TCP_MAX_BACKLOG_CONNECTIONS``
-    Specify the maximum number of incoming connections (pending to establish). The *Agent* can manage (default 100).
+    Specifies the maximum number of incoming connections (pending to establish) that the *Agent* can manage (default 100).
 
 ``UAGENT_CONFIG_SERVER_QUEUE_MAX_SIZE``
     Maximum server's queues size (default 32000).
@@ -164,4 +164,3 @@ Adding a new middleware implementation is quite simple, just the following steps
 #. In *CMakeLists.txt* add an option similar to `UAGENT_FAST_PROFILE` and add the source to `SRCS` variable.
 #. In *include/uxr/agent/config.hpp.in* add a `#cmakedefine` with the name of the CMake option.
 #. Finally, add the CLI middleware option in `MiddlewareOpt` constructor at *include/uxr/agent/utils/CLI.hpp*.
-
