@@ -2,8 +2,10 @@
 
 Quick start
 ===========
-*eProsima Micro XRCE-DDS* provides a C API which allows the creation of *eProsima Micro XRCE-DDS Clients* that publish and/or subscribe to topics from DDS Global Data Space.
-The following example shows how to create a simple *eProsima Micro XRCE-DDS Client* and *eProsima Micro XRCE-DDS Agent* for publishing and subscribing to the DDS world, using this HelloWorld.idl: ::
+*eProsima Micro XRCE-DDS* provides a C API which allows the creation of *eProsima Micro XRCE-DDS Clients* that publish and/or subscribe to topics from
+the DDS Global Data Space.
+The following example shows how to create a simple *eProsima Micro XRCE-DDS Client* and a simple *eProsima Micro XRCE-DDS Agent* for publishing
+and subscribing to the DDS world, using this HelloWorld.idl: ::
 
     struct HelloWorld
     {

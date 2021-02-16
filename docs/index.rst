@@ -7,13 +7,15 @@ eProsima Micro XRCE-DDS
 =======================
 
 *eProsima Micro XRCE-DDS* is a software solution that allows communicating eXtremely Resource Constrained Environments (XRCEs) with an existing DDS network.
-This implementation complies with the specification proposal, "DDS for eXtremely Resource Constrained Environments" submitted to the Object Management Group (OMG) consortium.
+This implementation complies with the specification of the [eXtremely Resource Constrained Environments DDS (DDS-XRCE)](https://www.omg.org/spec/DDS-XRCE/)
+protocol as defined and maintained by the Object Management Group (OMG) consortium.
 
-*eProsima Micro XRCE-DDS* implements a client-server protocol to enable resource-constrained devices (clients) to take part in DDS communications.
-*eProsima Micro XRCE-DDS Agent* (server) makes possible this communication acting on behalf of the *eProsima Micro XRCE-DDS Clients*
-and enables them to take part as DDS publishers and/or subscribers in the DDS Global Data Space.
+The *Micro XRCE-DDS* library implements a client-server protocol that enables resource-constrained devices (clients) to take part in DDS communications.
+The *Micro XRCE-DDS Agent* (server) acts as a bridge to make this communication possible.
+The *Micro XRCE-DDS Agent* acts on behalf of the *Micro XRCE-DDS Clients* and enables them to take part to the DDS Global Data Space
+as DDS publishers and/or subscribers.
 
-*eProsima Micro XRCE-DDS* provides both, a plug and play *eProsima Micro XRCE-DDS Agent* and an API layer which allows you to implement your *eProsima Micro XRCE-DDS Clients*.
+*Micro XRCE-DDS* provides both a plug and play *Micro XRCE-DDS Agent* and an API layer which allows the user to implement the *Micro XRCE-DDS Clients*.
 
 .. image:: images/xrcedds_architecture.png
 
