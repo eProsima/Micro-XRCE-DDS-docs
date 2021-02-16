@@ -13,7 +13,7 @@ In contrast to other IoT middlewares such as MQTT and CoaP, which work over a pa
 This feature of DDS-XRCE is enhanced by *eProsima Micro XRCE-DDS* in two ways.
 On the one hand, the logic of both the *Agent* and the *Client* is completely separated from the transport protocol underneath through a set of interfaces, which will be explained in the following sections.
 
-On the other hand, taking advantage of the transport interface flexibility, the XRCE-DDS Client package has implemented a framing protocol that enables using the DDS-XRCE wire protocol over stream oriented transports.
+On the other hand, taking advantage of the transport interface flexibility, the Client comes with a framing protocol implemented that enables using the DDS-XRCE wire protocol over stream-oriented transports.
 This feature allows using XRCE-DDS over two kinds of transports layers:
 
 * **Packet oriented transports**: communication protocols that allow sending whole packets.
