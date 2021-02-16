@@ -1067,7 +1067,7 @@ Transport
 `````````
 These functions are platform dependent.
 The declaration of these functions can be found in the ``uxr/client/profile/transport/`` folder.
-The common init transport functions follow the next nomenclature.
+The common init transport functions follow the nomenclature below.
 
 ------
 
