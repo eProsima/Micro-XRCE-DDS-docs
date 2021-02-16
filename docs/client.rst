@@ -901,7 +901,7 @@ The request will be sent in the next ``run_session`` function call.
 Requests to allocate an output stream of ``topic_size`` bytes for a write operation.
 This function will initialize an ``ucdrBuffer`` struct where a topic of ``topic_size`` size will be serialized.
 If there is sufficient space for writing ``topic_size`` bytes into the reliable stream, the returned value is ``true``, otherwise it is ``false``.
-The topic will be sent in the next ``run_session`` function. If buffer is full at some moment during the serialization process, ``flush_callback`` will be call and user will be in charge of running a session for flushing the reliable stream.
+The topic will be sent in the following ``run_session`` function. If during the serialization process the buffer gets overfilled, the ``flush_callback`` function will be called and the user will be in charge of running a session for flushing the stream.
 
 NOTE: This approach is not valid with best-effort streams.
 
