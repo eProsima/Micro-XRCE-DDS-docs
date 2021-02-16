@@ -838,7 +838,7 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
 
 Write access profile
 ````````````````````
-These functions are enabled when ``PROFILE_WRITE_ACCESS`` is enabled as a CMake argument.
+These functions are enabled when ``PROFILE_WRITE_ACCESS`` is activated as a CMake argument.
 The declaration of these functions can be found in ``uxr/client/profile/session/write_access.h``.
 
 ------
