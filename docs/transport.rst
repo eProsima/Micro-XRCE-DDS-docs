@@ -227,7 +227,7 @@ In the best case, it is **only 19 bytes**, but it should be noted that, in this 
 Custom Transport API
 --------------------
 
-XRCE-DDS provides an user API that allows interfacing with the lowest level transport layer at runtime. This way an user is enabled to implement its own transports based on one of the two communication approaches: stream-oriented or packet-oriented.
+*eProsima Micro XRCE-DDS* provides a user API that allows interfacing with the lowest level transport layer at runtime. In this way, a user is enabled to implement its own transports based on one of the two communication approaches: stream-oriented or packet-oriented.
 
 Client custom transport API
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
