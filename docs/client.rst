@@ -899,7 +899,7 @@ The request will be sent in the next ``run_session`` function call.
                                   struct ucdrBuffer* ub, size_t topic_size, uxrOnBuffersFull flush_callback);
 
 Requests to allocate an output stream of ``topic_size`` bytes for a write operation.
-This function will initialize an ``ucdrBuffer`` struct where a topic of ``topic_size`` size must be serialized.
+This function will initialize an ``ucdrBuffer`` struct where a topic of ``topic_size`` size will be serialized.
 Whether the necessary gap for writing a ``topic_size`` bytes into the reliable stream, the returned value is ``true``, otherwise ``false``.
 The topic will be sent in the next ``run_session`` function. If buffer is full at some moment during the serialization process, ``flush_callback`` will be call and user will be in charge of running a session for flushing the reliable stream.
 
