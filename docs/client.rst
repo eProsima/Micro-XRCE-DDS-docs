@@ -846,7 +846,7 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
 .. code-block:: c
 
     bool uxr_prepare_output_stream(uxrSession* session, uxrStreamId stream_id, uxrObjectId datawriter_id,
-                                  struct ucdrBuffer* mb_topic, uint32_t topic_size);
+                                  struct ucdrBuffer* ub_topic, uint32_t topic_size);
 
 Requests a writing into a specific output stream.
 This function will initialize an ``ucdrBuffer`` struct where a topic of ``topic_size`` size must be serialized.
@@ -858,7 +858,7 @@ NOTE: All ``topic_size`` bytes requested will be sent to the *Agent* after a ``r
 :session: Session structure previously initialized.
 :stream_id: The output stream ID where the message will be written.
 :datawriter_id: The `datawriter` ID that will write the topic to the DDS World.
-:mb_topic: An ``ucdrBuffer`` struct used to serialize the topic.
+:ub_topic: An ``ucdrBuffer`` struct used to serialize the topic.
            This struct points to a requested gap into the stream.
 :topic_size: The bytes that will be reserved in the stream.
 
@@ -891,6 +891,27 @@ The request will be sent in the next ``run_session`` function call.
 :replier_id: The `replier`'s ID that will write the reply to the DDS World.
 :buffer: The raw buffer that contains the serialized reply.
 :len: The size of the serialized reply.
+
+------
+
+.. code-block:: c
+    bool uxr_prepare_output_stream_fragmented(uxrSession* session, uxrStreamId stream_id, uxrObjectId datawriter_id,
+                                  struct ucdrBuffer* ub, size_t topic_size, uxrOnBuffersFull flush_callback);
+
+Requests to allocate an output stream of ``topic_size`` bytes for a write operation.
+This function will initialize an ``ucdrBuffer`` struct where a topic of ``topic_size`` size will be serialized.
+If there is sufficient space for writing ``topic_size`` bytes into the reliable stream, the returned value is ``true``, otherwise it is ``false``.
+The topic will be sent in the following ``run_session`` function. If during the serialization process the buffer gets overfilled, the ``flush_callback`` function will be called and the user will be in charge of running a session for flushing the stream.
+
+NOTE: This approach is not valid with best-effort streams.
+
+:session: Session structure previously initialized.
+:stream_id: The output stream ID where the message will be written.
+:datawriter_id: The `datawriter` ID that will write the topic to the DDS World.
+:ub: An ``ucdrBuffer`` struct used to serialize the topic.
+           This struct points to a requested memory slot in the stream.
+:topic_size: The slot, in bytes, that will be reserved in the stream.
+:flush_callback: Callback for flushing the output buffers.
 
 ------
 
