@@ -177,7 +177,7 @@ This approach has some advantages which should be pointed out:
     2. The framing technique allows to **reducing memory usage**.
        It is because the Framing Buffer size (42 bytes) bounds the Device Buffer size.
     3. The framing technique also allows sending **large data** over stream oriented transports.
-       It is because the message size is not bounded by the Device Buffer size, since the message is fragmented and stuffing during the framing stage.
+       The reason is that the message size is not bounded by the Device Buffer size, since the message is fragmented and has undergone byte stuffing during the framing stage.
 
 Data Receiving
 ^^^^^^^^^^^^^^
