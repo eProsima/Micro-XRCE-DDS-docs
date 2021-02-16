@@ -165,7 +165,7 @@ This workflow could be divided into the following steps:
     2. The *Client* library serializes the topic inside an XRCE message using *Micro CDR*.
        As a result, the XRCE message with the topic is stored in an **Output Stream Buffer**.
     3. The *Client* library calls the Stream Framing Protocol to send the serialized message.
-    4. The Stream Transport frames the message, that is, adds the header, payload, and CRC of the frame, taking into account the stuffing.
+    4. The Stream Transport frames the message, that is, it adds the header, the payload, and CRC of the frame, taking into account the stuffing.
        This step takes place in an auxiliary buffer called **Framing Buffer**.
     5. Each time the Framing Buffer is full, the data is flushed into the **Device Buffer**, calling the writing system function.
 
