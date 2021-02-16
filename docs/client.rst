@@ -443,7 +443,7 @@ It implies:
 
 The ``_until_data`` suffix function version will perform these actions during a ``timeout`` duration
 or until a subscription data, request or reply is received.
-The function will return ``true`` if one subscription data, request or reply is received, ``false`` otherwise.
+The function will return ``true`` if a subscription data, request or reply is received, and ``false`` otherwise.
 
 :session: Session structure previously initialized.
 :timeout: Maximum waiting time for a new message, in milliseconds.
