@@ -442,7 +442,7 @@ It implies:
 3. Listening messages from the *Agent* and calling the associated callback if it exists (a topic callback or a status callback).
 
 The ``_until_data`` suffix function version will perform these actions during a ``timeout`` duration
-or until one subscription data, request or reply is received.
+or until a subscription data, request or reply is received.
 The function will return ``true`` if one subscription data, request or reply is received, ``false`` otherwise.
 
 :session: Session structure previously initialized.
