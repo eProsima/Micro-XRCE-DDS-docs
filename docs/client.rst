@@ -484,7 +484,7 @@ This function returns the epoch time in nanoseconds taking into account the offs
 
 Create entities by XML profile
 ``````````````````````````````
-These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` is enabled as a CMake argument.
+These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` is activated as a CMake argument.
 The declaration of these functions can be found in ``uxr/client/profile/session/create_entities_xml.h``.
 
 ------
