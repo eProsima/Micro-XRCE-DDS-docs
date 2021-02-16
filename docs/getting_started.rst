@@ -295,7 +295,7 @@ Read Data
 ^^^^^^^^^
 Once we have created a valid `DataReader` entity, we can read data from the DDS Global Data Space using the read operation.
 This operation configures how the *Agent* will send the data to the *Client*.
-Current implementation sends unlimited topics to the *Client*.
+The current implementation sends unlimited topics to the *Client*.
 
 .. code-block:: C
 
