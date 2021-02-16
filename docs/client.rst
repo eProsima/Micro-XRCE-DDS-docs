@@ -16,7 +16,7 @@ The *Client* library follows a profile concept that enables to choose, add or re
 That allows customizing the *Client* library size, if there are features that are not used.
 The profiles can be chosen using CMake arguments and start with the prefix ``PROFILE``.
 As part of these profiles, the user can choose between several transport layers.
-Communication with the *Agent* is done through the transport you choose.
+The communication with the *Agent* is done through the transport chosen by the user.
 
 The implementation of the transport depends on the platform.
 The next tables show the current implementation.
