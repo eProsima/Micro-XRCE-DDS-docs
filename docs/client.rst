@@ -226,7 +226,7 @@ This function logs in a session, enabling any other XRCE communication with the 
 
     void uxr_create_session_retries(uxrSession* session, size_t retries);
 
-Creates a new session with the *Agent* with retries.
+Attempts to establish a new session on the *Agent* :code:`retries` times
 This function logs in a session, enabling any other XRCE communication with the *Agent*.
 
 :session: Session structure previously initialized.
