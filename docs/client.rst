@@ -439,7 +439,7 @@ It implies:
 
 1. Flushing all output streams sending the data through the transport.
 2. If there is any reliable stream, it will operate according to the associated reliable behaviour to ensure communication.
-3. Listening messages from the *Agent* and call the associated callback if it exists (a topic callback or a status callback).
+3. Listening messages from the *Agent* and calling the associated callback if it exists (a topic callback or a status callback).
 
 The ``_until_data`` suffix function version will perform these actions during ``timeout`` duration
 or until one subscription data, request or reply is received.
