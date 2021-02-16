@@ -2,21 +2,24 @@
 
 eProsima Micro XRCE-DDS Client
 ==============================
-In *eProsima Micro XRCE-DDS*, a *Client* can communicate with DDS Network as any other DDS actor could do.
-*Clients* can publish and subscribe to data Topics in the DDS Global Data Space.
+In *eProsima Micro XRCE-DDS*, a *Client* can communicate with the DDS Network as any other DDS actor could do.
+*Clients* can either publish and subscribe to data Topics in the DDS Global Data Space, or
+follow a request-reply pattern.
 
-*eProsima Micro XRCE-DDS* provides you with a C API to create *eProsima Micro XRCE-DDS Clients* application.
-All functions needed to set up the *Client* can be found in ``client.h`` header.
+*eProsima Micro XRCE-DDS* provides the user with a C API to create *eProsima Micro XRCE-DDS Clients* applications.
+**All** functions needed to set up the *Client* can be found in the :code:`client.h` header.
 That is the only header you need to include.
 
 Profiles
 --------
 
-The *Client* library follows a profile concept that enables to choose, add or remove some features in configuration time.
-That allows customizing the *Client* library size, if there are features that are not used.
-The profiles can be chosen using CMake arguments and start with the prefix ``PROFILE``.
-As part of these profiles, the user can choose between several transport layers.
-The communication with the *Agent* is done through the transport chosen by the user.
+The *Client* library follows a profile concept that enables to choose, add or remove some features at compile-time,
+thus allowing to customize the *Client* library size, if there are features that are not used.
+
+The profiles can be chosen using CMake arguments and start with the prefix :code:`PROFILE`.
+
+As part of these profiles, the user can choose:
+* The transport layers. The communication with the *Agent* is done through the transport chosen by the user.
 
 The implementation of the transport depends on the platform.
 The next tables show the current implementation.
@@ -31,6 +34,8 @@ Serial        X                    X
 
 The addition of a new transport or an existant transport for a new platform can be easily implemented setting the callbacks of a ``uxrCommunication`` structure.
 See the current transport implementations as an example of new custom transport.
+
+.. _client_configuration:
 
 Configuration
 -------------

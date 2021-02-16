@@ -207,7 +207,7 @@ The following code shows how to create a `Requester` and a `Replier` using the X
 
     replier_id = uxr_object_id(0x01, UXR_REPLIER_ID);
     const char* replier_xml = "<dds>"
-                                  "<replier profile_name=\"my_requester\""
+                                  "<replier profile_name=\"my_replier\""
                                            "service_name=\"service_name\""
                                            "request_type=\"request_type\""
                                            "reply_type=\"reply_type\">"

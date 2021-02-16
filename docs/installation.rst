@@ -1,8 +1,9 @@
 .. _installation_label:
 
 Installation
-=========================
-To compile and install the Client and the Agent modules, CMake is used.
+============
+
+.. _install_agent:
 
 Installing the Agent stand-alone
 --------------------------------
@@ -13,7 +14,7 @@ Clone the project from GitHub: ::
     $ cd Micro-XRCE-DDS-Agent
     $ mkdir build && cd build
 
-On Linux, inside of ``build`` folder, execute the following commands: ::
+On Linux, inside of the :code:`build` folder, execute the following commands: ::
 
     $ cmake ..
     $ make
@@ -25,9 +26,21 @@ On Windows first select the Visual Studio version: ::
     $ cmake --build .
     $ cmake --build . --target install
 
-Now you have the executable *eProsima Micro XRCE-DDS Agent* installed in your system. Before running it, you need to add ``/usr/local/lib`` to the dynamic loader-linker directories. ::
+.. note::
+    The *eProsima Micro XRCE-DDS Agent* can be configured at compile-time via several CMake definitions.
+    Find them listed in the :ref:`micro_xrce_dds_client_label` page, in the :ref:`agent_configuration` section.
+
+Now you have the executable *eProsima Micro XRCE-DDS Agent* installed in your system. Before running it, you need to add
+:code:`/usr/local/lib` to the dynamic loader-linker directories. ::
 
     sudo ldconfig /usr/local/lib/
+
+.. important::
+    The *eProsima Micro XRCE-DDS Agent* executable comes with a rich CLI.
+    Find out more all the options offered by the *Agent* CLI in the :ref:`run_agent` section of the
+    :ref:`micro_xrce_dds_agent_label` page. 
+
+.. _install_client:
 
 Installing the Client stand-alone
 ---------------------------------
@@ -44,7 +57,8 @@ On Linux, inside of ``build`` folder, execute the following commands: ::
     $ make
     $ sudo make install
 
-Now you have the executable *eProsima Micro XRCE-DDS Client* installed in your system. Before running it, you need to add ``/usr/local/lib`` to the dynamic loader-linker directories. ::
+Now you have the executable *eProsima Micro XRCE-DDS Client* installed in your system.
+Before running it, you need to add :code:`/usr/local/lib` to the dynamic loader-linker directories. ::
 
     sudo ldconfig /usr/local/lib/
 
@@ -54,17 +68,21 @@ On Windows first select the Visual Studio version: ::
     $ cmake --build .
     $ cmake --build . --target install
 
-If you want to install the *eProsima Micro XRCE-DDS Client* examples, you can add ``-DUCLIENT_BUILD_EXAMPLES=ON`` to the CMake's command-line options.
-This flag will enable the compilation of the examples when the project is compiled.
-There are several CMake definitions for configuring the build of the client library at compile time.
-You can found them in :ref:`micro_xrce_dds_client_label` page under `Configuration` section.
+.. note::
+    If you want to install the *eProsima Micro XRCE-DDS Client* examples, you can add :code:`-DUCLIENT_BUILD_EXAMPLES=ON`
+    to the :code:`cmake ..` command-line options. This flag will enable the compilation of the examples.
+    In addition to this flag, there are several other CMake definitions for configuring the building of the client
+    library at compile-time.
+    Find them in the :ref:`micro_xrce_dds_client_label` page, in the :ref:`client_configuration` section.
 
-For building your Client app, you need to build against the following libs: ::
+For building your Client app in your host machine, you need to build against the following libs: ::
 
     gcc <your_main.c> -lmicrocdr -lmicroxrcedds_client
 
-Installing the XRCE-DDS Gen standalone
---------------------------------
+.. _install_gen:
+
+Installing the Micro XRCE-DDS Gen tool
+--------------------------------------
 
 Clone the project from GitHub: ::
 
@@ -79,6 +97,8 @@ You will have the *Micro XRCE-DDS-Gen* tool available as: ::
 
     $ ./scripts/microxrceddsgen -help 
 
+.. _install_agent_client:
+
 Installing Agent and Client
 ---------------------------
 
@@ -88,7 +108,7 @@ Clone the project from GitHub: ::
     $ cd Micro-XRCE-DDS
     $ mkdir build && cd build
 
-On Linux, inside of ``build`` folder, execute the following commands: ::
+On Linux, inside of the :code:`build` folder, execute the following commands: ::
 
     $ cmake ..
     $ make
@@ -99,6 +119,10 @@ On Windows choose the Visual Studio version using the CMake option *-G*, for exa
     $ cmake -G "Visual Studio 14 2015 Win64" ..
     $ cmake --build . --target install
 
-Now you have *eProsima Micro XRCE-DDS Agent* and *eProsima Micro XRCE-DDS Client* installed in your system.
+Now you have both the *eProsima Micro XRCE-DDS Agent* and the *eProsima Micro XRCE-DDS Client* installed in your system.
 
 Usually is useful to install examples along with the XRCE-DDS suite, for doing so, just use `cmake .. -DUXRCE_BUILD_EXAMPLES=ON`.
+
+.. note::
+    If you want to install the *eProsima Micro XRCE-DDS* examples, you can add :code:`-DUXRCE_BUILD_EXAMPLES=ON`
+    to the :code:`cmake ..` command-line options. This flag will enable the compilation of the examples.

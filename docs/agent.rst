@@ -9,7 +9,9 @@ Also, *Agents* keep track of the *Clients* and the entities they create.
 The *Agent* uses the entities to interact with the DDS Global Data Space on behalf of the *Clients*.
 
 The communication between a *Client* and an *Agent* currently supports UDP, TCP and Serial (dependent on the platform).
-While it is running, the *Agent* will attend any received request from the *Clients* and answers back with the result of that request.
+While it is running, the *Agent* will attend any received request from the *Clients* and answer back with the result of that request.
+
+.. _agent_configuration:
 
 Configuration
 -------------
@@ -41,6 +43,8 @@ The following is a list of the aforementioned parameters:
 
 ``UAGENT_SERVER_BUFFER_SIZE``
     Server buffer size. (default 65535).
+
+.. _run_agent:
 
 Run an Agent
 ------------
