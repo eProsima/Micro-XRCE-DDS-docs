@@ -232,7 +232,7 @@ Custom Transport API
 Client custom transport API
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-By means of using the following functions an user can set four callbacks that will be in charge of opening and closing the transport, and writing and reading from it. This custom transport API is enabled by setting the CMake argument ``UCLIENT_PROFILE_CUSTOM_TRANSPORT=<bool>`` to true. In the case that stream-oriented transport is used ``UCLIENT_PROFILE_STREAM_FRAMING=<bool>`` should also be enabled.
+By means of the following functions, a user can set four callbacks which will be in charge of opening and closing the transport, and writing and reading from it. This custom transport API is enabled by setting the CMake argument ``UCLIENT_PROFILE_CUSTOM_TRANSPORT=<bool>`` to true. In the case that stream-oriented transport is used ``UCLIENT_PROFILE_STREAM_FRAMING=<bool>`` should also be enabled.
 
 UXRDLLAPI void uxr_set_custom_transport_callbacks(uxrCustomTransport* transport,
                                                   bool framing,
