@@ -175,7 +175,7 @@ This approach has some advantages which should be pointed out:
 
     1. The HDLD framing and the CRC control provide **integrity** and **security** to the Stream Framing.
     2. The framing technique allows to **reduce memory usage**.
-       It is because the Framing Buffer size (42 bytes) bounds the Device Buffer size.
+       The reason is that the Framing Buffer size (42 bytes) bounds the Device Buffer size.
     3. The framing technique also allows sending **large data** over stream oriented transports.
        The reason is that the message size is not bounded by the Device Buffer size, since the message is fragmented and has undergone byte stuffing during the framing stage.
 
