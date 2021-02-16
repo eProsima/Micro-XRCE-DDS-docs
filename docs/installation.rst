@@ -75,7 +75,7 @@ Clone the project from GitHub: ::
     $ git submodules update
     $ gradle build -Dbranch=v1.2.5  
 
-You will have the XRCE-DDS available as: ::
+You will have the *Micro XRCE-DDS-Gen* tool available as: ::
 
     $ ./scripts/microxrceddsgen -help 
 
