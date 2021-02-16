@@ -272,7 +272,7 @@ Where ``struct uxrCustomTransport*`` will have the ``args`` passed through ``boo
 
     typedef size_t (*write_custom_func)(struct uxrCustomTransport*, const uint8_t*, size_t, uint8_t*);
 
-Where ``struct uxrCustomTransport*`` refers to the opened transport structure,  the first ``const uint8_t*`` is the buffer to be sent, following ``size_t`` is the length of the buffer and the last ``uint8_t*`` is an error code that should be set when the write process has any problem. This function should return the number of bytes sent successfully.
+Where ``struct uxrCustomTransport*`` refers to the opened transport structure,  the first ``const uint8_t*`` is the buffer to be sent, ``size_t`` is the length of the buffer, and the last ``uint8_t*`` is an error code that should be set when the write process has any problem. This function should return the number of bytes sent successfully.
 
 .. code-block:: c
 
