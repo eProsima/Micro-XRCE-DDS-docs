@@ -9,10 +9,15 @@ Furthermore, this section describes how to add your custom transport in *eProsim
 Introduction
 ------------
 
-In contrast to other IoT middleware such as MQTT and CoaP, which work over a particular transport protocol, the XRCE protocol is design to support multiple transport protocol natively.
-This feature of XRCE is enhanced by *eProsima Micro XRCE-DDS* in two ways.
-On the one hand, both *Agent* and *Client* have the logic of the protocol complete separate from the transport protocol through a set of interfaces, which will be explained in the following sections.
-On the other hand, taking advantage of the transport interface flexibility, one custom Serial Transport has been implemented to provide support to serial communication.
+In contrast to other IoT middlewares such as MQTT and CoaP, which work over a particular transport protocol, the DDS-XRCE protocol is designed to support multiple transport protocols natively.
+This feature of DDS-XRCE is enhanced by *eProsima Micro XRCE-DDS* in two ways.
+On the one hand, the logic of both the *Agent* and the *Client* is completely separated from the transport protocol underneath through a set of interfaces, which will be explained in the following sections.
+
+On the other hand, taking advantage of the transport interface flexibility, the Client comes with a framing protocol implemented that enables using the DDS-XRCE wire protocol over stream-oriented transports.
+This feature allows using *eProsima Micro XRCE-DDS* over two kinds of transports layers:
+
+* **Packet-oriented transports**: communication protocols that allow sending whole packets.
+* **Stream-oriented transports**: communication protocols that follow a stream logic.
 
 Agent Transport Architecture
 ----------------------------
@@ -125,16 +130,16 @@ For example, in the case of Linux under UDP transport protocol, the ``uxrUDPPlat
     size_t uxr_write_udp_data_platform(uxrUDPPlatform* platform, const uint8_t* buf, size_t len, uint8_t* errcode);
     size_t uxr_read_udp_data_platform(uxrUDPPlatform* platform, uint8_t* buf, size_t len, int timeout, uint8_t* errcode);
 
-Custom Serial Transport
+Stream Framing Protocol
 -----------------------
 
-*eProsima Micro XRCE-DDS* has a **Custom Serial Transport** with the following features:
+*eProsima Micro XRCE-DDS* has a **Stream Framing Protocol** with the following features:
 
-* **HDLC Framing**: each serial framing begins with a ``begin_frame`` octet ``(0x7E)``, and the rest of the frame is byte stuffing using the ``space`` octet ``(0x7D)`` following by the original octet exclusive-or with ``0x20``.
-  For example, if the frame contains the octet `0x7E` it is encoded as `0x7D, 0x5E`; and the same for the octet `0x7E` which is encoded as `0x7D, 0x5D`.
-* **CRC Calculation**: serial frames end with the CRC-16 for detecting frame corruption.
-  The CRC-16 is computed using the polynomial ``x^16 + x^12 + x^5 + 1`` after the frame stuffing for each octet of the frame and including the ``begin_frame``, as it is described in `RFC 1662 <https://tools.ietf.org/html/rfc1662>`_ (see sec. C.2).
-* **Routing header**: the Serial Transport provides ``source`` and ``remote`` address in the framing, which could be used for implement a routing protocol.
+* **HDLC Framing**: each frame begins with a ``begin_frame`` octet ``(0x7E)``, and the rest of the frame undergoes byte stuffing, using the ``space`` octet ``(0x7D)`` followed by the original octet exclusive-or with ``0x20``.
+  For example, if the frame contains the octet `0x7E`, it is encoded as `0x7D, 0x5E`; and the same for the octet `0x7D` which is encoded as `0x7D, 0x5D`.
+* **CRC Calculation**: frames end with the CRC-16 for detecting frame corruption.
+  The CRC-16 is computed using the polynomial ``x^16 + x^12 + x^5 + 1`` after the frame stuffing for each octet of the frame and including the ``begin_frame``, as it is described in the `RFC 1662 <https://tools.ietf.org/html/rfc1662>`_ (see sec. C.2).
+* **Routing header**: the Stream Framing Protocol provides ``source`` and ``remote`` addresses in the framing, which can be used to implement a routing protocol.
 
 All the previous features are addressed using the following frame format: ::
 
@@ -159,8 +164,8 @@ This workflow could be divided into the following steps:
     1. A publisher application calls the *Client* library to send a given topic.
     2. The *Client* library serializes the topic inside an XRCE message using *Micro CDR*.
        As a result, the XRCE message with the topic is stored in an **Output Stream Buffer**.
-    3. The *Client* library calls the Serial Transport to send the serialized message.
-    4. The Serial Transport frames the message, that is, adds the header, payload, and CRC of the frame, taking into account the stuffing.
+    3. The *Client* library calls the Stream Framing Protocol to send the serialized message.
+    4. The Stream Transport frames the message, that is, it adds the header, the payload, and CRC of the frame, taking into account the stuffing.
        This step takes place in an auxiliary buffer called **Framing Buffer**.
     5. Each time the Framing Buffer is full, the data is flushed into the **Device Buffer**, calling the writing system function.
 
@@ -168,11 +173,11 @@ This workflow could be divided into the following steps:
 
 This approach has some advantages which should be pointed out:
 
-    1. The HDLD framing and the CRC control provide **integrity** and **security** to the Serial Transport.
-    2. The framing technique allows to **reducing memory usage**.
-       It is because the Framing Buffer size (42 bytes) bounds the Device Buffer size.
-    3. The framing technique also allows sending **large data** over serial.
-       It is because the message size is not bounded by the Device Buffer size, since the message is fragmented and stuffing during the framing stage.
+    1. The HDLD framing and the CRC control provide **integrity** and **security** to the Stream Framing.
+    2. The framing technique allows to **reduce memory usage**.
+       The reason is that the Framing Buffer size (42 bytes) bounds the Device Buffer size.
+    3. The framing technique also allows sending **large data** over stream-oriented transports.
+       The reason is that the message size is not bounded by the Device Buffer size, since the message is fragmented and has undergone byte stuffing during the framing stage.
 
 Data Receiving
 ^^^^^^^^^^^^^^
@@ -180,9 +185,9 @@ Data Receiving
 The workflow of the data receiving is analogous to the data sending workflow:
 
     1. A subscriber application calls the *Client* library to receive a given topic.
-    2. The *Client* library calls the Serial Transport to receive the serial message.
-    3. The Serial Transport reads data from the **Device Buffer** and unframes the raw data received from the Device Buffer in the **Unframing Buffer**.
-    4. Once the Unframing Buffer is full, the Serial Transport appends the fragment into the **Input Stream Buffer**.
+    2. The *Client* library calls the Stream Framing Protocol to receive the stream message.
+    3. The Stream Framing Protocol reads data from the **Device Buffer** and unframes the raw data received from the Device Buffer in the **Unframing Buffer**.
+    4. Once the Unframing Buffer is full, the Stream Framing Protocol appends the fragment into the **Input Stream Buffer**.
        This operation is repeated until a complete message is received.
     5. The *Client* library deserializes the topic from the Input Stream Buffer to the user topic struct.
 
@@ -219,3 +224,59 @@ In Serial Transport, the topic's packaging could be divided into two steps:
 The figure above shows the overhead added by Serial Transport.
 In the best case, it is **only 19 bytes**, but it should be noted that, in this example, the message stuffing has been neglected.
 
+Custom Transport API
+--------------------
+
+*eProsima Micro XRCE-DDS* provides a user API that allows interfacing with the lowest level transport layer at runtime. In this way, a user is enabled to implement its own transports based on one of the two communication approaches: stream-oriented or packet-oriented.
+
+Client custom transport API
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+By means of the following functions, a user can set four callbacks which will be in charge of opening and closing the transport, and writing and reading from it. This custom transport API is enabled by setting the CMake argument ``UCLIENT_PROFILE_CUSTOM_TRANSPORT=<bool>`` to true. In the case that stream-oriented transport is used ``UCLIENT_PROFILE_STREAM_FRAMING=<bool>`` should also be enabled.
+
+------
+
+.. code-block:: c
+
+    void uxr_set_custom_transport_callbacks(uxrCustomTransport* transport, bool framing, open_custom_func open, close_custom_func close, write_custom_func write, read_custom_func read);
+
+Assigns the callback for custom transport.
+
+:transport: The uninitialized structure used for managing the transport.
+            This structure must be accessible during the connection.
+:framing: Enables or disables Stream Framing Protocol for a custom transport.
+:open: Callback for opening a custom transport.
+:close: Callback for closing a custom transport.
+:write: Callback for writing to a custom transport.
+:read: Callback for reading from a custom transport.
+
+The function signatures for the above callbacks are:
+
+.. code-block:: c
+
+    typedef bool (*open_custom_func)(struct uxrCustomTransport*);
+
+Where ``struct uxrCustomTransport*`` will have the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``
+
+.. code-block:: c
+
+    typedef bool (*close_custom_func)(struct uxrCustomTransport*);
+
+Where ``struct uxrCustomTransport*`` will have the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``
+
+.. code-block:: c
+
+    typedef size_t (*write_custom_func)(struct uxrCustomTransport*, const uint8_t*, size_t, uint8_t*);
+
+Where ``struct uxrCustomTransport*`` refers to the opened transport structure,  the first ``const uint8_t*`` is the buffer to be sent, ``size_t`` is the length of the buffer, and the last ``uint8_t*`` is an error code that should be set when the write process has any problem. This function should return the number of bytes sent successfully.
+
+.. code-block:: c
+
+    typedef size_t (*read_custom_func)(struct uxrCustomTransport*, uint8_t*, size_t, int, uint8_t*);
+
+Where ``struct uxrCustomTransport*`` refers to the opened transport structure,  the first ``uint8_t*`` is the buffer to be write with the received bytes, following ``size_t`` is the length of the buffer, the following ``int`` is the maximum time in milliseconds that the read operating should take and the last ``uint8_t*`` is an error code that should be set when the read process has any problem. This function should return the number of bytes received successfully.
+
+Server custom transport API
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[JOSE]
