@@ -16,7 +16,7 @@ On the one hand, the logic of both the *Agent* and the *Client* is completely se
 On the other hand, taking advantage of the transport interface flexibility, the Client comes with a framing protocol implemented that enables using the DDS-XRCE wire protocol over stream-oriented transports.
 This feature allows using XRCE-DDS over two kinds of transports layers:
 
-* **Packet oriented transports**: communication protocols that allow sending whole packets.
+* **Packet-oriented transports**: communication protocols that allow sending whole packets.
 * **Stream oriented transports**: communication protocols that follows a stream logic.
 
 Agent Transport Architecture
