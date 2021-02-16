@@ -921,7 +921,7 @@ The discovery profile allows discovering *Agents* in the network by UDP.
 The reachable *Agents* will respond to the discovery call sending information about them, as their IP and port.
 There are two modes: multicast and unicast.
 The discovery phase can be performed before the `uxr_create_session` call to determine the *Agent* to connect with.
-These functions are enabled when ``PROFILE_DISCOVERY`` is enabled as a CMake argument.
+These functions are enabled when ``PROFILE_DISCOVERY`` is activated as a CMake argument.
 The declaration of these functions can be found in ``uxr/client/profile/discovery/discovery.h``.
 
 *This feature is only available on Linux.*
