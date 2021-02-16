@@ -139,7 +139,7 @@ Stream Framing Protocol
   For example, if the frame contains the octet `0x7E`, it is encoded as `0x7D, 0x5E`; and the same for the octet `0x7D` which is encoded as `0x7D, 0x5D`.
 * **CRC Calculation**: frames end with the CRC-16 for detecting frame corruption.
   The CRC-16 is computed using the polynomial ``x^16 + x^12 + x^5 + 1`` after the frame stuffing for each octet of the frame and including the ``begin_frame``, as it is described in the `RFC 1662 <https://tools.ietf.org/html/rfc1662>`_ (see sec. C.2).
-* **Routing header**: the Stream Framing Protocol provides ``source`` and ``remote`` address in the framing, which could be used for implement a routing protocol.
+* **Routing header**: the Stream Framing Protocol provides ``source`` and ``remote`` addresses in the framing, which can be used to implement a routing protocol.
 
 All the previous features are addressed using the following frame format: ::
 
