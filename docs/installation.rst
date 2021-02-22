@@ -3,6 +3,17 @@
 Installation
 ============
 
+In this section, you can find the instructions to install the following packages:
+
+- :ref:`install_agent`
+- :ref:`install_client`
+- :ref:`install_gen`
+- :ref:`install_agent_client`
+
+The user can decide wether to install the *Agent* and *Client* as stand-alone packages,
+or together. If the first approach is chosen, refer to the :ref:`Release Notes <notes_label>`
+section in order to match versions that are compatible.
+
 .. _install_agent:
 
 Installing the Agent stand-alone
@@ -28,7 +39,7 @@ On Windows first select the Visual Studio version: ::
 
 .. note::
     The *eProsima Micro XRCE-DDS Agent* can be configured at compile-time via several CMake definitions.
-    Find them listed in the :ref:`micro_xrce_dds_client_label` page, in the :ref:`agent_configuration` section.
+    Find them listed in the :ref:`agent_configuration` section of the :ref:`micro_xrce_dds_agent_label` page.
 
 Now you have the executable *eProsima Micro XRCE-DDS Agent* installed in your system. Before running it, you need to add
 :code:`/usr/local/lib` to the dynamic loader-linker directories. ::
@@ -37,7 +48,7 @@ Now you have the executable *eProsima Micro XRCE-DDS Agent* installed in your sy
 
 .. important::
     The *eProsima Micro XRCE-DDS Agent* executable comes with a rich CLI.
-    Find out more all the options offered by the *Agent* CLI in the :ref:`run_agent` section of the
+    Find out all the options offered by this CLI when running the *Agent* in the :ref:`agent_cli` section of the
     :ref:`micro_xrce_dds_agent_label` page. 
 
 .. _install_client:
@@ -73,7 +84,7 @@ On Windows first select the Visual Studio version: ::
     to the :code:`cmake ..` command-line options. This flag will enable the compilation of the examples.
     In addition to this flag, there are several other CMake definitions for configuring the building of the client
     library at compile-time.
-    Find them in the :ref:`micro_xrce_dds_client_label` page, in the :ref:`client_configuration` section.
+    Find them in the :ref:`profiles` and :code:`configurations` sections of the :ref:`micro_xrce_dds_client_label` page.
 
 For building your Client app in your host machine, you need to build against the following libs: ::
 

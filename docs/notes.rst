@@ -1,3 +1,5 @@
+.. _notes_label:
+
 Version 1.3.0
 =============
 
@@ -17,10 +19,10 @@ This version includes the following changes in both Agent and Client:
         * Minor Windows visibility function fixes.
 
 Previous Versions
------------------
+=================
 
 Version 1.2.0
-=============
+-------------
 
 **Agent 1.3.0 | Client 1.2.1**
 
@@ -44,7 +46,7 @@ This version includes the following changes in both Agent and Client:
         * Isolated installation option.
 
 Version 1.1.0
-=============
+-------------
 
 **Agent 1.1.0 | Client 1.1.1**
 
@@ -88,7 +90,7 @@ This version includes the following changes in both Agent and Client:
         * User data bad alignment.
 
 Version 1.0.3
-=============
+-------------
 
 **Agent 1.0.3 | Client 1.0.2**
 
@@ -105,7 +107,7 @@ This version includes the following changes in both Agent and Client:
     * Fix bugs.
 
 Version 1.0.2
-=============
+-------------
 
 **Agent 1.0.2 | Client 1.0.1**
 
@@ -117,7 +119,7 @@ This version includes the following changes in the Agent:
     * Documentation fixes.
 
 Version 1.0.1
-=============
+-------------
 
 **Agent 1.0.1 | Client 1.0.1**
 
@@ -137,7 +139,7 @@ This release includes the following changes in both Agent and Client:
     * Bug fixes.
 
 Version 1.0.0
-=============
+-------------
 
 This release includes the following features:
 
@@ -155,7 +157,7 @@ This release includes the following features:
 * API changes.
 
 Version 1.0.0Beta2
-==================
+------------------
 
 This release includes the following features:
 

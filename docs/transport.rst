@@ -4,6 +4,11 @@ Transport
 =========
 
 This section shows how the transport layer is implemented in both *eProsima Micro XRCE-DDS Agent* and *eProsima Micro XRCE-DDS Client*.
+
+The section is organized as follows:
+- 
+
+
 Furthermore, this section describes how to add your custom transport in *eProsima Micro XRCE-DDS*.
 
 Introduction
@@ -227,6 +232,8 @@ In the best case, it is **only 19 bytes**, but it should be noted that, in this 
 Custom Transport API
 --------------------
 
+.. TODO: This content is repeated in: client, client API. agent (not yet). agent API (not yet). What to do?
+
 *eProsima Micro XRCE-DDS* provides a user API that allows interfacing with the lowest level transport layer at runtime. In this way, a user is enabled to implement its own transports based on one of the two communication approaches: stream-oriented or packet-oriented.
 
 Client custom transport API
@@ -276,7 +283,7 @@ Where ``struct uxrCustomTransport*`` refers to the opened transport structure,  
 
 Where ``struct uxrCustomTransport*`` refers to the opened transport structure,  the first ``uint8_t*`` is the buffer to be write with the received bytes, following ``size_t`` is the length of the buffer, the following ``int`` is the maximum time in milliseconds that the read operating should take and the last ``uint8_t*`` is an error code that should be set when the read process has any problem. This function should return the number of bytes received successfully.
 
-Server custom transport API
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Agent custom transport API
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-[JOSE]
+.. TODO: @Jose
