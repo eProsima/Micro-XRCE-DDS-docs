@@ -999,6 +999,29 @@ Creates an identifier for reference an entity.
 
 ------
 
+.. code-block:: c
+
+    bool uxr_ping_agent(const uxrCommunication* comm, const int timeout);
+
+[TODO]
+
+:comm: [TODO]
+:timeout: [TODO]
+
+------
+
+.. code-block:: c
+
+    bool uxr_ping_agent_attempts(const uxrCommunication* comm, const int timeout, const uint8_t attempts);
+
+[TODO]
+
+:comm: [TODO]
+:timeout: [TODO]
+:attempts: [TODO]
+
+------
+
 .. _transport_api:
 
 Transport
@@ -1007,9 +1030,6 @@ Transport
 These functions are platform dependent.
 The declaration of these functions can be found in the ``uxr/client/profile/transport/`` folder.
 The common init transport functions follow the nomenclature below.
-
-.. TODO: new functions have been added. Should the description above be improved and expanded?
-(ping, custom transport..)
 
 ------
 
@@ -1057,34 +1077,23 @@ Initializes a Serial connection using a file descriptor
 
 .. code-block:: c
 
+    bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);
+
+Initializes a Custom connection using user defined arguments
+
+:transport: The uninitialized structure used for managing the transport.
+            This structure must be accessible during the connection.
+            ``args`` will be accesible as ``transport->args``.
+
+------
+
+.. code-block:: c
+
     bool uxr_close_PROTOCOL_transport(PROTOCOLTransport* transport);
 
-Closes a transport previously opened. `PROTOCOL` can be ``udp``, ``tcp`` or ``serial``.
+Closes a transport previously opened. `PROTOCOL` can be ``udp``, ``tcp``, ``serial`` or ``custom``.
 
 :transport: The transport to close.
-
-------
-
-.. code-block:: c
-
-    bool uxr_ping_agent(const uxrCommunication* comm, const int timeout);
-
-[TODO]
-
-:comm: [TODO]
-:timeout: [TODO]
-
-------
-
-.. code-block:: c
-
-    bool uxr_ping_agent_attempts(const uxrCommunication* comm, const int timeout, const uint8_t attempts);
-
-[TODO]
-
-:comm: [TODO]
-:timeout: [TODO]
-:attempts: [TODO]
 
 ------
 
