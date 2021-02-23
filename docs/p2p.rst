@@ -62,9 +62,7 @@ the *Client* publish in the DDS World the :code:`HelloWorld` topic
 (take a look at the IDL defining this topic in the file
 :code:`Micro-XRCE-DDS-Client/examples/PublishHelloWorldP2P/HelloWorld.idl`). ::
 
-    $ Micro-XRCE-DDS-Client/build/examples/PublishHelloWorld2P2/PublishHelloWorldClientP2P 127.0.0.1 2019
-
-.. TODO: decide which path to give to the user.
+    $ examples/PublishHelloWorld2P2/PublishHelloWorldClientP2P 127.0.0.1 2019
 
 The source code of the :code:`PublishHelloWorldClientP2P` can be found in
 :code:`Micro-XRCE-DDS-Client/examples/PublishHelloWorldP2P/main.c`.
@@ -76,9 +74,7 @@ After having executed the publisher app, we can launch the :code:`SubscribeHello
 which is located in the folder :code:`Micro-XRCE-DDS-Client/build/examples/SubscribeHelloWorldP2P`, which'll make
 this *Client* subscribe to the same :code:`HelloWorld` topic from the DDS World. ::
 
-    $ Micro-XRCE-DDS-Client/build/examples/SubscriberHelloWorldP2P/SubscribeHelloWorldClientP2P 127.0.0.1 2019
-
-.. TODO: decide which path to give to the user.
+    $ examples/SubscriberHelloWorldP2P/SubscribeHelloWorldClientP2P 127.0.0.1 2019
 
 The source code of the :code:`SubscribeHelloWorldClientP2P` can be found in
 :code:`Micro-XRCE-DDS-Client/examples/SubscribeHelloWorldP2P/main.c`.

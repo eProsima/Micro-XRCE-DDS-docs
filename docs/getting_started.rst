@@ -103,12 +103,12 @@ Next, we will create a session that allows us interacting with the *Agent*:
 
 The first function ``uxr_init_session`` initializes the ``session`` structure with the transport and the `Client Key` (the session identifier for an *Agent*).
 The ``uxr_set_topic_callback`` function is for registering the function ``on_topic`` which will be called when the `Client` receives a topic.
-Once the session has been initialized, we can send the first message for login the `Client` in the *Agent* side: ``uxr_create_session``.
+Once the session has been initialized, we can send the first message for logging the `Client` in the *Agent* side: ``uxr_create_session``.
 This function will try to connect with the *Agent* by ``CONFIG_MAX_SESSION_CONNECTION_ATTEMPTS`` attempts (configurable as a CMake argument).
 
 Optionally, we also could add a status callback with the function ``uxr_set_status_callback``, but for this example, we do not need it.
 
-Once we have login the session successful, we can create the streams that we will use.
+Once we have logged in the session successfully, we can create the streams that we will use.
 In this case, we will use two, both reliables, for input and output.
 
 .. code-block:: C
@@ -200,7 +200,7 @@ The `Publisher` and `Subscriber` XML information is given when the `DataWriter` 
 DataWriters & DataReaders
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Analogous to publishers and subscribers entities, we create the `DataWriters` and `DataReaders` entities.
+Analogously to publishers and subscribers entities, we create the `DataWriters` and `DataReaders` entities.
 These entities are in charge of sending and receiving the data.
 `DataWriters` are referred to as publishers, and `DataReaders` are referred to as subscribers.
 The configuration of these `DataReaders` and `DataWriters` are contained in the XML.
@@ -418,7 +418,7 @@ An example of this can be found in the :code:`examples/Deployment` folder.
 The tutorials above are based on *all in one* examples, that is, examples that create entities, publish or subscribe and then delete the resources.
 One possible real purpose of this consists in differentiating the logic of `creating entities` and the actions of `publishing and subscribing`.
 It can be done by creating two differents *Clients*, one in charge of configuring the entities in the *Agent*, which runs once,
-only for creating the entities at **compile-time**, and other/s that log(s) to the same session as the first *Client*
+only for creating the entities at **compile-time**, and other/s that log(s) in the same session as the first *Client*
 (sharing the entities) and only publish(es) or subscrib(es) to data.
 
 This allows creating *Clients* in a real scenario with the only purpose of sending and receiving data.
@@ -460,8 +460,6 @@ Publisher
 
 Then, the `publisher client` is connected to the *Agent* `A`.
 This *Client* logs in a session with its *Client* key (0xAABBCCDD).
-
-.. TODO: check the above sentence: "logs in a session". And in general the use of "log" and "login".
 
 At that moment, it can use all entities created related to this `client key`.
 Because all entities that it uses were successfully created by the `configurator client`, the `publisher client` can immediately publish to `DDS`.

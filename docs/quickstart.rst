@@ -103,9 +103,7 @@ the *Client* publish in the DDS World the :code:`HelloWorld` topic
 (take a look at the IDL defining this topic in the file
 :code:`Micro-XRCE-DDS-Client/examples/PublishHelloWorld/HelloWorld.idl`). ::
 
-    $ Micro-XRCE-DDS-Client/build/examples/PublishHelloWorld/PublishHelloWorldClient 127.0.0.1 2019
-
-.. TODO: decide which path to give to the user.
+    $ examples/PublishHelloWorld/PublishHelloWorldClient 127.0.0.1 2019
 
 The source code of the :code:`PublishHelloWorldClient` can be found in
 :code:`Micro-XRCE-DDS-Client/examples/PublishHelloWorld/main.c`.
@@ -117,9 +115,7 @@ After having executed the publisher app, we can launch the :code:`SubscribeHello
 which is located in the folder :code:`Micro-XRCE-DDS-Client/build/examples/SubscribeHelloWorld`, which'll make
 this *Client* subscribe to the same :code:`HelloWorld` topic from the DDS World. ::
 
-    $ Micro-XRCE-DDS-Client/build/examples/SubscriberHelloWorld/SubscribeHelloWorldClient 127.0.0.1 2019
-
-.. TODO: decide which path to give to the user.
+    $ examples/SubscriberHelloWorld/SubscribeHelloWorldClient 127.0.0.1 2019
 
 The source code of the :code:`SubscribeHelloWorldClient` can be found in
 :code:`Micro-XRCE-DDS-Client/examples/SubscribeHelloWorld/main.c`.
@@ -189,10 +185,7 @@ At this point, it's possible to launch the :code:`RequestAdder` executable
 located in the folder :code:`Micro-XRCE-DDS-Client/build/examples/RequestAdder`, which'll make
 the *Client* send two integers as a request, and receive the sum of both integers as a response. ::
 
-    $ Micro-XRCE-DDS-Client/build/examples/RequestAdder/RequestAdder 127.0.0.1 2019
-
-.. TODO: decide which path to give to the user.
-.. TODO: check the command here.
+    $ examples/RequestAdder/RequestAdder 127.0.0.1 2019
 
 The source code of the :code:`RequestAdder` can be found in
 :code:`Micro-XRCE-DDS-Client/examples/RequestAdder/main.c`.
@@ -204,10 +197,7 @@ After having executed the Requester app, we can launch the :code:`ReplyAdder` ex
 which is located in the folder :code:`Micro-XRCE-DDS-Client/build/examples/ReplyAdder`, which'll make
 this *Client* receive requests composed by two integers, sum both numbers, and finally send the response. ::
 
-    $ Micro-XRCE-DDS-Client/build/examples/ReplyAdder/ReplyAdder 127.0.0.1 2019
-
-.. TODO: decide which path to give to the user.
-.. TODO: check the command here.
+    $ examples/ReplyAdder/ReplyAdder 127.0.0.1 2019
 
 The source code of the :code:`ReplyAdder` can be found in
 :code:`Micro-XRCE-DDS-Client/examples/ReplyAdder/main.c`.
