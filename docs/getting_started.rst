@@ -464,7 +464,6 @@ This *Client* logs in a session with its *Client* key (0xAABBCCDD).
 At that moment, it can use all entities created related to this `client key`.
 Because all entities that it uses were successfully created by the `configurator client`, the `publisher client` can immediately publish to `DDS`.
 
-
 Subscriber configuration
 ------------------------
 

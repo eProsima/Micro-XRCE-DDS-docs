@@ -135,14 +135,8 @@ Serial        X
 Custom        X           X
 ============ ========== =========
 
-.. TODO: organize text below @pablo
-
 Each available transport can be activated or desactivated via the opportune CMake flag:
 :code:`UCLIENT_PROFILE_<transport>`, where :code:`<transport> = UDP, TCP, SERIAL` or :code:`CUSTOM`.
-
-The addition of a new custom transport or an existent transport for a new platform can be easily implemented setting the callbacks of a ``uxrCommunication``
-structure.
-See the current transport implementations as an example of new custom transport.
 
 *eProsima Micro XRCE-DDS* provides a user API that allows interfacing with the lowest level transport layer at runtime. In this way, a user is enabled to implement its own transports based on one of the two communication approaches: stream-oriented or packet-oriented.
 By means of this API, a user can set four callbacks which will be in charge of opening and closing the transport, and writing and reading from it. This custom transport API is enabled by setting the CMake argument ``UCLIENT_PROFILE_CUSTOM_TRANSPORT=<bool>`` to true. In the case that stream-oriented transport is used ``UCLIENT_PROFILE_STREAM_FRAMING=<bool>`` should also be enabled.

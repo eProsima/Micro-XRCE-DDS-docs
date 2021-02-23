@@ -42,7 +42,6 @@ and with the XML creation mode, which is the default mode for creating entities:
 
     $ cd /usr/local/bin && MicroXRCEAgent udp -p 2019
 
-.. TODO: write a comment tagging guys and asking if it was ok to remove the "-r <references-file>" part
 
 .. _run_pubsub_example:
 
@@ -55,29 +54,19 @@ a simple publish/subscribe example where the communication is mediated by the *A
 Before considering the publisher and subscriber examples, it is useful to briefly summarize how the
 `Publisher` and `Subscriber` entities work, as well as to list the functions related to both entities.
 
-.. TODO: change text below according to the opportune entities.
-
 Publisher
-    The `Requester` entity is composed of a `Publisher` and a `Subscriber` associated with a `RequestTopic` and a `ReplyTopic` respectively.
-    The `Publisher` is in charge of sending the request, while the `Susbscriber` receives the replies.
+    The `Publisher` will be associated with a `Topic` and will handle a DDS publisher that publish topics.
 
-    To create a `Requester` entity, the ``uxr_buffer_create_requester_xml`` or ``uxr_buffer_create_requester_ref`` shall be used.
-    Once created, requests can be sent through ``uxr_buffer_request``.
-    Replies can be received by sending a data request to the *Agent* with ``uxr_buffer_request_data``,
-    and through the `on_reply` callback which shall be set by the ``uxr_set_reply_callback``.
-    This callback has a parameter :code:`reply_id` which corresponds to the identifier returned by the ``uxr_buffer_request`` call.
+    To create a `Publisher` entity, the ``uxr_buffer_create_publisher_xml`` or ``uxr_buffer_create_publisher_ref`` shall be used.
+    Once created, topics can be published through ``uxr_prepare_output_stream``.
 
 Subscriber
-    The `Reply` entity is a mirror of the `Requester`, that is, it contains a `Publisher` and a `Subscriber` as well,
-    but the topic association is reversed, 
-    as the `Publisher` is associated with the `ReplyTopic` and the `Subscriber` to the `RequestTopic`.
-    In this case, the `Subscriber` is in charge of receiving the request from the `Requester`, while the `Publisher` sends the replies.
+    The `Subscriber` will be associated with a `Topic` and will handle a DDS subscriber that receives topics.
 
-    To create a `Replier` entity, the ``uxr_buffer_create_replier_xml`` or ``uxr_buffer_create_replier_ref`` shall be used.
-    Once created, replies can be sent through ``uxr_buffer_reply``.
-    Requests can be received by sending a data request to the *Agent* with ``uxr_buffer_request_data``, 
-    and through the `on_request` callback which shall be set by the ``uxr_set_request_callback``.
-    This callback has a parameter `sample_id` which identifies the request and should be used in the ``uxr_buffer_reply``.
+    To create a `Subscriber` entity, the ``uxr_buffer_create_subscriber_xml`` or ``uxr_buffer_create_subscriber_ref`` shall be used.
+    Topics can be received by sending a data request to the *Agent* with ``uxr_buffer_request_data``, 
+    and through the `on_topic` callback which shall be set by the ``uxr_set_topic_callback``.
+    This callback has a parameter `request_id` which identifies the data request.
 
 All the files and the code used in this example can be found in the
 `Micro-XRCE-DDS-Client/examples/PublishHelloWorld <https://github.com/eProsima/Micro-XRCE-DDS-Client/tree/master/examples/PublishHelloWorld>`_
