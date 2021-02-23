@@ -461,7 +461,6 @@ Publisher
 Then, the `publisher client` is connected to the *Agent* `A`.
 This *Client* logs in a session with its *Client* key (0xAABBCCDD).
 
-.. TODO: check the above sentence: "logs in a session". And in general the use of "log" and "login".
 
 At that moment, it can use all entities created related to this `client key`.
 Because all entities that it uses were successfully created by the `configurator client`, the `publisher client` can immediately publish to `DDS`.
