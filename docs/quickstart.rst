@@ -42,7 +42,6 @@ and with the XML creation mode, which is the default mode for creating entities:
 
     $ cd /usr/local/bin && MicroXRCEAgent udp -p 2019
 
-.. TODO: write a comment tagging guys and asking if it was ok to remove the "-r <references-file>" part
 
 .. _run_pubsub_example:
 
