@@ -9,15 +9,6 @@ Also, we illustrate how to create C code consumable by the client from a IDL fil
 *eProsima Micro XRCE-DDS Gen*.
 Finally, we provide a deployment example.
 
-.. hint:: 
-    The code shown here can be found from the examples found into:
-
-    * :code:`examples/PublisherHelloWorld`
-    * :code:`examples/SubscriberHelloWorld`
-    * :code:`ReplyAdder`
-    * :code:`RequestAdder`
-    * :code:`Deployment`
-
 The section is organized as follows:
 
 - :ref:`prerequisites`
@@ -33,6 +24,15 @@ The section is organized as follows:
 - :ref:`read_data`
 - :ref:`close_client`
 - :ref:`deployment_example`
+
+.. hint:: 
+    The code shown here can be found in the examples below:
+
+    * :code:`examples/PublisherHelloWorld`
+    * :code:`examples/SubscriberHelloWorld`
+    * :code:`examples/ReplyAdder`
+    * :code:`examples/RequestAdder`
+    * :code:`examples/Deployment`
 
 .. _prerequisites:
 

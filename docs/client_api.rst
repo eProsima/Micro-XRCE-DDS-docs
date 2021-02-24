@@ -1097,7 +1097,7 @@ Closes a transport previously opened. `PROTOCOL` can be ``udp``, ``tcp``, ``seri
 
 ------
 
-.. _custom_transports_client_api_label:
+.. _custom_transport_callbacks:
 
 .. code-block:: c
 
