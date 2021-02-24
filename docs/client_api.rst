@@ -32,7 +32,7 @@ Session
 ^^^^^^^
 
 These functions are available even if no profile has been enabled.
-The declaration of these function can be found in ``uxr/client/core/session/session.h``.
+The declaration of these functions can be found in ``uxr/client/core/session/session.h``.
 
 ------
 
@@ -44,9 +44,9 @@ Initializes a session structure.
 Once this function is called, a ``create_session`` call can be performed.
 
 
-:session: Session structure where manage the session data.
+:session: Session structure where to manage the session data.
 :comm: Communication used for connecting to the *Agent*.
-          All different transports have a common attribute uxrCommunication.
+          All different transports have a common attribute ``uxrCommunication``.
           This parameter can not be shared between active sessions.
 :key: The key identifier of the *Client*.
          All *Clients* connected to an *Agent* must have a different key.
@@ -97,7 +97,7 @@ Sets the request callback. This will be called when the *Agent* sends a ``READ_D
 
     void uxr_set_reply_callback(uxrSession* session, uxrOnReplyFunc on_reply_func, void* args);
 
-Sets the request callback. This will be called when the *Agent* sends a ``READ_DATA`` submessage associated with a ``Replier``.
+Sets the reply callback. This will be called when the *Agent* sends a ``READ_DATA`` submessage associated with a ``Replier``.
 
 :session: Session structure previously initialized.
 :on_reply_func: Function callback that will be called.
@@ -111,7 +111,7 @@ Sets the request callback. This will be called when the *Agent* sends a ``READ_D
     bool uxr_create_session(uxrSession* session);
 
 Creates a new session with the *Agent*.
-This function logs in a session, enabling any other XRCE communication with the *Agent*.
+This function logs in a session, enabling any other `XRCE` communication with the *Agent*.
 
 :session: Session structure previously initialized.
 
@@ -121,11 +121,11 @@ This function logs in a session, enabling any other XRCE communication with the 
 
     void uxr_create_session_retries(uxrSession* session, size_t retries);
 
-Attempts to establish a new session on the *Agent* :code:`retries` times
-This function logs in a session, enabling any other XRCE communication with the *Agent*.
+Attempts to establish a new session on the *Agent* :code:`retries` times.
+This function logs in a session, enabling any other `XRCE` communication with the *Agent*.
 
 :session: Session structure previously initialized.
-:retries: Number of retries to try to create a session.
+:retries: Number of :code:`retries` to try to create a session.
 
 ------
 
@@ -137,7 +137,7 @@ Deletes a session previously created.
 All `XRCE` entities created with the session will be removed.
 This function logs out a session, disabling any other `XRCE` communication with the *Agent*.
 
-:session: Session structure previously initialized.
+:session: Session structure previously initialized and created.
 
 ------
 
@@ -149,7 +149,7 @@ Creates and initializes an output best-effort stream for writing.
 The ``uxrStreamId`` returned represents the new stream and can be used to manage it.
 The number of available calls to this function must be less or equal than ``CONFIG_MAX_OUTPUT_BEST_EFFORT_STREAMS`` CMake argument.
 
-:session: Session structure previously initialized.
+:session: Session structure previously initialized and created.
 :buffer: Memory block where the messages will be written.
 :size: Buffer size.
 
@@ -163,12 +163,12 @@ Creates and initializes an output reliable stream for writing.
 The ``uxrStreamId`` returned represents the new stream and can be used to manage it.
 The number of available calls to this function must be less or equal than ``CONFIG_MAX_OUTPUT_RELIABLE_STREAMS`` CMake argument.
 
-:session: Session structure previously initialized.
+:session: Session structure previously initialized and created.
 :buffer: Memory block where the messages will be written.
 :size: Buffer size.
 :history: History used for reliable connection.
           The buffer size will be split into smaller buffers using this value.
-          The history must be a power of two.
+          The history must be a divisor of the buffer size.
 
 ------
 
@@ -180,7 +180,7 @@ Creates and initializes an input best-effort stream for receiving messages.
 The ``uxrStreamId`` returned represents the new stream and can be used to manage it.
 The number of available calls to this function must be less or equal than ``CONFIG_MAX_INPUT_BEST_EFFORT_STREAMS`` CMake argument.
 
-:session: Session structure previously initialized.
+:session: Session structure previously initialized and created.
 
 ------
 
@@ -192,12 +192,12 @@ Creates and initializes an input reliable stream for receiving messages.
 The returned ``uxrStreamId`` represents the new stream and can be used to manage it.
 The number of available calls to this function must be less or equal than ``CONFIG_MAX_INPUT_RELIABLE_STREAMS`` CMake argument.
 
-:session: Session structure previously initialized.
+:session: Session structure previously initialized and created.
 :buffer: Memory block where the messages will be storaged.
 :size: Buffer size.
 :history: History used for reliable connection.
           The buffer will be split into smaller buffers using this value.
-          The history must be a power of two.
+          The history must be a divisor of the buffer size.
 
 ------
 
@@ -207,7 +207,7 @@ The number of available calls to this function must be less or equal than ``CONF
 
 Flashes all output streams sending the data through the transport.
 
-:session: Session structure previously initialized.
+:session: Session structure previously initialized and created.
 
 ------
 
@@ -220,14 +220,36 @@ It implies:
 
 1. Flushing all output streams sending the data through the transport.
 2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
-3. Listening messages from the *Agent* and calling the associated callback if it exists (a topic callback or a status callback).
+3. Listening to messages from the *Agent* and calling the associated callback if it exists (a topic callback or a status callback).
 
 The ``time`` suffix function version will perform these actions and will listen to messages for a ``time`` duration.
 Only when the time waiting for a message overcome the ``time`` duration, the function finishes.
 The function will return ``true`` if the sending data have been confirmed, ``false`` otherwise.
 
-:session: Session structure previously initialized.
+:session: Session structure previously initialized and created.
 :time: Time for waiting, in milliseconds.
+          For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
+
+------
+
+.. code-block:: c
+
+    void uxr_run_session_timeout(uxrSession* session, int timeout);
+
+This function processes the internal functionality of a session.
+It implies:
+
+1. Flushing all output streams sending the data through the transport.
+2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
+3. Listening messages from the *Agent* and call the associated callback if it exists (a topic callback or a status callback).
+
+The ``timeout`` suffix function version will perform these actions until receiving one message.
+Once the message has been received or the timeout has been reached, the function finishes.
+Only when the time waiting for a message overcome the ``timeout`` duration, the function finishes.
+The function will return ``true`` if it has received a message, ``false`` if the timeout has been reached.
+
+:session: Session structure previously initialized.
+:timeout: Time for waiting for a new message, in milliseconds.
           For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
 
 ------

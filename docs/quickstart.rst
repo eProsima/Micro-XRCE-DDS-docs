@@ -55,7 +55,7 @@ Before considering the publisher and subscriber examples, it is useful to briefl
 `Publisher` and `Subscriber` entities work, as well as to list the functions related to both entities.
 
 Publisher
-    The `Publisher` will be associated with a `Topic` and will handle a DDS publisher that publish topics.
+    The `Publisher` will be associated with a `Topic` and will handle a DDS publisher that publishes topics.
 
     To create a `Publisher` entity, the ``uxr_buffer_create_publisher_xml`` or ``uxr_buffer_create_publisher_ref`` shall be used.
     Once created, topics can be published through ``uxr_prepare_output_stream``.
