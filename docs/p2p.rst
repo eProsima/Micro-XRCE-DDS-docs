@@ -3,6 +3,17 @@
 P2P Communication
 =================
 
+This section illustrates the peer-to-peer communication mode offered by *eProsima Micro XRCE-DDS*.
+It is organized as follows:
+
+- :ref:`intro_p2p`
+- :ref:`pubsub_p2p_example`
+
+.. _intro_p2p:
+
+Introduction
+^^^^^^^^^^^^
+
 The peer-to-peer (P2P) mode allows direct communication between applications without DDS,
 where by *application* is to be understood the combination of an *Agent* and one or more *Clients*.
 
@@ -20,6 +31,8 @@ Some consideration shall be taken into account in order to use the P2P communica
 #. The DataWriter's and DataReader's references need to match the Topic's reference.
 #. Publishers and Subscribers have no role.
 #. Agents use the CedMiddleware and the Discovery mechanism.
+
+.. _pubsub_p2p_example:
 
 Publish/Subscribe P2P Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

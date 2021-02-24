@@ -4,12 +4,16 @@ Transport
 =========
 
 This section shows how the transport layer is implemented in both *eProsima Micro XRCE-DDS Agent* and *eProsima Micro XRCE-DDS Client*.
-
-The section is organized as follows:
-- 
-
-
 Furthermore, this section describes how to add your custom transport in *eProsima Micro XRCE-DDS*.
+It is organized as follows:
+
+- :ref:`intro_transport`
+- :ref:`agent_transport_architecture`
+- :ref:`client_transport_architecture`
+- :ref:`stream_framing_label`
+- :ref:`custom_transport`
+
+.. _intro_transport:
 
 Introduction
 ------------
@@ -23,6 +27,8 @@ This feature allows using *eProsima Micro XRCE-DDS* over two kinds of transports
 
 * **Packet-oriented transports**: communication protocols that allow sending whole packets.
 * **Stream-oriented transports**: communication protocols that follow a stream logic.
+
+.. _agent_transport_architecture:
 
 Agent Transport Architecture
 ----------------------------
@@ -73,6 +79,8 @@ These functions are overridden by the ``UDPServerBase`` class, which is in charg
 
 On the other hand, the last five virtual functions are platform specific (Platform Layer).
 These functions are override by the ``UDPServerLinux`` and ``UDPServerWindows`` for Linux and Windows systems, respectively.
+
+.. _client_transport_architecture:
 
 Client Transport Architecture
 -----------------------------
@@ -134,6 +142,8 @@ For example, in the case of Linux under UDP transport protocol, the ``uxrUDPPlat
     bool uxr_close_udp_platform(uxrUDPPlatform* platform);
     size_t uxr_write_udp_data_platform(uxrUDPPlatform* platform, const uint8_t* buf, size_t len, uint8_t* errcode);
     size_t uxr_read_udp_data_platform(uxrUDPPlatform* platform, uint8_t* buf, size_t len, int timeout, uint8_t* errcode);
+
+.. _stream_framing_label:
 
 Stream Framing Protocol
 -----------------------
@@ -229,61 +239,227 @@ In Serial Transport, the topic's packaging could be divided into two steps:
 The figure above shows the overhead added by Serial Transport.
 In the best case, it is **only 19 bytes**, but it should be noted that, in this example, the message stuffing has been neglected.
 
-Custom Transport API
---------------------
+.. _custom_transport:
 
-.. TODO: This content is repeated in: client, client API. agent (not yet). agent API (not yet). What to do?
+Custom Transport
+----------------
 
-*eProsima Micro XRCE-DDS* provides a user API that allows interfacing with the lowest level transport layer at runtime. In this way, a user is enabled to implement its own transports based on one of the two communication approaches: stream-oriented or packet-oriented.
+*eProsima Micro XRCE-DDS* provides a user API that allows interfacing with the lowest level transport layer at runtime,
+which enables users to implement their own transports in both the *Client* and *Agent* libraries.
+Thanks to this, the Micro XRCE-DDS wire protocol can be transmitted over virtually any protocol, network or communication
+mechanism. In order to do so, two general communication modes are provided:
 
-Client custom transport API
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* **Stream-oriented mode**: the communication mechanism implemented does not have the concept of packet. 
+  HDLC framing (:ref:`stream_framing_label`) will be used.
+* **Packet-oriented mode**: the communication mechanism implemented is able to send a whole packet that includes an XRCE message.
 
-By means of the following functions, a user can set four callbacks which will be in charge of opening and closing the transport, and writing and reading from it. This custom transport API is enabled by setting the CMake argument ``UCLIENT_PROFILE_CUSTOM_TRANSPORT=<bool>`` to true. In the case that stream-oriented transport is used ``UCLIENT_PROFILE_STREAM_FRAMING=<bool>`` should also be enabled.
+These two modes can be selected by activating and deactivating the :code:`framing` parameter in both the *Client* and the *Agent* functions.
 
-------
+The relevant API can be found in the :ref:`transport_api` section of the :ref:`client_api_label`.
 
-.. code-block:: c
+Micro XRCE-DDS Client
+^^^^^^^^^^^^^^^^^^^^^
 
-    void uxr_set_custom_transport_callbacks(uxrCustomTransport* transport, bool framing, open_custom_func open, close_custom_func close, write_custom_func write, read_custom_func read);
+In order to enable the *eProsima Micro XRCE-DDS Client* profile for custom transports, the CMake argument 
+``UCLIENT_PROFILE_CUSTOM_TRANSPORT=<bool>`` must be set to true. By doing so, the user will enable the functionality for setting
+the transport-related callbacks explained in the :ref:`transport_api` section of the :ref:`client_api_label`.
 
-Assigns the callback for custom transport.
-
-:transport: The uninitialized structure used for managing the transport.
-            This structure must be accessible during the connection.
-:framing: Enables or disables Stream Framing Protocol for a custom transport.
-:open: Callback for opening a custom transport.
-:close: Callback for closing a custom transport.
-:write: Callback for writing to a custom transport.
-:read: Callback for reading from a custom transport.
-
-The function signatures for the above callbacks are:
+An example on how to set these external transport callbacks in the *Client* API is:
 
 .. code-block:: c
 
-    typedef bool (*open_custom_func)(struct uxrCustomTransport*);
+    uxrCustomTransport transport;
+    uxr_set_custom_transport_callbacks(
+        &transport,
+        true, // Framing enabled here. Using Stream-oriented mode.
+        my_custom_transport_open,
+        my_custom_transport_close,
+        my_custom_transport_write,
+        my_custom_transport_read);
 
-Where ``struct uxrCustomTransport*`` will have the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``
+    struct custom_args {
+        ...
+    }
+    
+    struct custom_args args;
 
-.. code-block:: c
+    if(!uxr_init_custom_transport(&transport, (void *) &args))
+    {
+        printf("Error at create transport.\n");
+        return 1;
+    }
 
-    typedef bool (*close_custom_func)(struct uxrCustomTransport*);
+It is important to notice that in :code:`uxr_init_custom_transport` a pointer to custom arguments is set. This reference will be copied to
+the :code:`uxrCustomTransport` and will be available to every callbacks call.
 
-Where ``struct uxrCustomTransport*`` will have the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``
+In general, four functions need to be implemented. The behavior of these functions is sightly different, depending on the selected mode:
 
-.. code-block:: c
+Open function
+    .. code-block:: c
+    
+        bool my_custom_transport_open(uxrCustomTransport* transport)
+        {
+            ...
+        }
 
-    typedef size_t (*write_custom_func)(struct uxrCustomTransport*, const uint8_t*, size_t, uint8_t*);
+    This function should open and init the custom transport. It returns a boolean indicating if the opening was successful.
 
-Where ``struct uxrCustomTransport*`` refers to the opened transport structure,  the first ``const uint8_t*`` is the buffer to be sent, ``size_t`` is the length of the buffer, and the last ``uint8_t*`` is an error code that should be set when the write process has any problem. This function should return the number of bytes sent successfully.
+    :code:`transport->args` have the arguments passed through :code:`uxr_init_custom_transport`.
 
-.. code-block:: c
+Close function
+    .. code-block:: c
+    
+        bool my_custom_transport_close(uxrCustomTransport* transport)
+        {
+            ...
+        }
+    
+    This function should close the custom transport. It returns a boolean indicating if closing was successful.
+   
+    :code:`transport->args` have the arguments passed through :code:`uxr_init_custom_transport`.
 
-    typedef size_t (*read_custom_func)(struct uxrCustomTransport*, uint8_t*, size_t, int, uint8_t*);
+Write function
+    .. code-block:: c
+    
+        size_t my_custom_transport_write(
+                uxrCustomTransport* transport,
+                const uint8_t* buffer,
+                size_t length,
+                uint8_t* errcode)
+        {
+            ...
+        }
 
-Where ``struct uxrCustomTransport*`` refers to the opened transport structure,  the first ``uint8_t*`` is the buffer to be write with the received bytes, following ``size_t`` is the length of the buffer, the following ``int`` is the maximum time in milliseconds that the read operating should take and the last ``uint8_t*`` is an error code that should be set when the read process has any problem. This function should return the number of bytes received successfully.
+    This function should write data to the custom transport. It returns the number of Bytes written.
 
-Agent custom transport API
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+    :code:`transport->args` have the arguments passed through :code:`uxr_init_custom_transport`.
 
-.. TODO: @Jose
+    * **Stream-oriented mode:** The function can send up to :code:`length` Bytes from :code:`buffer`.
+
+    * **Packet-oriented mode:** The function should send :code:`length` Bytes from :code:`buffer`.
+      If less than :code:`length` Bytes are written :code:`errcode` can be set.
+
+Read function
+    .. code-block:: c
+    
+        size_t my_custom_transport_read(
+                uxrCustomTransport* transport,
+                uint8_t* buffer,
+                size_t length,
+                int timeout,
+                uint8_t* errcode)
+        {
+            ...
+        }
+
+    This function should read data to the custom transport. It returns the number of Bytes read
+
+    :code:`transport->args` have the arguments passed through :code:`uxr_init_custom_transport`.
+
+    * **Stream-oriented mode:** The function should retrieve up to :code:`length` Bytes from transport
+      and write them into :code:`buffer` in :code:`timeout` milliseconds.
+
+    * **Packet-oriented mode:** The function should retrieve :code:`length` Bytes from transport
+      and write them into :code:`buffer` in :code:`timeout` milliseconds. If less than :code:`length` Bytes are read :code:`errcode` can be set.
+
+Micro XRCE-DDS Agent
+^^^^^^^^^^^^^^^^^^^^^
+
+.. TODO: @Jose review this.
+
+The *eProsima Micro XRCE-DDS Agent* profile for custom transports is enabled by default. 
+
+An example on how to set the external transport callbacks in the Micro XRCE-DDS Agent API is:
+
+.. code-block:: cpp
+    
+    eprosima::uxr::Middleware::Kind mw_kind(eprosima::uxr::Middleware::Kind::FASTDDS);
+    eprosima::uxr::CustomEndPoint custom_endpoint;
+
+    // Add transport endpoing parameters
+    custom_endpoint.add_member<uint32_t>("param1");
+    custom_endpoint.add_member<uint16_t>("param2");
+    custom_endpoint.add_member<std::string>("param3");
+
+    eprosima::uxr::CustomAgent custom_agent(
+        "my_custom_transport",
+        &custom_endpoint,
+        mw_kind,
+        true, // Framing enabled here. Using Stream-oriented mode.
+        my_custom_transport_open,
+        my_custom_transport_close,
+        my_custom_transport_write
+        my_custom_transport_read);
+
+    custom_agent.start();
+
+The :code:`custom_endpoint` is the object in charge of handling the endpoint parameters. The *Agent*, unlike the *Client*, can receive
+messages from multiple *Clients* so it must be able to differentiate between different *Clients*.
+Therefore, the :code:`eprosima::uxr::CustomEndPoint` should be provided with information about the origin of the message
+in the read callback, and with information about the destination of the message in the write callback.
+
+In general, members of a :code:`eprosima::uxr::CustomEndPoint` object can be unsigned integers and strings.
+
+As in the *Client* API, four functions should be implemented. The behavior of these functions is sightly different
+depending on the selected mode:
+
+Open function
+    .. code-block:: c
+
+        eprosima::uxr::CustomAgent::InitFunction my_custom_transport_open = [&]() -> bool
+        {
+            ...
+        }
+
+    This function should open and init the custom transport. It returns a boolean indicating if the opening was successful.
+
+Close function
+    .. code-block:: c
+    
+        eprosima::uxr::CustomAgent::FiniFunction my_custom_transport_close = [&]() -> bool
+        {
+            ...
+        }
+
+    This function should close the custom transport. It returns a boolean indicating if the closing was successful.
+
+Write function
+    .. code-block:: c
+    
+        eprosima::uxr::CustomAgent::SendMsgFunction my_custom_transport_write = [&](
+            const eprosima::uxr::CustomEndPoint* destination_endpoint,
+            uint8_t* buffer,
+            size_t length,
+            eprosima::uxr::TransportRc& transport_rc) -> ssize_t
+        {
+            ...
+        }
+
+    This function should write data to the custom transport. It must use
+    the :code:`destination_endpoint` members to set the data destination. It returns the number of Bytes written.
+
+    * **Stream-oriented mode:** The function can send up to :code:`length` Bytes from :code:`buffer`.
+
+    * **Packet-oriented mode:** The function should send :code:`length` Bytes from :code:`buffer`. If less than :code:`length` Bytes are written, :code:`transport_rc` can be set.
+
+Read function
+    .. code-block:: c
+    
+        eprosima::uxr::CustomAgent::RecvMsgFunction my_custom_transport_read = [&](
+                eprosima::uxr::CustomEndPoint* source_endpoint,
+                uint8_t* buffer,
+                size_t length,
+                int timeout,
+                eprosima::uxr::TransportRc& transport_rc) -> ssize_t
+        {
+            ...
+        }
+
+    This function should read data to the custom transport. It must fill :code:`source_endpoint` members with data source.
+    It returns the number of Bytes read.
+
+    * **Stream-oriented mode:** The function should retrieve up to :code:`length` Bytes from transport
+      and write them into :code:`buffer` in :code:`timeout` milliseconds.
+
+    * **Packet-oriented mode:** The function should retrieve :code:`length` Bytes from transport
+      and write them into :code:`buffer` in :code:`timeout` milliseconds. If less than :code:`length` Bytes are read transport_rc can be set.

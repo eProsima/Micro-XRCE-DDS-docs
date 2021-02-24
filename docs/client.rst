@@ -141,7 +141,7 @@ Each available transport can be activated or desactivated via the opportune CMak
 *eProsima Micro XRCE-DDS* provides a user API that allows interfacing with the lowest level transport layer at runtime. In this way, a user is enabled to implement its own transports based on one of the two communication approaches: stream-oriented or packet-oriented.
 By means of this API, a user can set four callbacks which will be in charge of opening and closing the transport, and writing and reading from it. This custom transport API is enabled by setting the CMake argument ``UCLIENT_PROFILE_CUSTOM_TRANSPORT=<bool>`` to true. In the case that stream-oriented transport is used ``UCLIENT_PROFILE_STREAM_FRAMING=<bool>`` should also be enabled.
 
-Find out more in the :ref:`dedicated section <transport_api>` of the API.
+Find out more in the :ref:`transport_api` section of the :ref:`client_api_label`.
 
 Discovery profile
 ^^^^^^^^^^^^^^^^^
