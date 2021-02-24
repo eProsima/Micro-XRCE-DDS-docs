@@ -206,6 +206,8 @@ If less than :code:`length` Bytes are written transport_rc can be set.
 
 This function returns the number of Bytes written.
 
+.. code-block:: c
+
     eprosima::uxr::CustomAgent::RecvMsgFunction my_custom_transport_read = [&](
             eprosima::uxr::CustomEndPoint* source_endpoint,
             uint8_t* buffer,
