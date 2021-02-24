@@ -1097,6 +1097,8 @@ Closes a transport previously opened. `PROTOCOL` can be ``udp``, ``tcp``, ``seri
 
 ------
 
+.. _custom_transports_client_api_label:
+
 .. code-block:: c
 
     void uxr_set_custom_transport_callbacks(uxrCustomTransport* transport, bool framing, open_custom_func open,

@@ -135,6 +135,8 @@ For example, in the case of Linux under UDP transport protocol, the ``uxrUDPPlat
     size_t uxr_write_udp_data_platform(uxrUDPPlatform* platform, const uint8_t* buf, size_t len, uint8_t* errcode);
     size_t uxr_read_udp_data_platform(uxrUDPPlatform* platform, uint8_t* buf, size_t len, int timeout, uint8_t* errcode);
 
+.. _stream_framing_label:
+
 Stream Framing Protocol
 -----------------------
 
