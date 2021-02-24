@@ -58,19 +58,25 @@ In general, four functions should be implemented. The behavior of these function
 
     bool my_custom_transport_open(uxrCustomTransport* transport)
     {
-        // This function should open and init the custom transport
-        // transport->args have the arguments passed through uxr_init_custom_transport
-
-        // This function returns a boolean indicating if opening is successful
+        ...
     }
+
+This function should open and init the custom transport.
+:code:`transport->args` have the arguments passed through :code:`uxr_init_custom_transport`
+This function returns a boolean indicating if opening is successful.
+
+.. code-block:: c
 
     bool my_custom_transport_close(uxrCustomTransport* transport)
     {
-        // This function should close the custom transport
-        // transport->args have the arguments passed through uxr_init_custom_transport
-
-        // This function returns a boolean indicating if closing is successful
+        ...
     }
+
+This function should close the custom transport.
+:code:`transport->args` have the arguments passed through :code:`uxr_init_custom_transport`.
+This function returns a boolean indicating if closing is successful.
+
+.. code-block:: c
 
     size_t my_custom_transport_write(
             uxrCustomTransport* transport,
@@ -78,18 +84,22 @@ In general, four functions should be implemented. The behavior of these function
             size_t length,
             uint8_t* errcode)
     {
-        // This function should write data to the custom transport
-        // transport->args have the arguments passed through uxr_init_custom_transport
-
-        // Stream-oriented mode:
-        // The function can send up to length Bytes from buffer
-
-        // Packet-oriented mode:
-        // The function should send length Bytes from buffer
-        // If less than length Bytes are written errcode can be set.
-
-        // This function returns the number of Bytes written.
+        ...
     }
+
+This function should write data to the custom transport.
+:code:`transport->args` have the arguments passed through :code:`uxr_init_custom_transport`.
+
+**Stream-oriented mode:**
+The function can send up to :code:`length` Bytes from :code:`buffer`
+
+**Packet-oriented mode:**
+The function should send :code:`length` Bytes from :code:`buffer`
+If less than :code:`length` Bytes are written :code:`errcode` can be set.
+
+This function returns the number of Bytes written.
+
+.. code-block:: c
 
     size_t my_custom_transport_read(
             uxrCustomTransport* transport,
@@ -98,20 +108,22 @@ In general, four functions should be implemented. The behavior of these function
             int timeout,
             uint8_t* errcode)
     {
-        // This function should read data to the custom transport
-        // transport->args have the arguments passed through uxr_init_custom_transport
-
-        // Stream-oriented mode:
-        // The function should retrieve up to length Bytes from transport
-        // and write them into buffer in timeout milliseconds.
-
-        // Packet-oriented mode:
-        // The function should retrieve length Bytes from transport
-        // and write them into buffer in timeout milliseconds.
-        // If less than length Bytes are read errcode can be set.
-
-        // This function returns the number of Bytes read.
+        ...
     }
+
+This function should read data to the custom transport
+:code:`transport->args` have the arguments passed through :code:`uxr_init_custom_transport`
+
+**Stream-oriented mode:**
+The function should retrieve up to :code:`length` Bytes from transport
+and write them into :code:`buffer` in :code:`timeout` milliseconds.
+
+**Packet-oriented mode:**
+The function should retrieve :code:`length` Bytes from transport
+and write them into :code:`buffer` in :code:`timeout` milliseconds.
+If less than :code:`length` Bytes are read :code:`errcode` can be set.
+
+This function returns the number of Bytes read.
 
 Micro XRCE-DDS Agent
 ^^^^^^^^^^^^^^^^^^^^^
@@ -155,17 +167,23 @@ As in the *Client* API four functions should be implemented. The behavior of the
 
     eprosima::uxr::CustomAgent::InitFunction my_custom_transport_open = [&]() -> bool
     {
-        // This function should open and init the custom transport
-
-        // This function returns a boolean indicating if opening is successful
+        ...
     }
+
+This function should open and init the custom transport
+This function returns a boolean indicating if opening is successful
+
+.. code-block:: c
 
     eprosima::uxr::CustomAgent::FiniFunction my_custom_transport_close = [&]() -> bool
     {
-        // This function should close the custom transport
-
-        // This function returns a boolean indicating if closing is successful
+        ...
     }
+
+This function should close the custom transport
+This function returns a boolean indicating if closing is successful
+
+.. code-block:: c
 
     eprosima::uxr::CustomAgent::SendMsgFunction my_custom_transport_write = [&](
         const eprosima::uxr::CustomEndPoint* destination_endpoint,
@@ -173,18 +191,20 @@ As in the *Client* API four functions should be implemented. The behavior of the
         size_t length,
         eprosima::uxr::TransportRc& transport_rc) -> ssize_t
     {
-        // This function should write data to the custom transport
-        // This function must use destination_endpoint members to set the data destination
-
-        // Stream-oriented mode:
-        // The function can send up to length Bytes from buffer
-
-        // Packet-oriented mode:
-        // The function should send length Bytes from buffer
-        // If less than length Bytes are written transport_rc can be set.
-
-        // This function returns the number of Bytes written.
+        ...
     }
+
+This function should write data to the custom transport
+This function must use destination_endpoint members to set the data destination
+
+**Stream-oriented mode:**
+The function can send up to :code:`length` Bytes from :code:`buffer`
+
+**Packet-oriented mode:**
+The function should send :code:`length` Bytes from :code:`buffer`
+If less than :code:`length` Bytes are written transport_rc can be set.
+
+This function returns the number of Bytes written.
 
     eprosima::uxr::CustomAgent::RecvMsgFunction my_custom_transport_read = [&](
             eprosima::uxr::CustomEndPoint* source_endpoint,
@@ -193,22 +213,22 @@ As in the *Client* API four functions should be implemented. The behavior of the
             int timeout,
             eprosima::uxr::TransportRc& transport_rc) -> ssize_t
     {
-        // This function should read data to the custom transport
-        // This function must fill source_endpoint members with data source 
-
-        // Stream-oriented mode:
-        // The function should retrieve up to length Bytes from transport
-        // and write them into buffer in timeout milliseconds.
-
-        // Packet-oriented mode:
-        // The function should retrieve length Bytes from transport
-        // and write them into buffer in timeout milliseconds.
-        // If less than length Bytes are read transport_rc can be set.
-
-        // This function returns the number of Bytes read.
+        ...
     }
 
+This function should read data to the custom transport
+This function must fill source_endpoint members with data source 
 
+**Stream-oriented mode:**
+The function should retrieve up to :code:`length` Bytes from transport
+and write them into :code:`buffer` in :code:`timeout` milliseconds.
+
+**Packet-oriented mode:**
+The function should retrieve :code:`length` Bytes from transport
+and write them into :code:`buffer` in :code:`timeout` milliseconds.
+If less than :code:`length` Bytes are read transport_rc can be set.
+
+This function returns the number of Bytes read.
 
 
 
