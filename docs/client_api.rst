@@ -53,6 +53,8 @@ Once this function is called, a ``create_session`` call can be performed.
 
 ------
 
+.. _status_callback:
+
 .. code-block:: c
 
     void uxr_set_status_callback(uxrSession* session, uxrOnStatusFunc on_status_func, void* args);
@@ -60,49 +62,115 @@ Once this function is called, a ``create_session`` call can be performed.
 Assigns the callback for the *Agent* status messages.
 
 :session: Session structure previously initialized.
-:on_status_func: Function callback that will be called when a valid status message comes from the *Agent*.
+:on_status_func: Function callback that is called when a valid status message comes from the *Agent*.
 :args: User pointer data.
-       The args will be provided to ``on_status_func`` function.
+       The args are provided to the ``on_status_func`` function.
+
+The function signature for the ``on_status_func`` callback is:
+
+.. code-block:: c
+
+    typedef void (*uxrOnStatusFunc) (struct uxrSession* session, uxrObjectId object_id, uint16_t request_id,
+                                     uint8_t status, void* args);
+
+.. TODO: explain this signature.
 
 ------
+
+.. _topic_callback:
 
 .. code-block:: c
 
     void uxr_set_topic_callback(uxrSession* session, uxrOnTopicFunc on_topic_func, void* args);
 
 Assigns the callback for topics.
-The topics will be received only if a ``request_data`` function has been called.
+The topics are received only if a ``request_data`` function has been called.
 
 :session: Session structure previously initialized.
-:on_status_func: Function callback that will be called when a valid data message comes from the *Agent*.
+:on_status_func: Function callback that is called when a valid data message comes from the *Agent*.
 :args: User pointer data.
-       The args will be provided to ``on_topic_func`` function.
+       The args are provided to the ``on_topic_func`` function.
+
+The function signature for the ``on_topic_func`` callback is:
+
+.. code-block:: c
+
+    typedef void (*uxrOnTopicFunc) (struct uxrSession* session, uxrObjectId object_id, uint16_t request_id, uxrStreamId stream_id,
+                                    struct ucdrBuffer* ub, uint16_t length, void* args);
+
+.. TODO: explain this signature.
 
 ------
+
+.. _time_callback:
+
+.. code-block:: c
+
+    void uxr_set_time_callback(uxrSession* session, uxrOnTimeFunc on_time_func, void* args);
+
+Assigns the time callback, which ..?
+
+.. TODO: fill this.
+
+:session: Session structure previously initialized.
+:on_time_func: Function callback that is called .. ?
+:args: User pointer data.
+       The args are provided to the ``on_time_func`` function.
+
+The function signature for the ``on_time_func`` callback is:
+
+.. code-block:: c
+
+    typedef void (*uxrOnTimeFunc) (struct uxrSession* session, int64_t current_timestamp, int64_t transmit_timestamp,
+                                   int64_t received_timestamp, int64_t originate_timestamp, void* args);
+
+.. TODO: explain this signature.
+
+------
+
+.. _request_callback:
 
 .. code-block:: c
 
     void uxr_set_request_callback(uxrSession* session, uxrOnRequestFunc on_request_func, void* args);
 
-Sets the request callback. This will be called when the *Agent* sends a ``READ_DATA`` submessage associated with a ``Requester``.
+Sets the request callback, which is called when the *Agent* sends a ``READ_DATA`` submessage associated with a ``Requester``.
 
 :session: Session structure previously initialized.
-:on_request_func: Function callback that will be called.
+:on_request_func: Function callback that is called when the *Agent* sends a ``READ_DATA`` submessage associated with a ``Requester``.
 :args: User pointer data.
-       The args will be provided to ``on_request_func`` function.
+       The args are provided to the ``on_request_func`` function.
+
+The function signature for the ``on_request_func`` callback is:
+
+.. code-block:: c
+
+    typedef void (*uxrOnRequestFunc) (struct uxrSession* session, uxrObjectId object_id, uint16_t request_id,
+                                      SampleIdentity* sample_id, struct ucdrBuffer* ub, uint16_t length, void* args);
+
+.. TODO: explain this signature.
 
 ------
+
+.. _reply_callback:
 
 .. code-block:: c
 
     void uxr_set_reply_callback(uxrSession* session, uxrOnReplyFunc on_reply_func, void* args);
 
-Sets the reply callback. This will be called when the *Agent* sends a ``READ_DATA`` submessage associated with a ``Replier``.
+Sets the reply callback, which is called when the *Agent* sends a ``READ_DATA`` submessage associated with a ``Replier``.
 
 :session: Session structure previously initialized.
-:on_reply_func: Function callback that will be called.
+:on_reply_func: Function callback that is called when the *Agent* sends a ``READ_DATA`` submessage associated with a ``Replier``
 :args: User pointer data.
-       The args will be provided to ``on_reply_func`` function.
+       The args are provided to ``on_reply_func`` function.
+
+.. code-block:: c
+
+    typedef void (*uxrOnReplyFunc) (struct uxrSession* session, uxrObjectId object_id, uint16_t request_id, uint16_t reply_id,
+                                    struct ucdrBuffer* ub, uint16_t length, void* args);
+
+.. TODO: explain this signature.
 
 ------
 
@@ -110,7 +178,7 @@ Sets the reply callback. This will be called when the *Agent* sends a ``READ_DAT
 
     bool uxr_create_session(uxrSession* session);
 
-Creates a new session with the *Agent*.
+Creates a new session on the *Agent*.
 This function logs in a session, enabling any other `XRCE` communication with the *Agent*.
 
 :session: Session structure previously initialized.
@@ -125,7 +193,7 @@ Attempts to establish a new session on the *Agent* :code:`retries` times.
 This function logs in a session, enabling any other `XRCE` communication with the *Agent*.
 
 :session: Session structure previously initialized.
-:retries: Number of :code:`retries` to try to create a session.
+:retries: Number of attempts for creating a session.
 
 ------
 
@@ -134,10 +202,23 @@ This function logs in a session, enabling any other `XRCE` communication with th
     bool uxr_delete_session(uxrSession* session);
 
 Deletes a session previously created.
-All `XRCE` entities created with the session will be removed.
+All `XRCE` entities created with the session are removed.
 This function logs out a session, disabling any other `XRCE` communication with the *Agent*.
 
 :session: Session structure previously initialized and created.
+
+------
+
+.. code-block:: c
+
+    bool uxr_delete_session_retries(uxrSession* session, size_t retries);
+
+Attempts to delete a previously created session :code:`retries` times.
+All `XRCE` entities created with the session are removed.
+This function logs out a session, disabling any other `XRCE` communication with the *Agent*.
+
+:session: Session structure previously initialized and created.
+:retries: Number of attempts for deleting a session.
 
 ------
 
@@ -150,7 +231,7 @@ The ``uxrStreamId`` returned represents the new stream and can be used to manage
 The number of available calls to this function must be less or equal than ``CONFIG_MAX_OUTPUT_BEST_EFFORT_STREAMS`` CMake argument.
 
 :session: Session structure previously initialized and created.
-:buffer: Memory block where the messages will be written.
+:buffer: Memory block where the messages are written.
 :size: Buffer size.
 
 ------
@@ -164,10 +245,10 @@ The ``uxrStreamId`` returned represents the new stream and can be used to manage
 The number of available calls to this function must be less or equal than ``CONFIG_MAX_OUTPUT_RELIABLE_STREAMS`` CMake argument.
 
 :session: Session structure previously initialized and created.
-:buffer: Memory block where the messages will be written.
+:buffer: Memory block where the messages are written.
 :size: Buffer size.
 :history: History used for reliable connection.
-          The buffer size will be split into smaller buffers using this value.
+          The buffer size is split into a ``history`` number of smaller buffers.
           The history must be a divisor of the buffer size.
 
 ------
@@ -193,10 +274,10 @@ The returned ``uxrStreamId`` represents the new stream and can be used to manage
 The number of available calls to this function must be less or equal than ``CONFIG_MAX_INPUT_RELIABLE_STREAMS`` CMake argument.
 
 :session: Session structure previously initialized and created.
-:buffer: Memory block where the messages will be storaged.
+:buffer: Memory block where the messages are stored.
 :size: Buffer size.
 :history: History used for reliable connection.
-          The buffer will be split into smaller buffers using this value.
+          The buffer size is split into a ``history`` number of smaller buffers.
           The history must be a divisor of the buffer size.
 
 ------
@@ -213,171 +294,190 @@ Flashes all output streams sending the data through the transport.
 
 .. code-block:: c
 
-    void uxr_run_session_time(uxrSession* session, int time);
+    void uxr_run_session_time(uxrSession* session, int timeout_ms);
 
 This function processes the internal functionality of a session.
 It implies:
 
 1. Flushing all output streams sending the data through the transport.
-2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
-3. Listening to messages from the *Agent* and calling the associated callback if it exists (a topic callback or a status callback).
+2. If there is any reliable stream, it performs the associated reliable behaviour to ensure communication.
+3. Listening to messages from the *Agent* and calling the associated callback if it exists (which can be a
+   :ref:`status <status_callback>`/:ref:`topic <topic_callback>`/:ref:`time <time_callback>`/:ref:`request <request_callback>`
+   or :ref:`reply <reply_callback>` callback)
 
-The ``time`` suffix function version will perform these actions and will listen to messages for a ``time`` duration.
-Only when the time waiting for a message overcome the ``time`` duration, the function finishes.
-The function will return ``true`` if the sending data have been confirmed, ``false`` otherwise.
+
+The ``time`` suffix function version perform these actions and listens to messages for a ``timeout_ms`` duration,
+which is refreshed each time a new message is received, that is, the counter restarts for another ``timeout_ms`` period.
+Only when the wait time for a message overcomes the ``timeout_ms`` duration, the function finishes.
+The function returns ``true`` if the sending data have been confirmed, ``false`` otherwise.
 
 :session: Session structure previously initialized and created.
-:time: Time for waiting, in milliseconds.
+:timeout_ms: Time for waiting for each new message, in milliseconds.
           For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
 
 ------
 
 .. code-block:: c
 
-    void uxr_run_session_timeout(uxrSession* session, int timeout);
+    void uxr_run_session_timeout(uxrSession* session, int timeout_ms);
 
 This function processes the internal functionality of a session.
 It implies:
 
 1. Flushing all output streams sending the data through the transport.
-2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
-3. Listening messages from the *Agent* and call the associated callback if it exists (a topic callback or a status callback).
+2. If there is any reliable stream, it performs the associated reliable behaviour to ensure communication.
+3. Listening to messages from the *Agent* and calling the associated callback if it exists (which can be a
+   :ref:`status <status_callback>`/:ref:`topic <topic_callback>`/:ref:`time <time_callback>`/:ref:`request <request_callback>`
+   or :ref:`reply <reply_callback>` callback)
 
-The ``timeout`` suffix function version will perform these actions until receiving one message.
-Once the message has been received or the timeout has been reached, the function finishes.
-Only when the time waiting for a message overcome the ``timeout`` duration, the function finishes.
-The function will return ``true`` if it has received a message, ``false`` if the timeout has been reached.
+The ``timeout`` suffix function version performs these actions and listens to messages for a *total* ``timeout_ms`` duration.
+Each time a new message is received, the counter retakes from where it left, that is, for a period equal to
+``timeout_ms`` minus the time spent waiting for the previous message(s).
+When the *total* wait time overcomes the ``timeout_ms`` duration, the function finishes.
+The function returns ``true`` if the sending data have been confirmed, ``false`` otherwise.
 
-:session: Session structure previously initialized.
-:timeout: Time for waiting for a new message, in milliseconds.
+:session: Session structure previously initialized and created.
+:timeout_ms: Total time for waiting for a new message, in milliseconds.
           For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
 
 ------
 
 .. code-block:: c
 
-    void uxr_run_session_until_timeout(uxrSession* session, int timeout);
+    void uxr_run_session_until_timeout(uxrSession* session, int timeout_ms);
 
 This function processes the internal functionality of a session.
 It implies:
 
 1. Flushing all output streams sending the data through the transport.
-2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
-3. Listening messages from the *Agent* and call the associated callback if it exists (a topic callback or a status callback).
+2. If there is any reliable stream, it performs the associated reliable behaviour to ensure communication.
+3. Listening to messages from the *Agent* and calling the associated callback if it exists (which can be a
+   :ref:`status <status_callback>`/:ref:`topic <topic_callback>`/:ref:`time <time_callback>`/:ref:`request <request_callback>`
+   or :ref:`reply <reply_callback>` callback)
 
-The ``_until_timeout`` suffix function version will perform these actions until receiving one message.
-Once the message has been received or the timeout has been reached, the function finishes.
-Only when the time waiting for a message overcome the ``timeout`` duration, the function finishes.
-The function will return ``true`` if it has received a message, ``false`` if the timeout has been reached.
+The ``until_timeout`` suffix function version performs these actions until receiving one message,
+for a ``timeout_ms`` time duration.
+Once a message has been received or the timeout has been reached, the function finishes.
+The function returns ``true`` if it has received a message, ``false`` if the timeout has been reached.
 
-:session: Session structure previously initialized.
-:timeout: Time for waiting for a new message, in milliseconds.
+:session: Session structure previously initialized and created.
+:timeout_ms: Maximum time for waiting for a new message, in milliseconds.
           For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
 
 ------
 
 .. code-block:: c
 
-    bool uxr_run_session_until_confirm_delivery(uxrSession* session, int timeout);
+    bool uxr_run_session_until_confirm_delivery(uxrSession* session, int timeout_ms);
 
 This function processes the internal functionality of a session.
 It implies:
 
 1. Flushing all output streams sending the data through the transport.
-2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
-3. Listening messages from the *Agent* and call the associated callback if it exists (a topic callback or a status callback).
+2. If there is any reliable stream, it performs the associated reliable behaviour to ensure communication.
+3. Listening to messages from the *Agent* and calling the associated callback if it exists (which can be a
+   :ref:`status <status_callback>`/:ref:`topic <topic_callback>`/:ref:`time <time_callback>`/:ref:`request <request_callback>`
+   or :ref:`reply <reply_callback>` callback)
 
-The ``_until_confirm_delivery`` suffix function version will perform these actions during ``timeout``
+The ``until_confirm_delivery`` suffix function version performs these actions during ``timeout_ms``
 or until the output reliable streams confirm that the sent messages have been received by the *Agent*.
-The function will return ``true`` if the sent data have been confirmed, ``false`` otherwise.
+The function returns ``true`` if the sent data have been confirmed, ``false`` otherwise.
 
-:session: Session structure previously initialized.
-:timeout: Maximum waiting time for a new message, in milliseconds.
+:session: Session structure previously initialized and created.
+:timeout_ms: Maximum waiting time for a new message, in milliseconds.
           For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
 
 ------
 
 .. code-block:: c
 
-    bool uxr_run_session_until_all_status(uxrSession* session, int timeout, const uint16_t* request_list,
+    bool uxr_run_session_until_all_status(uxrSession* session, int timeout_ms, const uint16_t* request_list,
                                           uint8_t* status_list, size_t list_size);
 
 This function processes the internal functionality of a session.
 It implies:
 
 1. Flushing all output streams sending the data through the transport.
-2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
-3. Listening messages from the *Agent* and call the associated callback if it exists (a topic callback or a status callback).
+2. If there is any reliable stream, it performs the associated reliable behaviour to ensure communication.
+3. Listening to messages from the *Agent* and calling the associated callback if it exists (which can be a
+   :ref:`status <status_callback>`/:ref:`topic <topic_callback>`/:ref:`time <time_callback>`/:ref:`request <request_callback>`
+   or :ref:`reply <reply_callback>` callback)
 
-The ``_until_all_status`` suffix function version will perform these actions during ``timeout`` duration
-or until all requested status had been received.
-The function will return ``true`` if all status have been received and all of them have the value ``UXR_STATUS_OK`` or ``UXR_STATUS_OK_MATCHED``, ``false`` otherwise.
+The ``until_all_status`` suffix function version performs these actions during a ``timeout_ms`` duration
+or until all requested statuses have been received.
+The function returns ``true`` if all statuses have been received and all of them have the value ``UXR_STATUS_OK``
+or ``UXR_STATUS_OK_MATCHED``, ``false`` otherwise.
 
-:session: Session structure previously initialized.
-:timeout: Maximum waiting time for a new message, in milliseconds.
+:session: Session structure previously initialized and created.
+:timeout_ms: Maximum waiting time for a new message, in milliseconds.
           For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
 :request_list: An array of requests to confirm with a status.
-:status_list: An uninitialized array with the same size as ``request_list`` where the status values will be written.
-              The position of status in the list corresponds to the request at the same position in ``request_list``.
-:list_size: The size of ``request_list`` and ``status_list`` arrays.
+:status_list: An uninitialized array with the same size as ``request_list`` where the status values are written.
+              The position of each status in the `status_list` matches the corresponding request position in the ``request_list``.
+:list_size: The size of the ``request_list`` and ``status_list`` arrays.
 
 ------
 
 .. code-block:: c
 
-    bool uxr_run_session_until_one_status(uxrSession* session, int timeout, const uint16_t* request_list,
+    bool uxr_run_session_until_one_status(uxrSession* session, int timeout_ms, const uint16_t* request_list,
                                           uint8_t* status_list, size_t list_size);
 
 This function processes the internal functionality of a session.
 It implies:
 
 1. Flushing all output streams sending the data through the transport.
-2. If there is any reliable stream, it will perform the associated reliable behaviour to ensure communication.
-3. Listening messages from the *Agent* and call the associated callback if it exists (a topic callback or a status callback).
+2. If there is any reliable stream, it performs the associated reliable behaviour to ensure communication.
+3. Listening to messages from the *Agent* and calling the associated callback if it exists (which can be a
+   :ref:`status <status_callback>`/:ref:`topic <topic_callback>`/:ref:`time <time_callback>`/:ref:`request <request_callback>`
+   or :ref:`reply <reply_callback>` callback)
 
-The ``_until_one_status`` suffix function version will perform these actions during ``timeout`` duration
-or until one requested status had been received.
-The function will return ``true`` if one status have been received and has the value ``UXR_STATUS_OK`` or ``UXR_STATUS_OK_MATCHED``, ``false`` otherwise.
+The ``until_one_status`` suffix function version performs these actions during a ``timeout_ms`` duration
+or until one requested status has been received.
+The function returns ``true`` if one status has been received and has the value ``UXR_STATUS_OK`` or ``UXR_STATUS_OK_MATCHED``,
+``false`` otherwise.
 
-:session: Session structure previously initialized.
-:timeout: Maximum waiting time for a new message, in milliseconds.
+:session: Session structure previously initialized and created.
+:timeout_ms: Maximum waiting time for a new message, in milliseconds.
           For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
-:request_list: An array of requests that can be confirmed.
-:status_list: An uninitialized array with the same size as ``request_list`` where the status value will be written.
-              The position of the status in the list corresponds to the request at the same position in ``request_list``.
-:list_size: The size of ``request_list`` and ``status_list`` arrays.
+:request_list: An array of requests to confirm with a status.
+:status_list: An uninitialized array with the same size as ``request_list`` where the status values are written.
+              The position of each status in the `status_list` matches the corresponding request position in the ``request_list``.
+:list_size: The size of the ``request_list`` and ``status_list`` arrays.
 
 ------
 
 .. code-block:: c
 
-    bool uxr_run_session_until_data(uxrSession* session, int timeout);
+    bool uxr_run_session_until_data(uxrSession* session, int timeout_ms);
 
 This function processes the internal functionality of a session.
 It implies:
 
 1. Flushing all output streams sending the data through the transport.
-2. If there is any reliable stream, it will operate according to the associated reliable behaviour to ensure communication.
-3. Listening messages from the *Agent* and calling the associated callback if it exists (a topic callback or a status callback).
+2. If there is any reliable stream, it operates according to the associated reliable behaviour to ensure communication.
+3. Listening to messages from the *Agent* and calling the associated callback if it exists (which can be a
+   :ref:`status <status_callback>`/:ref:`topic <topic_callback>`/:ref:`time <time_callback>`/:ref:`request <request_callback>`
+   or :ref:`reply <reply_callback>` callback)
 
-The ``_until_data`` suffix function version will perform these actions during a ``timeout`` duration
+The ``until_data`` suffix function version performs these actions during a ``timeout_ms`` duration
 or until a subscription data, request or reply is received.
-The function will return ``true`` if a subscription data, request or reply is received, and ``false`` otherwise.
+The function returns ``true`` if a subscription data, request or reply is received, and ``false`` otherwise.
 
-:session: Session structure previously initialized.
-:timeout: Maximum waiting time for a new message, in milliseconds.
+:session: Session structure previously initialized and created.
+:timeout_ms: Maximum waiting time for a new message, in milliseconds.
           For waiting without timeout, set the value to ``UXR_TIMEOUT_INF``
 
 ------
 
 .. code-block:: c
 
-    bool uxr_sync_session(uxrSession* session, int timeout);
+    bool uxr_sync_session(uxrSession* session, int time);
 
 This function synchronizes the session time with the *Agent* using the NTP protocol by default.
 
-:session: Session structure previously initialized.
-:timeout: The waiting time in milliseconds.
+:session: Session structure previously initialized and created.
+:time: The waiting time in milliseconds.
 
 ------
 
@@ -385,7 +485,7 @@ This function synchronizes the session time with the *Agent* using the NTP proto
 
     int64_t uxr_epoch_millis(uxrSession* session);
 
-This function returns the epoch time in milliseconds taking into account the offset computed during the time synchronization.
+This function returns the epoch time in milliseconds, taking into account the offset computed during the time synchronization.
 
 :session: Session structure previously initialized.
 
@@ -397,7 +497,7 @@ This function returns the epoch time in milliseconds taking into account the off
 
 This function returns the epoch time in nanoseconds taking into account the offset computed during the time synchronization.
 
-:session: Session structure previously initialized.
+:session: Session structure previously initialized and created.
 
 ------
 
@@ -406,7 +506,7 @@ This function returns the epoch time in nanoseconds taking into account the offs
 Create entities by XML
 ^^^^^^^^^^^^^^^^^^^^^^
 
-These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` is activated as a CMake argument.
+These functions are enabled when the ``PROFILE_CREATE_ENTITIES_XML`` is activated as a CMake argument.
 The declaration of these functions can be found in ``uxr/client/profile/session/create_entities_xml.h``.
 
 ------
@@ -416,18 +516,19 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
     uint16_t uxr_buffer_create_participant_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
                                                uint16_t domain, const char* xml, uint8_t mode);
 
-Creates a `participant` entity in the *Agent*.
-The message is only written into the stream buffer.
-To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
+Creates a *participant* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_PARTICIPANT_ID``.
 :xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_mode_table`).
 
 ------
 
@@ -436,12 +537,12 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
     uint16_t uxr_buffer_create_topic_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
                                          uxrObjectId participant_id, const char* xml, uint8_t mode);
 
-Creates a `topic` entity in the *Agent*.
-The message is only written into the stream buffer.
-To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
+Creates a *topic* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_TOPIC_ID``.
@@ -449,7 +550,8 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
             The type must be ``UXR_PARTICIPANT_ID``.
 :xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_mode_table`).
 
 ------
 
@@ -458,12 +560,12 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
     uint16_t uxr_buffer_create_publisher_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
                                              uxrObjectId participant_id, const char* xml, uint8_t mode);
 
-Creates a `publisher` entity in the *Agent*.
-The message is only written into the stream buffer.
-To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
+Creates a *publisher* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_PUBLISHER_ID``.
@@ -471,7 +573,8 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
             The type must be ``UXR_PARTICIPANT_ID``.
 :xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_mode_table`).
 
 ------
 
@@ -480,12 +583,12 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
     uint16_t uxr_buffer_create_subscriber_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
                                               uxrObjectId participant_id, const char* xml, uint8_t mode);
 
-Creates a `subscriber` entity in the *Agent*.
-The message is only written into the stream buffer.
-To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
+Creates a *subscriber* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_SUBSCRIBER_ID``.
@@ -493,7 +596,8 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
             The type must be ``UXR_PARTICIPANT_ID``.
 :xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_mode_table`).
 
 ------
 
@@ -502,12 +606,12 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
     uint16_t uxr_buffer_create_datawriter_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
                                               uxrObjectId publisher_id, const char* xml, uint8_t mode);
 
-Creates a `datawriter` entity in the *Agent*.
-The message is only written into the stream buffer.
-To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
+Creates a *datawriter* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_DATAWRITER_ID``.
@@ -515,7 +619,8 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
             The type must be ``UXR_PUBLISHER_ID``.
 :xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_mode_table`).
 
 ------
 
@@ -524,12 +629,12 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
     uint16_t uxr_buffer_create_datareader_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
                                               uxrObjectId subscriber_id, const char* xml, uint8_t mode);
 
-Creates a `datareader` entity in the *Agent*.
-The message is only written into the stream buffer.
-To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
+Creates a *datareader* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_DATAREADER_ID``.
@@ -537,7 +642,8 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
             The type must be ``UXR_SUBSCRIBER_ID``.
 :xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_mode_table`).
 
 ------
 
@@ -546,12 +652,12 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
     uint16_t uxr_buffer_create_requester_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
                                              uxrObjectId participant_id, const char* xml, uint8_t mode);
 
-Creates a `requester` entity in the *Agent*.
-The message is only written into the stream buffer.
-To send the message it is necessary to call the ``uxr_flash_output_streams`` or ``uxr_run_session`` functions.
+Creates a *requester* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_REQUESTER_ID``.
@@ -559,7 +665,8 @@ To send the message it is necessary to call the ``uxr_flash_output_streams`` or 
             The type must be ``UXR_PARTICIPANT_ID``.
 :xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_mode_table`).
 
 ------
 
@@ -568,12 +675,12 @@ To send the message it is necessary to call the ``uxr_flash_output_streams`` or 
     uint16_t uxr_buffer_create_replier_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
                                            uxrObjectId participant_id, const char* xml, uint8_t mode);
 
-Creates a `replier` entity in the *Agent*.
-The message is only written into the stream buffer.
-To send the message it is necessary to call the ``uxr_flash_output_streams`` or ``uxr_run_session`` functions.
+Creates a *replier* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_REPLIER_ID``.
@@ -581,7 +688,8 @@ To send the message it is necessary to call the ``uxr_flash_output_streams`` or 
             The type must be ``UXR_PARTICIPANT_ID``.
 :xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_mode_table`).
 
 ------
 
@@ -600,18 +708,19 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
     uint16_t uxr_buffer_create_participant_ref(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
                                                const char* ref, uint8_t mode);
 
-Creates a `participant` entity in the *Agent*.
-The message is only written into the stream buffer.
-To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
+Creates a *participant* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
+:session: SSession structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_PARTICIPANT_ID``
 :ref: A reference to the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_mode_table`).
 
 ------
 
@@ -620,12 +729,12 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
     uint16_t uxr_buffer_create_topic_ref(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
                                          uxrObjectId participant_id, const char* ref, uint8_t mode);
 
-Creates a `topic` entity in the *Agent*.
-The message is only written into the stream buffer.
-To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
+Creates a *topic* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_TOPIC_ID``
@@ -633,7 +742,8 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
             The type must be ``UXR_PARTICIPANT_ID``
 :ref: A reference to the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_mode_table`).
 
 ------
 
@@ -642,12 +752,12 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
     uint16_t uxr_buffer_create_datawriter_ref(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
                                               uxrObjectId publisher_id, const char* ref, uint8_t mode);
 
-Creates a `datawriter` entity in the *Agent*.
-The message is only written into the stream buffer.
-To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
+Creates a *datawriter* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_DATAWRITER_ID``
@@ -655,7 +765,8 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
             The type must be ``UXR_PUBLISHER_ID``
 :ref: A reference to the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_mode_table`).
 
 ------
 
@@ -664,12 +775,12 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
     uint16_t uxr_buffer_create_datareader_ref(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
                                               uxrObjectId subscriber_id, const char* ref, uint8_t mode);
 
-Creates a `datareader` entity in the *Agent*.
-The message is only written into the stream buffer.
-To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
+Creates a *datareader* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_DATAREADER_ID``.
@@ -677,7 +788,8 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
             The type must be ``UXR_SUBSCRIBER_ID``.
 :ref: A reference to the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_mode_table`).
 
 ------
 
@@ -686,12 +798,12 @@ To send the message is necessary call to ``uxr_flash_output_streams`` or to ``ux
     uint16_t uxr_buffer_create_requester_ref(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
                                              uxrObjectId participant_id, const char* ref, uint8_t mode);
 
-Creates a `requester` entity in the *Agent*.
-The message is only written into the stream buffer.
-To send the message it is necessary to call the ``uxr_flash_output_streams`` or ``uxr_run_session`` functions.
+Creates a *requester* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_REQUESTER_ID``.
@@ -699,7 +811,8 @@ To send the message it is necessary to call the ``uxr_flash_output_streams`` or 
             The type must be ``UXR_PARTICIPANT_ID``.
 :ref: A reference to the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_mode_table`).
 
 ------
 
@@ -708,12 +821,12 @@ To send the message it is necessary to call the ``uxr_flash_output_streams`` or 
     uint16_t uxr_buffer_create_replier_ref(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
                                            uxrObjectId participant_id, const char* ref, uint8_t mode);
 
-Creates a `replier` entity in the *Agent*.
-The message is only written into the stream buffer.
-To send the message it is necessary to call the ``uxr_flash_output_streams`` or ``uxr_run_session`` functions.
+Creates a *replier* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_REPLIER_ID``.
@@ -721,7 +834,8 @@ To send the message it is necessary to call the ``uxr_flash_output_streams`` or 
             The type must be ``UXR_PARTICIPANT_ID``.
 :ref: A reference to the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags.
+        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_mode_table`).
 
 ------
 
@@ -730,7 +844,7 @@ To send the message it is necessary to call the ``uxr_flash_output_streams`` or 
 Create entities common profile
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-These functions are enabled when ``PROFILE_CREATE_ENTITIES_XML`` or ``PROFILE_CREATE_ENTITIES_REF`` are activated as CMake arguments.
+These functions are enabled when either ``PROFILE_CREATE_ENTITIES_XML`` or ``PROFILE_CREATE_ENTITIES_REF`` are activated as CMake arguments.
 The declaration of these functions can be found in ``uxr/client/profile/session/common_create_entities.h``.
 
 ------
@@ -740,21 +854,21 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
     uint16_t uxr_buffer_delete_entity(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id);
 
 Removes an entity.
-The message is only written into the stream buffer.
-To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
-:object_id: The identifier of the object which will be deleted.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
+:object_id: The identifier of the object which is deleted.
 
 ------
 
 .. _read_access_api:
 
-Read access profile
-^^^^^^^^^^^^^^^^^^^
+Read access
+^^^^^^^^^^^
 
-These functions are enabled when ``PROFILE_READ_ACCESS`` is activated as a CMake argument.
+The *Read Access* is used by the *Client* to handle the read operation on the *Agent*.
 The declaration of these functions can be found in ``uxr/client/profile/session/read_access.h``.
 
 ------
@@ -762,31 +876,51 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
 .. code-block:: c
 
     uint16_t uxr_buffer_request_data(uxrSession* session, uxrStreamId stream_id, uxrObjectId datareader_id,
-                                     uxrStreamId data_stream_id, uxrDeliveryControl* delivery_control);
+                                     uxrStreamId data_stream_id, const uxrDeliveryControl* const control);
 
-This function requests a read from a `datareader` of the *Agent*.
+This function requests a *datareader* previously created on the *Agent* to perform a read operation
+that fetches data from the middleware.
 The returned value is an identifier of the request.
-All received topic will have the same request identifier.
-The topics will be received at the callback topic through the ``run_session`` function.
-If there is no error with the request data, the topics will be received generating a status callback with the value ``UXR_STATUS_OK``.
-If there is an error, a status error will be sent by the *Agent*.
-The message is only written into the stream buffer.
-To send the message is necessary call to ``uxr_flash_output_streams`` or to ``uxr_run_session`` function.
+All received topics have the same request identifier.
+The topics are received on the callback topic through the ``run_session`` function.
+If there is no error with the request data, a status callback with the value ``UXR_STATUS_OK`` is generated along with 
+the topics retrieval.
+If there is an error, a status error is sent by the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
-:object_id: The `datareader` ID that will read the topic from the DDS World.
-:data_stream_id: The input stream ID where the data will be received.
-:delivery_control: Optional information about how the delivery must be.
-                   A ``NULL`` value is accepted, in this case, only one topic will be received.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID used to send messages to the *Agent*.
+:datareader_id: The ID of the *datareader* that reads the topics from the middleware.
+:data_stream_id: The input stream ID where the data is received.
+:control: Optional information allowing the *Client* to configure the data delivery from the *Agent*.
+          Details on the configurable parameters can be found in the :ref:`read_access` of the :ref:`micro_xrce_dds_client_label` page.
+          A ``NULL`` value is accepted, in which case only one topic is received.
+
+------
+
+.. code-block:: c
+
+    uint16_t uxr_buffer_cancel_data(uxrSession* session, uxrStreamId stream_id, uxrObjectId datareader_id);
+
+This function requests a *datareader* previously created on the *Agent* to cancel the data received from the middleware.
+It does so by resetting the ``delivery_control`` parameters and the input stream ID used to receive the data.
+The returned value is an identifier of the request.
+
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID used to send messages to the *Agent*.
+:datareader_id: The ID of the *datareader* that reads the topics from the middleware.
+
+.. TODO: check.
 
 ------
 
 .. _write_access_api:
 
 Write access profile
-````````````````````
-These functions are enabled when ``PROFILE_WRITE_ACCESS`` is activated as a CMake argument.
+^^^^^^^^^^^^^^^^^^^^
+
+The *Write Access* is used by the *Client* to handle the write operation on the *Agent*.
 The declaration of these functions can be found in ``uxr/client/profile/session/write_access.h``.
 
 ------
@@ -794,21 +928,24 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
 .. code-block:: c
 
     bool uxr_prepare_output_stream(uxrSession* session, uxrStreamId stream_id, uxrObjectId datawriter_id,
-                                   struct ucdrBuffer* ub_topic, uint32_t topic_size);
+                                   ucdrBuffer* ub, uint32_t topic_size);
 
-Requests a writing into a specific output stream.
-This function will initialize an ``ucdrBuffer`` struct where a topic of ``topic_size`` size must be serialized.
-Whether the necessary gap for writing a ``topic_size`` bytes into the stream, the returned value is ``true``, otherwise ``false``.
-The topic will be sent in the next ``run_session`` function.
+This function requests a *datawriter* previously created on the *Agent* to perform a write operation
+into a specific output stream.
+It initializes a ``ucdrBuffer`` struct where a topic of ``topic_size`` size must be serialized.
+If there is sufficient space for writing ``topic_size`` bytes into the stream, the returned value is ``true``, otherwise it is ``false``.
+The topic is sent in the following ``run_session`` function.
 
-NOTE: All ``topic_size`` bytes requested will be sent to the *Agent* after a ``run_session`` call, no matter if the ``ucdrBuffer`` has been used or not.
+.. note::
+    All ``topic_size`` bytes requested are sent to the *Agent* after a ``run_session`` call,
+    no matter if the ``ucdrBuffer`` has been used or not.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
-:datawriter_id: The `datawriter` ID that will write the topic to the DDS World.
-:ub_topic: An ``ucdrBuffer`` struct used to serialize the topic.
-           This struct points to a requested gap into the stream.
-:topic_size: The bytes that will be reserved in the stream.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
+:datawriter_id: The ID of the *datawriter* that writes topics into the middleware.
+:ub: The ``ucdrBuffer`` struct used to serialize the topic.
+           This struct points to the requested memory slot in the stream.
+:topic_size: The slot, in bytes, that is reserved in the stream.
 
 ------
 
@@ -816,12 +953,12 @@ NOTE: All ``topic_size`` bytes requested will be sent to the *Agent* after a ``r
 
     bool uxr_buffer_request(uxrSession* session, uxrStreamId stream_id, uxrObjectId requester_id, uint8_t* buffer, size_t len);
 
-Buffers a request into a specific output stream.
-The request will be sent in the next ``run_session`` function call.
+This function buffers a request into a specific output stream.
+The request is sent in the following ``run_session`` function call.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
-:requester_id: The `requester`'s ID that will write the request to the DDS World.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
+:requester_id: The ID of the *requester* that forwards the request to the middleware.
 :buffer: The raw buffer that contains the serialized request.
 :len: The size of the serialized request.
 
@@ -831,12 +968,12 @@ The request will be sent in the next ``run_session`` function call.
 
     bool uxr_buffer_reply(uxrSession* session, uxrStreamId stream_id, uxrObjectId replier_id, uint8_t* buffer, size_t len);
 
-Buffers a reply into a specific output stream.
-The request will be sent in the next ``run_session`` function call.
+This function buffers a reply into a specific output stream.
+The request is sent in the following ``run_session`` function call.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
-:replier_id: The `replier`'s ID that will write the reply to the DDS World.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
+:replier_id: The ID of the *replier* that writes the reply to the middleware.
 :buffer: The raw buffer that contains the serialized reply.
 :len: The size of the serialized reply.
 
@@ -847,20 +984,45 @@ The request will be sent in the next ``run_session`` function call.
     bool uxr_prepare_output_stream_fragmented(uxrSession* session, uxrStreamId stream_id, uxrObjectId datawriter_id,
                                               struct ucdrBuffer* ub, size_t topic_size, uxrOnBuffersFull flush_callback);
 
-Requests to allocate an output stream of ``topic_size`` bytes for a write operation.
-This function will initialize an ``ucdrBuffer`` struct where a topic of ``topic_size`` size will be serialized.
+This function requests a *datawriter* previously created on the *Agent* to allocate an output stream of ``topic_size`` bytes
+for a write operation.
+This function initializes an ``ucdrBuffer`` struct where a topic of ``topic_size`` size is serialized.
 If there is sufficient space for writing ``topic_size`` bytes into the reliable stream, the returned value is ``true``, otherwise it is ``false``.
-The topic will be sent in the following ``run_session`` function. If during the serialization process the buffer gets overfilled, the ``flush_callback`` function will be called and the user will be in charge of running a session for flushing the stream.
+The topic is sent in the following ``run_session`` function. If, during the serialization process, the buffer gets overfilled, the
+``flush_callback`` function is called and the user has to run a session for flushing the stream.
 
-NOTE: This approach is not valid with best-effort streams.
+.. note::
+    This approach is not valid for best-effort streams.
 
-:session: Session structure previously initialized.
-:stream_id: The output stream ID where the message will be written.
-:datawriter_id: The `datawriter` ID that will write the topic to the DDS World.
-:ub: An ``ucdrBuffer`` struct used to serialize the topic.
-           This struct points to a requested memory slot in the stream.
-:topic_size: The slot, in bytes, that will be reserved in the stream.
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
+:datawriter_id: The ID of the *datawriter* that writes the topic to the middleware.
+:ub: The ``ucdrBuffer`` struct used to serialize the topic.
+           This struct points to the requested memory slot in the stream.
+:topic_size: The slot, in bytes, that is reserved in the stream.
 :flush_callback: Callback for flushing the output buffers.
+
+The function signature for the ``flush_callback`` callback is:
+
+.. code-block:: c
+
+    typedef bool (*uxrOnBuffersFull) (struct uxrSession* session);
+
+.. TODO: explain this signature.
+
+------
+
+.. code-block:: c
+
+    bool on_full_output_buffer_fragmented(ucdrBuffer* ub, void* args)
+
+This function .. callback ..
+
+.. TODO: Write here.
+
+:ub: The ``ucdrBuffer`` struct used to serialize the topic.
+           This struct points to the requested memory slot in the stream.
+:args:
 
 ------
 
@@ -870,55 +1032,60 @@ Discovery profile
 ^^^^^^^^^^^^^^^^^
 
 The discovery profile allows discovering *Agents* in the network by UDP.
-The reachable *Agents* will respond to the discovery call sending information about them, as their IP and port.
-There are two modes: multicast and unicast.
-The discovery phase can be performed before the `uxr_create_session` call to determine the *Agent* to connect with.
+The reachable *Agents* respond to the discovery call by sending information about themselves, as their IP and port.
+There are two modes: unicast and multicast.
+The discovery phase precedes the call to the ``uxr_create_session`` function, as it serves to determine the
+*Agent* to connect with.
 These functions are enabled when ``PROFILE_DISCOVERY`` is activated as a CMake argument.
 The declaration of these functions can be found in ``uxr/client/profile/discovery/discovery.h``.
 
-*This feature is only available on Linux.*
+.. note::
+    This feature is only available on Linux.
 
 ------
 
 .. code-block:: c
 
-    bool uxr_discovery_agents_multicast(uint32_t attempts, int period,
-                                        uxrOnAgentFound on_agent_func, void* args, uxrAgentAddress* chosen);
+    bool uxr_discovery_agents_default(uint32_t attempts, int period, uxrOnAgentFound on_agent_func, void* args);
 
-Searches into the network using multicast IP "239.255.0.2" and port 7400 (default used by the *Agent*) to discover *Agents*.
+This function looks for *Agents* in the network using UDP/IP multicast with address "239.255.0.2" and port 7400
+(which is the default used by the *Agent*).
 
-:attempts: The number of attempts to send the discovery message to the network.
-:period: How will often be sent the discovery message to the network.
-:on_agent_func: The callback function that will be called when an *Agent* was discovered.
-                The callback returns a boolean value.
-                A `true` means that the discovery routine will be finished.
-                The current *Agent* will be selected as *chosen*.
-                A `false` implies that the discovery routine must continue searching *Agents*.
-:args: User arguments passed to the callback function.
-:chosen: If the callback function was returned `true`, this value will contain the *Agent* value of the callback.
-
-------
-
-.. code-block:: c
-
-    bool uxr_discovery_agents_unicast(uint32_t attempts, int period,
-                                      uxrOnAgentFound on_agent_func, void* args, uxrAgentAddress* chosen,
-                                      const uxrAgentAddress* agent_list, size_t agent_list_size);
-
-Searches into the network using a list of unicast directions to discover *Agents*.
-
-:attempts: The number of attempts to send the discovery message to the network.
-:period: How will often be sent the discovery message to the network.
-:on_agent_func: The callback function that will be called when an *Agent* is discovered.
-                The callback returns a boolean value.
-                A ``true`` means that the discovery routine will be finished.
-                The current *Agent* will be selected as *chosen*.
+:attempts: The times a discovery message is sent across the network.
+:period: The wait time between two successive discovery calls.
+:on_agent_func: The callback function that is called when an *Agent* is discovered.
+                It returns a boolean value. A ``true`` means that the discovery routine has finished.
                 A ``false`` implies that the discovery routine must continue searching *Agents*.
 :args: User arguments passed to the callback function.
-:chosen: If the callback function was returned ``true``, this value will contain the *Agent* value of the callback.
-:agent_list: The list of addresses where discover *Agent*.
-             By default, the *Agents* will be listened at **port 7400** the discovery messages.
+
+The function signature for the ``on_agent_func`` callback is:
+
+.. code-block:: c
+
+    ttypedef bool (*uxrOnAgentFound) (const TransportLocator* locator, void* args);
+
+.. TODO: explain this signature.
+
+------
+
+.. code-block:: c
+
+    bool uxr_discovery_agents(uint32_t attempts, int period, uxrOnAgentFound on_agent_func, void* args,
+                              const TransportLocator* agent_list, size_t agent_list_size);
+
+This function looks for *Agents* in the network using UDP/IP unicast,
+using a list of unicast directions with the addresses and ports set by the user.
+
+:attempts: The times a discovery message is sent across the network.
+:period: The wait time between two successive discovery calls.
+:on_agent_func: The callback function that is called when an *Agent* is discovered.
+                It returns a boolean value. A ``true`` means that the discovery routine has finished.
+                A ``false`` implies that the discovery routine must continue searching *Agents*.
+:args: User arguments passed to the callback function.
+:agent_list: The list of addresses used for discovering *Agents*.
 :agent_list_size: The size of the ``agent_list``.
+
+The function signature for the ``on_time_func`` callback is the same as above.
 
 ------
 
@@ -928,7 +1095,7 @@ Topic serialization
 ^^^^^^^^^^^^^^^^^^^
 
 Functions to serialize and deserialize topics.
-These functions are generated automatically by *eProsima Micro XRCE-DDS Gen* utility over an IDL file with a topic `TOPICTYPE`.
+These functions are generated automatically by the *eProsima Micro XRCE-DDS Gen* utility fed with an IDL file with a topic ``TOPICTYPE``.
 The declaration of these functions can be found in the generated file ``TOPICTYPE.h``.
 
 ------
@@ -937,10 +1104,10 @@ The declaration of these functions can be found in the generated file ``TOPICTYP
 
     bool TOPICTYPE_serialize_topic(struct ucdrBuffer* writer, const TOPICTYPE* topic);
 
-Serializes a topic into an ``ucdrBuffer``.
+This function serializes a topic into an ``ucdrBuffer``.
 The returned value indicates if the serialization was successful.
 
-:writer: An ``ucdrBuffer`` representing the buffer for the serialization.
+:writer: The ``ucdrBuffer`` representing the buffer for the serialization.
 :topic: Struct to serialize.
 
 ------
@@ -949,11 +1116,11 @@ The returned value indicates if the serialization was successful.
 
     bool TOPICTYPE_deserialize_topic(struct ucdrBuffer* reader, TOPICTYPE* topic);
 
-Deserializes a topic from an ucdrBuffer.
-The returned value indicates if the serialization was successful.
+This function deserializes a topic from an ``ucdrBuffer``.
+The returned value indicates if the deserialization was successful.
 
-:reader: An ucdrBuffer representing the buffer for the deserialization.
-:topic: Struct where deserialize.
+:reader: An ``ucdrBuffer`` representing the buffer for the deserialization.
+:topic: Struct to deserialize.
 
 ------
 
@@ -961,7 +1128,7 @@ The returned value indicates if the serialization was successful.
 
     uint32_t TOPICTYPE_size_of_topic(const TOPICTYPE* topic, uint32_t size);
 
-Counts the number of bytes that the topic will need in an `ucdrBuffer`.
+This function counts the number of bytes that the topic needs in an `ucdrBuffer`.
 
 :topic: Struct to count the size.
 :size: Number of bytes already written into the `ucdrBuffer`.
@@ -983,12 +1150,12 @@ The declaration of these functions can be found in ``uxr/client/core/session/str
 
     uxrStreamId uxr_stream_id(uint8_t index, uxrStreamType type, uxrStreamDirection direction);
 
-Creates a stream identifier.
-This function does not create a new stream, only creates its identifier to be used in the *Client* API.
+This function creates a stream identifier.
+This function does not create a new stream, it only creates its identifier to be used in the *Client* API.
 
-:index: Identifier of the stream, its value corresponding to the creation order of the stream, different for each `type`.
+:index: Identifier of the stream. Its value corresponds to the creation order of the stream, different for each ``type``.
 :type: The type of the stream, it can be ``UXR_BEST_EFFORT_STREAM`` or ``UXR_RELIABLE_STREAM``.
-:direction: Represents the direction of the stream. It can be ``UXR_INPUT_STREAM`` or ``UXR_OUTPUT_STREAM``.
+:direction: Represents the direction (input or output) of the stream. It can be ``UXR_INPUT_STREAM`` or ``UXR_OUTPUT_STREAM``.
 
 ------
 
@@ -996,15 +1163,12 @@ This function does not create a new stream, only creates its identifier to be us
 
     uxrStreamId uxr_stream_id_from_raw(uint8_t stream_id_raw, uxrStreamDirection direction);
 
-Creates a stream identifier.
-This function does not create a new stream, only creates its identifier to be used in the *Client* API.
+This function creates a stream identifier.
+This function does not create a new stream, it only creates its identifier to be used in the *Client* API.
 
-:stream_id_raw: Identifier of the stream.
-      It goes from 0 to 255.
-      0 is for internal library use.
-      1 to 127, for best effort.
-      128 to 255, for reliable.
-:direction: Represents the direction of the stream. It can be ``UXR_INPUT_STREAM`` or ``MT_OUTPUT_STREAM``.
+:stream_id_raw: Identifier of the stream. It goes from **0** to **255**. **0** is for internal library use. **1** to **127** are for best effort.
+                **128** to **255** are for reliable.
+:direction: Represents the direction (input or output) of the stream. It can be ``UXR_INPUT_STREAM`` or ``MT_OUTPUT_STREAM``.
 
 ------
 
@@ -1012,12 +1176,14 @@ This function does not create a new stream, only creates its identifier to be us
 
     uxrObjectId uxr_object_id(uint16_t id, uint8_t type);
 
-Creates an identifier for reference an entity.
+This function creates an identifier to reference an entity.
 
-:id: Identifier of the object, different for each `type`
-     (can be several IDs with the same ID if they have different types).
+:id: Identifier of the object, different for each ``type``. There can be several objects with the same ID,
+     provided they have different types.
 :type: The type of the entity.
-       It can be: ``UXR_PARTICIPANT_ID``, ``UXR_TOPIC_ID``, ``UXR_PUBLISHER_ID``, ``UXR_SUBSCRIBER_ID``, ``UXR_DATAWRITER_ID`` or ``UXR_DATAREADER_ID``.
+       It can be: ``UXR_PARTICIPANT_ID``, ``UXR_TOPIC_ID``, ``UXR_PUBLISHER_ID``,
+       ``UXR_SUBSCRIBER_ID``, ``UXR_DATAWRITER_ID``, ``UXR_DATAREADER_ID``,
+       ``UXR_REQUESTER_ID``, or ``UXR_REPLIER_ID``.
 
 ------
 
@@ -1049,7 +1215,7 @@ Creates an identifier for reference an entity.
 Transport
 ^^^^^^^^^
 
-These functions are platform dependent.
+These functions are platform-dependent.
 The declaration of these functions can be found in the ``uxr/client/profile/transport/`` folder.
 The common init transport functions follow the nomenclature below.
 
@@ -1057,28 +1223,34 @@ The common init transport functions follow the nomenclature below.
 
 .. code-block:: c
 
-    bool uxr_init_udp_transport(uxrUDPTransport* transport, const char* ip, uint16_t port);
+    bool uxr_init_udp_transport(uxrUDPTransport* transport, uxrIpProtocol ip_protocol, const char* ip, const char* port);
 
-Initializes a UDP connection.
+This function initializes a UDP connection.
 
 :transport: The uninitialized structure used for managing the transport.
             This structure must be accessible during the connection.
+:ip_protocol: IPv4 or IPv6.
 :ip: *Agent* IP.
 :port: *Agent* port.
+
+.. TODO: check ip_protocol.
 
 ------
 
 .. code-block:: c
 
-    bool uxr_init_tcp_transport(uxrTCPTransport* transport, const char* ip, uint16_t port);
+    bool uxr_init_tcp_transport(uxrTCPTransport* transport, uxrIpProtocol ip_protocol, const char* ip, const char* port);
 
-Initializes a TCP connection.
-If the TCP is used, the behaviour of best-effort streams will be similar to reliable streams in UDP.
+This function initializes a TCP connection.
+In the case of TCP, the behaviour of best-effort streams is similar to that of reliable streams in UDP.
 
 :transport: The uninitialized structure used for managing the transport.
             This structure must be accessible during the connection.
+:ip_protocol: IPv4 or IPv6.
 :ip: *Agent* IP.
 :port: *Agent* port.
+
+.. TODO: check ip_protocol.
 
 ------
 
@@ -1086,13 +1258,13 @@ If the TCP is used, the behaviour of best-effort streams will be similar to reli
 
     bool uxr_init_serial_transport(uxrSerialTransport* transport, const int fd, uint8_t remote_addr, uint8_t local_addr);
 
-Initializes a Serial connection using a file descriptor
+This function initializes a Serial connection using a file descriptor.
 
 :transport: The uninitialized structure used for managing the transport.
             This structure must be accessible during the connection.
-:fd: File descriptor of the serial connection. Usually, the `fd` comes from the ``open`` OS function.
-:remote_addr: Identifier of the *Agent* in the serial connection.
-              By default, the *Agent* identifier in a serial is 0.
+:fd: File descriptor of the serial connection. Usually, the ``fd`` comes from the ``open`` OS function.
+:remote_addr: Identifier of the *Agent* in the connection.
+              By default, the *Agent* identifier in a seria connection is **0**.
 :local_addr: Identifier of the *Client* in the serial connection.
 
 ------
@@ -1101,11 +1273,11 @@ Initializes a Serial connection using a file descriptor
 
     bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);
 
-Initializes a Custom connection using user defined arguments
+This function initializes a Custom connection using user-defined arguments.
 
 :transport: The uninitialized structure used for managing the transport.
             This structure must be accessible during the connection.
-            ``args`` will be accesible as ``transport->args``.
+            ``args`` is accesible as ``transport->args``.
 
 ------
 
@@ -1113,9 +1285,9 @@ Initializes a Custom connection using user defined arguments
 
     bool uxr_close_PROTOCOL_transport(PROTOCOLTransport* transport);
 
-Closes a transport previously opened. `PROTOCOL` can be ``udp``, ``tcp``, ``serial`` or ``custom``.
+This function closes a transport previously opened. ``PROTOCOL`` can be ``udp``, ``tcp``, ``serial`` or ``custom``.
 
-:transport: The transport to close.
+:transport: The structure used for managing the transport that must be closed.
 
 ------
 
@@ -1124,9 +1296,9 @@ Closes a transport previously opened. `PROTOCOL` can be ``udp``, ``tcp``, ``seri
 .. code-block:: c
 
     void uxr_set_custom_transport_callbacks(uxrCustomTransport* transport, bool framing, open_custom_func open,
-                                            close_custom_func close, write_custom_func write, read_custom_func read);
+                               The transport to close.             close_custom_func close, write_custom_func write, read_custom_func read);
 
-Assigns the callback for custom transport.
+This function assigns the callback for custom transport.
 
 :transport: The uninitialized structure used for managing the transport.
             This structure must be accessible during the connection.
@@ -1140,24 +1312,28 @@ The function signatures for the above callbacks are:
 
 .. code-block:: c
 
-    typedef bool (*open_custom_func)(struct uxrCustomTransport*);
+    typedef bool (*open_custom_func) (struct uxrCustomTransport* transport);
 
-Where ``struct uxrCustomTransport*`` will have the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``
-
-.. code-block:: c
-
-    typedef bool (*close_custom_func)(struct uxrCustomTransport*);
-
-Where ``struct uxrCustomTransport*`` will have the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``
+Where ``transport`` has the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``
 
 .. code-block:: c
 
-    typedef size_t (*write_custom_func)(struct uxrCustomTransport*, const uint8_t*, size_t, uint8_t*);
+    typedef bool (*close_custom_func) (struct uxrCustomTransport* transport);
 
-Where ``struct uxrCustomTransport*`` refers to the opened transport structure,  the first ``const uint8_t*`` is the buffer to be sent, ``size_t`` is the length of the buffer, and the last ``uint8_t*`` is an error code that should be set when the write process has any problem. This function should return the number of bytes sent successfully.
+Where ``transport`` has the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``
 
 .. code-block:: c
 
-    typedef size_t (*read_custom_func)(struct uxrCustomTransport*, uint8_t*, size_t, int, uint8_t*);
+    typedef size_t (*write_custom_func) (struct uxrCustomTransport* transport, const uint8_t* buffer, size_t length, uint8_t* error_code);
 
-Where ``struct uxrCustomTransport*`` refers to the opened transport structure,  the first ``uint8_t*`` is the buffer to be write with the received bytes, following ``size_t`` is the length of the buffer, the following ``int`` is the maximum time in milliseconds that the read operating should take and the last ``uint8_t*`` is an error code that should be set when the read process has any problem. This function should return the number of bytes received successfully.
+Where ``transport`` refers to the opened transport structure, ``buffer`` is the buffer to be sent, ``length`` is the length of the buffer,
+and ``error_code`` is an error code that should be set in case the write process experiences some error.
+This function should return the number of successfully sent bytes.
+
+.. code-block:: c
+
+    typedef size_t (*read_custom_func) (struct uxrCustomTransport* transport, uint8_t* buffer, size_t length, int timeout, uint8_t* error_code);
+
+Where ``transport`` refers to the opened transport structure, ``buffer`` is the buffer to be written with the received bytes, ``length`` is the length of the buffer, ``timeout`` is the maximum time in milliseconds that the read operation should take, and ``error_code`` is an error
+code that should be set in case the read process experiences some error.
+This function should return the number of successfully received bytes.

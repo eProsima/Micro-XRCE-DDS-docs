@@ -21,6 +21,7 @@ The section is organized as follows:
 - :ref:`streams`
 - :ref:`profiles`
 - :ref:`configurations`
+- :ref:`read_access`
 - :ref:`creation_mode_table`
 
 *eProsima Micro XRCE-DDS* provides the user with a C API to create *eProsima Micro XRCE-DDS Clients* applications.
@@ -115,6 +116,8 @@ discovery functionality.
         - :code:`<bool>`
         - :code:`ON`
 
+.. TODO: add framing profile to the above table
+
 Transport profiles
 ^^^^^^^^^^^^^^^^^^
 
@@ -157,6 +160,11 @@ Find out more in the :ref:`dedicated section <discovery_api>` of the API.
 
 .. note::
     This feature is only available on Linux.
+
+Framing profile
+^^^^^^^^^^^^^^^
+
+.. TODO: add info/description
 
 .. _configurations:
 
@@ -240,6 +248,22 @@ By means of these flags, the user can change the default value of all the parame
           corresponds to the creation of a buffer this size.
         - :code:`<number>`
         - :code:`512`
+
+.. _read_access:
+
+Read Access Delivery Control
+----------------------------
+
+The Read Access Delivery Control handles the read operation from a *datareader* previously created
+on the *Agent* to fetch data from the middleware.
+It comes with an optional ``control`` argument, that allows the *Client* setting the following parameters:
+
+* ``max_bytes_per_second``: Maximum rate at which data messages may be returned, measured in bytes per secpond.
+* ``max_elapsed_time``: Maximum amount of time that can be spent by the Agent in delivering the topic, measured in seconds.
+* ``max_samples``: Maximum number of topics that the Agent can send to the Client.
+* ``min_pace_period``: Minimum elapsed time between two topics deliveries, measured in milliseconds,.
+
+For more information, consult the :ref:`read_access_api` of the :ref:`client_api_label`.
 
 .. _creation_mode_table:
 
