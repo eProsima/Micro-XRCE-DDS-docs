@@ -3,7 +3,7 @@
 Version 2.0.0
 =============
 
-**Agent 2.0.0 | Client 2.0.0**
+**Agent 2.0.0 | Client 2.0.0 | Micro-CDR 1.2.1**
 
 This version includes the following changes in both Agent and Client:
 
@@ -37,6 +37,11 @@ This version includes the following changes in both Agent and Client:
         * `Bugfix #167 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/167>`_ reliable fragment slots management.
         * `Bugfix #175 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/175>`_ reliable fragment size management.
         * `Bugfix #176 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/176>`_ discovery message deserialization.
+* Micro-CDR 1.2.1:
+    * Fix / Modify
+        * `Bugfix #53 <https://github.com/eProsima/Micro-CDR/pull/53>`_ fix in ucdr_reset_buffer function
+        * `Bugfix #54 <https://github.com/eProsima/Micro-CDR/pull/54>`_ fix alignment zero-length sequence bug
+        * `Bugfix #55 <https://github.com/eProsima/Micro-CDR/pull/55>`_ fix asymmetric fragmentation buffers
 
 Version 1.3.0
 =============
