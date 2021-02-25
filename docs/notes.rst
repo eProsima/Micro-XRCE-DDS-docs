@@ -1,5 +1,43 @@
 .. _notes_label:
 
+Version 2.0.0
+=============
+
+**Agent 2.0.0 | Client 2.0.0**
+
+This version includes the following changes in both Agent and Client:
+
+* Agent 2.0.0:
+    * Add
+        * `Micro XRCE-DDS Agent Snap package <https://snapcraft.io/micro-xrce-dds-agent>`_
+        * Middleware callbacks API
+        * Client to Agent ping feature without a session
+        * Custom transports API
+    * Fix / Modify
+        * Simplified CLI and removed dependency with CLI11 library.
+        * Optional disable of executable build. 
+        * CLI help console output.
+        * Removed platform handling in user API.
+* Client 2.0.0:
+    * Add
+        * POSIX transport with based on timeout instad of polling.
+        * Client to Agent ping feature without a session
+        * Continuos fragment mode TODO: update API and documentation
+        * :code:`uxr_run_session_until_data` functionality
+        * :code:`uxr_create_session_retries` functionality
+        * FreeRTOS+TCP transport support
+        * Zephyr RTOS time functions support
+        * Custom transports API
+        * DDS-XRCE best effort examples
+    * Fix / Modify
+        * `Update <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/192>`_ session creating timing to linear approach
+        * Removed :code:`client.config` file in favor of CMake arguments.
+        * Removed platform handling in user API.
+        * `Bugfix <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/156>`_ request/reply lenght management.
+        * `Bugfix <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/167>`_ reliable fragment slots management.
+        * `Bugfix <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/175>`_ reliable fragment size management.
+        * `Bugfix <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/176>`_ discovery message deserialization.
+
 Version 1.3.0
 =============
 
