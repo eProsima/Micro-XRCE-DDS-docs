@@ -437,6 +437,7 @@ Write function
 
     This function should write data to the custom transport. It must use
     the :code:`destination_endpoint` members to set the data destination. It returns the number of Bytes written.
+    It should set :code:`transport_rc` indicating the result of the operation.
 
     * **Stream-oriented mode:** The function can send up to :code:`length` Bytes from :code:`buffer`.
 
@@ -457,6 +458,7 @@ Read function
 
     This function should read data to the custom transport. It must fill :code:`source_endpoint` members with data source.
     It returns the number of Bytes read.
+    It should set :code:`transport_rc` indicating the result of the operation.
 
     * **Stream-oriented mode:** The function should retrieve up to :code:`length` Bytes from transport
       and write them into :code:`buffer` in :code:`timeout` milliseconds.
