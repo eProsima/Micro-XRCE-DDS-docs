@@ -1302,7 +1302,7 @@ This function closes a transport previously opened. ``PROTOCOL`` can be ``udp``,
 .. code-block:: c
 
     void uxr_set_custom_transport_callbacks(uxrCustomTransport* transport, bool framing, open_custom_func open,
-                               The transport to close.             close_custom_func close, write_custom_func write, read_custom_func read);
+                               close_custom_func close, write_custom_func write, read_custom_func read);
 
 This function assigns the callback for custom transport.
 
@@ -1320,26 +1320,33 @@ The function signatures for the above callbacks are:
 
     typedef bool (*open_custom_func) (struct uxrCustomTransport* transport);
 
-Where ``transport`` has the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``
+:transport: Custom transport structure. Has the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``.
 
 .. code-block:: c
 
     typedef bool (*close_custom_func) (struct uxrCustomTransport* transport);
 
-Where ``transport`` has the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``
+:transport: Custom transport structure. Has the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``.
 
 .. code-block:: c
 
     typedef size_t (*write_custom_func) (struct uxrCustomTransport* transport, const uint8_t* buffer, size_t length, uint8_t* error_code);
 
-Where ``transport`` refers to the opened transport structure, ``buffer`` is the buffer to be sent, ``length`` is the length of the buffer,
-and ``error_code`` is an error code that should be set in case the write process experiences some error.
+:transport: Custom transport structure. Has the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``.
+:buffer: Buffer to be sent.
+:length: Length of buffer.
+:error_code: Error code that should be set in case the write process experiences some error.
+
 This function should return the number of successfully sent bytes.
 
 .. code-block:: c
 
     typedef size_t (*read_custom_func) (struct uxrCustomTransport* transport, uint8_t* buffer, size_t length, int timeout, uint8_t* error_code);
 
-Where ``transport`` refers to the opened transport structure, ``buffer`` is the buffer to be written with the received bytes, ``length`` is the length of the buffer, ``timeout`` is the maximum time in milliseconds that the read operation should take, and ``error_code`` is an error
-code that should be set in case the read process experiences some error.
+:transport: Custom transport structure. Has the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``.
+:buffer: Buffer to write.
+:length: Maximum length of buffer.
+:timeout: Maximum timeout of the read operation.
+:error_code: Error code that should be set in case the write process experiences some error.
+
 This function should return the number of successfully received bytes.
