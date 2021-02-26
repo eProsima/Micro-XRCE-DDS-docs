@@ -166,7 +166,7 @@ The function signature for the ``on_request_func`` callback is:
 :request_id: Request id of the``request_data`` transaction.
 :sample_id: Identifier of the request.
 :ub: Serialized request data.
-:length: Lenght of the serialized data.
+:length: Length of the serialized data.
 :args: User pointer data.
 
 ------
