@@ -107,7 +107,7 @@ The function signature for the ``on_topic_func`` callback is:
 :request_id: Request id of the``request_data`` transaction.
 :stream_id: XRCE stream used.
 :ub: Serialized topic data.
-:length: Lenght of the serialized data.
+:length: Length of the serialized data.
 :args: User pointer data.
 
 ------
