@@ -194,7 +194,7 @@ Sets the reply callback, which is called when the *Agent* sends a ``READ_DATA`` 
 :request_id: Request id of the``request_data`` transaction.
 :reply_id: Identifier of the reply.
 :ub: Serialized request data.
-:length: Lenght of the serialized data.
+:length: Length of the serialized data.
 :args: User pointer data.
 
 ------
