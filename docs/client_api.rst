@@ -73,7 +73,11 @@ The function signature for the ``on_status_func`` callback is:
     typedef void (*uxrOnStatusFunc) (struct uxrSession* session, uxrObjectId object_id, uint16_t request_id,
                                      uint8_t status, void* args);
 
-.. TODO: explain this signature.
+:session: Session structure related to the status.
+:object_id: The identifier of the entity related to the status.
+:request_id: Status request id.
+:status: Status value.
+:args: User pointer data.
 
 ------
 
@@ -98,7 +102,13 @@ The function signature for the ``on_topic_func`` callback is:
     typedef void (*uxrOnTopicFunc) (struct uxrSession* session, uxrObjectId object_id, uint16_t request_id, uxrStreamId stream_id,
                                     struct ucdrBuffer* ub, uint16_t length, void* args);
 
-.. TODO: explain this signature.
+:session: Session structure related to the topic.
+:object_id: The identifier of the entity related to the topic.
+:request_id: Request id of the``request_data`` transaction.
+:stream_id: Id of the stream used for the communication.
+:ub: Serialized topic data.
+:length: Length of the serialized data.
+:args: User pointer data.
 
 ------
 
@@ -108,9 +118,7 @@ The function signature for the ``on_topic_func`` callback is:
 
     void uxr_set_time_callback(uxrSession* session, uxrOnTimeFunc on_time_func, void* args);
 
-Assigns the time callback, which ..?
-
-.. TODO: fill this.
+Assigns the time callback, to let the user perform custom time calculations based on client and agent timestamps.
 
 :session: Session structure previously initialized.
 :on_time_func: Function callback that is called .. ?
@@ -124,7 +132,12 @@ The function signature for the ``on_time_func`` callback is:
     typedef void (*uxrOnTimeFunc) (struct uxrSession* session, int64_t current_timestamp, int64_t transmit_timestamp,
                                    int64_t received_timestamp, int64_t originate_timestamp, void* args);
 
-.. TODO: explain this signature.
+:session: Session structure related to the topic.
+:current_timestamp: Client's timestamp of the response packet reception.
+:transmit_timestamp: Client's timestamp of the request packet transmission.
+:received_timestamp: Agent's timestamp of the request packet reception.
+:originate_timestamp: Agent's timestamp of the response packet transmission.
+:args: User pointer data.
 
 ------
 
@@ -148,7 +161,13 @@ The function signature for the ``on_request_func`` callback is:
     typedef void (*uxrOnRequestFunc) (struct uxrSession* session, uxrObjectId object_id, uint16_t request_id,
                                       SampleIdentity* sample_id, struct ucdrBuffer* ub, uint16_t length, void* args);
 
-.. TODO: explain this signature.
+:session: Session structure related to the topic.
+:object_id: The identifier of the entity related to the request.
+:request_id: Request id of the``request_data`` transaction.
+:sample_id: Identifier of the request.
+:ub: Serialized request data.
+:length: Length of the serialized data.
+:args: User pointer data.
 
 ------
 
@@ -170,7 +189,13 @@ Sets the reply callback, which is called when the *Agent* sends a ``READ_DATA`` 
     typedef void (*uxrOnReplyFunc) (struct uxrSession* session, uxrObjectId object_id, uint16_t request_id, uint16_t reply_id,
                                     struct ucdrBuffer* ub, uint16_t length, void* args);
 
-.. TODO: explain this signature.
+:session: Session structure related to the topic.
+:object_id: The identifier of the entity related to the request.
+:request_id: Request id of the``request_data`` transaction.
+:reply_id: Identifier of the reply.
+:ub: Serialized request data.
+:length: Length of the serialized data.
+:args: User pointer data.
 
 ------
 
@@ -903,15 +928,13 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
 
     uint16_t uxr_buffer_cancel_data(uxrSession* session, uxrStreamId stream_id, uxrObjectId datareader_id);
 
-This function requests a *datareader* previously created on the *Agent* to cancel the data received from the middleware.
+This function requests a *datareader*, *requester* or *replier* previously created on the *Agent* to cancel the data received from the middleware.
 It does so by resetting the ``delivery_control`` parameters and the input stream ID used to receive the data.
 The returned value is an identifier of the request.
 
 :session: Session structure previously initialized and created.
 :stream_id: The output stream ID used to send messages to the *Agent*.
 :datareader_id: The ID of the *datareader* that reads the topics from the middleware.
-
-.. TODO: check.
 
 ------
 
@@ -1008,21 +1031,7 @@ The function signature for the ``flush_callback`` callback is:
 
     typedef bool (*uxrOnBuffersFull) (struct uxrSession* session);
 
-.. TODO: explain this signature.
-
-------
-
-.. code-block:: c
-
-    bool on_full_output_buffer_fragmented(ucdrBuffer* ub, void* args)
-
-This function .. callback ..
-
-.. TODO: Write here.
-
-:ub: The ``ucdrBuffer`` struct used to serialize the topic.
-           This struct points to the requested memory slot in the stream.
-:args:
+:session: Session structure related to the buffer to be flushed.
 
 ------
 
@@ -1062,9 +1071,10 @@ The function signature for the ``on_agent_func`` callback is:
 
 .. code-block:: c
 
-    ttypedef bool (*uxrOnAgentFound) (const TransportLocator* locator, void* args);
+    typedef bool (*uxrOnAgentFound) (const TransportLocator* locator, void* args);
 
-.. TODO: explain this signature.
+:locator: Transport locator of a discovered agent.
+:args: User pointer data.
 
 ------
 
@@ -1233,8 +1243,6 @@ This function initializes a UDP connection.
 :ip: *Agent* IP.
 :port: *Agent* port.
 
-.. TODO: check ip_protocol.
-
 ------
 
 .. code-block:: c
@@ -1249,8 +1257,6 @@ In the case of TCP, the behaviour of best-effort streams is similar to that of r
 :ip_protocol: IPv4 or IPv6.
 :ip: *Agent* IP.
 :port: *Agent* port.
-
-.. TODO: check ip_protocol.
 
 ------
 
@@ -1296,7 +1302,7 @@ This function closes a transport previously opened. ``PROTOCOL`` can be ``udp``,
 .. code-block:: c
 
     void uxr_set_custom_transport_callbacks(uxrCustomTransport* transport, bool framing, open_custom_func open,
-                               The transport to close.             close_custom_func close, write_custom_func write, read_custom_func read);
+                               close_custom_func close, write_custom_func write, read_custom_func read);
 
 This function assigns the callback for custom transport.
 
@@ -1314,26 +1320,33 @@ The function signatures for the above callbacks are:
 
     typedef bool (*open_custom_func) (struct uxrCustomTransport* transport);
 
-Where ``transport`` has the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``
+:transport: Custom transport structure. Has the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``.
 
 .. code-block:: c
 
     typedef bool (*close_custom_func) (struct uxrCustomTransport* transport);
 
-Where ``transport`` has the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``
+:transport: Custom transport structure. Has the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``.
 
 .. code-block:: c
 
     typedef size_t (*write_custom_func) (struct uxrCustomTransport* transport, const uint8_t* buffer, size_t length, uint8_t* error_code);
 
-Where ``transport`` refers to the opened transport structure, ``buffer`` is the buffer to be sent, ``length`` is the length of the buffer,
-and ``error_code`` is an error code that should be set in case the write process experiences some error.
+:transport: Custom transport structure. Has the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``.
+:buffer: Buffer to be sent.
+:length: Length of buffer.
+:error_code: Error code that should be set in case the write process experiences some error.
+
 This function should return the number of successfully sent bytes.
 
 .. code-block:: c
 
     typedef size_t (*read_custom_func) (struct uxrCustomTransport* transport, uint8_t* buffer, size_t length, int timeout, uint8_t* error_code);
 
-Where ``transport`` refers to the opened transport structure, ``buffer`` is the buffer to be written with the received bytes, ``length`` is the length of the buffer, ``timeout`` is the maximum time in milliseconds that the read operation should take, and ``error_code`` is an error
-code that should be set in case the read process experiences some error.
+:transport: Custom transport structure. Has the ``args`` passed through ``bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);``.
+:buffer: Buffer to write.
+:length: Maximum length of buffer.
+:timeout: Maximum timeout of the read operation.
+:error_code: Error code that should be set in case the write process experiences some error.
+
 This function should return the number of successfully received bytes.
