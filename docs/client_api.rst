@@ -105,7 +105,7 @@ The function signature for the ``on_topic_func`` callback is:
 :session: Session structure related to the topic.
 :object_id: The identifier of the entity related to the topic.
 :request_id: Request id of the``request_data`` transaction.
-:stream_id: XRCE stream used.
+:stream_id: Id of the stream used for the communication.
 :ub: Serialized topic data.
 :length: Length of the serialized data.
 :args: User pointer data.
