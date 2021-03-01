@@ -104,7 +104,7 @@ Communication via pseudo terminal (only Linux)
 * The :code:`-v,--verbose <level[0-6]>` option sets log level from less to more verbose, in level 0 the logger is off.
   Then, from 1 to 6, the following logging levels are activated: *critical*, *error*, *warning*, *info*, *debug* and *trace*.
 * The option :code:`-m,--middleware <middleware-impl>` sets the middleware implementation to use.
-  There are three: RTPS (based on eProsima Fast RTPS), DDS (specified by the XRCE standard) and Centralized (topic are managed by the Agent similarly MQTT).
+  There are three: RTPS (based on eProsima Fast RTPS), DDS (specified by the XRCE standard and using Fast DDS) and Centralized (topic are managed by the Agent similarly MQTT).
 * The ``--p2p <port>`` option enables P2P communication. Centralized middleware is necessary for this option.
 
 .. _custom_transport_agent:
