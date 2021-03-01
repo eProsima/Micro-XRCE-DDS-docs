@@ -1219,7 +1219,7 @@ It returns ``true`` if a response was received from the *Agent*, ``false`` other
 This function provides the same functionality as the method described in :code:`uxr_ping_agent`, but allows to specify the number of ping attempts before returning a value.
 
 :comm: A pointer to a properly initialized XRCE-DDS communication structure, used to send the ping request.
-:timeout: The maximum time **per attempt** that the client will wait to receive the answer (*pong*) message, before returning.
+:timeout: The maximum time **per attempt** that the *Client* will wait to receive the answer (*pong*) message, before returning.
 :attempts: Maximum amount of times that the client will try to ping the agent and receive a response back.
 
 ------
