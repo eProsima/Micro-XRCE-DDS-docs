@@ -128,7 +128,7 @@ It returns ``true`` if the creation was successful, ``false`` otherwise.
 
     bool delete_client(uint32_t key, OpResult& op_result);
 
-Deletes a certain `ProxyClient` from the client proxy database, given its ID.
+This function deletes a given ``ProxyClient`` from the client proxy database, given its ID.
 
 Returns `true` if the operation was completed successfully, or `false` otherwise (for example, if the given ID was not registered to any `ProxyClient`).
 
