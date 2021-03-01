@@ -164,7 +164,7 @@ This function creates a DDS participant for a given *Client*, given a reference 
 
 This reference file must have been previously loaded to the *Agent*.
 
-The participant will act the entrypoint for the rest of DDS entities to be created.
+The participant will act as an entry point for the rest of the DDS entities to be created.
 
 Returns `true` if the creation was successful, or `false` otherwise.
 
