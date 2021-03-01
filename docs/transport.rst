@@ -423,7 +423,7 @@ Set member value
     Sets the specific value (numeric or string) for a certain member, which must previously exist in the CustomEndPoint.
 
     :member_name: The member whose value is going to be modified.
-    :value: The value to be set, of `KIND`: `uint8_t`, `uint16_t`, `uint32_t`, `uint64_t`, `uint128_t` or `std::string`.
+    :value: The value to be set, of `KIND`: ``uint8_t``, ``uint16_t``, ``uint32_t``, ``uint64_t``, ``uint128_t`` or ``std::string``.
 
 Get member
     .. code-block:: cpp
