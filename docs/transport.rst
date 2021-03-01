@@ -399,7 +399,7 @@ messages from multiple *Clients* so it must be able to differentiate between the
 Therefore, the :code:`eprosima::uxr::CustomEndPoint` should be provided with information about the origin of the message
 in the read callback, and with information about the destination of the message in the write callback.
 
-In general, members of a :code:`eprosima::uxr::CustomEndPoint` object can be unsigned integers and strings.
+In general, the members of a :code:`eprosima::uxr::CustomEndPoint` object can be unsigned integers and strings.
 
 `CustomEndPoint` defines three methods:
 
