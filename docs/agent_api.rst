@@ -237,7 +237,7 @@ This operation returns ``true`` if the entity is successfully created and linked
 
 This function creates a certain DDS entity attached to an existing ``ProxyClient``, given its client key.
 
-The description of the entity to be created is hosted in a certain references file and must be tagged with the same tag name, provided as the `ref` parameter to this method.
+The description of the entity to be created is hosted in a certain file where all the required references are defined, and must be tagged with the same tag name, provided as the ``ref`` parameter to this method.
 
 There are as many methods available as existing DDS entities, replacing the parameters *<entity>* and *<associated_entity>* as shown above in the previous method description (see :ref:`existing_entities_and_associated_entities`).
 
