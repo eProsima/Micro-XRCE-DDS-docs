@@ -145,7 +145,7 @@ This function creates a DDS participant for a given *Client*, given its self-con
 
 The participant will act as an entry point for the rest of the DDS entities to be created.
 
-Returns `true` if the creation was successful, or `false` otherwise.
+It returns ``true`` if the creation was successful, ``false`` otherwise.
 
 :client_key: The identifier of the `ProxyClient` to which the resulting participant will be attached to.
 :participant_id: The identifier of the participant to be created.
