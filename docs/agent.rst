@@ -116,7 +116,7 @@ Custom transport
 If none of the transports specified above is suitable for the target application, users can easily create an instance of a *Micro XRCE-DDS Agent*, together with a custom transport implementation.
 
 For this purpose, the ``eprosima::uxr::CustomAgent`` class was developed. It follows the policy of giving users function signatures to implement, which hide as much as possible the underneath implementation details of the *Agent*.
-Thus, this methods provide with common parameters used when implementing a receive/send message method, such as an octet pointer to a raw data buffer, buffer/message length, timeout, and so on.
+Thus, this methods provide common parameters used when implementing a receive/send message method, such as an octet pointer to a raw data buffer, buffer/message length, timeout, and so on.
 
 More details on how to implement a custom transport can be found in the :ref:`custom_transport` Agent's section of this documentation.
 
