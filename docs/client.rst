@@ -265,6 +265,57 @@ It comes with an optional ``control`` argument, that allows the *Client* setting
 
 For more information, consult the :ref:`read_access_api` of the :ref:`client_api_label`.
 
+Creation Mode
+-------------
+
+The creation of :ref:`entities_label>` on the *Agent* which can act on behalf of the *Clients*
+in the DDS world can be done in two ways: by XML, or by reference. In this section, we explain
+these two creation modes and provide guidance on their usage.
+
+XML
+    In the XML case, when creating the entities in the *Client* application, the user must provide each :code:`entity`
+    with a `const char* <entity>_xml` parameter containing a string of text with XML syntax, matching the DDS rules for creating
+    a DDS entity with an XML profile, as explained
+    `here <https://fast-dds.docs.eprosima.com/en/latest/fastdds/xml_configuration/xml_configuration.html>`_.
+    For instance, when creating a *participant* or a *topic*, the profiles will look as follows:
+
+    .. code-block:: C
+    
+        <!-- PARTICIPANT>    
+        const char* participant_xml = "<dds>"
+                                          "<participant>"
+                                              "<rtps>"
+                                                  "<name>[PARTICIPANT NAME]</name>"
+                                              "</rtps>"
+                                          "</participant>"
+                                      "</dds>";
+        
+        <!-- TOPIC -->
+        const char* topic_xml = "<dds>"
+                                    "<topic>"
+                                        "<name>[TOPIC NAME]</name>"
+                                        "<dataType>[TOPIC TYPE]</dataType>"
+                                    "</topic>"
+                                "</dds>"
+
+    As detailed in the :ref:`getting_started_label` section, *participants*, *topics*, *datawriters*, *datareaders*, *requesters* and *repliers* work similarly.
+    *Publishers* and *subscribers*, instead, inherit their XML fields from their associated *dataWriters* and *dataReaders*.
+    
+    Creation by XML has the advantage of being configurable direclty within the *Client* application,
+    but comes with the drawback of offering a very limited set of options as regards the QoS with which the DDS entities
+    profiles can be configured. Indeed, only best-effort or reliable communication streams can be set with this creation mode.
+    In many cases, these QoS configurations alone may not be enough. For these cases, *eProsima Micro XRCE-DDS* allows the users
+    to use the creation by references mode.
+
+References
+    Creation by references happens by feeding the *Agent* with an XML profile containing a string of text similar to the snippets
+    provided above, with a label associated to it. Therefore, when creating an entity, the *Client* will only need to provide a reference
+    to this label in spite of the complete XML profile. This creation mode comes with two advantages:
+    
+    - It consumes less *Client* memory, making the application more lightweight.
+    - It allows the *Clients* to write their own XML QoS and run the *Agent* with a custom configuration which can benefit of the *full set* of QoS available in DDS.
+
+
 .. _creation_mode_table:
 
 Creation Mode Table
