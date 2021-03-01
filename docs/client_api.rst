@@ -1220,7 +1220,7 @@ This function provides the same functionality as the method described in :code:`
 
 :comm: A pointer to a properly initialized XRCE-DDS communication structure, used to send the ping request.
 :timeout: The maximum time **per attempt** that the *Client* will wait to receive the answer (*pong*) message, before returning.
-:attempts: Maximum amount of times that the client will try to ping the agent and receive a response back.
+:attempts: Maximum amount of times that the *Client* will try to ping the *Agent* and receive a response back.
 
 ------
 
