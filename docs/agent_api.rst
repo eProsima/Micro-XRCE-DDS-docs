@@ -17,7 +17,7 @@ This is possible thanks to the intuitive built-in :ref:`agent_cli` and its multi
 Alternatively, users can access the underneath *Agent* implementation and fine-tune all of its parameters, options, and behaviour in their final application.
 This is specially useful when dealing with a :ref:`custom_transport` implementation.
 
-Therefore, the API section is organized as follows:
+The *Agent* API section is organized as follows:
 
 * :ref:`agent_instance_class_api`
 * :ref:`agent_class_api`
