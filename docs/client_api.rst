@@ -1205,7 +1205,7 @@ This function pings a *Micro XRCE-DDS Agent* to check if it is already up and ru
 
 This method does not require an XRCE session to be established beforehand.
 
-Returns `true` if a response was received from the agent, or `false` otherwise.
+It returns ``true`` if a response was received from the *Agent*, ``false`` otherwise.
 
 :comm: A pointer to a properly initialized Micro XRCE-DDS communication structure, used to send the ping request.
 :timeout: The maximum time that the client will wait to receive the answer (*pong*) message, before returning.
