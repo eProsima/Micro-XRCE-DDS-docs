@@ -45,7 +45,7 @@ which allows launching a *Micro XRCE-DDS Agent* with user-given parameters.
 
     bool create(int argc, char** argv);
 
-Creates an UDP/TCP/Serial `Micro XRCE-DDS Agent`, based on the given arguments.
+Creates a UDP/TCP/Serial *Micro XRCE-DDS Agent*, based on the given arguments.
 
 Returns `true` if the arguments were valid and an agent was successfully created, or false otherwise.
 
