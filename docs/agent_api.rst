@@ -312,4 +312,4 @@ This function sets the verbose level of the logger, from **0** (logger is off) t
     template <typename ... Args>
     void add_middleware_callback(const Middleware::Kind& middleware_kind, const middleware::CallbackKind& callback_kind, std::function<void (Args ...)>&& callback_function);
 
-Same functionality as the one described in :code:`add_middleware_callback`, for :ref:`agent_instance_class_api`.
+This function exposes the same functionality as the one described in :code:`add_middleware_callback`, for :ref:`agent_instance_class_api`.
