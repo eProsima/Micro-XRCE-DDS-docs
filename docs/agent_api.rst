@@ -27,7 +27,7 @@ The *Agent* API section is organized as follows:
 eprosima::uxr::AgentInstance
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The CLI manager, along with all the built-in agents available for the supported transports
+The CLI manager, along with all the built-in *Agents* available for the supported transports
 (UDP, TCP, Serial) are encapsulated in the `eprosima::uxr::AgentInstance` class.
 
 ------
