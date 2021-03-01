@@ -293,7 +293,7 @@ This function returns ``true`` if the file was correctly loaded, ``false`` other
 
     void reset();
 
-Deletes all the `ProxyClient` instances and their associated DDS entities.
+This function deletes all the ``ProxyClient`` instances and their associated DDS entities.
 
 ------
 
