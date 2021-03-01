@@ -395,7 +395,7 @@ An example on how to set the external transport callbacks in the Micro XRCE-DDS 
 ****************
 
 The :code:`custom_endpoint` is an object of type `eprosima::uxr::CustomEndPoint` and it us in charge of handling the endpoint parameters. The *Agent*, unlike the *Client*, can receive
-messages from multiple *Clients* so it must be able to differentiate between different *Clients*.
+messages from multiple *Clients* so it must be able to differentiate between them.
 Therefore, the :code:`eprosima::uxr::CustomEndPoint` should be provided with information about the origin of the message
 in the read callback, and with information about the destination of the message in the write callback.
 
