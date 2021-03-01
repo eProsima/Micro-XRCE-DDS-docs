@@ -68,7 +68,7 @@ Starts the execution of the previously created *Agent*, until it's ended by a us
     template <typename ... Args>
     void add_middleware_callback(const Middleware::Kind& middleware_kind, const middleware::CallbackKind& callback_kind, std::function<void (Args ...)>&& callback_function);
 
-Sets an user-defined callback function for a specific create/delete middleware entity operation.
+Sets a user-defined callback function for a specific create/delete middleware entity operation.
 
 :middleware_kind: Enum defining all the supported middlewares (see :ref:`middleware_abstraction_layer`).
 :callback_kind: Enum holding all the possible create/delete operations:
