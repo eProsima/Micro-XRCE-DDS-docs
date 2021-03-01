@@ -280,7 +280,7 @@ This function loads a configuration file that provides the tagged XML definition
 The used syntax must match the one defined for [FastDDS XML profile syntax](https://fast-dds.docs.eprosima.com/en/latest/fastdds/xml_configuration/xml_configuration.html),
 where the *profile name* attributes represent the reference names.
 
-Returns `true` if the file was correctly loaded or `false` otherwise.
+This function returns ``true`` if the file was correctly loaded, ``false`` otherwise.
 
 ..
     TODO: Add reference to creation mode section (xml/ref).
