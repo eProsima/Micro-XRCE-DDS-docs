@@ -37,7 +37,7 @@ The CLI manager, along with all the built-in *Agents* available for the supporte
     AgentInstance& getInstance();
 
 Gets a reference to the singleton `AgentInstance` wrapper class,
-which allows to launch Micro XRCE-DDS Agent upon user-given parameters.
+which allows launching a *Micro XRCE-DDS Agent* with user-given parameters.
 
 ------
 
