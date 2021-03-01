@@ -1216,7 +1216,7 @@ It returns ``true`` if a response was received from the *Agent*, ``false`` other
 
     bool uxr_ping_agent_attempts(const uxrCommunication* comm, const int timeout, const uint8_t attempts);
 
-It provides with the same functionality as the method described in :code:`uxr_ping_agent`, but allows to specify the number of ping attempts before returning a value.
+This function provides the same functionality as the method described in :code:`uxr_ping_agent`, but allows to specify the number of ping attempts before returning a value.
 
 :comm: A pointer to a properly initialized Micro XRCE-DDS communication structure, used to send the ping request.
 :timeout: The maximum time **per attempt** that the client will wait to receive the answer (*pong*) message, before returning.
