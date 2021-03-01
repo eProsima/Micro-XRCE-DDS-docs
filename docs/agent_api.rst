@@ -275,7 +275,7 @@ It returns ``true`` if the entity is correctly removed, ``false`` otherwise.
 
     bool load_config_file(const std::string& file_path);
 
-Loads a configuration file which provides with the tagged XML definitions of the desired XRCE entities that can be created using the reference creation mode.
+This function loads a configuration file that provides the tagged XML definitions of the desired XRCE entities that can be created using the reference creation mode.
 
 The used syntax must match the one defined for [FastDDS XML profile syntax](https://fast-dds.docs.eprosima.com/en/latest/fastdds/xml_configuration/xml_configuration.html),
 where the *profile name* attributes represent the reference's names.
