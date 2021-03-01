@@ -98,7 +98,7 @@ Sets a user-defined callback function for a specific create/delete middleware en
 eprosima::uxr::Agent
 ^^^^^^^^^^^^^^^^^^^^
 
-However, it is also possible for users to create and instantiate their own agent instances, for example, to implement a :ref:`custom_transport_agent`.
+However, it is also possible for users to create and instantiate their own *Agent* instance, for example, to implement a :ref:`custom_transport_agent`.
 Also, in some scenarios it could be useful to have all the necessary `ProxyClient` and their associated DDS entities created by the agent even before
 clients are started, so that client applications get rid of the process of creating the session and the DDS entities and can focus only on the communication.
 
