@@ -14,7 +14,7 @@ That being said, most user will find out that, with te provided *MicroXRCEAgent*
 it is more than enough to launch an *Agent* and start the communication process with *Micro XRCE-DDS Client* applications.
 This is possible thanks to the intuitive built-in :ref:`agent_cli` and its multiple configuration parameters.
 
-Also, users can access the underneath `Agent` implementation and fine-tune all of its parameters, options and behaviour in their final application.
+Alternatively, users can access the underneath *Agent* implementation and fine-tune all of its parameters, options, and behaviour in their final application.
 This is specially useful when dealing with a :ref:`custom_transport` implementation.
 
 Therefore, the API section is organized as follows:
