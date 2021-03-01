@@ -160,7 +160,7 @@ It returns ``true`` if the creation was successful, ``false`` otherwise.
 
     bool create_participant_by_ref(uint32_t client_key, uint16_t participant_id, int16_t domain_id, const char* ref, uint8_t flag, OpResult& op_result);
 
-Creates a DDS participant for a certain client, given a reference to its description hosted in a certain XML descriptor file.
+This function creates a DDS participant for a given *Client*, given a reference to its description hosted in a certain XML descriptor file.
 
 The references file must have been previously loaded by the agent.
 
