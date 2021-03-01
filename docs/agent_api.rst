@@ -222,7 +222,7 @@ replier         participant
 
 This operation returns ``true`` if the entity is successfully created and linked to its associated entity (which must previously exist in the given ``ProxyClient``), ``false`` otherwise.
 
-:client_key: The identifier of the `ProxyClient` to which the resulting entity will be attached to.
+:client_key: The identifier of the ``ProxyClient`` to which the resulting entity will be attached to.
 :<entity>_id: The ID of the DDS entity to be created.
 :<associated_entity>_id: The identifier of the DDS entity to which this one will be assocciated.
 :xml: The XML describing the entity properties.
