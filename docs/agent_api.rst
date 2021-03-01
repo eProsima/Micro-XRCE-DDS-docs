@@ -102,7 +102,7 @@ However, it is also possible for users to create and instantiate their own *Agen
 Also, in some scenarios, it could be useful to have all the necessary ``ProxyClient``s and their associated DDS entities created by the *Agent* even before
 *Clients* are started, so that *Clients* applications can avoid the process of creating the session and the DDS entities, and can focus on the communication.
 
-This would allow a Micro XRCE-DDS Client application to be as tiny in terms of memory consumption as it can be.
+This would allow a Micro XRCE-DDS Client application to be as tiny as it can be in terms of memory consumption.
 
 The following API is provided to fulfill these requirements:
 
