@@ -184,7 +184,7 @@ Returns ``true`` if the creation was successful, ``false`` otherwise.
 
     bool delete_participant(uint32_t client_key, uint16_t participant_id, OpResult& op_result);
 
-Removes a DDS participant from a certain client proxy.
+This function removes a DDS participant from a certain client proxy.
 Returns `true` if the participant was deleted, or `false` otherwise.
 
 :client_key: The identifier of the `ProxyClient` from which the participant must be deleted.
