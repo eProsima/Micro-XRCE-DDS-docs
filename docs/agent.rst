@@ -113,7 +113,7 @@ Communication via pseudo terminal (only Linux)
 Custom transport
 ----------------
 
-If none of the transports specified above is suitable for the target application, users can easily create an instance of a Micro XRCE-DDS Agent, providing with a custom transport implementation.
+If none of the transports specified above is suitable for the target application, users can easily create an instance of a *Micro XRCE-DDS Agent*, together with a custom transport implementation.
 
 For that purpose, `eprosima::uxr::CustomAgent` class was developed, following the principle of giving users function signatures to be implemented that hide as much as possible the implementation details of the *Agent*.
 Thus, this methods provide with common parameters used when implementing a receive/send message method, such as an octet pointer to a raw data buffer, buffer/message length, timeout, and so on.
