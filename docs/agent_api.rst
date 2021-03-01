@@ -171,7 +171,7 @@ Returns ``true`` if the creation was successful, ``false`` otherwise.
 :client_key: The identifier of the ``ProxyClient`` to which the resulting participant will be attached to.
 :participant_id: The identifier of the participant to be created.
 :domain_id: The DDS domain ID associated to the participant.
-:ref: The reference tag which will retrieve the participant description from the references file, previously loaded by the agent.
+:ref: The reference tag which will retrieve the participant description from the file where the references are defined, previously loaded to the *Agent*.
 :flag: It determines the creation mode of the new participant (see :ref:`creation_mode_table`).
 :op_result: The result status of this operation.
 
