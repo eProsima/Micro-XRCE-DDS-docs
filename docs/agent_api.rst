@@ -100,7 +100,7 @@ eprosima::uxr::Agent
 
 However, it is also possible for users to create and instantiate their own *Agent* instance, for example, to implement a :ref:`custom_transport_agent`.
 Also, in some scenarios, it could be useful to have all the necessary ``ProxyClient``s and their associated DDS entities created by the *Agent* even before
-clients are started, so that client applications get rid of the process of creating the session and the DDS entities and can focus only on the communication.
+*Clients* are started, so that *Clients* applications can avoid the process of creating the session and the DDS entities, and can focus on the communication.
 
 This would allow a Micro XRCE-DDS Client application to be as tiny in terms of memory consumption as it can be.
 
