@@ -11,7 +11,7 @@ Keeping up with this philosophy, the API provided to the user attempts to be as 
 while allowing to configure all the different aspects related to the *Agent*'s behaviour.
 
 That being said, most user will find out that, with te provided *MicroXRCEAgent* standalone application,
-it is more than enough to launch an agent and start the communication process with *Micro XRCE-DDS Client* applications.
+it is more than enough to launch an *Agent* and start the communication process with *Micro XRCE-DDS Client* applications.
 This is possible thanks to the intuitive built-in :ref:`agent_cli` and its multiple configuration parameters.
 
 Also, users can access the underneath `Agent` implementation and fine-tune all of its parameters, options and behaviour in their final application.
