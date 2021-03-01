@@ -401,7 +401,7 @@ in the read callback, and with information about the destination of the message 
 
 In general, the members of a :code:`eprosima::uxr::CustomEndPoint` object can be unsigned integers and strings.
 
-`CustomEndPoint` defines three methods:
+``CustomEndPoint`` defines three methods:
 
 Add member
     .. code-block:: cpp
