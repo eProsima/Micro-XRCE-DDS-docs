@@ -141,7 +141,7 @@ Returns ``true`` if the operation was completed successfully, ``false`` otherwis
 
     bool create_participant_by_xml(uint32_t client_key, uint16_t participant_id, int16_t domain_id, const char* xml, uint8_t flag, OpResult& op_result);
 
-Creates a DDS participant for a certain client, given its self-contained description in a XML file.
+This function creates a DDS participant for a given *Client*, given its self-contained description in an XML file.
 
 The participant will act the entrypoint for the rest of DDS entities to be created.
 
