@@ -1201,7 +1201,7 @@ This function creates an identifier to reference an entity.
 
     bool uxr_ping_agent(const uxrCommunication* comm, const int timeout);
 
-Pings a Micro XRCE-DDS Agent to check if it is already up and running.
+This function pings a *Micro XRCE-DDS Agent* to check if it is already up and running.
 
 This method does not require an XRCE session to be established beforehand.
 
