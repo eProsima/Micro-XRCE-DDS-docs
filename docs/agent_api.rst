@@ -197,7 +197,7 @@ Returns ``true`` if the participant was deleted, ``false`` otherwise.
 
     bool create_<entity>_by_xml(uint32_t client_key, uint16_t <entity>_id, uint16_t <associated_entity>_id, const char* xml, uint8_t flag, OpResult& op_result);
 
-Creates a certain DDS entity attached to an existing `ProxyClient`, given its client key.
+This function creates a certain DDS entity attached to an existing ``ProxyClient``, given its client key.
 
 An XML must be provided, containing the DDS description of the entity to be created.
 
