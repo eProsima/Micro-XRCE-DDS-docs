@@ -312,25 +312,4 @@ Sets the verbose level of the logger, from `0` (logger is off) to `6` (critical,
     template <typename ... Args>
     void add_middleware_callback(const Middleware::Kind& middleware_kind, const middleware::CallbackKind& callback_kind, std::function<void (Args ...)>&& callback_function);
 
-Sets an user-defined callback function for a specific create/delete middleware entity operation.
-
-:middleware_kind: Enum defining all the supported middlewares (see :ref:`middleware_abstraction_layer`).
-:callback_kind: Enum holding all the possible create/delete operations:
-
-.. code-block:: cpp
-
-    enum class CallbackKind : uint8_t
-    {
-        CREATE_PARTICIPANT,
-        CREATE_DATAWRITER,
-        CREATE_DATAREADER,
-        CREATE_REQUESTER,
-        CREATE_REPLIER,
-        DELETE_PARTICIPANT,
-        DELETE_DATAWRITER,
-        DELETE_DATAREADER,
-        DELETE_REQUESTER,
-        DELETE_REPLIER
-    };
-
-:callback_function: Callback to be defined by the user. It must follow a certain signature, depending on the used middleware.
+Same functionality as the one described in :code:`add_middleware_callback`, for :ref:`agent_instance_class_api`.
