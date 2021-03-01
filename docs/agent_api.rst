@@ -263,7 +263,7 @@ This function deletes a certain entity from a ``ProxyClient``. Its associated en
 
 There exist as many method signatures of this type in the agent's API as available entities. See the :ref:`existing_entities_and_associated_entities` table for further information.
 
-Returns `true` if the entity is correctly removed, or `false` otherwise.
+It returns ``true`` if the entity is correctly removed, ``false`` otherwise.
 
 :client_key: The identifier of the `ProxyClient` from which the entity must be deleted.
 :<entity>_id: The ID of the DDS entity to be deleted.
