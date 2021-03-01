@@ -246,7 +246,7 @@ This operation returns ``true`` if the entity is successfully created and linked
 :client_key: The identifier of the ``ProxyClient`` to which the resulting entity will be attached to.
 :<entity>_id: The ID of the DDS entity to be created.
 :<associated_entity>_id: The identifier of the DDS entity to which this one will be assocciated.
-:ref: The reference tag which will retrieve the DDS entity description from the references file.
+:ref: The reference tag which will retrieve the DDS entity description from the file hosting the referenced entities definitions.
 :flag: It determines the creation mode of the new entity (see :ref:`creation_mode_table`).
 :op_result: The result status of this operation.
 
