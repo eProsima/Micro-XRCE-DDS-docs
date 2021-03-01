@@ -259,7 +259,7 @@ This operation returns ``true`` if the entity is successfully created and linked
 
     bool delete_<entity>(uint32_t client_key, uint16_t <entity>_id, OpResult& op_result);
 
-Deletes a certain entity from a `ProxyClient`. Its associated entities will also be deleted, if applicable.
+This function deletes a certain entity from a ``ProxyClient``. Its associated entities will also be deleted, if applicable.
 
 There exist as many method signatures of this type in the agent's API as available entities. See the :ref:`existing_entities_and_associated_entities` table for further information.
 
