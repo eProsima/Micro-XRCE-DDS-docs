@@ -1208,7 +1208,7 @@ This method does not require an XRCE session to be established beforehand.
 It returns ``true`` if a response was received from the *Agent*, ``false`` otherwise.
 
 :comm: A pointer to a properly initialized XRCE-DDS communication structure, used to send the ping request.
-:timeout: The maximum time that the client will wait to receive the answer (*pong*) message, before returning.
+:timeout: The maximum time that the *Client* will wait to receive the answer (*pong*) message, before returning.
 
 ------
 
