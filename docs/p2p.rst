@@ -55,7 +55,7 @@ On Linux, this would be: ::
 
 After having installed the *Agent* system-wide, you can launch it with the :code:`ced` option activated: ::
 
-    $ ./MicroXRCEAgent udp -p <port> -m ced -d
+    $ ./MicroXRCEAgent udp4 -p <port> -m ced -d
 
 Client P2P publisher app
 ------------------------

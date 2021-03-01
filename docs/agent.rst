@@ -105,6 +105,7 @@ Communication via pseudo terminal (only Linux)
   Then, from 1 to 6, the following logging levels are activated: *critical*, *error*, *warning*, *info*, *debug* and *trace*.
 * The option :code:`-m,--middleware <middleware-impl>` sets the middleware implementation to use.
   There are three: RTPS (based on eProsima Fast RTPS), DDS (specified by the XRCE standard and using Fast DDS) and Centralized (topic are managed by the Agent similarly MQTT).
+  More information about the supported middlewares can be found :ref:`here <middleware_abstraction_layer>`.
 * The ``--p2p <port>`` option enables P2P communication. Centralized middleware is necessary for this option.
 
 .. _custom_transport_agent:
