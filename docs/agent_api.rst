@@ -114,7 +114,7 @@ The following API is provided to fulfill these requirements:
 
 This function allows to create a ``ProxyClient`` entity, which can act on behalf of an external *Client* to request the creation/deletion of DDS entities.
 
-Returns `true` if the creation was successful, or `false` otherwise.
+It returns ``true`` if the creation was successful, ``false`` otherwise.
 
 :key: The `ProxyClient`'s identifier.
 :session: The session ID to which the created `ProxyClient` is attached to.
