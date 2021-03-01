@@ -28,7 +28,7 @@ eprosima::uxr::AgentInstance
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The CLI manager, along with all the built-in *Agents* available for the supported transports
-(UDP, TCP, Serial) are encapsulated in the `eprosima::uxr::AgentInstance` class.
+(UDP, TCP, Serial) are encapsulated in the ``eprosima::uxr::AgentInstance`` class.
 
 ------
 
