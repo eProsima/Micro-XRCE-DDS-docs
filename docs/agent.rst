@@ -37,7 +37,7 @@ Once it is built successfully, launch it by executing one of the following comma
 UDP transport
     The communication via UDP can be executed using two modes, IPv4 and IPv6; and configured as follows: ::
 
-        $ ./MicroXRCEAgent udp4/udp6 [OPTIONS]
+        $ ./MicroXRCEAgent [ udp4 | udp6 ]  [OPTIONS]
 
         Options:
           -h,--help                                    Print the help message.
