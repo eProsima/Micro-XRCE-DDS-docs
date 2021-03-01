@@ -410,7 +410,7 @@ Add member
 
     Allows to dynamically add a new member to the endpoint definition.
 
-    Returns `true` if member was correctly added, or `false` if something went wrong (for example, the member already existed).
+    Returns ``true`` if the member was correctly added, ``false`` if something went wrong (for example, if the member already exists).
 
     :KIND: To be chosen from: ``uint8_t``, ``uint16_t``, ``uint32_t``, ``uint64_t``, ``uint128_t`` or ``std::string``.
     :member_name: The tag used to identify the endpoint member.
