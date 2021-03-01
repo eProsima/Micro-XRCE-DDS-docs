@@ -130,7 +130,7 @@ It returns ``true`` if the creation was successful, ``false`` otherwise.
 
 This function deletes a given ``ProxyClient`` from the client proxy database, given its ID.
 
-Returns `true` if the operation was completed successfully, or `false` otherwise (for example, if the given ID was not registered to any `ProxyClient`).
+Returns ``true`` if the operation was completed successfully, ``false`` otherwise (for example, if the provided ID was not registered to any ``ProxyClient``).
 
 :key: The identifier of the `ProxyClient` to be removed.
 :op_result: The result status of the operation.
