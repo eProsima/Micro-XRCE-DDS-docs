@@ -112,7 +112,7 @@ The following API is provided to fulfill these requirements:
 
     bool create_client(uint32_t key, uint8_t session, uint16_t mtu, Middleware::Kind middleware_kind, OpResult& op_result);
 
-Allows to create a `ProxyClient` entity, which can act on behalf of an external client to request the creation/deletion of DDS entities.
+This function allows to create a ``ProxyClient`` entity, which can act on behalf of an external *Client* to request the creation/deletion of DDS entities.
 
 Returns `true` if the creation was successful, or `false` otherwise.
 
