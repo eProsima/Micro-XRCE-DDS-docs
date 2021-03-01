@@ -132,7 +132,7 @@ This function deletes a given ``ProxyClient`` from the client proxy database, gi
 
 Returns ``true`` if the operation was completed successfully, ``false`` otherwise (for example, if the provided ID was not registered to any ``ProxyClient``).
 
-:key: The identifier of the `ProxyClient` to be removed.
+:key: The identifier of the ``ProxyClient`` to be removed.
 :op_result: The result status of the operation.
 
 ------
