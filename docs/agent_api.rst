@@ -89,7 +89,7 @@ Sets a user-defined callback function for a specific create/delete middleware en
         DELETE_REPLIER
     };
 
-:callback_function: Callback to be defined by the user. It must follow a certain signature, depending on the used middleware.
+:callback_function: Callback to be defined by the user. It must follow a certain signature, depending on the middleware used.
 
 ------
 
