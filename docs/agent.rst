@@ -51,7 +51,7 @@ UDP transport
 TCP transport
     The communication via TCP can be executed using two modes, IPv4 and IPv6; and configured as follows: ::
 
-        $ ./MicroXRCEAgent tcp4/tcp6 [OPTIONS]
+        $ ./MicroXRCEAgent [ tcp4 | tcp6 ] [OPTIONS]
 
         Options:
           -h,--help                                    Print the help message.
