@@ -116,7 +116,7 @@ This function allows to create a ``ProxyClient`` entity, which can act on behalf
 
 It returns ``true`` if the creation was successful, ``false`` otherwise.
 
-:key: The `ProxyClient`'s identifier.
+:key: The ``ProxyClient``'s identifier.
 :session: The session ID to which the created `ProxyClient` is attached to.
 :mtu: The *Maximum Transmission Unit* size.
 :middleware_kind: The middleware used by the `ProxyClient`, to be chosen among the ones presented in the :ref:`middleware_abstraction_layer`.
