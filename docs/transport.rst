@@ -365,14 +365,12 @@ Read function
 Micro XRCE-DDS Agent
 ^^^^^^^^^^^^^^^^^^^^^
 
-.. TODO: @Jose review this.
-
-The *eProsima Micro XRCE-DDS Agent* profile for custom transports is enabled by default. 
+The *eProsima Micro XRCE-DDS Agent* profile for custom transports is enabled by default.
 
 An example on how to set the external transport callbacks in the Micro XRCE-DDS Agent API is:
 
 .. code-block:: cpp
-    
+
     eprosima::uxr::Middleware::Kind mw_kind(eprosima::uxr::Middleware::Kind::FASTDDS);
     eprosima::uxr::CustomEndPoint custom_endpoint;
 
@@ -393,18 +391,58 @@ An example on how to set the external transport callbacks in the Micro XRCE-DDS 
 
     custom_agent.start();
 
-The :code:`custom_endpoint` is the object in charge of handling the endpoint parameters. The *Agent*, unlike the *Client*, can receive
+*CustomEndPoint*
+****************
+
+The :code:`custom_endpoint` is an object of type `eprosima::uxr::CustomEndPoint` and it us in charge of handling the endpoint parameters. The *Agent*, unlike the *Client*, can receive
 messages from multiple *Clients* so it must be able to differentiate between different *Clients*.
 Therefore, the :code:`eprosima::uxr::CustomEndPoint` should be provided with information about the origin of the message
 in the read callback, and with information about the destination of the message in the write callback.
 
 In general, members of a :code:`eprosima::uxr::CustomEndPoint` object can be unsigned integers and strings.
 
-As in the *Client* API, four functions should be implemented. The behavior of these functions is sightly different
+`CustomEndPoint` defines three methods:
+
+Add member
+    .. code-block:: cpp
+
+        bool eprosima::uxr::CustomEndPoint::add_member<*KIND*>(const std::string& member_name);
+
+    Allows to dinamically add a new member to the endpoint definition.
+
+    Returns `true` if member was correctly added, or `false` if something went wrong (for example, the member already existed).
+
+    :KIND: To be chosen from: `uint8_t`, `uint16_t`, `uint32_t`, `uint64_t`, `uint128_t` or `std::string`.
+    :member_name: The tag used to identify the endpoint member.
+
+Set member value
+    .. code-block:: cpp
+
+        void eprosima::uxr::CustomEndPoint::set_member_value(const std::string& member_name, const *KIND* & value);
+
+    Sets the specific value (numeric or string) for a certain member, which must previously exist in the CustomEndPoint.
+
+    :member_name: The member whose value is going to be modified.
+    :value: The value to be set, of `KIND`: `uint8_t`, `uint16_t`, `uint32_t`, `uint64_t`, `uint128_t` or `std::string`.
+
+Get member
+    .. code-block:: cpp
+
+        const *KIND* & eprosima::uxr::CustomEndPoint::get_member(const std::string& member_name);
+
+    Gets the current value of the member registered with the given parameter.
+    The retrieved value might be an `uint8_t`, `uint16_t`, `uint32_t`, `uint64_t`, `uint128_t` or `std::string`.
+
+    :member_name: The `CustomEndPoint` member name whose current value is requested.
+
+*CustomAgent user-defined methods*
+**********************************
+
+As in the *Client* API, four functions should be implemented. The behaviour of these functions is sightly different
 depending on the selected mode:
 
 Open function
-    .. code-block:: c
+    .. code-block:: cpp
 
         eprosima::uxr::CustomAgent::InitFunction my_custom_transport_open = [&]() -> bool
         {
@@ -414,8 +452,8 @@ Open function
     This function should open and init the custom transport. It returns a boolean indicating if the opening was successful.
 
 Close function
-    .. code-block:: c
-    
+    .. code-block:: cpp
+
         eprosima::uxr::CustomAgent::FiniFunction my_custom_transport_close = [&]() -> bool
         {
             ...
@@ -424,8 +462,8 @@ Close function
     This function should close the custom transport. It returns a boolean indicating if the closing was successful.
 
 Write function
-    .. code-block:: c
-    
+    .. code-block:: cpp
+
         eprosima::uxr::CustomAgent::SendMsgFunction my_custom_transport_write = [&](
             const eprosima::uxr::CustomEndPoint* destination_endpoint,
             uint8_t* buffer,
@@ -444,8 +482,8 @@ Write function
     * **Packet-oriented mode:** The function should send :code:`length` Bytes from :code:`buffer`. If less than :code:`length` Bytes are written, :code:`transport_rc` can be set.
 
 Read function
-    .. code-block:: c
-    
+    .. code-block:: cpp
+
         eprosima::uxr::CustomAgent::RecvMsgFunction my_custom_transport_read = [&](
                 eprosima::uxr::CustomEndPoint* source_endpoint,
                 uint8_t* buffer,

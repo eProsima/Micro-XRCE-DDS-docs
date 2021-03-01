@@ -34,69 +34,63 @@ Agent CLI
 To run the *Agent*, first of all build it as indicated in the :ref:`installation_label` page.
 Once it is built successfully, launch it by executing one of the following commands:
 
-.. TODO: @jose: check and reorganize this.
-
 UDP transport
-    The communication via UDP can be executed and configured as follow: ::
+    The communication via UDP can be executed using two modes, IPv4 and IPv6; and configured as follows: ::
 
-        $ ./MicroXRCEAgent udp [OPTIONS]
+        $ ./MicroXRCEAgent udp4/udp6 [OPTIONS]
 
         Options:
-          -h,--help                                    Print this help message and exit
-          -p,--port UINT REQUIRED                      Select the port
-          -m,--middleware TEXT in {ced,rtps,dds}=dds   Select the kind of Middleware
-          -r,--refs FILE                               Load a reference file
-          -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from less to more verbose
-          -d,--discovery                               Activate the Discovery server
-          --disport UINT=7400 Needs: --discovery       Select the port for the Discovery server
-          --p2p UINT                                   Activate the P2P profile using the given port
+          -h,--help                                    Print the help message.
+          -p,--port UINT REQUIRED                      Select the IP port.
+          -m,--middleware TEXT in {ced,rtps,dds}=dds   Select the kind of middleware among the supported ones. By default, it will be FastDDS.
+          -r,--refs FILEPATH                           Load a references file from the given path.
+          -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from none (0) to full verbosity (6).
+          -d,--discovery UINT=7400                     Activate the Discovery server. If no port is specified, 7400 will be used.
+          --p2p UINT                                   Activate the P2P profile, using the given port.
 
 TCP transport
-    The communication via TCP can be executed and configured as follow: ::
+    The communication via TCP can be executed using two modes, IPv4 and IPv6; and configured as follows: ::
 
-        $ ./MicroXRCEAgent tcp [OPTIONS]
-    
+        $ ./MicroXRCEAgent tcp4/tcp6 [OPTIONS]
+
         Options:
-          -h,--help                                    Print this help message and exit
-          -p,--port UINT REQUIRED                      Select the port
-          -m,--middleware TEXT in {ced,rtps,dds}=dds   Select the kind of Middleware
-          -r,--refs FILE                               Load a reference file
-          -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from less to more verbose
-          -d,--discovery                               Activate the Discovery server
-          --disport UINT=7400 Needs: --discovery       Select the port for the Discovery server
-          --p2p UINT                                   Activate the P2P profile using the given port
+          -h,--help                                    Print the help message.
+          -p,--port UINT REQUIRED                      Select the IP port.
+          -m,--middleware TEXT in {ced,rtps,dds}=dds   Select the kind of middleware among the supported ones. By default, it will be FastDDS.
+          -r,--refs FILEPATH                           Load a references file from the given path.
+          -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from none (0) to full verbosity (6).
+          -d,--discovery UINT=7400                     Activate the Discovery server. If no port is specified, 7400 will be used.
+          --p2p UINT                                   Activate the P2P profile, using the given port.
 
 Communication via Serial transport (only Linux)
-    The communication via Serial transport can be executed and configured as follow: ::
+    The communication via Serial transport can be executed and configured as follows: ::
 
         $ ./MicroXRCEAgent serial [OPTIONS]
-    
-        Options:
-          -h,--help                                    Print this help message and exit
-          --dev FILE REQUIRED                          Select the serial device
-          -b,--baudrate TEXT=115200                    Select the baudrate
-          -m,--middleware TEXT in {ced,rtps,dds}=dds   Select the kind of Middleware
-          -r,--refs FILE                               Load a reference file
-          -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from less to more verbose
-          -d,--discovery                               Activate the Discovery server
-          --disport UINT=7400 Needs: --discovery       Select the port for the Discovery server
-          --p2p UINT                                   Activate the P2P profile using the given port
-
-Communication via Custom transport (only Linux)
-    The communication via Custom transport can be executed and configured as follow: ::
-
-        $ ./MicroXRCEAgent pseudo-serial [OPTIONS]
 
         Options:
-          -h,--help                                    Print this help message and exit
-          --dev FILE REQUIRED                          Select the serial device
-          -b,--baudrate TEXT=115200                    Select the baudrate
-          -m,--middleware TEXT in {ced,rtps,dds}=dds   Select the kind of Middleware
-          -r,--refs FILE                               Load a reference file
-          -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from less to more verbose
-          -d,--discovery                               Activate the Discovery server
-          --disport UINT=7400 Needs: --discovery       Select the port for the Discovery server
-          --p2p UINT                                   Activate the P2P profile using the given port
+          -h,--help                                    Print the help message.
+          -D,--dev FILE REQUIRED                       Specify the serial device.
+          -b,--baudrate TEXT=115200                    Select the baudrate.
+          -m,--middleware TEXT in {ced,rtps,dds}=dds   Select the kind of middleware among the supported ones. By default, it will be FastDDS.
+          -r,--refs FILEPATH                           Load a references file from the given path.
+          -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from none (0) to full verbosity (6).
+          -d,--discovery UINT=7400                     Activate the Discovery server. If no port is specified, 7400 will be used.
+          --p2p UINT                                   Activate the P2P profile, using the given port.
+
+Communication via pseudo terminal (only Linux)
+    The communication via pseudo serial can be executed and configured as follow: ::
+
+        $ ./MicroXRCEAgent pseudoterminal [OPTIONS]
+
+        Options:
+          -h,--help                                    Print the help message.
+          -D,--dev FILE REQUIRED                       Specify the pseudo serial device.
+          -b,--baudrate TEXT=115200                    Select the baudrate.
+          -m,--middleware TEXT in {ced,rtps,dds}=dds   Select the kind of middleware among the supported ones. By default, it will be FastDDS.
+          -r,--refs FILEPATH                           Load a references file from the given path.
+          -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from none (0) to full verbosity (6).
+          -d,--discovery UINT=7400                     Activate the Discovery server. If no port is specified, 7400 will be used.
+          --p2p UINT                                   Activate the P2P profile, using the given port.
 
 * The reference file shall be composed by a set of Fast DDS profiles following the
   `XML syntax <https://fast-dds.docs.eprosima.com/en/latest/fastdds/xml_configuration/xml_configuration.html>`_
@@ -107,7 +101,8 @@ Communication via Custom transport (only Linux)
 * The :code:`-b,--baudrate <baudrate>` options sets the baud rate of the communication. It can take the following values:
   0, 50, 75, 110, 134, 150, 200, 300, 600, 1200, 1800, 240, 4800, 9600, 19200, 38400, 57600, 115200 (default),
   230400, 460800, 500000, 576000, 921600, 1000000, 1152000, 1500000, 2000000, 2500000, 3000000, 3500000 or 4000000 bauds.
-* The :code:`-v,--verbose <level[0-6]>` option sets log level from less to more verbose, in  level 0 the logger is off.
+* The :code:`-v,--verbose <level[0-6]>` option sets log level from less to more verbose, in level 0 the logger is off.
+  Then, from 1 to 6, the following logging levels are activated: *critical*, *error*, *warning*, *info*, *debug* and *trace*.
 * The option :code:`-m,--middleware <middleware-impl>` sets the middleware implementation to use.
   There are three: RTPS (based on eProsima Fast RTPS), DDS (specified by the XRCE standard) and Centralized (topic are managed by the Agent similarly MQTT).
 * The ``--p2p <port>`` option enables P2P communication. Centralized middleware is necessary for this option.
@@ -117,7 +112,12 @@ Communication via Custom transport (only Linux)
 Custom transport
 ----------------
 
-.. TODO: Add text here.
+If none of the transports specified above is suitable for the target application, users can easily create an instance of a Micro XRCE-DDS Agent, providing with a custom transport implementation.
+
+For that purpose, `eprosima::uxr::CustomAgent` class was developed, following the principle of giving users function signatures to be implemented that hide as much as possible the implementation details of the *Agent*.
+Thus, this methods provide with common parameters used when implementing a receive/send message method, such as an octet pointer to a raw data buffer, buffer/message length, timeout, and so on.
+
+More details on how to implement a custom transport can be found in the :ref:`custom_transport` Agent's section of this documentation.
 
 .. _agent_configuration:
 

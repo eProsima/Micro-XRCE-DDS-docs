@@ -1201,10 +1201,14 @@ This function creates an identifier to reference an entity.
 
     bool uxr_ping_agent(const uxrCommunication* comm, const int timeout);
 
-[TODO]
+Pings a Micro XRCE-DDS Agent to check if it is already up and running.
 
-:comm: [TODO]
-:timeout: [TODO]
+This method does not require an XRCE session to be established beforehand.
+
+Returns `true` if a response was received from the agent, or `false` otherwise.
+
+:comm: A pointer to a properly initialized Micro XRCE-DDS communication structure, used to send the ping request.
+:timeout: The maximum time that the client will wait to receive the answer (*pong*) message, before returning.
 
 ------
 
@@ -1212,11 +1216,11 @@ This function creates an identifier to reference an entity.
 
     bool uxr_ping_agent_attempts(const uxrCommunication* comm, const int timeout, const uint8_t attempts);
 
-[TODO]
+It provides with the same functionality as the method described above, but allows to specify the number of ping attempts before returning a value.
 
-:comm: [TODO]
-:timeout: [TODO]
-:attempts: [TODO]
+:comm: A pointer to a properly initialized Micro XRCE-DDS communication structure, used to send the ping request.
+:timeout: The maximum time **per attempt** that the client will wait to receive the answer (*pong*) message, before returning.
+:attempts: Maximum amount of times that the client will try to ping the agent and receive a response back.
 
 ------
 
