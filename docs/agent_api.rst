@@ -168,7 +168,7 @@ The participant will act as an entry point for the rest of the DDS entities to b
 
 Returns ``true`` if the creation was successful, ``false`` otherwise.
 
-:client_key: The identifier of the `ProxyClient` to which the resulting participant will be attached to.
+:client_key: The identifier of the ``ProxyClient`` to which the resulting participant will be attached to.
 :participant_id: The identifier of the participant to be created.
 :domain_id: The DDS domain ID associated to the participant.
 :ref: The reference tag which will retrieve the participant description from the references file, previously loaded by the agent.
