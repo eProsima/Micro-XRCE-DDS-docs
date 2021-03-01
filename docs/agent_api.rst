@@ -241,7 +241,7 @@ The description of the entity to be created is hosted in a certain file where al
 
 There are as many methods available as existing DDS entities, replacing the parameters *<entity>* and *<associated_entity>* as shown above in the previous method description (see :ref:`existing_entities_and_associated_entities`).
 
-This operation returns `true` if the entity is successfully created and linked to its associated entity (which must previously exist in the given `ProxyClient`), or false otherwise.
+This operation returns ``true`` if the entity is successfully created and linked to its associated entity (which must previously exist in the given ``ProxyClient``), ``false`` otherwise.
 
 :client_key: The identifier of the `ProxyClient` to which the resulting entity will be attached to.
 :<entity>_id: The ID of the DDS entity to be created.
