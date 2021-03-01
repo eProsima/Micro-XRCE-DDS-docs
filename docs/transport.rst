@@ -408,7 +408,7 @@ Add member
 
         bool eprosima::uxr::CustomEndPoint::add_member<*KIND*>(const std::string& member_name);
 
-    Allows to dinamically add a new member to the endpoint definition.
+    Allows to dynamically add a new member to the endpoint definition.
 
     Returns `true` if member was correctly added, or `false` if something went wrong (for example, the member already existed).
 
