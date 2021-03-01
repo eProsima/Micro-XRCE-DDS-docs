@@ -59,7 +59,7 @@ Returns ``true`` if the arguments were valid and an *Agent* was successfully cre
 
     bool run();
 
-Starts the execution of the previously created agent, until finished via an user interrupt or a process error.
+Starts the execution of the previously created *Agent*, until it's ended by a user's interrupt or a process error.
 
 ------
 
