@@ -101,7 +101,7 @@ Communication via pseudo terminal (only Linux)
 * The :code:`-b,--baudrate <baudrate>` options sets the baud rate of the communication. It can take the following values:
   0, 50, 75, 110, 134, 150, 200, 300, 600, 1200, 1800, 240, 4800, 9600, 19200, 38400, 57600, 115200 (default),
   230400, 460800, 500000, 576000, 921600, 1000000, 1152000, 1500000, 2000000, 2500000, 3000000, 3500000 or 4000000 bauds.
-* The :code:`-v,--verbose <level[0-6]>` option sets log level from less to more verbose, in level 0 the logger is off.
+* The :code:`-v,--verbose <level[0-6]>` option sets log level from less to more verbose, where level 0 corresponds to the logger being off.
   Then, from 1 to 6, the following logging levels are activated: *critical*, *error*, *warning*, *info*, *debug* and *trace*.
 * The option :code:`-m,--middleware <middleware-impl>` sets the middleware implementation to use.
   There are three: RTPS (based on eProsima Fast RTPS), DDS (specified by the XRCE standard and using Fast DDS) and Centralized (topic are managed by the Agent similarly MQTT).
