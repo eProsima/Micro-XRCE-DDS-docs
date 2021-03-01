@@ -7,7 +7,7 @@ The *Micro XRCE-DDS Agent* is developed using a fully compliant C++11 API.
 This allowed to focus its development on modularity and usability,
 while keeping it simple for the final user.
 
-Keeping up with this philosophy, the API provided to the user attempts to be as intuitive as possible,
+Keeping up with this philosophy, the API provided to the user attempts to be as much intuitive as possible,
 while allowing to configure all the different aspects related to te agent's behaviour.
 
 That being said, most user will find out that, with te provided *MicroXRCEAgent* standalone application,
