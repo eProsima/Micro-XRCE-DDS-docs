@@ -301,7 +301,7 @@ This function deletes all the ``ProxyClient`` instances and their associated DDS
 
     void set_verbose_level(uint8_t verbose_level);
 
-Sets the verbose level of the logger, from `0` (logger is off) to `6` (critical, error, warning, info, debug and trace messages displayed).
+This function sets the verbose level of the logger, from **0** (logger is off) to **6** (critical, error, warning, info, debug, and trace messages are displayed). Intermediate tracing levels display information up to the position in the aforementioned list; for example, level **4** shows critical, error, warning and info messages.
 
 :verbose_level: The level to be set.
 
