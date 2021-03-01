@@ -285,7 +285,7 @@ This function returns ``true`` if the file was correctly loaded, ``false`` other
 ..
     TODO: Add reference to creation mode section (xml/ref).
 
-:file_path: Relative path to the references file.
+:file_path: Relative path to the file containing the DDS entities description in XML format, tagged accordingly to be referenced by the API.
 
 ------
 
