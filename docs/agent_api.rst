@@ -162,7 +162,7 @@ It returns ``true`` if the creation was successful, ``false`` otherwise.
 
 This function creates a DDS participant for a given *Client*, given a reference to its description hosted in a certain XML descriptor file.
 
-The references file must have been previously loaded by the agent.
+This reference file must have been previously loaded to the *Agent*.
 
 The participant will act the entrypoint for the rest of DDS entities to be created.
 
