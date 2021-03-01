@@ -412,7 +412,7 @@ Add member
 
     Returns `true` if member was correctly added, or `false` if something went wrong (for example, the member already existed).
 
-    :KIND: To be chosen from: `uint8_t`, `uint16_t`, `uint32_t`, `uint64_t`, `uint128_t` or `std::string`.
+    :KIND: To be chosen from: ``uint8_t``, ``uint16_t``, ``uint32_t``, ``uint64_t``, ``uint128_t`` or ``std::string``.
     :member_name: The tag used to identify the endpoint member.
 
 Set member value
