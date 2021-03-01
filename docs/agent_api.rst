@@ -187,7 +187,7 @@ Returns ``true`` if the creation was successful, ``false`` otherwise.
 This function removes a DDS participant from a certain client proxy.
 Returns ``true`` if the participant was deleted, ``false`` otherwise.
 
-:client_key: The identifier of the `ProxyClient` from which the participant must be deleted.
+:client_key: The identifier of the ``ProxyClient`` from which the participant must be deleted.
 :participant_id: The ID of the participant to be deleted.
 :op_result: The result status of the operation.
 
