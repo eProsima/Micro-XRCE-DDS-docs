@@ -278,7 +278,7 @@ It returns ``true`` if the entity is correctly removed, ``false`` otherwise.
 This function loads a configuration file that provides the tagged XML definitions of the desired XRCE entities that can be created using the reference creation mode.
 
 The used syntax must match the one defined for [FastDDS XML profile syntax](https://fast-dds.docs.eprosima.com/en/latest/fastdds/xml_configuration/xml_configuration.html),
-where the *profile name* attributes represent the reference's names.
+where the *profile name* attributes represent the reference names.
 
 Returns `true` if the file was correctly loaded or `false` otherwise.
 
