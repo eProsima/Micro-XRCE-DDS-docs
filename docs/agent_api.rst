@@ -50,7 +50,7 @@ Creates a UDP/TCP/Serial *Micro XRCE-DDS Agent*, based on the given arguments.
 Returns ``true`` if the arguments were valid and an *Agent* was successfully created, ``false`` otherwise.
 
 :argc: Number of arguments provided by the user via the CLI.
-       This is usually inherited from the `main` loop.
+       This is usually inherited from the ``main`` loop.
 :argv: List of arguments to be parsed by the CLI engine.
 
 ------
