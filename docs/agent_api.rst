@@ -220,7 +220,7 @@ requester       participant
 replier         participant
 =============== =========================
 
-This operation returns `true` if the entity is successfully created and linked to its associated entity (which must previously exist in the given `ProxyClient`), or false otherwise.
+This operation returns ``true`` if the entity is successfully created and linked to its associated entity (which must previously exist in the given ``ProxyClient``), ``false`` otherwise.
 
 :client_key: The identifier of the `ProxyClient` to which the resulting entity will be attached to.
 :<entity>_id: The ID of the DDS entity to be created.
