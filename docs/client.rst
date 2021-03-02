@@ -268,7 +268,7 @@ For more information, consult the :ref:`read_access_api` of the :ref:`client_api
 Creation Mode
 -------------
 
-The creation of :ref:`entities_label>` on the *Agent* which can act on behalf of the *Clients*
+The creation of :ref:`entities_label` on the *Agent* which can act on behalf of the *Clients*
 in the DDS world can be done in two ways: by XML, or by reference. In this section, we explain
 these two creation modes and provide guidance on their usage.
 
