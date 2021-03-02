@@ -950,25 +950,25 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
 
 .. code-block:: c
 
-    bool uxr_prepare_output_stream(uxrSession* session, uxrStreamId stream_id, uxrObjectId datawriter_id,
-                                   ucdrBuffer* ub, uint32_t topic_size);
+    uint16_t uxr_prepare_output_stream(uxrSession* session, uxrStreamId stream_id, uxrObjectId entity_id,
+                                   ucdrBuffer* ub, uint32_t data_size);
 
-This function requests a *datawriter* previously created on the *Agent* to perform a write operation
+This function requests a *datawriter*, *requester* or *replier* previously created on the *Agent* to perform a write operation
 into a specific output stream.
-It initializes a ``ucdrBuffer`` struct where a topic of ``topic_size`` size must be serialized.
-If there is sufficient space for writing ``topic_size`` bytes into the stream, the returned value is ``true``, otherwise it is ``false``.
+It initializes a ``ucdrBuffer`` struct where a data of ``data_size`` size must be serialized.
+If there is sufficient space for writing ``data_size`` bytes into the stream, the returned value is the XRCE request ID, otherwise it is ``0``.
 The topic is sent in the following ``run_session`` function.
 
 .. note::
-    All ``topic_size`` bytes requested are sent to the *Agent* after a ``run_session`` call,
+    All ``data_size`` bytes requested are sent to the *Agent* after a ``run_session`` call,
     no matter if the ``ucdrBuffer`` has been used or not.
 
 :session: Session structure previously initialized and created.
 :stream_id: The output stream ID where the messages are written.
-:datawriter_id: The ID of the *datawriter* that writes topics into the middleware.
-:ub: The ``ucdrBuffer`` struct used to serialize the topic.
+:entity_id: The ID of the *datawriter*, *requester* or *replier* that writes data into the middleware.
+:ub: The ``ucdrBuffer`` struct used to serialize the data.
            This struct points to the requested memory slot in the stream.
-:topic_size: The slot, in bytes, that is reserved in the stream.
+:data_size: The slot, in bytes, that is reserved in the stream.
 
 ------
 
@@ -1004,13 +1004,28 @@ The request is sent in the following ``run_session`` function call.
 
 .. code-block:: c
 
-    bool uxr_prepare_output_stream_fragmented(uxrSession* session, uxrStreamId stream_id, uxrObjectId datawriter_id,
-                                              struct ucdrBuffer* ub, size_t topic_size, uxrOnBuffersFull flush_callback);
+    bool uxr_buffer_topic(uxrSession* session, uxrStreamId stream_id, uxrObjectId datawriter_id, uint8_t* buffer, size_t len);
 
-This function requests a *datawriter* previously created on the *Agent* to allocate an output stream of ``topic_size`` bytes
+This function buffers a topic into a specific output stream.
+The request is sent in the following ``run_session`` function call.
+
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
+:datawriter_id: The ID of the *datawriter* that writes the reply to the middleware.
+:buffer: The raw buffer that contains the serialized topic.
+:len: The size of the serialized topic.
+
+------
+
+.. code-block:: c
+
+    uint16_t uxr_prepare_output_stream_fragmented(uxrSession* session, uxrStreamId stream_id, uxrObjectId entity_id,
+                                              struct ucdrBuffer* ub, size_t data_size, uxrOnBuffersFull flush_callback);
+
+This function requests a *datawriter*, *requester* or *replier* previously created on the *Agent* to allocate an output stream of ``data_size`` bytes
 for a write operation.
-This function initializes an ``ucdrBuffer`` struct where a topic of ``topic_size`` size is serialized.
-If there is sufficient space for writing ``topic_size`` bytes into the reliable stream, the returned value is ``true``, otherwise it is ``false``.
+This function initializes an ``ucdrBuffer`` struct where a topic of ``data_size`` size is serialized.
+If there is sufficient space for writing ``data_size`` bytes into the stream, the returned value is the XRCE request ID, otherwise it is ``0``.
 The topic is sent in the following ``run_session`` function. If, during the serialization process, the buffer gets overfilled, the
 ``flush_callback`` function is called and the user has to run a session for flushing the stream.
 
@@ -1019,10 +1034,10 @@ The topic is sent in the following ``run_session`` function. If, during the seri
 
 :session: Session structure previously initialized and created.
 :stream_id: The output stream ID where the messages are written.
-:datawriter_id: The ID of the *datawriter* that writes the topic to the middleware.
+:entity_id: The ID of the *datawriter*, *requester* or *replier* that writes data into the middleware.
 :ub: The ``ucdrBuffer`` struct used to serialize the topic.
            This struct points to the requested memory slot in the stream.
-:topic_size: The slot, in bytes, that is reserved in the stream.
+:data_size: The slot, in bytes, that is reserved in the stream.
 :flush_callback: Callback for flushing the output buffers.
 
 The function signature for the ``flush_callback`` callback is:
