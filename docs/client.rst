@@ -168,7 +168,7 @@ Find out more in the :ref:`dedicated section <discovery_api>` of the API.
 Framing profile
 ^^^^^^^^^^^^^^^
 
-Framing profile enables :ref:`HDLC Framing <_stream_framing_label>` for using :ref:`stream-oriented transports <_intro_transport>` such as Serial transports or custom transports that required framing.
+The framing profile enables :ref:`HDLC Framing <stream_framing_label>` for using :ref:`stream-oriented transports <intro_transport>` such as Serial transports or Custom transports that require framing.
 
 .. _configurations:
 
