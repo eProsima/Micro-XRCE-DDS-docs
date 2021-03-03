@@ -40,7 +40,7 @@ After having installed the *Agent* system-wide, you can launch it.
 For this example, the *Client*-*Agent* communication will be done through UDP, using the port :code:`2019`
 and with the XML creation mode, which is the default mode for creating entities: ::
 
-    $ cd /usr/local/bin && MicroXRCEAgent udp -p 2019
+    $ cd /usr/local/bin && MicroXRCEAgent udp4 -p 2019
 
 
 .. _run_pubsub_example:
