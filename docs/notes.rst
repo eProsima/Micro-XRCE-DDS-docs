@@ -22,15 +22,17 @@ This version includes the following changes in both Agent and Client:
     * Add
         * POSIX transport with based on timeout instad of polling.
         * Client to Agent ping feature without a session
-        * Continuos fragment mode TODO: update API and documentation
-        * :code:`uxr_run_session_until_data` functionality
-        * :code:`uxr_create_session_retries` functionality
+        * Continuos fragment mode
         * FreeRTOS+TCP transport support
         * Zephyr RTOS time functions support
         * Custom transports API
         * DDS-XRCE best effort examples
+        * :code:`uxr_run_session_until_data` functionality
+        * :code:`uxr_create_session_retries` functionality
+        * :code:`uxr_buffer_topic` functionality
     * Fix / Modify
         * `Update <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/192>`_ session creating timing to linear approach
+        * Modified :code:`uxr_prepare_output_stream` API return code
         * Removed :code:`client.config` file in favor of CMake arguments.
         * Removed platform handling in user API.
         * `Bugfix #156 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/156>`_ request/reply lenght management.
