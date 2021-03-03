@@ -34,6 +34,10 @@ The section is organized as follows:
     * :code:`examples/RequestAdder`
     * :code:`examples/Deployment`
 
+.. note::
+    This example makes use of the creation mode by XML, which is one of the two possible representation formats for creating DDS entities:
+    by XML or by reference (see the :ref:`creation_mode_client` and :ref:`creation_mode_agent` sections).
+
 .. _prerequisites:
 
 Prerequisites

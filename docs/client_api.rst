@@ -552,8 +552,8 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
             The type must be ``UXR_PARTICIPANT_ID``.
 :xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
-        (see :ref:`creation_mode_table`).
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
 
 ------
 
@@ -575,8 +575,8 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
             The type must be ``UXR_PARTICIPANT_ID``.
 :xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
-        (see :ref:`creation_mode_table`).
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
 
 ------
 
@@ -598,8 +598,8 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
             The type must be ``UXR_PARTICIPANT_ID``.
 :xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
-        (see :ref:`creation_mode_table`).
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
 
 ------
 
@@ -621,8 +621,8 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
             The type must be ``UXR_PARTICIPANT_ID``.
 :xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
-        (see :ref:`creation_mode_table`).
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
 
 ------
 
@@ -644,8 +644,8 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
             The type must be ``UXR_PUBLISHER_ID``.
 :xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
-        (see :ref:`creation_mode_table`).
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
 
 ------
 
@@ -667,8 +667,8 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
             The type must be ``UXR_SUBSCRIBER_ID``.
 :xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
-        (see :ref:`creation_mode_table`).
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
 
 ------
 
@@ -690,8 +690,8 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
             The type must be ``UXR_PARTICIPANT_ID``.
 :xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
-        (see :ref:`creation_mode_table`).
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
 
 ------
 
@@ -713,8 +713,8 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
             The type must be ``UXR_PARTICIPANT_ID``.
 :xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
-        (see :ref:`creation_mode_table`).
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
 
 ------
 
@@ -744,8 +744,8 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
             The type must be ``UXR_PARTICIPANT_ID``
 :ref: A reference to the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
-        (see :ref:`creation_mode_table`).
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
 
 ------
 
@@ -767,8 +767,8 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
             The type must be ``UXR_PARTICIPANT_ID``
 :ref: A reference to the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
-        (see :ref:`creation_mode_table`).
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
 
 ------
 
@@ -790,8 +790,8 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
             The type must be ``UXR_PUBLISHER_ID``
 :ref: A reference to the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
-        (see :ref:`creation_mode_table`).
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
 
 ------
 
@@ -813,8 +813,8 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
             The type must be ``UXR_SUBSCRIBER_ID``.
 :ref: A reference to the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
-        (see :ref:`creation_mode_table`).
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
 
 ------
 
@@ -836,8 +836,8 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
             The type must be ``UXR_PARTICIPANT_ID``.
 :ref: A reference to the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
-        (see :ref:`creation_mode_table`).
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
 
 ------
 
@@ -859,8 +859,8 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
             The type must be ``UXR_PARTICIPANT_ID``.
 :ref: A reference to the new entity.
 :mode: Determines the creation entity mode.
-        The Creation Mode Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
-        (see :ref:`creation_mode_table`).
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
 
 ------
 

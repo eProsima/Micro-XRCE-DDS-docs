@@ -22,7 +22,8 @@ The section is organized as follows:
 - :ref:`profiles`
 - :ref:`configurations`
 - :ref:`read_access`
-- :ref:`creation_mode_table`
+- :ref:`creation_mode_client`
+- :ref:`creation_policy_table`
 
 *eProsima Micro XRCE-DDS* provides the user with a C API to create *eProsima Micro XRCE-DDS Clients* applications.
 Find the full Client API in the :ref:`dedicated page <client_api_label>`.
@@ -94,11 +95,6 @@ discovery functionality.
         - Description
         - Values
         - Default
-    *   - :code:`UCLIENT_PROFILE_DISCOVERY`
-        - Enables or disables the functions of the discovery feature |br|
-          (currently, only for POSIX).
-        - :code:`<bool>`
-        - :code:`ON`
     *   - :code:`UCLIENT_PROFILE_UDP`
         - Enables or disables the possibility to connect with the *Agent* by UDP.
         - :code:`<bool>`
@@ -111,12 +107,19 @@ discovery functionality.
         - Enables or disables the possibility to connect with the *Agent* by Serial.
         - :code:`<bool>`
         - :code:`ON`
-    *   - :code:`UCLIENT_PROFILE_CUSTOM`
+    *   - :code:`UCLIENT_PROFILE_CUSTOM_TRANSPORT`
         - Enables or disables the possibility to connect with the *Agent* by Custom Transport.
         - :code:`<bool>`
         - :code:`ON`
-
-.. TODO: add framing profile to the above table
+    *   - :code:`UCLIENT_PROFILE_DISCOVERY`
+        - Enables or disables the functions of the discovery feature |br|
+          (currently, only for POSIX).
+        - :code:`<bool>`
+        - :code:`ON`
+    *   - :code:`UCLIENT_PROFILE_STREAM_FRAMING`
+        - Enables or disables the stream framing protocol.
+        - :code:`<bool>`
+        - :code:`ON`
 
 Transport profiles
 ^^^^^^^^^^^^^^^^^^
@@ -139,7 +142,8 @@ Custom        X           X
 ============ ========== =========
 
 Each available transport can be activated or desactivated via the opportune CMake flag:
-:code:`UCLIENT_PROFILE_<transport>`, where :code:`<transport> = UDP, TCP, SERIAL` or :code:`CUSTOM`.
+:code:`UCLIENT_PROFILE_<transport>`, where :code:`<transport> = UDP, TCP, SERIAL`, or
+:code:`UCLIENT_PROFILE_CUSTOM_TRANSPORT` in the case Custom transport is to be used.
 
 *eProsima Micro XRCE-DDS* provides a user API that allows interfacing with the lowest level transport layer at runtime. In this way, a user is enabled to implement its own transports based on one of the two communication approaches: stream-oriented or packet-oriented.
 By means of this API, a user can set four callbacks which will be in charge of opening and closing the transport, and writing and reading from it. This custom transport API is enabled by setting the CMake argument ``UCLIENT_PROFILE_CUSTOM_TRANSPORT=<bool>`` to true. In the case that stream-oriented transport is used ``UCLIENT_PROFILE_STREAM_FRAMING=<bool>`` should also be enabled.
@@ -248,6 +252,12 @@ By means of these flags, the user can change the default value of all the parame
           corresponds to the creation of a buffer this size.
         - :code:`<number>`
         - :code:`512`
+    *   - :code:`UCLIENT_CUSTOM_TRANSPORT_MTU`
+        - This value corresponds to the *Maximum Transmission Unit (MTU)* that can |br|
+          be sent and/or received by Custom transport. It is measured in bytes and, |br|
+          internally, it corresponds to the creation of a buffer this size.
+        - :code:`<number>`
+        - :code:`512`
 
 .. _read_access:
 
@@ -265,8 +275,10 @@ It comes with an optional ``control`` argument, that allows the *Client* setting
 
 For more information, consult the :ref:`read_access_api` of the :ref:`client_api_label`.
 
-Creation Mode
--------------
+.. _creation_mode_client:
+
+Creation Mode: Client
+---------------------
 
 The creation of :ref:`entities_label` on the *Agent* which can act on behalf of the *Clients*
 in the DDS world can be done in two ways: by XML, or by reference. In this section, we explain
@@ -277,11 +289,12 @@ XML
     with a `const char* <entity>_xml` parameter containing a string of text with XML syntax, matching the DDS rules for creating
     a DDS entity with an XML profile, as explained
     `here <https://fast-dds.docs.eprosima.com/en/latest/fastdds/xml_configuration/xml_configuration.html>`_.
-    For instance, when creating a *participant* or a *topic*, the profiles will look as follows:
+
+    For instance, when creating a *participant* or a *topic*, the profiles shall look as follows:
 
     .. code-block:: C
     
-        <!-- PARTICIPANT>    
+        <!-- PARTICIPANT -->    
         const char* participant_xml = "<dds>"
                                           "<participant>"
                                               "<rtps>"
@@ -315,11 +328,23 @@ References
     - It consumes less *Client* memory, making the application more lightweight.
     - It allows the *Clients* to write their own XML QoS and run the *Agent* with a custom configuration which can benefit of the *full set* of QoS available in DDS.
 
+    For instance, when creating a *participant* or a *topic*, the profiles shall look as follows:
 
-.. _creation_mode_table:
+    .. code-block:: C
+    
+        <!-- PARTICIPANT -->    
+        const char* participant_ref = "participant_label";
+        
+        <!-- TOPIC -->
+        const char* topic_ref = "topic_label"
 
-Creation Mode Table
--------------------
+Find more information in the :ref:`creation_mode_agent` section in the :ref:`micro_xrce_dds_agent_label` page.
+
+
+.. _creation_policy_table:
+
+Creation Policy Table
+---------------------
 
 The following table summarizes the behaviour of the *Agent* under entity creation request.
 

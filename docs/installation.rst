@@ -51,6 +51,8 @@ Now you have the executable *eProsima Micro XRCE-DDS Agent* installed in your sy
     Find out all the options offered by this CLI when running the *Agent* in the :ref:`agent_cli` section of the
     :ref:`micro_xrce_dds_agent_label` page. 
 
+.. TODO: Create a section on snap installation here.
+
 .. _install_client:
 
 Installing the Client stand-alone

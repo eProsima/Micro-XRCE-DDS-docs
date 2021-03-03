@@ -36,7 +36,7 @@ The CLI manager, along with all the built-in *Agents* available for the supporte
 
     AgentInstance& getInstance();
 
-Gets a reference to the singleton ``AgentInstance`` wrapper class,
+This function gets a reference to the singleton ``AgentInstance`` wrapper class,
 which allows launching a *Micro XRCE-DDS Agent* with user-given parameters.
 
 ------
@@ -45,7 +45,7 @@ which allows launching a *Micro XRCE-DDS Agent* with user-given parameters.
 
     bool create(int argc, char** argv);
 
-Creates a UDP/TCP/Serial *Micro XRCE-DDS Agent*, based on the given arguments.
+This function creates a UDP/TCP/Serial *Micro XRCE-DDS Agent*, based on the given arguments.
 
 Returns ``true`` if the arguments were valid and an *Agent* was successfully created, ``false`` otherwise.
 
@@ -59,7 +59,7 @@ Returns ``true`` if the arguments were valid and an *Agent* was successfully cre
 
     bool run();
 
-Starts the execution of the previously created *Agent*, until it's ended by a user's interrupt or a process error.
+This function starts the execution of the previously created *Agent*, until it's ended by a user's interrupt or a process error.
 
 ------
 
@@ -68,7 +68,7 @@ Starts the execution of the previously created *Agent*, until it's ended by a us
     template <typename ... Args>
     void add_middleware_callback(const Middleware::Kind& middleware_kind, const middleware::CallbackKind& callback_kind, std::function<void (Args ...)>&& callback_function);
 
-Sets a user-defined callback function for a specific create/delete middleware entity operation.
+This function sets a user-defined callback function for a specific create/delete middleware entity operation.
 
 :middleware_kind: Enum defining all the supported middlewares (see :ref:`middleware_abstraction_layer`).
 :callback_kind: Enum holding all the possible create/delete operations:
@@ -98,8 +98,8 @@ Sets a user-defined callback function for a specific create/delete middleware en
 eprosima::uxr::Agent
 ^^^^^^^^^^^^^^^^^^^^
 
-However, it is also possible for users to create and instantiate their own *Agent* instance, for example, to implement a :ref:`custom_transport_agent`.
-Also, in some scenarios, it could be useful to have all the necessary ``ProxyClient``s and their associated DDS entities created by the *Agent* even before
+However, it is also possible for users to create and instantiate their own *Agent*, for example, to implement a :ref:`custom_transport_agent`.
+Also, in some scenarios, it could be useful to have all the necessary ``ProxyClients`` and their associated DDS entities created by the *Agent* even before
 *Clients* are started, so that *Clients* applications can avoid the process of creating the session and the DDS entities, and can focus on the communication.
 
 This would allow a Micro XRCE-DDS Client application to be as tiny as it can be in terms of memory consumption.
@@ -151,7 +151,7 @@ It returns ``true`` if the creation was successful, ``false`` otherwise.
 :participant_id: The identifier of the participant to be created.
 :domain_id: The DDS domain ID associated to the participant.
 :xml: The XML describing the participant properties.
-:flag: It determines the creation mode of the new participant (see :ref:`creation_mode_table`).
+:flag: It determines the creation mode of the new participant (see :ref:`creation_mode_client` and :ref:`creation_mode_agent`).
 :op_result: The result status of this operation.
 
 ------
@@ -172,11 +172,8 @@ Returns ``true`` if the creation was successful, ``false`` otherwise.
 :participant_id: The identifier of the participant to be created.
 :domain_id: The DDS domain ID associated to the participant.
 :ref: The reference tag which will retrieve the participant description from the file where the references are defined, previously loaded to the *Agent*.
-:flag: It determines the creation mode of the new participant (see :ref:`creation_mode_table`).
+:flag: It determines the creation mode of the new participant (see :ref:`creation_mode_client` and :ref:`creation_mode_agent`).
 :op_result: The result status of this operation.
-
-..
-    TODO: Add reference to creation mode section (xml/ref).
 
 ------
 
@@ -226,7 +223,7 @@ This operation returns ``true`` if the entity is successfully created and linked
 :<entity>_id: The ID of the DDS entity to be created.
 :<associated_entity>_id: The identifier of the DDS entity to which this one will be assocciated.
 :xml: The XML describing the entity properties.
-:flag: It determines the creation mode of the new entity (see :ref:`creation_mode_table`).
+:flag: It determines the creation mode of the new entity (see see :ref:`creation_mode_client` and :ref:`creation_mode_agent`).
 :op_result: The result status of this operation.
 
 ------
@@ -247,11 +244,8 @@ This operation returns ``true`` if the entity is successfully created and linked
 :<entity>_id: The ID of the DDS entity to be created.
 :<associated_entity>_id: The identifier of the DDS entity to which this one will be assocciated.
 :ref: The reference tag which will retrieve the DDS entity description from the file hosting the referenced entities definitions.
-:flag: It determines the creation mode of the new entity (see :ref:`creation_mode_table`).
+:flag: It determines the creation mode of the new entity (see see :ref:`creation_mode_client` and :ref:`creation_mode_agent`).
 :op_result: The result status of this operation.
-
-..
-    TODO: Add reference to creation mode section (xml/ref).
 
 ------
 
@@ -271,21 +265,24 @@ It returns ``true`` if the entity is correctly removed, ``false`` otherwise.
 
 ------
 
+.. _load_config_file:
+
 .. code-block:: cpp
 
     bool load_config_file(const std::string& file_path);
 
-This function loads a configuration file that provides the tagged XML definitions of the desired XRCE entities that can be created using the reference creation mode.
+This function loads a configuration file that provides the tagged XML definitions of the desired XRCE entities that can be created using the reference creation mode (see see :ref:`creation_mode_client` and :ref:`creation_mode_agent`).
 
 The used syntax must match the one defined for [FastDDS XML profile syntax](https://fast-dds.docs.eprosima.com/en/latest/fastdds/xml_configuration/xml_configuration.html),
 where the *profile name* attributes represent the reference names.
 
-This function returns ``true`` if the file was correctly loaded, ``false`` otherwise.
-
-..
-    TODO: Add reference to creation mode section (xml/ref).
+It returns ``true`` if the file was correctly loaded, ``false`` otherwise.
 
 :file_path: Relative path to the file containing the DDS entities description in XML format, tagged accordingly to be referenced by the API.
+
+.. note::
+    This function needs to be called when implementing a Custom transport in the case creation of entities by reference
+    is used.
 
 ------
 
@@ -313,3 +310,10 @@ This function sets the verbose level of the logger, from **0** (logger is off) t
     void add_middleware_callback(const Middleware::Kind& middleware_kind, const middleware::CallbackKind& callback_kind, std::function<void (Args ...)>&& callback_function);
 
 This function exposes the same functionality as the one described in :code:`add_middleware_callback`, for :ref:`agent_instance_class_api`.
+
+.. _server_class_api:
+
+eprosima::uxr::Server
+^^^^^^^^^^^^^^^^^^^^^
+
+.. TODO: document start and stop functions.

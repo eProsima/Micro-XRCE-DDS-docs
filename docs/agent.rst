@@ -24,6 +24,7 @@ This section is organized as follow:
 - :ref:`agent_cli`
 - :ref:`custom_transport_agent`
 - :ref:`agent_configuration`
+- :ref:`creation_mode_agent`
 - :ref:`middleware_abstraction_layer`
 
 .. _agent_cli:
@@ -172,6 +173,61 @@ The following is a table listing these parameters and the functionalities they c
          - Server buffer size.
          - :code:`<number>`
          - :code:`65535`
+
+.. _creation_mode_agent:
+
+Creation Mode: Agent
+--------------------
+
+As explained in the :ref:`creation_mode_client` section in the :ref:`micro_xrce_dds_client_label` page, the creation of :ref:`entities_label` on the *Agent* can be done in two ways: by XML, or by reference.
+While the creation by XML is configured directly on the *Client*, creation by reference must be configured on the *Agent*, via
+an ``agent.refs`` file which must be loaded as a CLI parameter by using the
+``-r`` option followed by the path to the reference file. If a Custom trasnport is used, the ``agent.refs`` file must be fed to the
+:ref:```load_config_file`` <load_config_file>` function defined in the *Agent*.
+
+The ``agent.refs`` file should define the desired profiles as follows:
+
+.. code-block:: cpp
+
+    <profiles>
+        <participant profile_name="default_xrce_participant">
+            <rtps>
+                <name>default_xrce_participant</name>
+            </rtps>
+        </participant>
+        <data_writer profile_name="shapetype_data_writer">
+            <topic>
+                <kind>WITH_KEY</kind>
+                <name>Square</name>
+                <dataType>ShapeType</dataType>
+            </topic>
+        </data_writer>
+        <data_reader profile_name="shapetype_data_reader">
+            <topic>
+                <kind>WITH_KEY</kind>
+                <name>Square</name>
+                <dataType>ShapeType</dataType>
+            </topic>
+        </data_reader>
+        <topic profile_name="shapetype_topic">
+            <kind>WITH_KEY</kind>
+            <name>Square</name>
+            <dataType>ShapeType</dataType>
+        </topic>
+        <requester profile_name="shapetype_requester"
+                  service_name="shapetype_service"
+                  request_type="request_type"
+                  reply_type="reply_type">
+        </requester>
+        <replier profile_name="shapetype_replier"
+                service_name="shapetype_service"
+                request_type="request_type"
+                reply_type="reply_type">
+        </replier>
+    </profiles>
+
+In the reference file, each entity must be associated to a ``profile_name`` which serves as a label to which the *Client* can refere
+when creating entities.
 
 .. _middleware_abstraction_layer:
 
