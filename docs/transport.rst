@@ -362,6 +362,8 @@ Read function
     * **Packet-oriented mode:** The function should retrieve :code:`length` Bytes from transport
       and write them into :code:`buffer` in :code:`timeout` milliseconds. If less than :code:`length` Bytes are read :code:`errcode` can be set.
 
+.. _custom_agent:
+
 Micro XRCE-DDS Agent
 ^^^^^^^^^^^^^^^^^^^^^
 

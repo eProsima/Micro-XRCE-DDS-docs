@@ -273,7 +273,7 @@ It returns ``true`` if the entity is correctly removed, ``false`` otherwise.
 
 This function loads a configuration file that provides the tagged XML definitions of the desired XRCE entities that can be created using the reference creation mode (see see :ref:`creation_mode_client` and :ref:`creation_mode_agent`).
 
-The used syntax must match the one defined for [FastDDS XML profile syntax](https://fast-dds.docs.eprosima.com/en/latest/fastdds/xml_configuration/xml_configuration.html),
+The used syntax must match the one defined for `FastDDS XML profile syntax <https://fast-dds.docs.eprosima.com/en/latest/fastdds/xml_configuration/xml_configuration.html>`_,
 where the *profile name* attributes represent the reference names.
 
 It returns ``true`` if the file was correctly loaded, ``false`` otherwise.
@@ -283,6 +283,8 @@ It returns ``true`` if the file was correctly loaded, ``false`` otherwise.
 .. note::
     This function needs to be called when implementing a Custom transport in the case creation of entities by reference
     is used.
+    This function must be called before :ref:`server_class_api` :code:`start` method.
+
 
 ------
 
@@ -298,7 +300,12 @@ This function deletes all the ``ProxyClient`` instances and their associated DDS
 
     void set_verbose_level(uint8_t verbose_level);
 
-This function sets the verbose level of the logger, from **0** (logger is off) to **6** (critical, error, warning, info, debug, and trace messages are displayed). Intermediate tracing levels display information up to the position in the aforementioned list; for example, level **4** shows critical, error, warning and info messages.
+This function sets the verbose level of the logger, from **0** (logger is off) to **6** (critical, error, warning, info, debug, and trace messages are displayed).
+
+Intermediate tracing levels display information up to the position in the aforementioned list; for example, level **4** shows critical, error, warning and info messages.
+
+.. note::
+    This function must be called before :ref:`server_class_api` :code:`start` method.
 
 :verbose_level: The level to be set.
 
@@ -311,9 +318,38 @@ This function sets the verbose level of the logger, from **0** (logger is off) t
 
 This function exposes the same functionality as the one described in :code:`add_middleware_callback`, for :ref:`agent_instance_class_api`.
 
+.. note::
+    This function must be called before :ref:`server_class_api` :code:`start` method.
+
 .. _server_class_api:
 
 eprosima::uxr::Server
 ^^^^^^^^^^^^^^^^^^^^^
 
-.. TODO: document start and stop functions.
+This class inherits from :ref:`agent_class_api` and it is the base class used for implementing any of the built-in *Agent* servers that are available by default in the standalone executable that is generated when the library is compiled and installed (see :ref:`Installation Manual<install_agent>`),
+and that can be launched and used by means of the built-in :ref:`agent_cli`.
+
+Also, when creating a :ref:`Custom Agent <custom_agent>`, which inherits directly from :ref:`server_class_api` users will need to call the `start()` method after configuring the *Agent*, if applicable (namely, by using :code:`load_config_file`, :code:`set_verbose_level` or :code:`add_middleware_callback` methods).
+An example on how to do this can be found `here <https://github.com/eProsima/Micro-XRCE-DDS-Agent/blob/develop/examples/custom_agent/custom_agent.cpp#L234>`_.
+
+------
+
+.. code-block:: cpp
+
+    bool start();
+
+Launches the threads involved in the *Agent* server communication, namely, receiver and sender thread for getting/dispatching messages;
+processing thread, to process the messages; and a heartbeat and an error handler thread.
+After calling this method, the communication between the *Agent* and the *Clients* can effectively start.
+
+This method returns ``true`` if the server has been correctly started, or ``false`` if some error happened during startup.
+
+------
+
+.. code-block:: cpp
+
+    bool stop();
+
+Stops a previously launched :ref:`server_class_api` and all of its associated threads.
+
+This method returns ``true`` if the stopping process was successful, or ``false`` otherwise.
