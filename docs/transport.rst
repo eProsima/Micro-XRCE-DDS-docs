@@ -188,7 +188,7 @@ This workflow could be divided into the following steps:
 
 This approach has some advantages which should be pointed out:
 
-    1. The HDLD framing and the CRC control provide **integrity** and **security** to the Stream Framing.
+    1. The HDLC framing and the CRC control provide **integrity** and **security** to the Stream Framing.
     2. The framing technique allows to **reduce memory usage**.
        The reason is that the Framing Buffer size (42 bytes) bounds the Device Buffer size.
     3. The framing technique also allows sending **large data** over stream-oriented transports.

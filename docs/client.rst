@@ -168,7 +168,7 @@ Find out more in the :ref:`dedicated section <discovery_api>` of the API.
 Framing profile
 ^^^^^^^^^^^^^^^
 
-.. TODO: add info/description
+Framing profile enables :ref:`HDLC Framing <_stream_framing_label>` for using :ref:`stream-oriented transports <_intro_transport>` such as Serial transports or custom transports that required framing.
 
 .. _configurations:
 
