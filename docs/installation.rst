@@ -51,7 +51,8 @@ Now you have the executable *eProsima Micro XRCE-DDS Agent* installed in your sy
     Find out all the options offered by this CLI when running the *Agent* in the :ref:`agent_cli` section of the
     :ref:`micro_xrce_dds_agent_label` page. 
 
-.. TODO: Create a section on snap installation here.
+.. note::
+    If you wish, you can also install the Micro XRCE-DDS Agent as a `Snap package. <https://snapcraft.io/micro-xrce-dds-agent>`_ To do so, simply execute ``sudo snap install micro-xrce-dds-agent`` in your Linux console. You can add the ``--edge`` flag.
 
 .. _install_client:
 
