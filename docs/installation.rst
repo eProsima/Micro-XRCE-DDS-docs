@@ -49,10 +49,32 @@ Now you have the executable *eProsima Micro XRCE-DDS Agent* installed in your sy
 .. important::
     The *eProsima Micro XRCE-DDS Agent* executable comes with a rich CLI.
     Find out all the options offered by this CLI when running the *Agent* in the :ref:`agent_cli` section of the
-    :ref:`micro_xrce_dds_agent_label` page. 
+    :ref:`micro_xrce_dds_agent_label` page.
 
-.. note::
-    If you wish, you can also install the Micro XRCE-DDS Agent as a `Snap package. <https://snapcraft.io/micro-xrce-dds-agent>`_ To do so, simply execute ``sudo snap install micro-xrce-dds-agent`` in your Linux console. You can add the ``--edge`` flag.
+Installation from Snap package
+******************************
+
+    If you wish, you can also install the *eProsima Micro XRCE-DDS Agent* as a `Snap package. <https://snapcraft.io/micro-xrce-dds-agent>`_
+
+    To do so, simply execute ``sudo snap install micro-xrce-dds-agent`` in your Linux console.
+    This will download the Snap package corresponding to the ``stable`` version, that is, *master* branch on GitHub.
+
+    You can add the ``--edge`` flag to the installation command, just in case you want to download the Snap image corresponding to the *develop* branch on the upstream source code repository.
+
+.. _install_agent_docker:
+
+Using the provided Docker image
+*******************************
+
+    The *eProsima Micro XRCE-DDS Agent* can also be launched directly from its dedicated `Docker image. <https://hub.docker.com/r/eprosima/micro-xrce-dds-agent>`_
+
+    You can pull the image to your local machine by executing ``docker pull eprosima/micro-xrce-dds-agent:<tag> <<args>>``, with *tag* being one of the following options:
+
+    * ``stable``: `Micro XRCE-DDS Agent master <https://github.com/eProsima/Micro-XRCE-DDS-Agent/tree/master>`_ branch.
+    * ``latest``: `Micro XRCE-DDS Agent develop <https://github.com/eProsima/Micro-XRCE-DDS-Agent/tree/develop>`_ branch)
+    * ``vM.m.p``: `Micro XRCE-DDS Agent tagged <https://github.com/eProsima/Micro-XRCE-DDS-Agent/tags>`_ versions, with the *Major*, *minor*, *patch* structure.
+
+    The accepted arguments for ``<<args>>`` are exactly the same ones which are listed in the :ref:`agent_cli` section.
 
 .. _install_client:
 
@@ -93,6 +115,23 @@ For building your Client app in your host machine, you need to build against the
 
     gcc <your_main.c> -lmicrocdr -lmicroxrcedds_client
 
+.. _install_client_docker:
+
+Using the provided Docker image
+*******************************
+
+    The *eProsima Micro XRCE-DDS Client* comes with a `Docker image <https://hub.docker.com/r/eprosima/micro-xrce-dds-agent>`_ where the library is installed, as well as the provided examples, so users can easily execute them.
+
+
+    You can pull the image to your local machine by executing ``docker pull eprosima/micro-xrce-dds-client:<tag> <<args>>``, with *tag* being one of the following options:
+
+    * ``stable``: `Micro XRCE-DDS Client master <https://github.com/eProsima/Micro-XRCE-DDS-Client/tree/master>`_ branch.
+    * ``latest``: `Micro XRCE-DDS Client develop <https://github.com/eProsima/Micro-XRCE-DDS-Client/tree/develop>`_ branch)
+    * ``vM.m.p``: `Micro XRCE-DDS Client tagged <https://github.com/eProsima/Micro-XRCE-DDS-Client/tags>`_ versions, with the *Major*, *minor*, *patch* structure.
+
+    The accepted arguments for ``<<args>>`` are the examples' executable names, along with the arguments required for each example to work.
+    `Here <https://github.com/eProsima/Micro-XRCE-DDS-Client/tree/master/examples>`_ you can find a list of all the available examples; note that they may differ between *master* and *develop* branches and tagged versions.
+
 .. _install_gen:
 
 Installing the Micro XRCE-DDS Gen tool
@@ -105,11 +144,11 @@ Clone the project from GitHub: ::
     $ cd Micro-XRCE-DDS-Gen
     $ git submodules init
     $ git submodules update
-    $ gradle build -Dbranch=v1.2.5  
+    $ gradle build -Dbranch=v1.2.5
 
 You will have the *Micro XRCE-DDS-Gen* tool available as: ::
 
-    $ ./scripts/microxrceddsgen -help 
+    $ ./scripts/microxrceddsgen -help
 
 .. _install_agent_client:
 
@@ -140,3 +179,24 @@ Usually is useful to install examples along with the XRCE-DDS suite, for doing s
 .. note::
     If you want to install the *eProsima Micro XRCE-DDS* examples, you can add :code:`-DUXRCE_BUILD_EXAMPLES=ON`
     to the :code:`cmake ..` command-line options. This flag will enable the compilation of the examples.
+
+.. _install_agent_client_docker:
+
+Using the provided Docker image
+*******************************
+
+    *eProsima Micro XRCE-DDS* is also available as a whole package in a `Docker image. <https://hub.docker.com/r/eprosima/micro-xrce-dds-agent>`_
+
+    Within this Docker image, the *Micro XRCE-DDS Agent* standalone application and library are installed, as well as the *Micro XRCE-DDS Client* library and built-in examples.
+
+    You can pull the image to your local machine by executing ``docker pull eprosima/micro-xrce-dds:<tag> <<args>>``, with *tag* being one of the following options:
+
+    * ``stable``: `Micro XRCE-DDS master <https://github.com/eProsima/Micro-XRCE-DDS/tree/master>`_ branch.
+    * ``latest``: `Micro XRCE-DDS develop <https://github.com/eProsima/Micro-XRCE-DDS/tree/develop>`_ branch)
+    * ``vM.m.p``: `Micro XRCE-DDS tagged <https://github.com/eProsima/Micro-XRCE-DDS/tags>`_ versions, with the *Major*, *minor*, *patch* structure.
+
+    The accepted arguments for ``<<args>>`` are:
+
+    * To launch the *Micro XRCE-DDS Agent*: ``MicroXRCEAgent <<agent_args``, being ``<<agent_args>>`` the ones described in the :ref:`agent_cli` section.
+
+    * The *Micro XRCE-DDS Client* examples' executable names, as explained :ref:`above.<install_client_docker>`
