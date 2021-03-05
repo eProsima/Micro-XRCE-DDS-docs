@@ -76,15 +76,15 @@ For sending and receiving data from/to DDS, the Client has access to the *DataWr
 These entities handle the writing/reading operations.
 For sending and receiving any topic, the *Write Data* and *Read Data* operations must be used.
 
-If you want to remove any entity from the Agent, you can use the *Delete entity* operation.
-Also, to log out a Client session from the Agent, you can use the *Delete session* operation.
+To remove any entity from the Agent, use the *Delete entity* operation.
+Also, to log out a Client session from the Agent, use the *Delete session* operation.
 
 .. _operations_label:
 
 Operations
 ^^^^^^^^^^
 
-Operations are the possible actions your *eProsima Micro XRCE-DDS Client* can request
+Operations are the possible actions the *eProsima Micro XRCE-DDS Client* can request
 to the *eProsima Micro XRCE-DDS Agent*.
 Operations revolve around :ref:`entities_label`.
 The *eProsima Micro XRCE-DDS Agent* will respond to all the requests with the status of the operation.
@@ -104,7 +104,7 @@ The *eProsima Micro XRCE-DDS Agent* will respond to all the requests with the st
         - This operation deletes the *Client-Agent* connection and removes all entities associated with it.
           After this operation, |br| any other operation except *Create session* will fail.
     *   - *Create entity*
-        - A session can create all the entities it needs. There is a *Create entity* operation for each entity your
+        - A session can create all the entities it needs. There is a *Create entity* operation for each entity the
           session can handle. |br| Each *Create entity* operation is related to an ID for its management.
     *   - *Delete entity*
         - Analogously, a session can delete the entities that were previously created on the *Agent*.

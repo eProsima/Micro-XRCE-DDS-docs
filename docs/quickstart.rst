@@ -35,7 +35,7 @@ On Linux, this would be: ::
     $ make
     $ sudo make install
 
-After having installed the *Agent* system-wide, you can launch it.
+After having installed the *Agent* system-wide, it's possible to launch it.
 
 For this example, the *Client*-*Agent* communication will be done through UDP, using the port :code:`2019`
 and with the XML creation mode, which is the default mode for creating entities: ::
@@ -111,7 +111,7 @@ The source code of the :code:`SubscribeHelloWorldClient` can be found in
 
 At this point, the subscriber will receive the topics that are being sent by the publisher.
 
-In order to see the messages from the DDS Global Data Space point of view, you can use the *eProsima Fast DDS* HelloWorld example
+In order to see the messages from the DDS Global Data Space point of view, use the *eProsima Fast DDS* HelloWorld example
 running a subscriber. Find more information on how to do so at
 `Fast DDS HelloWorld <https://fast-dds.docs.eprosima.com/en/latest/fastdds/getting_started/simple_app/simple_app.html#writing-a-simple-publisher-and-subscriber-application>`_.
 

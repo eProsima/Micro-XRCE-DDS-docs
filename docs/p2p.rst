@@ -53,7 +53,7 @@ On Linux, this would be: ::
     $ make
     $ sudo make install
 
-After having installed the *Agent* system-wide, you can launch it with the :code:`ced` option activated: ::
+After having installed the *Agent* system-wide, launch it with the :code:`ced` option activated: ::
 
     $ ./MicroXRCEAgent udp4 -p <port> -m ced -d
 

@@ -4,7 +4,7 @@ Transport
 =========
 
 This section shows how the transport layer is implemented in both *eProsima Micro XRCE-DDS Agent* and *eProsima Micro XRCE-DDS Client*.
-Furthermore, this section describes how to add your custom transport in *eProsima Micro XRCE-DDS*.
+Furthermore, this section describes how to add a Custom transport in *eProsima Micro XRCE-DDS*.
 It is organized as follows:
 
 - :ref:`intro_transport`

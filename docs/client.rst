@@ -83,10 +83,11 @@ Profiles
 The *Client* library follows a profile concept that enables to choose, add or remove some features at **compile-time**,
 thus allowing to customize the *Client* library size, if there are features that are not used.
 
-The profiles can be chosen using CMake arguments and start with the prefix :code:`UCLIENT_PROFILE`.
+The profiles can be chosen using CMake arguments and start with the prefix :code:`UCLIENT_PROFILE`
+(:code:`-D<parameter>=<value>`) before the compilation.
 
 By means of these profiles, the user can choose which transport to use, and whether to enable or not the
-discovery functionality.
+discovery and framing functionalities.
 
 .. list-table::
     :header-rows: 1
@@ -176,9 +177,8 @@ Configurations
 --------------
 
 There are several definitions for configuring and building the *Client* library at **compile-time**.
-These definitions allow you to create a version of the library according to your requirements.
-These definitions can be modified through CMake flags:
-
+These definitions allow users to create a version of the library according to their requirements.
+These parameters can be selected as CMake flags (:code:`-D<parameter>=<value>`) before the compilation.
 By means of these flags, the user can change the default value of all the parameters listed below.
 
 .. list-table::

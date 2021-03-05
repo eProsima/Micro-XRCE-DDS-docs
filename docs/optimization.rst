@@ -13,13 +13,13 @@ Executable code size
 --------------------
 
 To tune the executable code size, the library can be compiled enabling or disabling several profiles.
-To add or remove profiles from the library, you can enable or disable them as CMake arguments.
+To add or remove profiles from the library, enable or disable them as CMake arguments.
 More information can be found at: :ref:`micro_xrce_dds_client_label`.
 
 .. important::
     
-    If you are compiling your app with *gcc*, its highly recommended compile it with the linker flag: ``-Wl,--gc-sections``.
-    It will remove the code that your app does not use from the final executable.
+    When compiling with *gcc*, it is highly recommended to compile it with the linker flag: ``-Wl,--gc-sections``.
+    It will remove the code that the app doesn't use from the final executable.
 
 Runtime size
 ------------
@@ -32,7 +32,7 @@ Stream buffers
 ~~~~~~~~~~~~~~
 
 Streams number
-   You can define a maximum of *127* best-effort streams and of *128* reliable streams.
+   It's possile to define a maximum of *127* best-effort streams and of *128* reliable streams.
    However, for most purposes, only one stream - either best effort or reliable - is needed.
 
 History of a reliable stream
@@ -42,7 +42,7 @@ History of a reliable stream
    However, if the history of an output stream is full (no messages confirmed by the *Agent* yet), 
    no more messages can be stored in the stream.
    For input streams, the history is used for recovering lost messages faster while reducing the bandwidth.
-   If your connection is highly reliable and saving memory is a priority, a reduced history can be used.
+   If the connection is highly reliable and saving memory is a priority, a reduced history can be used.
 
 Stream size
    In case of reliable communciation, this size is equal to :code:`MAX_MESSAGE_SIZE * HISTORY`.
