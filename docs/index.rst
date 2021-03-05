@@ -79,7 +79,7 @@ This example is useful to understand how the DDS-XRCE protocol interfaces with t
 To learn how to handle all the ingredients needed to create a *Client*, carefully read the :ref:`getting_started_label` page.
 This page describes how to use the *eProsima Micro XRCE-DDS* API in order to set up and run a *Client* application.
 
-A genric introduction to the library can be found in the :ref:`user` page.
+A generic introduction to the library can be found in the :ref:`user` page.
 To know more about *Clients* and *Agents*, find detailed information in the :ref:`micro_xrce_dds_client_label` and :ref:`client_api_label` pages, and in the :ref:`micro_xrce_dds_agent_label` and :ref:`agent_api_label` pages respectively.
 
 eProsima Micro XRCE-DDS Gen
