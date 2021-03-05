@@ -32,7 +32,7 @@ Stream buffers
 ~~~~~~~~~~~~~~
 
 Streams number
-   It's possile to define a maximum of *127* best-effort streams and of *128* reliable streams.
+   It's possible to define a maximum of *127* best-effort streams and of *128* reliable streams.
    However, for most purposes, only one stream - either best effort or reliable - is needed.
 
 History of a reliable stream
