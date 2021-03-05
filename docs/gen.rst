@@ -8,6 +8,9 @@ eProsima Micro XRCE-DDS Gen
 This tool can generate from a given IDL specification file, the C struct associated with the
 Topic, as well as the serialization and deserialization methods.
 Also, it can generate a sample demo that works with the proposed topic.
+
+To find out how to install this package, refer to the :ref:`install_gen` section.
+
 As an example of the potential of this tool, the following shows the source code generated from the ShapeDemo IDL file.
 
 ::
@@ -72,28 +75,7 @@ it will generate the following header file and its corresponding source:
 The *Client* library must be compiled with the ``WRITE_ACCESS_PROFILE`` option for the *publisher*, to use these examples
 and the ``READ_ACCESS_PROFILE`` option for the *subscriber*.
 
-Installation
-------------
+.. note::
 
-To use *eProsima Micro XRCE-DDS Gen*, it is needed to follow the next steps:
-
-1. Install its dependencies:
-
-    1.1 `Gradle <https://gradle.org/install/>`_.
-
-    1.2 `Java JDK <http://www.oracle.com/technetwork/java/javase/downloads/index.html>`_.
-
-2. Clone the code from the GitHub repository. ::
-
-    $ git clone --recursive https://github.com/eProsima/micro-XRCE-DDS-gen.git
-    $ cd micro-XRCE-DDS-gen
-
-3. Build the code with Gradle. ::
-
-    $ gradle build
-
-Notes
------
-
-At present, *eProsima Micro XRCE-DDS Gen* only supports Structs composed of integer, string, array and sequence types,
-even though it is planned to enhance the capabilities of the *eProsima Micro XRCE-DDS Gen* tool in a near future.
+    At present, *eProsima Micro XRCE-DDS Gen* only supports Structs composed of integer, string, array and sequence types,
+    even though it is planned to enhance the capabilities of the *eProsima Micro XRCE-DDS Gen* tool in a near future.
