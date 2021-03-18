@@ -274,7 +274,7 @@ The number of available calls to this function must be less or equal than ``CONF
 :size: Buffer size.
 :history: History used for reliable connection.
           The buffer size is split into a ``history`` number of smaller buffers.
-          The history must be a divisor of the buffer size.
+          The history must be a divisor of the buffer size and a power of two.
 
 ------
 
@@ -303,7 +303,7 @@ The number of available calls to this function must be less or equal than ``CONF
 :size: Buffer size.
 :history: History used for reliable connection.
           The buffer size is split into a ``history`` number of smaller buffers.
-          The history must be a divisor of the buffer size.
+          The history must be a divisor of the buffer size and a power of two.
 
 ------
 
