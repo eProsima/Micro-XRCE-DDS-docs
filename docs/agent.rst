@@ -109,25 +109,25 @@ Once it is built successfully, launch it executing one of the following commands
 Middleware Abstraction Layer
 ----------------------------
 
-The Middleware Abstraction Layer is an interface whose purpose is to isolated the XRCE core from the middleware, as well as, to allow providing multiple middleware implementations.
-The interface has a set of pure virtual functions, which are called by the `ProxyClient` each time a *Client* requests for creating/deleting an entity or write/read data.
+The Middleware Abstraction Layer is an interface whose purpose is to isolate the XRCE core from the middleware, as well as to allow providing multiple middleware implementations.
+The interface has a set of pure virtual functions, which are called by the `ProxyClient` each time a *Client* requests to create/delete an entity or to write/read data.
 
 .. image:: images/middleware_abstraction_layer.svg
 
-For the moment, the *Agent* counts with two middleware implementations: *FastMiddleware* and *CedMiddleware*.
+Currently, the *Agent* comes with two middleware implementations: *FastMiddleware* and *CedMiddleware*.
 
 FastMiddleware
 ^^^^^^^^^^^^^^
 
 The *FastMiddleware* uses *eProsima Fast RTPS*, a C++ implementation of the RTPS (Real Time Publish Subscribe) protocol.
-This middleware allows *Client* to produce and consume data in the DDS Global Data Space, and consequently in the ROS 2 system.
+This middleware allows a *Client* to produce and consume data in the DDS Global Data Space, and consequently communicate with a ROS 2 system.
 In that case, the *Agent* has the default behaviour as described in the DDS-XRCE standard, that is, for each DDS-XRCE entity a DDS proxy entity is created, and the writing/reading action produces a publishing/subscribing operation in the DDS world.
 
 FastDDSMiddleware
-^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^
 
 The *FastDDSMiddleware* uses *eProsima Fast DDS*, a C++ implementation of the DDS standard.
-This middleware allows *Client* to produce and consume data in the DDS Global Data Space, and consequently in the ROS 2 system.
+This middleware allows a *Client* to produce and consume data in the DDS Global Data Space, and consequently communicate with a ROS 2 system.
 As in the previous case, for each DDS-XRCE entity a DDS proxy entity is created, and the writing/reading action produces a publishing/subscribing operation in the DDS world (as described in the DDS-XRCE standard).
 
 .. _ced_middleware_label:
@@ -135,15 +135,15 @@ As in the previous case, for each DDS-XRCE entity a DDS proxy entity is created,
 CedMiddleware
 ^^^^^^^^^^^^^
 
-The *CedMiddleware* (Centralized Middleware) works similar to MQTT, that is, the *Agent* acts as a broker:
+The *CedMiddleware* (Centralized Middleware) works similar to MQTT, that is, the *Agent* acts as a broker by:
 
-* accepting connection from *Clients*,
-* accepting topics messages published by *Client*,
-* processing subscribe and unsubscribe requests from *Client*,
-* forwarding topics messages that match *Client* subscriptions,
+* accepting connections from *Clients*,
+* accepting topic messages published by *Clients*,
+* processing subscribe and unsubscribe requests from *Clients*,
+* forwarding topic messages that match a *Client's* subscriptions,
 * and closing the connection from the *Client*.
  
-By default, this middleware does not allow communication between *Client* connected to different *Agent*, but the :ref:`P2P communication <p2p_communication_label>` enable this feature.
+By default, this middleware does not allow communication between *Clients* connected to different *Agents*, but the :ref:`P2P communication <p2p_communication_label>` enables this feature.
 
 How to add a middleware
 ^^^^^^^^^^^^^^^^^^^^^^^
