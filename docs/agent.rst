@@ -248,6 +248,7 @@ FastDDSMiddleware
 ^^^^^^^^^^^^^^^^^
 
 The *FastDDSMiddleware* uses *eProsima Fast DDS*, a C++ implementation of the DDS standard.
+
 This middleware allows the *Clients* to produce and consume data in the DDS Global Data Space, and as such also in the
 ROS 2 ecosystem.
 The *Agent* has the behaviour described in the *DDS-XRCE* standard, that is, for each *DDS-XRCE*
