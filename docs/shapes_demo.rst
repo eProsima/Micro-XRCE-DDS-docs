@@ -44,7 +44,7 @@ tree, entity_tree            <id>:
 h, help:
     Shows this message.
 
-For example, to create a publisher *Client* that sends a square Topic in reliable mode, you need to run the following commands: ::
+For example, to create a publisher *Client* that sends a square Topic in reliable mode, run the following commands: ::
 
     > create_session
     > create_participant 1
@@ -66,7 +66,7 @@ In case of a subscriber *Client* that receives square topics in a reliable mode,
 
 This *Client* will receive 5 topics in reliable mode.
 
-To create the entities tree easily, you can run the command ``entity_tree <id>``.
+To create the entities tree easily, run the command ``entity_tree <id>``.
 For example, the following command creates the necessary entities for publishing and subscribing data with id `3`: ::
 
     > entity_tree 3
@@ -77,10 +77,10 @@ For example, the following command creates the necessary entities for publishing
     create_datawriter 3 3
     create_datareader 3 3
 
-To modify the output default stream, you can change it with `stream <id>`.
+To modify the output default stream, change it with `stream <id>`.
 
-The maximum available streams corresponds with the ``CONFIG_MAX_OUTPUT_BEST_EFFORT_STREAMS`` and
-``CONFIG_MAX_OUTPUT_RELIABLE_STREAMS`` properties configurable in ``client.config`` file.
+The maximum available streams correspond to the ``CONFIG_MAX_OUTPUT_BEST_EFFORT_STREAMS`` and
+``CONFIG_MAX_OUTPUT_RELIABLE_STREAMS`` properties as CMake arguments.
 
     > stream 1
 
