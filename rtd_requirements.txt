@@ -1,5 +1,5 @@
 sphinxcontrib-svg2pdfconverter
-sphinx==3.0.3
+sphinx==3.2.1
 breathe==4.19.0
 doc8==0.8.0
 sphinx_rtd_theme==0.4.3
