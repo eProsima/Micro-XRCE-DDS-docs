@@ -333,7 +333,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    ("contents", 'MicroXRCE-DDS.tex', u'MicroXRCE-DDS Documentation',
+    (master_doc, 'MicroXRCE-DDS.tex', u'MicroXRCE-DDS Documentation',
      u'eProsima', 'manual'),
 ]
 
