@@ -144,8 +144,8 @@ Clone the project from GitHub: ::
     $ sudo apt install git openjdk-8-jdk gradle
     $ git clone https://github.com/eProsima/Micro-XRCE-DDS-Gen.git
     $ cd Micro-XRCE-DDS-Gen
-    $ git submodules init
-    $ git submodules update
+    $ git submodule init
+    $ git submodule update
     $ gradle build -Dbranch=v1.2.5
 
 The *Micro XRCE-DDS-Gen* tool will be available as: ::
