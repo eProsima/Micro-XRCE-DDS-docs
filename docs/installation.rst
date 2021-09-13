@@ -5,6 +5,7 @@ Installation
 
 In this section, instructions are provided to install the following packages:
 
+- :ref:`docker_install`
 - :ref:`install_agent`
 - :ref:`install_client`
 - :ref:`install_gen`
@@ -13,6 +14,12 @@ In this section, instructions are provided to install the following packages:
 The user can decide wether to install the *Agent* and *Client* as stand-alone packages,
 or together. If the first approach is chosen, refer to the :ref:`Release Notes <notes_label>`
 section in order to match versions that are compatible.
+
+.. _docker_install:
+
+Using pre-installed docker images
+--------------------------------
+Download `here <https://www.eprosima.com/index.php/downloads-all>`_ the Micro XRCE-DDS docker image that contains a pre-installed client and agent as well as some compiled examples.
 
 .. _install_agent:
 
