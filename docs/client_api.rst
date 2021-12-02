@@ -1163,6 +1163,8 @@ into a specific output stream.
 It initializes a ``ucdrBuffer`` struct where a data of ``data_size`` size must be serialized.
 If there is sufficient space for writing ``data_size`` bytes into the stream, the returned value is the XRCE request ID, otherwise it is ``0``.
 The topic is sent in the following ``run_session`` function.
+If ``UCLIENT_PROFILE_MULTITHREAD`` is enabled, user should unlock the stream lock after serializing the requested amount of data using
+``UXR_UNLOCK_STREAM_ID(session, stream_id);``
 
 .. note::
     All ``data_size`` bytes requested are sent to the *Agent* after a ``run_session`` call,
@@ -1233,6 +1235,8 @@ This function initializes an ``ucdrBuffer`` struct where a topic of ``data_size`
 If there is sufficient space for writing ``data_size`` bytes into the stream, the returned value is the XRCE request ID, otherwise it is ``0``.
 The topic is sent in the following ``run_session`` function. If, during the serialization process, the buffer gets overfilled, the
 ``flush_callback`` function is called and the user has to run a session for flushing the stream.
+If ``UCLIENT_PROFILE_MULTITHREAD`` is enabled, user should unlock the stream lock after serializing the requested amount of data using
+``UXR_UNLOCK_STREAM_ID(session, stream_id);``
 
 .. note::
     This approach is not valid for best-effort streams.
