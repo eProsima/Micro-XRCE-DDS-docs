@@ -1423,27 +1423,45 @@ This function creates an identifier to reference an entity.
 
 .. code-block:: c
 
-    bool uxr_ping_agent(const uxrCommunication* comm, const int timeout);
+    bool uxr_ping_agent_session(struct uxrSession* session, const int timeout_ms, const uint8_t attempts);
 
 This function pings a *Micro XRCE-DDS Agent* to check if it is already up and running.
 
-This method does not require an XRCE session to be established beforehand.
+This method does require an XRCE session to be established beforehand. Internally it spins the session until
+ping answer is received or it timeouts.
 
 It returns ``true`` if a response was received from the *Agent*, ``false`` otherwise.
 
-:comm: A pointer to a properly initialized XRCE-DDS communication structure, used to send the ping request.
-:timeout: The maximum time that the *Client* will wait to receive the answer (*pong*) message, before returning.
+:session: A pointer to a properly initialized XRCE-DDS session, used to send the ping request.
+:timeout_ms: The maximum time that the *Client* will wait to receive the answer (*pong*) message, before returning.
+:attempts: Maximum amount of times that the *Client* will try to ping the *Agent* and receive a response back.
 
 ------
 
 .. code-block:: c
 
-    bool uxr_ping_agent_attempts(const uxrCommunication* comm, const int timeout, const uint8_t attempts);
+    bool uxr_ping_agent(const uxrCommunication* comm, const int timeout_ms);
+
+This function pings a *Micro XRCE-DDS Agent* to check if it is already up and running.
+
+This method does not require an XRCE session to be established beforehand. It acts directly over
+the transport layer so if a session is running simultaneouly, data can be loss.
+
+It returns ``true`` if a response was received from the *Agent*, ``false`` otherwise.
+
+:comm: A pointer to a properly initialized XRCE-DDS communication structure, used to send the ping request.
+:timeout_ms: The maximum time that the *Client* will wait to receive the answer (*pong*) message, before returning.
+
+------
+
+.. code-block:: c
+
+    bool uxr_ping_agent_attempts(const uxrCommunication* comm, const int timeout_ms, const uint8_t attempts);
 
 This function provides the same functionality as the method described in :code:`uxr_ping_agent`, but allows to specify the number of ping attempts before returning a value.
 
 :comm: A pointer to a properly initialized XRCE-DDS communication structure, used to send the ping request.
-:timeout: The maximum time **per attempt** that the *Client* will wait to receive the answer (*pong*) message, before returning.
+:timeout_ms: The maximum time **per attempt** that the *Client* will wait to receive the answer (*pong*) message, before returning.
 :attempts: Maximum amount of times that the *Client* will try to ping the *Agent* and receive a response back.
 
 ------
