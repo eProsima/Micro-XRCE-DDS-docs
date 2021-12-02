@@ -47,7 +47,7 @@ Best-effort streams
 Reliable streams
     Reliable streams perform the communication without loss, regardless of the transport layer used,
     and allow for message fragmentation to send and receive messages longer than the *MTU*.
-    
+
     To avoid loss of data, reliable streams use additional messages to confirm the delivery.
     Moreover, reliable streams have a history associated, used to store messages that can not be processed
     due to issues such as delivery order or incomplete fragments or messages that can not be confirmed yet.
@@ -65,9 +65,9 @@ Reliable streams
     Summarizing:
 
     * A short history causes more messages to be discarded, increasing the data traffic because they need to be sent again.
-      At the same time, it consumes less memory. 
+      At the same time, it consumes less memory.
     * A long history will reduce the traffic of confirmation messages when the loss rate is high.
-  
+
     This internal management of the communication implies that a reliable stream is more expensive than a best-effort
     stream, in both memory and bandwidth, but it is possible to play with these values using the history size.
 
@@ -121,6 +121,14 @@ discovery and framing functionalities.
         - Enables or disables the stream framing protocol.
         - :code:`<bool>`
         - :code:`ON`
+    *   - :code:`UCLIENT_PROFILE_MULTITHREAD`
+        - Enables or disables the multithread locking operation of the library.
+        - :code:`<bool>`
+        - :code:`ON`
+    *   - :code:`UCLIENT_PROFILE_SHARED_MEMORY`
+        - Enables or disables a basic local memory transport operation between entities in the same application.
+        - :code:`<bool>`
+        - :code:`ON`
 
 Transport profiles
 ^^^^^^^^^^^^^^^^^^
@@ -134,11 +142,11 @@ with the transports supported by the *eProsima Micro XRCE-DDS Client*.
 The table below shows the current implementation.
 
 ============ ========== =========
-Transport     POSIX      Windows   
-============ ========== ========= 
-UDP           X           X        
-TCP           X           X        
-Serial        X                  
+Transport     POSIX      Windows
+============ ========== =========
+UDP           X           X
+TCP           X           X
+Serial        X
 Custom        X           X
 ============ ========== =========
 
@@ -170,6 +178,17 @@ Framing profile
 ^^^^^^^^^^^^^^^
 
 The framing profile enables :ref:`HDLC Framing <stream_framing_label>` for using :ref:`stream-oriented transports <intro_transport>` such as Serial transports or Custom transports that require framing.
+
+Multithread profile
+^^^^^^^^^^^^^^^
+
+The multithread profile enables the thread-safe operation with the Micro XRCE-DDS Client library. It lockguards all the critical sections of the API and allows the usage from concurrent tasks.
+
+Shared memory profile
+^^^^^^^^^^^^^^^
+
+The multithread profile enables a simple intraprocess communication. This profile is intended to be used whithin devices without memory protection units where all tasks or processes have access to the whole memory space.
+
 
 .. _configurations:
 
@@ -227,7 +246,7 @@ By means of these flags, the user can change the default value of all the parame
           the first heartbeat to be sent. The wait time for the next heartbeat will be |br|
           double. It is measured in milliseconds.
         - :code:`<number>`
-        - :code:`1`
+        - :code:`100`
     *   - :code:`UCLIENT_BIG_ENDIANNESS`
         - This value must correspond to the memory endianness of the device in |br|
           which the *Client* is running. :code:`OFF` implies that the machine is little-endian |br|
@@ -258,6 +277,14 @@ By means of these flags, the user can change the default value of all the parame
           internally, it corresponds to the creation of a buffer this size.
         - :code:`<number>`
         - :code:`512`
+    *   - :code:`UCLIENT_SHARED_MEMORY_MAX_ENTITIES`
+        - This value corresponds to the *Max number of entities involved in shared memory.
+        - :code:`<number>`
+        - :code:`4`
+    *   - :code:`UCLIENT_SHARED_MEMORY_STATIC_MEM_SIZE`
+        - This value corresponds to the *Max number data buffers stored in shared memory.
+        - :code:`<number>`
+        - :code:`10`
 
 .. _read_access:
 
@@ -281,8 +308,8 @@ Creation Mode: Client
 ---------------------
 
 The creation of :ref:`entities_label` on the *Agent* which can act on behalf of the *Clients*
-in the DDS world can be done in two ways: by XML, or by reference. In this section, we explain
-these two creation modes and provide guidance on their usage.
+in the DDS world can be done in three ways: by XML, by reference or by binary. In this section, we explain
+these three creation modes and provide guidance on their usage.
 
 XML
     In the XML case, when creating the entities in the *Client* application, the user must provide each :code:`entity`
@@ -293,8 +320,8 @@ XML
     For instance, when creating a *participant* or a *topic*, the profiles shall look as follows:
 
     .. code-block:: C
-    
-        <!-- PARTICIPANT -->    
+
+        <!-- PARTICIPANT -->
         const char* participant_xml = "<dds>"
                                           "<participant>"
                                               "<rtps>"
@@ -302,7 +329,7 @@ XML
                                               "</rtps>"
                                           "</participant>"
                                       "</dds>";
-        
+
         <!-- TOPIC -->
         const char* topic_xml = "<dds>"
                                     "<topic>"
@@ -313,7 +340,7 @@ XML
 
     As detailed in the :ref:`getting_started_label` section, *participants*, *topics*, *datawriters*, *datareaders*, *requesters* and *repliers* work similarly.
     *Publishers* and *subscribers*, instead, inherit their XML fields from their associated *dataWriters* and *dataReaders*.
-    
+
     Creation by XML has the advantage of being configurable direclty within the *Client* application,
     but comes with the drawback of offering a very limited set of options as regards the QoS with which the DDS entities
     profiles can be configured. Indeed, only best-effort or reliable communication streams can be set with this creation mode.
@@ -324,19 +351,38 @@ References
     Creation by references happens by feeding the *Agent* with an XML profile containing a string of text similar to the snippets
     provided above, with a label associated to it. Therefore, when creating an entity, the *Client* will only need to provide a reference
     to this label in spite of the complete XML profile. This creation mode comes with two advantages:
-    
+
     - It consumes less *Client* memory, making the application more lightweight.
     - It allows the *Clients* to write their own XML QoS and run the *Agent* with a custom configuration which can benefit of the *full set* of QoS available in DDS.
 
     For instance, when creating a *participant* or a *topic*, the profiles shall look as follows:
 
     .. code-block:: C
-    
-        <!-- PARTICIPANT -->    
+
+        <!-- PARTICIPANT -->
         const char* participant_ref = "participant_label";
-        
+
         <!-- TOPIC -->
         const char* topic_ref = "topic_label"
+
+Binary
+
+    Creation by binary provides a comprehensive API in the Micro XRCE-DDS Client library that can be used to generate and send over the
+    XRCE-DDS middleware binary representations of the entities that are being created. This creation mode comes with two advantages:
+
+    - It consumes less *Client* memory than XML mode, making the application more lightweight.
+    - It provides much more flexibility than the REF mode in the client side.
+
+    For instance, when creating a *participant* or a *topic*, the profiles shall look as follows:
+
+    .. code-block:: C
+
+      uxrQoS_t qos = {
+        .reliability = UXR_RELIABILITY_RELIABLE, .durability = UXR_DURABILITY_TRANSIENT_LOCAL,
+        .history = UXR_HISTORY_KEEP_LAST, .depth = 0
+      };
+      uxr_buffer_create_topic_bin(&session, reliable_out, topic_id, participant_id, "ExampleTopic", "ExampleType", UXR_REPLACE);
+      uxr_buffer_create_datawriter_bin(&session, reliable_out, datawriter_id, publisher_id, topic_id, qos, UXR_REPLACE);
 
 Find more information in the :ref:`creation_mode_agent` section in the :ref:`micro_xrce_dds_agent_label` page.
 
