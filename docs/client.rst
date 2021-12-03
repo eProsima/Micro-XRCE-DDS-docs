@@ -147,11 +147,12 @@ Transport     POSIX      Windows
 UDP           X           X
 TCP           X           X
 Serial        X
+CAN FD        X
 Custom        X           X
 ============ ========== =========
 
 Each available transport can be activated or desactivated via the opportune CMake flag:
-:code:`UCLIENT_PROFILE_<transport>`, where :code:`<transport> = UDP, TCP, SERIAL`, or
+:code:`UCLIENT_PROFILE_<transport>`, where :code:`<transport> = UDP, TCP, SERIAL, CAN`, or
 :code:`UCLIENT_PROFILE_CUSTOM_TRANSPORT` in the case Custom transport is to be used.
 
 *eProsima Micro XRCE-DDS* provides a user API that allows interfacing with the lowest level transport layer at runtime. In this way, a user is enabled to implement its own transports based on one of the two communication approaches: stream-oriented or packet-oriented.
@@ -285,6 +286,10 @@ By means of these flags, the user can change the default value of all the parame
         - This value corresponds to the *Max number data buffers stored in shared memory.
         - :code:`<number>`
         - :code:`10`
+
+.. note::
+The MTU of the CAN transport is fixed to 64 bytes, which is the maximum payload supported by CAN FD frames.
+Take this into account to calculate the size of the streams for the requirements of the application.
 
 .. _read_access:
 

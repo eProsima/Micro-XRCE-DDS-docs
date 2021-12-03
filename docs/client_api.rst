@@ -1523,6 +1523,23 @@ This function initializes a Serial connection using a file descriptor.
 
 .. code-block:: c
 
+    bool uxr_init_can_transport(uxrCANTransport* transport, const char* dev, uint32_t can_id);
+
+This function initializes a CAN FD connection using a network interface.
+
+:transport: The uninitialized structure used for managing the transport.
+            This structure must be accessible during the connection.
+:dev: Interface name of the CAN FD bus.
+:can_id: Can identifier of this Client.
+
+.. note:: 
+The used interface must support CAN FD frames with a maximum payload of 64 bytes.
+The can identifier will be used on the CAN frames and should be unique for each client.
+
+------
+
+.. code-block:: c
+
     bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);
 
 This function initializes a Custom connection using user-defined arguments.
@@ -1537,7 +1554,7 @@ This function initializes a Custom connection using user-defined arguments.
 
     bool uxr_close_PROTOCOL_transport(PROTOCOLTransport* transport);
 
-This function closes a transport previously opened. ``PROTOCOL`` can be ``udp``, ``tcp``, ``serial`` or ``custom``.
+This function closes a transport previously opened. ``PROTOCOL`` can be ``udp``, ``tcp``, ``serial``, ``can`` or ``custom``.
 
 :transport: The structure used for managing the transport that must be closed.
 
