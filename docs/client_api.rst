@@ -1532,9 +1532,9 @@ This function initializes a CAN FD connection using a network interface.
 :dev: Interface name of the CAN FD bus.
 :can_id: Can identifier of this Client.
 
-.. note:: 
-The used interface must support CAN FD frames with a maximum payload of 64 bytes.
-The can identifier will be used on the CAN frames and should be unique for each client.
+.. note::
+    The used interface must support CAN FD frames with a maximum payload of 64 bytes.
+    The can identifier will be used on the CAN frames and should be unique for each client.
 
 ------
 

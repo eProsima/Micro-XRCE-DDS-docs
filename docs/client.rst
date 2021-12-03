@@ -108,6 +108,10 @@ discovery and framing functionalities.
         - Enables or disables the possibility to connect with the *Agent* by Serial.
         - :code:`<bool>`
         - :code:`ON`
+    *   - :code:`UCLIENT_PROFILE_CAN`
+        - Enables or disables the possibility to connect with the *Agent* by CAN FD.
+        - :code:`<bool>`
+        - :code:`OFF`
     *   - :code:`UCLIENT_PROFILE_CUSTOM_TRANSPORT`
         - Enables or disables the possibility to connect with the *Agent* by Custom Transport.
         - :code:`<bool>`
@@ -288,8 +292,8 @@ By means of these flags, the user can change the default value of all the parame
         - :code:`10`
 
 .. note::
-The MTU of the CAN transport is fixed to 64 bytes, which is the maximum payload supported by CAN FD frames.
-Take this into account to calculate the size of the streams for the requirements of the application.
+    The MTU of the CAN transport is fixed to 64 bytes, which is the maximum payload supported by CAN FD frames.
+    Take this into account to calculate the size of the streams for the requirements of the application.
 
 .. _read_access:
 

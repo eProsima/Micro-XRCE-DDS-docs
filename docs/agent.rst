@@ -12,7 +12,7 @@ The *Agents* receive messages containing operations from the *Clients*, and keep
 create.
 These entities are used by the *Agents* to interact with the DDS Global Data Space on behalf of the *Clients*.
 
-The communication between a *Client* and an *Agent* currently supports UDP, TCP, Serial, and Custom transports, depending
+The communication between a *Client* and an *Agent* currently supports UDP, TCP, Serial, CAN FD, and Custom transports, depending
 on the peripherals and communication technologies offered by the platforms.
 A section dedicated to the configuration and use of the Custom Transport can be found
 at the end of this :ref:`page <custom_transport_agent>`.
@@ -77,6 +77,7 @@ Communication via Serial transport (only Linux)
           -r,--refs FILEPATH                           Load a references file from the given path.
           -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from none (0) to full verbosity (6).
 
+.. note::
     The *Agent* will check and wait for the proper availability of the Serial port to start the connection.
     Its expected to start the transport with a disconnected Serial port.
 
@@ -95,7 +96,8 @@ Communication via Multiserial transport (only Linux)
           -r,--refs FILEPATH                           Load a references file from the given path.
           -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from none (0) to full verbosity (6).
 
-    The *Agent* will check and wait for the proper availability of each Serial port to start the connection.
+.. note::
+    The *Agent* will check and wait for the proper availability of each Serial port to start the connection.  
     Its expected to start the transport with multiple disconnected ports.
 
 Communication via CAN FD transport (only Linux)
@@ -110,6 +112,7 @@ Communication via CAN FD transport (only Linux)
           -r,--refs FILEPATH                           Load a references file from the given path.
           -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from none (0) to full verbosity (6).
 
+.. note::
     The used interface must support CAN FD frames with a maximum payload of 64 bytes.
     The agent will use the received message identifiers from each client on its output frames.
 

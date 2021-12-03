@@ -28,7 +28,7 @@ eprosima::uxr::AgentInstance
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The CLI manager, along with all the built-in *Agents* available for the supported transports
-(UDP, TCP, Serial) are encapsulated in the ``eprosima::uxr::AgentInstance`` class.
+(UDP, TCP, Serial, CAN) are encapsulated in the ``eprosima::uxr::AgentInstance`` class.
 
 ------
 
@@ -45,7 +45,7 @@ which allows launching a *Micro XRCE-DDS Agent* with user-given parameters.
 
     bool create(int argc, char** argv);
 
-This function creates a UDP/TCP/Serial *Micro XRCE-DDS Agent*, based on the given arguments.
+This function creates a UDP/TCP/Serial/CAN *Micro XRCE-DDS Agent*, based on the given arguments.
 The created *Agent* will start automatically on success.
 
 Returns ``true`` if the arguments were valid and an *Agent* was successfully created, ``false`` otherwise.
