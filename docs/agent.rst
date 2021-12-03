@@ -71,12 +71,47 @@ Communication via Serial transport (only Linux)
         Options:
           -h,--help                                    Print the help message.
           -D,--dev FILE REQUIRED                       Specify the serial device.
+          -f,--file FILE REQUIRED                      Specify a text file with the serial device name.
           -b,--baudrate TEXT=115200                    Select the baudrate.
           -m,--middleware TEXT in {ced,rtps,dds}=dds   Select the kind of middleware among the supported ones. By default, it will be FastDDS.
           -r,--refs FILEPATH                           Load a references file from the given path.
           -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from none (0) to full verbosity (6).
-          -d,--discovery UINT=7400                     Activate the Discovery server. If no port is specified, 7400 will be used.
-          --p2p UINT                                   Activate the P2P profile, using the given port.
+
+    The *Agent* will check and wait for the proper availability of the Serial port to start the connection.
+    Its expected to start the transport with a disconnected Serial port.
+
+Communication via Multiserial transport (only Linux)
+    This transport allows multiple serial connections on the same *Agent* instance.
+    The communication via Multiserial transport can be executed and configured as follows: ::
+
+        $ ./MicroXRCEAgent multiserial [OPTIONS]
+
+        Options:
+          -h,--help                                    Print the help message.
+          -D,--devs FILE REQUIRED                      Specify the serial devices.
+          -f,--file FILE REQUIRED                      Specify a text file with one serial device per line.
+          -b,--baudrate TEXT=115200                    Select the baudrate.
+          -m,--middleware TEXT in {ced,rtps,dds}=dds   Select the kind of middleware among the supported ones. By default, it will be FastDDS.
+          -r,--refs FILEPATH                           Load a references file from the given path.
+          -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from none (0) to full verbosity (6).
+
+    The *Agent* will check and wait for the proper availability of each Serial port to start the connection.
+    Its expected to start the transport with multiple disconnected ports.
+
+Communication via CAN FD transport (only Linux)
+    The communication via CAN FD transport can be executed and configured as follows: ::
+
+        $ ./MicroXRCEAgent canfd [OPTIONS]
+
+        Options:
+          -h,--help                                    Print the help message.
+          -D,--dev INTERFACE REQUIRED                  Specify the CAN interface.
+          -m,--middleware TEXT in {ced,rtps,dds}=dds   Select the kind of middleware among the supported ones. By default, it will be FastDDS.
+          -r,--refs FILEPATH                           Load a references file from the given path.
+          -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from none (0) to full verbosity (6).
+
+    The used interface must support CAN FD frames with a maximum payload of 64 bytes.
+    The agent will use the received message identifiers from each client on its output frames.
 
 Communication via pseudo terminal (only Linux)
     The communication via pseudo serial can be executed and configured as follow: ::
@@ -90,8 +125,6 @@ Communication via pseudo terminal (only Linux)
           -m,--middleware TEXT in {ced,rtps,dds}=dds   Select the kind of middleware among the supported ones. By default, it will be FastDDS.
           -r,--refs FILEPATH                           Load a references file from the given path.
           -v,--verbose UINT in {0,1,2,3,4,5,6}=4       Select log level from none (0) to full verbosity (6).
-          -d,--discovery UINT=7400                     Activate the Discovery server. If no port is specified, 7400 will be used.
-          --p2p UINT                                   Activate the P2P profile, using the given port.
 
 * The reference file shall be composed by a set of Fast DDS profiles following the
   `XML syntax <https://fast-dds.docs.eprosima.com/en/latest/fastdds/xml_configuration/xml_configuration.html>`_
@@ -107,7 +140,7 @@ Communication via pseudo terminal (only Linux)
 * The option :code:`-m,--middleware <middleware-impl>` sets the middleware implementation to use.
   There are three: RTPS (based on eProsima Fast RTPS), DDS (specified by the XRCE standard and using Fast DDS) and Centralized (topic are managed by the Agent similarly to MQTT).
   More information about the supported middlewares can be found :ref:`here <middleware_abstraction_layer>`.
-* The ``--p2p <port>`` option enables P2P communication. Centralized middleware is necessary for this option.
+* The ``--p2p <port>`` option enables P2P communication, this option is only available on network transports. Centralized middleware is necessary for this option.
 
 .. _custom_transport_agent:
 
