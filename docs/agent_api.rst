@@ -46,6 +46,7 @@ which allows launching a *Micro XRCE-DDS Agent* with user-given parameters.
     bool create(int argc, char** argv);
 
 This function creates a UDP/TCP/Serial *Micro XRCE-DDS Agent*, based on the given arguments.
+The created *Agent* will start automatically on success.
 
 Returns ``true`` if the arguments were valid and an *Agent* was successfully created, ``false`` otherwise.
 
@@ -57,9 +58,20 @@ Returns ``true`` if the arguments were valid and an *Agent* was successfully cre
 
 .. code-block:: cpp
 
-    bool run();
+    void run();
 
-This function starts the execution of the previously created *Agent*, until it's ended by a user's interrupt or a process error.
+This function blocks until the previously created *Agent* is ended by the stop function, a user's interrupt or a process error.
+
+------
+
+.. code-block:: cpp
+
+    void stop();
+
+Stops a previously created *Agent*, blocking until the stop process is completed.
+Note that this will trigger a call on the ``transport::fini`` method.
+
+To restart a stopped agent, the ``create`` method should be used.
 
 ------
 
