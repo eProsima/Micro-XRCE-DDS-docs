@@ -19,7 +19,7 @@ section in order to match versions that are compatible.
 
 Using pre-installed docker images
 --------------------------------
-Download `here <https://www.eprosima.com/index.php/downloads-all>`_ the Micro XRCE-DDS docker image that contains a pre-installed client and agent as well as some compiled examples.
+Download `here <https://www.eprosima.com/index.php/downloads-all>`_ the Micro XRCE-DDS and Fast-DDS Suite docker image that contains a pre-installed client and agent as well as some compiled examples.
 
 .. _install_agent:
 
@@ -40,7 +40,7 @@ On Linux, inside of the :code:`build` folder, execute the following commands: ::
 
 On Windows first select the Visual Studio version: ::
 
-    $ cmake -G "Visual Studio 14 2015 Win64" ..
+    $ cmake -G "Visual Studio 15 2017 Win64" ..
     $ cmake --build .
     $ cmake --build . --target install
 
@@ -110,7 +110,7 @@ Now the the executable *eProsima Micro XRCE-DDS Client* is installed in the syst
 
 On Windows first select the Visual Studio version: ::
 
-    $ cmake -G "Visual Studio 14 2015 Win64" ..
+    $ cmake -G "Visual Studio 15 2017 Win64" ..
     $ cmake --build .
     $ cmake --build . --target install
 
@@ -135,7 +135,7 @@ The *eProsima Micro XRCE-DDS Client* comes with a `Docker image <https://hub.doc
 Pull the image by executing ``docker pull eprosima/micro-xrce-dds-client:<tag> <<args>>``, with *tag* being one of the following options:
 
 * ``stable``: `Micro XRCE-DDS Client master <https://github.com/eProsima/Micro-XRCE-DDS-Client/tree/master>`_ branch.
-* ``latest``: `Micro XRCE-DDS Client develop <https://github.com/eProsima/Micro-XRCE-DDS-Client/tree/develop>`_ branch)
+* ``latest``: `Micro XRCE-DDS Client develop <https://github.com/eProsima/Micro-XRCE-DDS-Client/tree/develop>`_ branch
 * ``vM.m.p``: `Micro XRCE-DDS Client tagged <https://github.com/eProsima/Micro-XRCE-DDS-Client/tags>`_ versions, with the *Major*, *minor*, *patch* structure.
 
 The accepted arguments for ``<<args>>`` are the examples' executable names, followed by the arguments required for each example to work.
@@ -178,7 +178,7 @@ On Linux, inside of the :code:`build` folder, execute the following commands: ::
 
 On Windows choose the Visual Studio version using the CMake option *-G*, for example: ::
 
-    $ cmake -G "Visual Studio 14 2015 Win64" ..
+    $ cmake -G "Visual Studio 15 2017 Win64" ..
     $ cmake --build . --target install
 
 Now both the *eProsima Micro XRCE-DDS Agent* and the *eProsima Micro XRCE-DDS Client* are installed in the system.
@@ -203,7 +203,7 @@ Within this Docker image, the *Micro XRCE-DDS Agent* standalone application and 
 Pull the image by executing ``docker pull eprosima/micro-xrce-dds:<tag> <<args>>``, with *tag* being one of the following options:
 
 * ``stable``: `Micro XRCE-DDS master <https://github.com/eProsima/Micro-XRCE-DDS/tree/master>`_ branch.
-* ``latest``: `Micro XRCE-DDS develop <https://github.com/eProsima/Micro-XRCE-DDS/tree/develop>`_ branch)
+* ``latest``: `Micro XRCE-DDS develop <https://github.com/eProsima/Micro-XRCE-DDS/tree/develop>`_ branch
 * ``vM.m.p``: `Micro XRCE-DDS tagged <https://github.com/eProsima/Micro-XRCE-DDS/tags>`_ versions, with the *Major*, *minor*, *patch* structure.
 
 The accepted arguments for ``<<args>>`` are:

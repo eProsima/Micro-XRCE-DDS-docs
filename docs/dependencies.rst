@@ -39,6 +39,6 @@ Gradle
 Windows
 ^^^^^^^
 
-Microsoft Visual C++ 2015 or 2017
-    *eProsima Micro XRCE-DDS* is supported on Windows over the Microsoft Visual C++ 2015 and 2017 frameworks.
+Microsoft Visual C++ 2017 or greater
+    *eProsima Micro XRCE-DDS* is supported on Windows over the Microsoft Visual C++ 2017 or greater frameworks.
 

@@ -18,6 +18,7 @@ The functions are grouped as follows:
 * :ref:`session_api`
 * :ref:`entities_xml_api`
 * :ref:`entities_ref_api`
+* :ref:`entities_bin_api`
 * :ref:`entities_common_api`
 * :ref:`read_access_api`
 * :ref:`write_access_api`
@@ -531,7 +532,6 @@ This function returns the epoch time in nanoseconds taking into account the offs
 Create entities by XML
 ^^^^^^^^^^^^^^^^^^^^^^
 
-These functions are enabled when the ``PROFILE_CREATE_ENTITIES_XML`` is activated as a CMake argument.
 The declaration of these functions can be found in ``uxr/client/profile/session/create_entities_xml.h``.
 
 ------
@@ -723,7 +723,6 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
 Create entities by reference
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-These functions are enabled when ``PROFILE_CREATE_ENTITIES_REF`` is activated as a CMake argument.
 The declaration of these functions can be found in ``uxr/client/profile/session/create_entities_ref.h``.
 
 ------
@@ -737,7 +736,7 @@ Creates a *participant* entity in the *Agent*.
 The message is written into the stream buffer.
 To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
 
-:session: SSession structure previously initialized and created.
+:session: Session structure previously initialized and created.
 :stream_id: The output stream ID where the messages are written.
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
@@ -864,6 +863,212 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
 
 ------
 
+.. _entities_bin_api:
+
+Create entities by binary
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The declaration of these functions can be found in ``uxr/client/profile/session/create_entities_ref.h``.
+
+------
+
+.. code-block:: c
+
+    uint16_t uxr_buffer_create_participant_bin(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
+        uint16_t domain_id, const char* participant_name, uint8_t mode);
+
+Creates a *participant* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
+
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
+:object_id: The identifier of the new entity.
+            Later, the entity can be referenced with this id.
+            The type must be ``UXR_PARTICIPANT_ID``
+:domain_id: DDS Domain ID for the participant.
+:participant_name: Participant name.
+:mode: Determines the creation entity mode.
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
+
+------
+
+.. code-block:: c
+
+    uint16_t uxr_buffer_create_topic_bin(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
+        uxrObjectId participant_id, const char* topic_name, const char* type_name, uint8_t mode);
+
+Creates a *topic* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
+
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
+:object_id: The identifier of the new entity.
+            Later, the entity can be referenced with this id.
+            The type must be ``UXR_TOPIC_ID``
+:participant_id: The identifier of the associated participant.
+            The type must be ``UXR_PARTICIPANT_ID``
+:topic_name: Topic name.
+:type_name: Type name.
+:mode: Determines the creation entity mode.
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
+
+------
+
+.. code-block:: c
+
+    uint16_t uint16_t uxr_buffer_create_publisher_bin(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
+        uxrObjectId participant_id, uint8_t mode);
+
+Creates a *publisher* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
+
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
+:object_id: The identifier of the new entity.
+            Later, the entity can be referenced with this id.
+            The type must be ``UXR_PUBLISHER_ID``.
+:participant_id: The identifier of the associated participant.
+            The type must be ``UXR_PARTICIPANT_ID``.
+:mode: Determines the creation entity mode.
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
+
+------
+
+.. code-block:: c
+
+    uint16_t uint16_t uxr_buffer_create_subscriber_bin(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
+        uxrObjectId participant_id, uint8_t mode);
+
+Creates a *subscriber* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
+
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
+:object_id: The identifier of the new entity.
+            Later, the entity can be referenced with this id.
+            The type must be ``UXR_SUBSCRIBER_ID``.
+:participant_id: The identifier of the associated participant.
+            The type must be ``UXR_PARTICIPANT_ID``.
+:mode: Determines the creation entity mode.
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
+
+------
+
+.. code-block:: c
+
+    uint16_t uxr_buffer_create_datawriter_bin(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
+        uxrObjectId publisher_id, uxrObjectId topic_id, uxrQoS_t qos, uint8_t mode);
+
+Creates a *datawriter* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
+
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
+:object_id: The identifier of the new entity.
+            Later, the entity can be referenced with this id.
+            The type must be ``UXR_DATAWRITER_ID``
+:publisher_id: The identifier of the associated publisher.
+            The type must be ``UXR_PUBLISHER_ID``
+:topic_id: The identifier of the associated topic.
+            The type must be ``UXR_TOPIC_ID``
+:qos: ``uxrQoS_t`` struct describing QoS.
+:mode: Determines the creation entity mode.
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
+
+------
+
+.. code-block:: c
+
+    uint16_t uxr_buffer_create_datareader_bin(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
+        uxrObjectId subscriber_id, uxrObjectId topic_id, uxrQoS_t qos, uint8_t mode);
+
+Creates a *datareader* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
+
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
+:object_id: The identifier of the new entity.
+            Later, the entity can be referenced with this id.
+            The type must be ``UXR_DATAREADER_ID``.
+:subscriber_id: The identifier of the associated subscriber.
+            The type must be ``UXR_SUBSCRIBER_ID``.
+:topic_id: The identifier of the associated topic.
+            The type must be ``UXR_TOPIC_ID``
+:qos: ``uxrQoS_t`` struct describing QoS.
+:mode: Determines the creation entity mode.
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
+
+------
+
+.. code-block:: c
+
+    uint16_t uxr_buffer_create_requester_bin(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
+        uxrObjectId participant_id, const char* service_name, const char* request_type, const char* reply_type,
+        const char* request_topic_name, const char* reply_topic_name, uxrQoS_t qos, uint8_t mode);
+
+Creates a *requester* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
+
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
+:object_id: The identifier of the new entity.
+            Later, the entity can be referenced with this id.
+            The type must be ``UXR_REQUESTER_ID``.
+:participant_id: The identifier of the associated participant.
+            The type must be ``UXR_PARTICIPANT_ID``.
+:service_name: Service name.
+:request_type: Request type name.
+:reply_type: Reply type name.
+:request_topic_name: Request topic name.
+:reply_topic_name: Reply topic name.
+:qos: ``uxrQoS_t`` struct describing QoS.
+:mode: Determines the creation entity mode.
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
+
+------
+
+.. code-block:: c
+
+    uint16_t uxr_buffer_create_replier_bin(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
+        uxrObjectId participant_id, const char* service_name, const char* request_type, const char* reply_type,
+        const char* request_topic_name, const char* reply_topic_name, uxrQoS_t qos, uint8_t mode);
+
+Creates a *replier* entity in the *Agent*.
+The message is written into the stream buffer.
+To send the message, it is necessary to call either the ``uxr_flash_output_streams`` or the ``uxr_run_session`` function.
+
+:session: Session structure previously initialized and created.
+:stream_id: The output stream ID where the messages are written.
+:object_id: The identifier of the new entity.
+            Later, the entity can be referenced with this id.
+            The type must be ``UXR_REPLIER_ID``.
+:participant_id: The identifier of the associated participant.
+            The type must be ``UXR_PARTICIPANT_ID``.
+:service_name: Service name.
+:request_type: Request type name.
+:reply_type: Reply type name.
+:request_topic_name: Request topic name.
+:reply_topic_name: Reply topic name.
+:qos: ``uxrQoS_t`` struct describing QoS.:mode: Determines the creation entity mode.
+        The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
+        (see :ref:`creation_policy_table`).
+
+------
+
 .. _entities_common_api:
 
 Create entities common profile
@@ -908,7 +1113,7 @@ that fetches data from the middleware.
 The returned value is an identifier of the request.
 All received topics have the same request identifier.
 The topics are received on the callback topic through the ``run_session`` function.
-If there is no error with the request data, a status callback with the value ``UXR_STATUS_OK`` is generated along with 
+If there is no error with the request data, a status callback with the value ``UXR_STATUS_OK`` is generated along with
 the topics retrieval.
 If there is an error, a status error is sent by the *Agent*.
 The message is written into the stream buffer.
@@ -958,6 +1163,8 @@ into a specific output stream.
 It initializes a ``ucdrBuffer`` struct where a data of ``data_size`` size must be serialized.
 If there is sufficient space for writing ``data_size`` bytes into the stream, the returned value is the XRCE request ID, otherwise it is ``0``.
 The topic is sent in the following ``run_session`` function.
+If ``UCLIENT_PROFILE_MULTITHREAD`` is enabled, user should unlock the stream lock after serializing the requested amount of data using
+``UXR_UNLOCK_STREAM_ID(session, stream_id);``
 
 .. note::
     All ``data_size`` bytes requested are sent to the *Agent* after a ``run_session`` call,
@@ -1028,6 +1235,8 @@ This function initializes an ``ucdrBuffer`` struct where a topic of ``data_size`
 If there is sufficient space for writing ``data_size`` bytes into the stream, the returned value is the XRCE request ID, otherwise it is ``0``.
 The topic is sent in the following ``run_session`` function. If, during the serialization process, the buffer gets overfilled, the
 ``flush_callback`` function is called and the user has to run a session for flushing the stream.
+If ``UCLIENT_PROFILE_MULTITHREAD`` is enabled, user should unlock the stream lock after serializing the requested amount of data using
+``UXR_UNLOCK_STREAM_ID(session, stream_id);``
 
 .. note::
     This approach is not valid for best-effort streams.
@@ -1214,27 +1423,45 @@ This function creates an identifier to reference an entity.
 
 .. code-block:: c
 
-    bool uxr_ping_agent(const uxrCommunication* comm, const int timeout);
+    bool uxr_ping_agent_session(struct uxrSession* session, const int timeout_ms, const uint8_t attempts);
 
 This function pings a *Micro XRCE-DDS Agent* to check if it is already up and running.
 
-This method does not require an XRCE session to be established beforehand.
+This method does require an XRCE session to be established beforehand. Internally it spins the session until
+ping answer is received or it timeouts.
 
 It returns ``true`` if a response was received from the *Agent*, ``false`` otherwise.
 
-:comm: A pointer to a properly initialized XRCE-DDS communication structure, used to send the ping request.
-:timeout: The maximum time that the *Client* will wait to receive the answer (*pong*) message, before returning.
+:session: A pointer to a properly initialized XRCE-DDS session, used to send the ping request.
+:timeout_ms: The maximum time that the *Client* will wait to receive the answer (*pong*) message, before returning.
+:attempts: Maximum amount of times that the *Client* will try to ping the *Agent* and receive a response back.
 
 ------
 
 .. code-block:: c
 
-    bool uxr_ping_agent_attempts(const uxrCommunication* comm, const int timeout, const uint8_t attempts);
+    bool uxr_ping_agent(const uxrCommunication* comm, const int timeout_ms);
+
+This function pings a *Micro XRCE-DDS Agent* to check if it is already up and running.
+
+This method does not require an XRCE session to be established beforehand. It acts directly over
+the transport layer so if a session is running simultaneouly, data can be loss.
+
+It returns ``true`` if a response was received from the *Agent*, ``false`` otherwise.
+
+:comm: A pointer to a properly initialized XRCE-DDS communication structure, used to send the ping request.
+:timeout_ms: The maximum time that the *Client* will wait to receive the answer (*pong*) message, before returning.
+
+------
+
+.. code-block:: c
+
+    bool uxr_ping_agent_attempts(const uxrCommunication* comm, const int timeout_ms, const uint8_t attempts);
 
 This function provides the same functionality as the method described in :code:`uxr_ping_agent`, but allows to specify the number of ping attempts before returning a value.
 
 :comm: A pointer to a properly initialized XRCE-DDS communication structure, used to send the ping request.
-:timeout: The maximum time **per attempt** that the *Client* will wait to receive the answer (*pong*) message, before returning.
+:timeout_ms: The maximum time **per attempt** that the *Client* will wait to receive the answer (*pong*) message, before returning.
 :attempts: Maximum amount of times that the *Client* will try to ping the *Agent* and receive a response back.
 
 ------
@@ -1296,6 +1523,23 @@ This function initializes a Serial connection using a file descriptor.
 
 .. code-block:: c
 
+    bool uxr_init_can_transport(uxrCANTransport* transport, const char* dev, uint32_t can_id);
+
+This function initializes a CAN FD connection using a network interface.
+
+:transport: The uninitialized structure used for managing the transport.
+            This structure must be accessible during the connection.
+:dev: Interface name of the CAN FD bus.
+:can_id: Can identifier of this Client.
+
+.. note::
+    The used interface must support CAN FD frames with a maximum payload of 64 bytes.
+    The can identifier will be used on the CAN frames and should be unique for each client.
+
+------
+
+.. code-block:: c
+
     bool uxr_init_custom_transport(uxrCustomTransport* transport, void * args);
 
 This function initializes a Custom connection using user-defined arguments.
@@ -1310,7 +1554,7 @@ This function initializes a Custom connection using user-defined arguments.
 
     bool uxr_close_PROTOCOL_transport(PROTOCOLTransport* transport);
 
-This function closes a transport previously opened. ``PROTOCOL`` can be ``udp``, ``tcp``, ``serial`` or ``custom``.
+This function closes a transport previously opened. ``PROTOCOL`` can be ``udp``, ``tcp``, ``serial``, ``can`` or ``custom``.
 
 :transport: The structure used for managing the transport that must be closed.
 
