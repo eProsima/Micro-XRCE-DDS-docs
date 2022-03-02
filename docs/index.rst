@@ -61,6 +61,8 @@ Pluggable transport layer.
 Commercial support
     Available at `support@eprosima.com`
 
+.. _installation_label_2:
+
 Installation
 ------------
 
