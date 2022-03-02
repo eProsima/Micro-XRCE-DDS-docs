@@ -185,12 +185,12 @@ Framing profile
 The framing profile enables :ref:`HDLC Framing <stream_framing_label>` for using :ref:`stream-oriented transports <intro_transport>` such as Serial transports or Custom transports that require framing.
 
 Multithread profile
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
 
 The multithread profile enables the thread-safe operation with the Micro XRCE-DDS Client library. It lockguards all the critical sections of the API and allows the usage from concurrent tasks.
 
 Shared memory profile
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 
 The multithread profile enables a simple intraprocess communication. This profile is intended to be used whithin devices without memory protection units where all tasks or processes have access to the whole memory space.
 
@@ -283,11 +283,11 @@ By means of these flags, the user can change the default value of all the parame
         - :code:`<number>`
         - :code:`512`
     *   - :code:`UCLIENT_SHARED_MEMORY_MAX_ENTITIES`
-        - This value corresponds to the *Max number of entities involved in shared memory.
+        - This value corresponds to the *Max number of entities involved in shared memory*.
         - :code:`<number>`
         - :code:`4`
     *   - :code:`UCLIENT_SHARED_MEMORY_STATIC_MEM_SIZE`
-        - This value corresponds to the *Max number data buffers stored in shared memory.
+        - This value corresponds to the *Max number data buffers stored in shared memory*.
         - :code:`<number>`
         - :code:`10`
 

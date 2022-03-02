@@ -22,6 +22,21 @@ The online documentation is hosted by Read the Docs.
 * [Installation manual](http://micro-xrce-dds.readthedocs.io/en/latest/installation.html)
 * [User manual](http://micro-xrce-dds.readthedocs.io/en/latest/introduction.html)
 
+## Build local documentation
+
+On Ubuntu, run:
+
+```bash
+git clone https://github.com/eProsima/Micro-XRCE-DDS-docs
+cd Micro-XRCE-DDS-docs
+sudo apt -y install librsvg2-bin
+python3 -m venv python_deps
+source python_deps/bin/activate
+pip3 install -U -r rtd_requirements.txt
+make html
+xdg-open build/html/index.html
+```
+
 ## Getting Help
 
 If in need of support, reach us by mail at `support@eProsima.com` or by phone at `+34 91 804 34 48`.
