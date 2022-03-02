@@ -115,6 +115,7 @@ Structure of the documentation
    transport
    p2p
    time_sync
+   docker
 
 .. toctree::
    :caption: Release Notes
