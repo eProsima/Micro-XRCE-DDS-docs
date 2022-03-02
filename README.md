@@ -24,9 +24,11 @@ The online documentation is hosted by Read the Docs.
 
 ## Build local documentation
 
-Clone this repo and enter in the folder:
+On Ubuntu, run:
 
 ```bash
+git clone https://github.com/eProsima/Micro-XRCE-DDS-docs
+cd Micro-XRCE-DDS-docs
 sudo apt -y install librsvg2-bin
 python3 -m venv python_deps
 source python_deps/bin/activate

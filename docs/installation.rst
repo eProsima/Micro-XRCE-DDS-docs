@@ -19,7 +19,8 @@ section in order to match versions that are compatible.
 
 Using pre-installed docker images
 ---------------------------------
-Download `here <https://www.eprosima.com/index.php/downloads-all>`__ the Micro XRCE-DDS and Fast-DDS Suite docker image that contains a pre-installed client and agent as well as some compiled examples. More information about this Docker image can be found :ref:`here <eprosima_docker_image>`.
+Download `here <https://www.eprosima.com/index.php/downloads-all>`__ the Micro XRCE-DDS and Fast-DDS Suite docker image that contains a pre-installed client and agent as well as some compiled examples.
+More information about this Docker image can be found :ref:`here <eprosima_docker_image>`.
 
 .. _install_agent:
 
