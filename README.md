@@ -27,6 +27,7 @@ The online documentation is hosted by Read the Docs.
 Clone this repo and enter in the folder:
 
 ```bash
+sudo apt -y install librsvg2-bin
 python3 -m venv python_deps
 source python_deps/bin/activate
 pip3 install -U -r rtd_requirements.txt

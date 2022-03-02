@@ -283,11 +283,11 @@ By means of these flags, the user can change the default value of all the parame
         - :code:`<number>`
         - :code:`512`
     *   - :code:`UCLIENT_SHARED_MEMORY_MAX_ENTITIES`
-        - This value corresponds to the *Max number of entities involved in shared memory.
+        - This value corresponds to the *Max number of entities involved in shared memory*.
         - :code:`<number>`
         - :code:`4`
     *   - :code:`UCLIENT_SHARED_MEMORY_STATIC_MEM_SIZE`
-        - This value corresponds to the *Max number data buffers stored in shared memory.
+        - This value corresponds to the *Max number data buffers stored in shared memory*.
         - :code:`<number>`
         - :code:`10`
 
