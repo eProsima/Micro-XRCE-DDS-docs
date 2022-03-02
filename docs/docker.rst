@@ -1,3 +1,5 @@
+.. _eprosima_docker_image:
+
 eProsima Docker Image
 =====================
 
@@ -39,7 +41,7 @@ You can run this Docker container as follows
 
 From the resulting Bash Shell you can run each feature.
 
-.. xrcedds_suite_examples:
+.. _xrcedds_suite_examples:
 
 Client Hello World Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -62,7 +64,7 @@ or
 
  $ docker run -it xrcedds-suite:<XRCE-DDS-Version> helloworld_sub
 
-.. xrcedds_suite_agent:
+.. _xrcedds_suite_agent:
 
 XRCE-DDS Agent
 ^^^^^^^^^^^^^^
@@ -74,4 +76,4 @@ In order to use it run:
 
  $ docker run -it xrcedds-suite:<XRCE-DDS-Version> xrce_agent [ARGUMENTS]
 
-More information about the eProsima XRCE-DDS Agent CLI can be found :ref:`here <_agent_cli>`
+More information about the eProsima XRCE-DDS Agent CLI can be found :ref:`here <agent_cli>`
