@@ -4,38 +4,39 @@ Version 2.1.1
 =============
 
 **Agent 2.1.1 | Client 2.1.1 | Micro-CDR 2.0.0**
+
 * `Agent 2.1.1 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/releases/tag/v2.1.1>`_:
     * This release includes the following bugfixes:
-        * Fix write destination id (`#292<https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/292>`_)
-        * Add sub entities destruction on FastDDS entities (`#295<https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/295>`_)
-        * Add reuse socket to TCP agent (`#301<https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/301>`_)
-        * Fix linux compile (`#297<https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/297>`_)
+        * Fix write destination id (`#292 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/292>`__)
+        * Add sub entities destruction on FastDDS entities (`#295 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/295>`__)
+        * Add reuse socket to TCP agent (`#301 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/301>`__)
+        * Fix linux compile (`#297 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/297>`__)
 
     * This release includes the following minor changes:
 
-        * Add CAN payload len on first frame byte (`#293<https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/293>`_)
-        * Add CAN transport flag to cmake / Upgrade splog version (`#296<https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/296>`_)
-        * Add Twitter and Readthedocs shields (backport #298) (`#299<https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/299>`_)
-        * Add use system spdlog flag (`#303<https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/303>`_)
-        * Implement GET_STATUS implementation result (`#304<https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/304>`_)
+        * Add CAN payload len on first frame byte (`#293 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/293>`__)
+        * Add CAN transport flag to cmake / Upgrade splog version (`#296 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/296>`__)
+        * Add Twitter and Readthedocs shields (backport #298) (`#299 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/299>`__)
+        * Add use system spdlog flag (`#303 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/303>`__)
+        * Implement GET_STATUS implementation result (`#304 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/304>`__)
 
 * `Client 2.1.1 <https://github.com/eProsima/Micro-XRCE-DDS-Client/releases/tag/v2.1.1>`_:
     * This release includes the following bugfixes:
-        * Fix fragment capacity overflow (`#296<https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/296>`_)
-        * Fix fragmentation header alignment (`#300<https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/300>`_)
-        * Fix run session timeouts (`#299<https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/299>`_)
-        * Fix code scanning alert (`#302<https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/302>`_)
-        * Fix exit run session condition (`#305<https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/305>`_)
-        * Fix multithread interlock (`#303<https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/303>`_)
-        * Reset stream on created session (`#304<https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/304>`_)
-        * Fix subscriber example (`#309<https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/309>`_)
-        * Fix Req Res example (`#314<https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/314>`_)
+        * Fix fragment capacity overflow (`#296 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/296>`__)
+        * Fix fragmentation header alignment (`#300 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/300>`__)
+        * Fix run session timeouts (`#299 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/299>`__)
+        * Fix code scanning alert (`#302 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/302>`__)
+        * Fix exit run session condition (`#305 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/305>`__)
+        * Fix multithread interlock (`#303 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/303>`__)
+        * Reset stream on created session (`#304 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/304>`__)
+        * Fix subscriber example (`#309 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/309>`__)
+        * Fix Req Res example (`#314 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/314>`__)
 
     * This release includes the following minor changes:
-        * RTEMS Serial Transport support (`#297<https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/297>`_)
-        * Add payload lenght on CAN messages (`#298<https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/298>`_)
-        * Add Twitter and Readthedocs shields (`#307<https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/307>`_)
-        * Implement GET_STATUS implementation result (`#312<https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/312>`_)
+        * RTEMS Serial Transport support (`#297 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/297>`__)
+        * Add payload lenght on CAN messages (`#298 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/298>`__)
+        * Add Twitter and Readthedocs shields (`#307 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/307>`__)
+        * Implement GET_STATUS implementation result (`#312 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/312>`__)
 
 * `Micro-CDR 2.0.0 <https://github.com/eProsima/Micro-CDR/releases/tag/v2.0.0>`_:
     * This release is not modified
