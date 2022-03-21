@@ -295,7 +295,7 @@ By means of these flags, the user can change the default value of all the parame
         - :code:`<bool>`
         - :code:`OFF`
     *   - :code:`UCLIENT_HARD_LIVELINESS_CHECK_TIMEOUT`
-        - Sets Micro XRCE-DDS Client hard liveliness check timeout in milliseconds.
+        - Sets Micro XRCE-DDS Client hard liveliness check timeout in milliseconds. Maximum value is 999999 ms.
         - :code:`<number>`
         - :code:`10000`
 
