@@ -290,6 +290,14 @@ By means of these flags, the user can change the default value of all the parame
         - This value corresponds to the *Max number data buffers stored in shared memory*.
         - :code:`<number>`
         - :code:`10`
+    *   - :code:`UCLIENT_HARD_LIVELINESS_CHECK`
+        - Enables Micro XRCE-DDS Client hard liveliness check.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UCLIENT_HARD_LIVELINESS_CHECK_TIMEOUT`
+        - Sets Micro XRCE-DDS Client hard liveliness check timeout in milliseconds.
+        - :code:`<number>`
+        - :code:`10000`
 
 .. note::
     The MTU of the CAN transport is fixed to 64 bytes, which is the maximum payload supported by CAN FD frames.
