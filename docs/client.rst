@@ -11,7 +11,7 @@ In *eProsima Micro XRCE-DDS*, a *Client* can communicate with the DDS Network as
 *Clients* can either publish and subscribe to data Topics in the DDS Global Data Space, or act as a client/service
 application following a request-reply pattern.
 
-This section explains how the *Client-Agent* communication happens through streams that can be either best-effort or Reliable.
+This section explains how the *Client-Agent* communication happens through streams that can be either best-effort or reliable.
 After this, it is explained how users can configure *Clients* applications and the communication with the *Agent*
 via sets of CMake flags (:code:`-D<parameter>=<value>`) that enable/disable profiles and/or allow customize
 the size of several parameters.
