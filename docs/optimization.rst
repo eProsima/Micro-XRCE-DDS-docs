@@ -17,7 +17,7 @@ To add or remove profiles from the library, enable or disable them as CMake argu
 More information can be found at: :ref:`micro_xrce_dds_client_label`.
 
 .. important::
-    
+
     When compiling with *gcc*, it is highly recommended to compile it with the linker flag: ``-Wl,--gc-sections``.
     It will remove the code that the app doesn't use from the final executable.
 
@@ -39,13 +39,13 @@ History of a reliable stream
    The history is used for recovering lost messages and for speeding up the communication.
    For output streams, a bigger history will allow writing and sending more messages without having to wait
    for confirmation.
-   However, if the history of an output stream is full (no messages confirmed by the *Agent* yet), 
+   However, if the history of an output stream is full (no messages confirmed by the *Agent* yet),
    no more messages can be stored in the stream.
    For input streams, the history is used for recovering lost messages faster while reducing the bandwidth.
    If the connection is highly reliable and saving memory is a priority, a reduced history can be used.
 
 Stream size
-   In case of reliable communciation, this size is equal to :code:`MAX_MESSAGE_SIZE * HISTORY`.
+   In case of reliable communication, this size is equal to :code:`MAX_MESSAGE_SIZE * HISTORY`.
    In case of a best-effort stream, the size simply equals :code:`MAX_MESSAGE_SIZE`,
    as no history is made available in this case.
    The :code:`MAX_MESSAGE_SIZE` represents the maximum message size that can be sent without
