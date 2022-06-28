@@ -16,8 +16,8 @@ Version 2.2.0
 * `Client 2.2.0 <https://github.com/eProsima/Micro-XRCE-DDS-Client/releases/tag/v2.2.0>`_:
     * This release includes the following bugfixes:
         * SuperBuild.cmake: pass C, CXX and LINKER flags too (`#315 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/315>`__)
-        * Add a nopoll version of the POSIX TCP transport profile (`#318 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/318`__)
-        * Fix wait_session_status listen timeout (`#322 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/322`__)
+        * Add a nopoll version of the POSIX TCP transport profile (`#318 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/318>`__)
+        * Fix wait_session_status listen timeout (`#322 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/322>`__)
 
     * This release includes the following minor changes:
         * Implement hard liveliness check (`#316 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/316>`__)
