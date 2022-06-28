@@ -6,7 +6,7 @@ eProsima Micro XRCE-DDS
 =======================
 
 *eProsima Micro XRCE-DDS* is a software solution that allows communicating eXtremely Resource Constrained Environments (XRCEs) with an existing DDS network.
-This implementation complies with the specification of the [eXtremely Resource Constrained Environments DDS (DDS-XRCE)](https://www.omg.org/spec/DDS-XRCE/)
+This implementation complies with the specification of the `eXtremely Resource Constrained Environments DDS (DDS-XRCE) <https://www.omg.org/spec/DDS-XRCE/>`
 protocol as defined and maintained by the Object Management Group (OMG) consortium.
 
 The *eprosima Micro XRCE-DDS* library implements a client-server protocol that enables resource-constrained devices (clients) to take part in DDS communications.

@@ -1,5 +1,30 @@
 .. _notes_label:
 
+Version 2.2.0
+=============
+
+**Agent 2.2.0 | Client 2.2.0 | Micro-CDR 2.0.0**
+
+* `Agent 2.2.0 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/releases/tag/v2.2.0>`_:
+    * This release includes the following bugfixes:
+        * Fix select timeout format (`#311 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/311>`__)
+        * Default services to preallocated with realloc (`#310 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/310>`__)
+
+    * This release includes the following minor changes:
+        * Implement hard liveliness check (`#308 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/308>`__)
+
+* `Client 2.2.0 <https://github.com/eProsima/Micro-XRCE-DDS-Client/releases/tag/v2.2.0>`_:
+    * This release includes the following bugfixes:
+        * SuperBuild.cmake: pass C, CXX and LINKER flags too (`#315 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/315>`__)
+        * Add a nopoll version of the POSIX TCP transport profile (`#318 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/318`__)
+        * Fix wait_session_status listen timeout (`#322 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/322`__)
+
+    * This release includes the following minor changes:
+        * Implement hard liveliness check (`#316 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/316>`__)
+
+* `Micro-CDR 2.0.0 <https://github.com/eProsima/Micro-CDR/releases/tag/v2.0.0>`_:
+    * This release is not modified
+
 Version 2.1.1
 =============
 
@@ -13,7 +38,6 @@ Version 2.1.1
         * Fix linux compile (`#297 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/297>`__)
 
     * This release includes the following minor changes:
-
         * Add CAN payload len on first frame byte (`#293 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/293>`__)
         * Add CAN transport flag to cmake / Upgrade splog version (`#296 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/296>`__)
         * Add Twitter and Readthedocs shields (backport #298) (`#299 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/299>`__)
