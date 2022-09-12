@@ -22,6 +22,8 @@ eProsima Fast DDS
     If willing to install *eProsima Fast DDS*, follow the instructions provided in the
     installation guide of the `eProsima Fast DDS documentation <https://fast-dds.docs.eprosima.com/en/latest/>`_.
 
+.. _dependencies_label_gen:
+
 eProsima Micro XRCE-DDS Gen
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -34,7 +36,8 @@ Java JDK
     `Oracle website <https://www.oracle.com/java/technologies/javase-downloads.html>`_.
 
 Gradle
-    `Gradle <https://gradle.org/install/>`_ is an open-source build automation tool.
+    Gradle is an open-source build automation tool, **version 7.0 or higher is required**.
+    Download and install it following the steps provided in the `Gradle website <https://gradle.org/install/>`_.
 
 Windows
 ^^^^^^^

@@ -147,9 +147,8 @@ Find a list of all the available examples `here <https://github.com/eProsima/Mic
 Installing the Micro XRCE-DDS Gen tool
 --------------------------------------
 
-Clone the project from GitHub: ::
+:ref:`Install dependencies<dependencies_label_gen>`, clone the project from GitHub and build: ::
 
-    $ sudo apt install git openjdk-8-jdk gradle
     $ git clone https://github.com/eProsima/Micro-XRCE-DDS-Gen.git
     $ cd Micro-XRCE-DDS-Gen
     $ git submodule init
