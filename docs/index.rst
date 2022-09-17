@@ -56,7 +56,7 @@ Best effort and reliable communication.
 Pluggable transport layer.
     *eProsima Micro XRCE-DDS* is not built over a specific transport protocol as *Serial* or *UDP*.
     It is agnostic about the transport used, and give the user the possibility of implementing the needed transport easily.
-    By default, *UPD*, *TCP*, and *Serial* transports are provided. Also, an easy way to implement *Custom* transport is offered.
+    By default, *UDP*, *TCP*, and *Serial* transports are provided. Also, an easy way to implement *Custom* transport is offered.
 
 Commercial support
     Available at `support@eprosima.com`
