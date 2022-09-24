@@ -104,7 +104,7 @@ After having executed the publisher app, we can launch the :code:`SubscribeHello
 which is located in the folder :code:`Micro-XRCE-DDS-Client/build/examples/SubscribeHelloWorld`, which'll make
 this *Client* subscribe to the same :code:`HelloWorld` topic from the DDS World. ::
 
-    $ examples/SubscriberHelloWorld/SubscribeHelloWorldClient 127.0.0.1 2019
+    $ examples/SubscribeHelloWorld/SubscribeHelloWorldClient 127.0.0.1 2019
 
 The source code of the :code:`SubscribeHelloWorldClient` can be found in
 :code:`Micro-XRCE-DDS-Client/examples/SubscribeHelloWorld/main.c`.
