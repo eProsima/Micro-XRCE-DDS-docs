@@ -28,8 +28,8 @@ The section is organized as follows:
 .. hint:: 
     The code shown here can be found in the examples below:
 
-    * :code:`examples/PublisherHelloWorld`
-    * :code:`examples/SubscriberHelloWorld`
+    * :code:`examples/PublishHelloWorld`
+    * :code:`examples/SubscribeHelloWorld`
     * :code:`examples/ReplyAdder`
     * :code:`examples/RequestAdder`
     * :code:`examples/Deployment`
