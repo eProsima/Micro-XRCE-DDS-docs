@@ -1,5 +1,26 @@
 .. _notes_label:
 
+Version 2.2.1
+=============
+
+**Agent 2.2.1 | Client 2.2.1 | Micro-CDR 2.0.0**
+
+* `Agent 2.2.1 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/releases/tag/v2.2.1>`_:
+    * This release includes the following bugfixes:
+        * Fix exception on Heartbeat filter (`#314 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/314>`__)
+        * Fix default QoS in Requester and Replier (`#313 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/313>`__)
+
+    * This release includes the following minor changes:
+        * Bump Fast DDS to v2.8 and Fast CDR to v1.0.24 (`#315 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/315>`__)
+
+* `Client 2.2.1 <https://github.com/eProsima/Micro-XRCE-DDS-Client/releases/tag/v2.2.1>`_:
+    * This release includes the following bugfixes:
+        * Check setsockopt return (`#325 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/325>`__)
+
+* `Micro-CDR 2.0.0 <https://github.com/eProsima/Micro-CDR/releases/tag/v2.0.0>`_:
+    * This release is not modified
+
+
 Version 2.2.0
 =============
 
