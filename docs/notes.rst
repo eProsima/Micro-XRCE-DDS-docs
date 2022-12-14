@@ -1,5 +1,33 @@
 .. _notes_label:
 
+Version 2.3.0
+=============
+
+**Agent 2.3.0 | Client 2.3.0 | Micro-CDR 2.0.1**
+
+* `Agent 2.3.0 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/releases/tag/v2.3.0>`_:
+    * This release includes the following bugfixes:
+        * Fix requester and replier reuse behavior (`#318 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/318>`__)
+        * Increase cmake minimum required according to fastdds (`#323 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/323>`__)
+
+    * This release includes the following minor changes:
+        * Bump internal Micro XRCE-DDS Client to v2.3.0
+        * Bump Fast DDS to v2.9.0
+        * Bump Fast CDR to v1.0.26
+
+* `Client 2.3.0 <https://github.com/eProsima/Micro-XRCE-DDS-Client/releases/tag/v2.3.0>`_:
+    * This release includes the following bugfixes:
+        * Increase cmake minimum required (`#335 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/335>`__)
+
+    * This release includes the following minor changes:
+        * Bump Micro CDR to v2.0.1
+
+* `Micro-CDR 2.0.1 <https://github.com/eProsima/Micro-CDR/releases/tag/v2.0.1>`_:
+    * This release includes the following bugfixes:
+        * Remove COMPILE_LANGUAGE:CXX from set_common_compile_options (`#71 <https://github.com/eProsima/Micro-CDR/pull/71>`__)
+        * Increase cmake minimum required (`#72 <https://github.com/eProsima/Micro-CDR/pull/72>`__)
+
+
 Version 2.2.1
 =============
 
