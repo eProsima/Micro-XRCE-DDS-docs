@@ -201,10 +201,6 @@ The following is a table listing these parameters and the functionalities they c
          - Client dead time in milliseconds.
          - :code:`<number>`
          - :code:`30000`
-    *    - :code:`UAGENT_CONFIG_CLIENT_DEAD_TIME`
-         - Client dead time in milliseconds.
-         - :code:`<number>`
-         - :code:`30000`
     *    - :code:`UAGENT_SERVER_BUFFER_SIZE`
          - Server buffer size.
          - :code:`<number>`
