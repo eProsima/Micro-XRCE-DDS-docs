@@ -153,7 +153,7 @@ Installing the Micro XRCE-DDS Gen tool
     $ cd Micro-XRCE-DDS-Gen
     $ git submodule init
     $ git submodule update
-    $ gradle build -Dbranch=v1.2.5
+    $ ./gradlew assemble
 
 The *Micro XRCE-DDS-Gen* tool will be available as: ::
 
