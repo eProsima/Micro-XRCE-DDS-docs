@@ -539,7 +539,7 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
 .. code-block:: c
 
     uint16_t uxr_buffer_create_participant_xml(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
-                                               uint16_t domain, const char* xml, uint8_t mode);
+                                               uint16_t domain_id, const char* xml, uint8_t mode);
 
 Creates a *participant* entity in the *Agent*.
 The message is written into the stream buffer.
@@ -550,6 +550,7 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_PARTICIPANT_ID``.
+:domain_id: The DDS domain identifier.
 :xml: An XML representation of the new entity.
 :mode: Determines the creation entity mode.
         The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
@@ -730,7 +731,7 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
 .. code-block:: c
 
     uint16_t uxr_buffer_create_participant_ref(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
-                                               const char* ref, uint8_t mode);
+                                               int16_t domain_id, const char* ref, uint8_t mode);
 
 Creates a *participant* entity in the *Agent*.
 The message is written into the stream buffer.
@@ -741,6 +742,7 @@ To send the message, it is necessary to call either the ``uxr_flash_output_strea
 :object_id: The identifier of the new entity.
             Later, the entity can be referenced with this id.
             The type must be ``UXR_PARTICIPANT_ID``
+:domain_id: DDS Domain ID for the participant.
 :ref: A reference to the new entity.
 :mode: Determines the creation entity mode.
         The Creation Policy Table describes the entities' creation behaviour according to the ``UXR_REUSE`` and ``UXR_REPLACE`` flags
