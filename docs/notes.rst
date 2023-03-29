@@ -1,5 +1,30 @@
 .. _notes_label:
 
+Version 2.4.0
+=============
+
+**Agent 2.4.0 | Client 2.4.0 | Micro-CDR 2.0.1**
+
+* `Agent 2.4.0 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/releases/tag/v2.4.0>`_:
+    * This release includes the following minor changes:
+        * Bump internal Micro XRCE-DDS Client to v2.4.0
+        * Bump Fast DDS to v2.10.0
+        * Bump Fast CDR to v1.0.27
+
+* `Client 2.4.0 <https://github.com/eProsima/Micro-XRCE-DDS-Client/releases/tag/v2.4.0>`_:
+    * This release includes the following bugfixes:
+        * Fix build for macOS (`#346 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/346>`__)
+        * Fix newline-eof compiler warning (`#347 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/347>`__)
+        * Fix doxygen warning (`#352 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/352>`__)
+        * Add missing doxygen parameter (`#353 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/353>`__)
+        * Fix domain id argument in create_participant API (`#348 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/348>`__)
+
+    * This release includes the following **minor changes**:
+        * Add CMAKE configuration for C standard version (`#340 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/340>`__)
+
+* `Micro-CDR 2.0.1 <https://github.com/eProsima/Micro-CDR/releases/tag/v2.0.1>`_:
+    * This release is not modified
+
 Version 2.3.0
 =============
 
