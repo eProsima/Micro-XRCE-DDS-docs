@@ -731,7 +731,7 @@ The declaration of these functions can be found in ``uxr/client/profile/session/
 .. code-block:: c
 
     uint16_t uxr_buffer_create_participant_ref(uxrSession* session, uxrStreamId stream_id, uxrObjectId object_id,
-                                               int16_t domain_id, const char* ref, uint8_t mode);
+                                               uint16_t domain_id, const char* ref, uint8_t mode);
 
 Creates a *participant* entity in the *Agent*.
 The message is written into the stream buffer.
