@@ -1,5 +1,44 @@
 .. _notes_label:
 
+Version 2.4.0
+=============
+
+**Agent 2.4.0 | Client 2.4.0 | Micro-CDR 2.0.1 | Gen 2.0.0**
+
+* `Agent 2.4.0 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/releases/tag/v2.4.0>`_:
+    * This release includes the following minor changes:
+        * Bump internal Micro XRCE-DDS Client to v2.4.0
+        * Bump Fast DDS to v2.10.0
+        * Bump Fast CDR to v1.0.27
+
+* `Client 2.4.0 <https://github.com/eProsima/Micro-XRCE-DDS-Client/releases/tag/v2.4.0>`_:
+    * This release includes the following bugfixes:
+        * Fix build for macOS (`#346 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/346>`__)
+        * Fix newline-eof compiler warning (`#347 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/347>`__)
+        * Fix doxygen warning (`#352 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/352>`__)
+        * Add missing doxygen parameter (`#353 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/353>`__)
+        * Fix domain id argument in create_participant API (`#348 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/348>`__)
+
+    * This release includes the following **minor changes**:
+        * Add CMAKE configuration for C standard version (`#340 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/340>`__)
+
+* `Micro-CDR 2.0.1 <https://github.com/eProsima/Micro-CDR/releases/tag/v2.0.1>`_:
+    * This release is not modified
+
+* `Gen 2.0.0 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/releases/tag/v2.0.0>`_:
+    * Adapted generation to Micro XRCE-DDS Client v2.4.0 API.
+    * This release includes the following minor changes:
+        * Update gradlew scrip to use Gradle 7 and fix compatibility with Client 2.3.0 (`#47 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/pull/47>`__)
+        * Enumerations support (`#43 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/pull/43>`__)
+        * Update IDL-Parser dependency to latest master (`#59 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/pull/59>`__)
+        * Add case sensitive argument -cs (`#61 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/pull/61>`__)
+        * Support of include directories argument -I (`#60 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/pull/60>`__)
+        * Add support for modules in examples (`#48 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/pull/48>`__)
+    * This release includes the following bugfixes:
+        * Avoid typedefs from IDL source files (`#58 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/pull/58>`__)
+        * Fix C namespaced module includes (`#53 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/pull/53>`__)
+        * Consume the bool return type and propagate it outward (`#46 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/pull/46>`__, `#49 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/pull/49>`__)
+
 Version 2.3.0
 =============
 
