@@ -72,21 +72,6 @@ For downloading the Snap image corresponding to the *develop* branch, add the ``
 .. note::
     The Snap package is only available for Linux.
 
-.. _install_agent_docker:
-
-Using the provided Docker image
-*******************************
-
-The *eProsima Micro XRCE-DDS Agent* can also be launched directly from its dedicated `Docker image. <https://hub.docker.com/r/eprosima/micro-xrce-dds-agent>`_.
-
-Pull the image by executing ``docker pull eprosima/micro-xrce-dds-agent:<tag> <<args>>``, with *tag* being one of the following options:
-
-* ``stable``: `Micro XRCE-DDS Agent master <https://github.com/eProsima/Micro-XRCE-DDS-Agent/tree/master>`_ branch.
-* ``latest``: `Micro XRCE-DDS Agent develop <https://github.com/eProsima/Micro-XRCE-DDS-Agent/tree/develop>`_ branch)
-* ``vM.m.p``: `Micro XRCE-DDS Agent tagged <https://github.com/eProsima/Micro-XRCE-DDS-Agent/tags>`_ versions, with the *Major*, *minor*, *patch* structure.
-
-The accepted arguments for ``<<args>>`` are exactly the same which are listed in the :ref:`agent_cli` section.
-
 .. _install_client:
 
 Installing the Client standalone
@@ -125,22 +110,6 @@ On Windows first select the Visual Studio version: ::
 For building a Client app in the host machine, compile against the following libs: ::
 
     gcc <main.c> -lmicrocdr -lmicroxrcedds_client
-
-.. _install_client_docker:
-
-Using the provided Docker image
-*******************************
-
-The *eProsima Micro XRCE-DDS Client* comes with a `Docker image <https://hub.docker.com/r/eprosima/micro-xrce-dds-agent>`_ where the library is installed together with the provided examples, so they can easily be executed by the users.
-
-Pull the image by executing ``docker pull eprosima/micro-xrce-dds-client:<tag> <<args>>``, with *tag* being one of the following options:
-
-* ``stable``: `Micro XRCE-DDS Client master <https://github.com/eProsima/Micro-XRCE-DDS-Client/tree/master>`_ branch.
-* ``latest``: `Micro XRCE-DDS Client develop <https://github.com/eProsima/Micro-XRCE-DDS-Client/tree/develop>`_ branch
-* ``vM.m.p``: `Micro XRCE-DDS Client tagged <https://github.com/eProsima/Micro-XRCE-DDS-Client/tags>`_ versions, with the *Major*, *minor*, *patch* structure.
-
-The accepted arguments for ``<<args>>`` are the examples' executable names, followed by the arguments required for each example to work.
-Find a list of all the available examples `here <https://github.com/eProsima/Micro-XRCE-DDS-Client/tree/master/examples>`_. Note that they may differ between *master* and *develop* branches and the tagged versions.
 
 .. _install_gen:
 
@@ -190,23 +159,3 @@ Now both the *eProsima Micro XRCE-DDS Agent* and the *eProsima Micro XRCE-DDS Cl
 .. note::
     In order to install the *eProsima Micro XRCE-DDS* examples, add :code:`-DUXRCE_BUILD_EXAMPLES=ON`
     to the :code:`cmake ..` command-line options. This flag will enable the compilation of the examples.
-
-.. _install_agent_client_docker:
-
-Using the provided Docker image
-*******************************
-
-*eProsima Micro XRCE-DDS* is also available as a whole package in a `Docker image. <https://hub.docker.com/r/eprosima/micro-xrce-dds-agent>`_
-
-Within this Docker image, the *Micro XRCE-DDS Agent* standalone application and library are installed, as well as the *Micro XRCE-DDS Client* library and built-in examples.
-
-Pull the image by executing ``docker pull eprosima/micro-xrce-dds:<tag> <<args>>``, with *tag* being one of the following options:
-
-* ``stable``: `Micro XRCE-DDS master <https://github.com/eProsima/Micro-XRCE-DDS/tree/master>`_ branch.
-* ``latest``: `Micro XRCE-DDS develop <https://github.com/eProsima/Micro-XRCE-DDS/tree/develop>`_ branch
-* ``vM.m.p``: `Micro XRCE-DDS tagged <https://github.com/eProsima/Micro-XRCE-DDS/tags>`_ versions, with the *Major*, *minor*, *patch* structure.
-
-The accepted arguments for ``<<args>>`` are:
-
-* To launch the *Micro XRCE-DDS Agent*: ``MicroXRCEAgent <<agent_args``, being ``<<agent_args>>`` the ones described in the :ref:`agent_cli` section.
-* The *Micro XRCE-DDS Client* examples' executable names, as explained :ref:`above.<install_client_docker>`
