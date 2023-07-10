@@ -1,5 +1,32 @@
 .. _notes_label:
 
+Version 2.4.1
+=============
+
+**Agent 2.4.1 | Client 2.4.1 | Micro-CDR 2.0.1 | Gen 2.0.1**
+
+* `Agent 2.4.1 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/releases/tag/v2.4.1>`_:
+    * This release includes the following minor changes:
+        * Allow overriding the client's domain ID through reference (`#331 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/331>`__).
+        * Override domain_id with ROS_DOMAIN_ID provided by the agent (`#333 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/333>`__).
+        * Bump internal Micro XRCE-DDS Client to v2.4.1
+        * Bump Fast DDS to v2.11.0.
+        * Bump Fast CDR to v1.1.0.
+
+* `Client 2.4.1 <https://github.com/eProsima/Micro-XRCE-DDS-Client/releases/tag/v2.4.1>`_:
+    * This release includes the following bugfixes:
+        * Fix freeaddrinfo call on UDP transport (`#359 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/359>`__)
+        * Fix fragmentation check on uxr_prepare_reliable_buffer_to_write (`#360 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/360>`__)
+
+* `Micro-CDR 2.0.1 <https://github.com/eProsima/Micro-CDR/releases/tag/v2.0.1>`_:
+    * This release is not modified
+
+* `Gen 2.0.1 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/releases/tag/v2.0.1>`_:
+
+    * This release includes the following minor changes:
+        * Use size_t in for loops to fix integer comparisons (`#64 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/pull/64>`__)
+        * Update IDL-Parser submodule to latest v1.6.0 version.
+
 Version 2.4.0
 =============
 
