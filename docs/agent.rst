@@ -211,7 +211,7 @@ The following is a table listing these parameters and the functionalities they c
 Domain ID
 ^^^^^^^^^
 
-The Domain ID of the entities created by the Agent can be configured at runtime with the environment variable ``XRCE_DOMAIN_ID_OVERRIDE``.
+The Domain ID of the Domain Participants created by the Agent can be overrided at runtime with the environment variable ``XRCE_DOMAIN_ID_OVERRIDE``.
 
 To allow this override, the *Client* shall use the reserved Domain ID value ``255`` when the participant is created.
 
