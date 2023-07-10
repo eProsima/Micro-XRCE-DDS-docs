@@ -22,7 +22,6 @@ Version 2.4.1
     * This release is not modified
 
 * `Gen 2.0.1 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/releases/tag/v2.0.1>`_:
-
     * This release includes the following minor changes:
         * Use size_t in for loops to fix integer comparisons (`#64 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/pull/64>`__)
         * Update IDL-Parser submodule to latest v1.6.0 version.
