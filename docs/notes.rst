@@ -1,5 +1,32 @@
 .. _notes_label:
 
+Version 2.4.2
+=============
+
+**Agent 2.4.2 | Client 2.4.2 | Micro-CDR 2.0.1 | Gen 2.0.2**
+
+* `Agent 2.4.2 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/releases/tag/v2.4.2>`_:
+    * This release includes the following minor changes:
+        * Enable termios baudrate configuration for macOS (`#342 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/342>`__).
+        * Enable Domain Override on Reference and XML Participant (`#351 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/351>`__).
+        * Bump internal Micro XRCE-DDS Client to v2.4.2
+        * Bump Fast DDS to v2.12.1.
+        * Bump Fast CDR to v1.1.1.
+    * This release includes the following bugfixes:
+        * Fix deserialization endianness (`#336 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/336>`__).
+
+* `Client 2.4.2 <https://github.com/eProsima/Micro-XRCE-DDS-Client/releases/tag/v2.4.2>`_:
+    * This release includes the following bugfixes:
+        * Rename UXR_CONFIG_CAN_TRANSPORT_MTU (`#372 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/372>`__)
+
+* `Micro-CDR 2.0.1 <https://github.com/eProsima/Micro-CDR/releases/tag/v2.0.1>`_:
+    * This release is not modified
+
+* `Gen 2.0.2 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/releases/tag/v2.0.2>`_:
+    * This release includes the following bugfixes:
+        * Force 4 Bytes to enum types (`#69 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/pull/69>`__)
+
+
 Version 2.4.1
 =============
 
