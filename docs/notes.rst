@@ -1,5 +1,28 @@
 .. _notes_label:
 
+Version 2.4.3
+=============
+
+**Agent 2.4.3 | Client 2.4.3 | Micro-CDR 2.0.1 | Gen 2.0.2**
+
+* `Agent 2.4.3 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/releases/tag/v2.4.3>`_:
+    * This release includes the following minor changes:
+        * Bump Fast DDS to v2.14.x.
+        * Bump Fast CDR to v2.2.x.
+
+* `Client 2.4.3 <https://github.com/eProsima/Micro-XRCE-DDS-Client/releases/tag/v2.4.3>`_:
+    * This release includes the following minor changes:
+        * Add BigHelloWorld example (`#379 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/379>`__)
+    * This release includes the following bugfixes:
+        * Fixed removal of z_impl_clock_gettime in zephyr 3.5.99 (`#378 <https://github.com/eProsima/Micro-XRCE-DDS-Client/pull/378>`__)
+
+* `Micro-CDR 2.0.1 <https://github.com/eProsima/Micro-CDR/releases/tag/v2.0.1>`_:
+    * This release is not modified
+
+* `Gen 2.0.2 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/releases/tag/v2.0.2>`_:
+    * This release is not modified
+
+
 Version 2.4.2
 =============
 
