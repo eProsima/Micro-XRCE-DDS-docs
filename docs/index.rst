@@ -9,6 +9,16 @@ eProsima Micro XRCE-DDS
 This implementation complies with the specification of the `eXtremely Resource Constrained Environments DDS (DDS-XRCE) <https://www.omg.org/spec/DDS-XRCE/>`_
 protocol as defined and maintained by the Object Management Group (OMG) consortium.
 
+Commercial support
+------------------
+
+Looking for commercial support? Write us to info@eprosima.com
+
+Find more about us at `eProsima's webpage <https://eprosima.com/>`__.
+
+Overview
+--------
+
 The *eprosima Micro XRCE-DDS* library implements a client-server protocol that enables resource-constrained devices (clients) to take part in DDS communications.
 The *eProsima Micro XRCE-DDS Agent* (server) acts as a bridge to make this communication possible.
 It acts on behalf of the *Micro XRCE-DDS Clients* by enabling them to take part to the DDS Global Data Space
