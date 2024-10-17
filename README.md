@@ -14,6 +14,12 @@ as DDS publishers and/or subscribers.
 
 ![Architecture](docs/images/xrcedds_architecture.png)
 
+## Commercial support
+
+Looking for commercial support? Write us to info@eprosima.com
+
+Find more about us at [eProsima’s webpage](https://eprosima.com/).
+
 ## Documentation
 
 The online documentation is hosted by Read the Docs.
@@ -36,7 +42,3 @@ pip3 install -U -r rtd_requirements.txt
 make html
 xdg-open build/html/index.html
 ```
-
-## Getting Help
-
-If in need of support, reach us by mail at `support@eProsima.com` or by phone at `+34 91 804 34 48`.
