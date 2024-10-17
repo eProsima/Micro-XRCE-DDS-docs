@@ -42,7 +42,3 @@ pip3 install -U -r rtd_requirements.txt
 make html
 xdg-open build/html/index.html
 ```
-
-## Getting Help
-
-If in need of support, reach us by mail at `support@eProsima.com` or by phone at `+34 91 804 34 48`.
