@@ -205,6 +205,82 @@ The following is a table listing these parameters and the functionalities they c
          - Server buffer size.
          - :code:`<number>`
          - :code:`65535`
+    *   - :code:`UAGENT_SUPERBUILD`
+        - Enables superbuild compilation.
+        - :code:`<bool>`
+        - :code:`ON`
+    *   - :code:`UAGENT_BUILD_TESTS`
+        - Builds tests.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UAGENT_INSTALLER`
+        - Builds Windows installer.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UAGENT_ISOLATED_INSTALL`
+        - Installs the project and dependencies into separated folders with version control.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UAGENT_USE_INTERNAL_GTEST`
+        - Enables internal GTest libraries.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UAGENT_USE_SYSTEM_FASTDDS`
+        - Forces find and use system installed Fast-DDS.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UAGENT_USE_SYSTEM_FASTCDR`
+        - Forces find and use system installed Fast-CDR.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UAGENT_USE_SYSTEM_LOGGER`
+        - Forces find and use system installed spdlog.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UAGENT_FAST_PROFILE`
+        - Builds FastMiddleware profile.
+        - :code:`<bool>`
+        - :code:`ON`
+    *   - :code:`UAGENT_CED_PROFILE`
+        - Builds CedMiddleware profile.
+        - :code:`<bool>`
+        - :code:`ON`
+    *   - :code:`UAGENT_DISCOVERY_PROFILE`
+        - Builds Discovery profile.
+        - :code:`<bool>`
+        - :code:`ON`
+    *   - :code:`UAGENT_P2P_PROFILE`
+        - Builds P2P discovery profile.
+        - :code:`<bool>`
+        - :code:`ON`
+    *   - :code:`UAGENT_SOCKETCAN_PROFILE`
+        - Builds Agent CAN FD transport.
+        - :code:`<bool>`
+        - :code:`ON`
+    *   - :code:`UAGENT_LOGGER_PROFILE`
+        - Builds logger profile.
+        - :code:`<bool>`
+        - :code:`ON`
+    *   - :code:`UAGENT_SECURITY_PROFILE`
+        - Builds security profile.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UAGENT_BUILD_EXECUTABLE`
+        - Builds Micro XRCE-DDS Agent provided executable.
+        - :code:`<bool>`
+        - :code:`ON`
+    *   - :code:`UAGENT_BUILD_USAGE_EXAMPLES`
+        - Builds Micro XRCE-DDS Agent built-in usage examples.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UAGENT_BUILD_CI_TESTS`
+        - Builds CI test cases.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UAGENT_TWEAK_XRCE_WRITE_LIMIT`
+        - This feature uses a tweak to allow XRCE WRITE DATA submessages greater than 64 kB.
+        - :code:`<bool>`
+        - :code:`ON`
 
 .. _agent_configuration_domain_id:
 
