@@ -101,7 +101,7 @@ On Windows first select the Visual Studio version: ::
     $ cmake --build . --target install
 
 .. note::
-    In order to install the *eProsima Micro XRCE-DDS Client* examples, add :code:`-DUCLIENT_BUILD_EXAMPLES=ON`
+    In order to install the *eProsima Micro XRCE-DDS Client* examples, add :code:`-DUCLIENT_BUILD_EXAMPLES=ON` and `-DUCLIENT_INSTALL_EXAMPLES=ON`
     to the :code:`cmake ..` command-line options. This flag will enable the compilation of the examples.
     In addition to this flag, there are several other CMake definitions for configuring the building of the client
     library at compile-time.

@@ -133,6 +133,11 @@ discovery and framing functionalities.
         - Enables or disables a basic local memory transport operation between entities in the same application.
         - :code:`<bool>`
         - :code:`ON`
+    *   - :code:`UCLIENT_PROFILE_MATCHING`
+        - Enables QoS matching support.
+        - :code:`<bool>`
+        - :code:`OFF`
+
 
 Transport profiles
 ^^^^^^^^^^^^^^^^^^
@@ -298,6 +303,66 @@ By means of these flags, the user can change the default value of all the parame
         - Sets Micro XRCE-DDS Client hard liveliness check timeout in milliseconds. Maximum value is 999999 ms.
         - :code:`<number>`
         - :code:`10000`
+    *   - :code:`UCLIENT_BUILD_MICROCDR`
+        - Forces local build of Micro CDR.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UCLIENT_SUPERBUILD`
+        - Enables superbuild compilation.
+        - :code:`<bool>`
+        - :code:`ON`
+    *   - :code:`UCLIENT_BUILD_TESTS`
+        - Builds tests.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UCLIENT_BUILD_EXAMPLES`
+        - Builds examples.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UCLIENT_INSTALL_EXAMPLES`
+        - Installs examples.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UCLIENT_VERBOSE_SERIALIZATION`
+        - Builds with serialization verbosity.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UCLIENT_VERBOSE_MESSAGE`
+        - Builds with message verbosity.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UCLIENT_PIC`
+        - Controls Position Independent Code.
+        - :code:`<bool>`
+        - :code:`ON`
+    *   - :code:`UCLIENT_ISOLATED_INSTALL`
+        - Installs the project and dependencies into separated folders with version control.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`BUILD_SHARED_LIBS`
+        - Controls shared/static library building.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`BUILD_DOCUMENTATION`
+        - Uses doxygen to create product documentation.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UCLIENT_BUILD_CI_TESTS`
+        - Builds CI test cases.
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UCLIENT_MEMORY_TESTS`
+        - Builds memory tests (only available on Linux).
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UCLIENT_PERFORMANCE_TESTS`
+        - Builds performance tests (only available on Linux).
+        - :code:`<bool>`
+        - :code:`OFF`
+    *   - :code:`UCLIENT_TWEAK_XRCE_WRITE_LIMIT`
+        - This feature uses a tweak to allow XRCE WRITE DATA submessages greater than 64 kB.
+        - :code:`<bool>`
+        - :code:`ON`
 
 .. note::
     The MTU of the CAN transport is fixed to 64 bytes, which is the maximum payload supported by CAN FD frames.
