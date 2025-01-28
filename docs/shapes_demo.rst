@@ -5,7 +5,7 @@ Shapes Demo
 
 `ShapesDemo <https://github.com/eProsima/ShapesDemo>`_ is an interactive example for testing how *eProsima Fast RTPS* working in the `DDS Global Data Space`.
 Because *eProsima Micro XRCE-DDS* aims to connect an `XRCE Client` to the `DDS World`, in this example, we will create a *Client* which will interact with the `Shapes Demo`.
-It can be found at `bin/ShapeDemoClient` inside of the installation directory.
+It can be found at `ShapeDemoClient` in the installation directory.
 This interactive *Client* waits for user input indicating commands to execute.
 
 The available commands are the following:
