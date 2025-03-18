@@ -1,5 +1,23 @@
 .. _notes_label:
 
+Version 3.0.1
+=============
+
+**Agent 3.0.1 | Client 3.0.0 | Micro-CDR 2.0.1 | Gen 2.0.2**
+
+* `Agent 3.0.1 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/releases/tag/v3.0.1>`_:
+    * This release includes the following fixes:
+        * Fix Micro XRCE-DDS Agent Fast DDS return code usage (`#385 <https://github.com/eProsima/Micro-XRCE-DDS-Agent/pull/385>`__)
+
+* `Client 3.0.0 <https://github.com/eProsima/Micro-XRCE-DDS-Client/releases/tag/v3.0.0>`_:
+    * This release is not modified
+
+* `Micro-CDR 2.0.1 <https://github.com/eProsima/Micro-CDR/releases/tag/v2.0.1>`_:
+    * This release is not modified
+
+* `Gen 2.0.2 <https://github.com/eProsima/Micro-XRCE-DDS-Gen/releases/tag/v2.0.2>`_:
+    * This release is not modified
+
 Version 3.0.0
 =============
 
